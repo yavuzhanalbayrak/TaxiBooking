@@ -11,7 +11,7 @@ import "./styles/reset.scss";
 import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
-
+import RegisterPage from "./pages/register/RegisterPage";
 function App() {
   const store = createStore({
     authName: "_auth",
@@ -35,6 +35,22 @@ function App() {
                 element={
                   <AuthLayout>
                     <LoginPage />
+                  </AuthLayout>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <AuthLayout>
+                    <RegisterPage />
+                  </AuthLayout>
+                }
+              />
+              <Route
+                path="/forgotPassword"
+                element={
+                  <AuthLayout>
+                    <RegisterPage />
                   </AuthLayout>
                 }
               />
