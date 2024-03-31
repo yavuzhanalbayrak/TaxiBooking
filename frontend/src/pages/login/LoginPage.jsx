@@ -258,6 +258,7 @@ function Login() {
                 <Button
                   className="submit"
                   style={{
+                    width:"100%",
                     color: formIsValid ? "white" : "#00000040",
                     backgroundColor: formIsValid ? "black" : "#0000000A",
                     border: formIsValid ? "#0057D9" : "1px solid #00000026",
