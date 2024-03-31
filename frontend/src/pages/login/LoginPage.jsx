@@ -8,6 +8,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Alert, Space } from "antd";
 import GlobalContext from "../../context/GlobalContext.jsx";
 import { toast } from "react-toastify";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 function Login() {
   const { currentUser, setCurrentUser } = useContext(GlobalContext);
@@ -25,40 +26,41 @@ function Login() {
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    if (currentUser) navigate("/");
-  }, [currentUser]);
+  const signIn = useSignIn();
 
   const handleSubmit = async () => {
     setLoading(true);
-    try {
-      const result = await axios.post(
-        `${import.meta.env.VITE_API_PORT}/api/users/login`,
-        {
+      await axios
+        .post(`${import.meta.env.VITE_API_PORT}/api/users/login`, {
           email,
           password,
-        }
-      );
+        })
+        .then((result) => {
+          if (
+            signIn({
+              auth: {
+                token: result.data.accessToken,
+                type: "Bearer",
+              },
+              userState: {
+                name: "React User",
+                uid: 123456,
+              },
+            })
+          ) {
+            navigate("/");
+            localStorage.setItem("token", result.data.accessToken);
+          } else {
+            toast.error("Kullanıcı Bilgileri Hatalı!");
 
-      if (result && result.data) {
-        const jwtToken = result.data.accessToken;
-        localStorage.setItem("token", jwtToken);
+          }
+        })
+        .catch((error) => {
+            toast.error("Kullanıcı Bilgileri Hatalı!");
+            setLoading(false);
+         })
 
-        if (result.status == 200) {
-          setToken(result.data.accessToken);
-          setErrorMessage("");
-          setLoading(false);
-        } else {
-          console.error("Login failed");
-          setLoading(false);
-        }
-      }
-    } catch (error) {
-      setErrorMessage(error.response ? error.response.data : error.message);
-      toast.error("Login failed");
-      setLoading(false);
-    }
+  
   };
 
   return (
@@ -152,7 +154,7 @@ function Login() {
                       : mailIsValid
                       ? ""
                       : "#FF4D4F",
-                      maxWidth: "235px",
+                    maxWidth: "235px",
                   }}
                   prefix={
                     <MailOutlined
@@ -212,7 +214,7 @@ function Login() {
                       : passwordIsValid
                       ? ""
                       : "#FF4D4F",
-                      maxWidth: "235px",
+                    maxWidth: "235px",
                   }}
                   prefix={
                     <LockOutlined
@@ -281,7 +283,8 @@ function Login() {
               </Form.Item>
               <Col className="form-end-message">
                 Hesabınız yok mu?
-                <Link to="/register"
+                <Link
+                  to="/register"
                   className="forget-password"
                   href="reset"
                   style={{
