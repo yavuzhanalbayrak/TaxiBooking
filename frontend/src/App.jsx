@@ -12,6 +12,7 @@ import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
 import RegisterPage from "./pages/register/RegisterPage";
+import ForgotPasswordPage from "./pages/forgot-password/ForgotPasswordPage"
 function App() {
   const store = createStore({
     authName: "_auth",
@@ -50,7 +51,7 @@ function App() {
                 path="/forgotPassword"
                 element={
                   <AuthLayout>
-                    <RegisterPage />
+                    <ForgotPasswordPage />
                   </AuthLayout>
                 }
               />

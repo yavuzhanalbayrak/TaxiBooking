@@ -30,43 +30,40 @@ function Login() {
 
   const handleSubmit = async () => {
     setLoading(true);
-      await axios
-        .post(`${import.meta.env.VITE_API_PORT}/api/users/login`, {
-          email,
-          password,
-        })
-        .then((result) => {
-          if (
-            signIn({
-              auth: {
-                token: result.data.accessToken,
-                type: "Bearer",
-              },
-              userState: {
-                name: "React User",
-                uid: 123456,
-              },
-            })
-          ) {
-            navigate("/");
-            localStorage.setItem("token", result.data.accessToken);
-          } else {
-            toast.error("Kullanıcı Bilgileri Hatalı!");
-
-          }
-        })
-        .catch((error) => {
-            toast.error("Kullanıcı Bilgileri Hatalı!");
-            setLoading(false);
-         })
-
-  
+    await axios
+      .post(`${import.meta.env.VITE_API_PORT}/api/users/login`, {
+        email,
+        password,
+      })
+      .then((result) => {
+        if (
+          signIn({
+            auth: {
+              token: result.data.accessToken,
+              type: "Bearer",
+            },
+            userState: {
+              name: "React User",
+              uid: 123456,
+            },
+          })
+        ) {
+          navigate("/");
+          localStorage.setItem("token", result.data.accessToken);
+        } else {
+          toast.error("Kullanıcı Bilgileri Hatalı!");
+        }
+      })
+      .catch((error) => {
+        toast.error("Kullanıcı Bilgileri Hatalı!");
+        setLoading(false);
+      });
   };
 
   return (
     <>
       <Row>
-        <Col>
+        <Col style={{ width: "500px" }}>
           <Col className="form-title" span={20}>
             Giriş
           </Col>
@@ -154,7 +151,6 @@ function Login() {
                       : mailIsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
                   prefix={
                     <MailOutlined
@@ -214,7 +210,6 @@ function Login() {
                       : passwordIsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
                   prefix={
                     <LockOutlined
@@ -232,11 +227,7 @@ function Login() {
                 />
               </Form.Item>
 
-              <Row
-                style={{
-                  marginTop: "-15px",
-                }}
-              >
+              <Row>
                 <Col span={12}>
                   <Form.Item>
                     <Checkbox
@@ -267,11 +258,9 @@ function Login() {
                 <Button
                   className="submit"
                   style={{
-                    width: "100%",
                     color: formIsValid ? "white" : "#00000040",
                     backgroundColor: formIsValid ? "black" : "#0000000A",
                     border: formIsValid ? "#0057D9" : "1px solid #00000026",
-                    maxWidth: "235px",
                   }}
                   type="primary"
                   htmlType="submit"

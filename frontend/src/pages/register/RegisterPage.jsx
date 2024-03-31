@@ -54,29 +54,28 @@ function Login() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    if(true){
-    console.log("name: " + name);
-    console.log("surname: " + surname);
-    console.log("email: " + email);
-    console.log("password: " + password);
-    console.log("password2: " + password2);
-    setTimeout(() => {
+    if (true) {
+      console.log("name: " + name);
+      console.log("surname: " + surname);
+      console.log("email: " + email);
+      console.log("password: " + password);
+      console.log("password2: " + password2);
+      setTimeout(() => {
         toast.success("Kayıt Başarılı!");
         navigate("/login");
-    }, 3000);
-    }
-    else{
-        setTimeout(() => {
-            toast.error("Kayıt Başarısız!");
-            setLoading(false);
-        }, 3000);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        toast.error("Kayıt Başarısız!");
+        setLoading(false);
+      }, 3000);
     }
   };
 
   return (
     <>
-      <Row style={{height:"80vh"}}>
-        <Col>
+      <Row style={{ height: "80vh" }}>
+        <Col style={{ width: "500px" }}>
           <Col className="form-title" span={20}>
             Kaydol
           </Col>
@@ -175,7 +174,6 @@ function Login() {
                       : nameIsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
                   prefix={
                     <UserOutlined
@@ -239,7 +237,6 @@ function Login() {
                       : surnameIsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
                   prefix={
                     <UserOutlined
@@ -307,7 +304,6 @@ function Login() {
                       : mailIsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
                   prefix={
                     <MailOutlined
@@ -386,7 +382,6 @@ function Login() {
                       : passwordIsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
                   prefix={
                     <LockOutlined
@@ -438,13 +433,8 @@ function Login() {
                       : password2IsValid
                       ? ""
                       : "#FF4D4F",
-                    maxWidth: "235px",
                   }}
-                  prefix={
-                    <LockOutlined
-                      className="site-form-item-icon"
-                    />
-                  }
+                  prefix={<LockOutlined className="site-form-item-icon" />}
                   disabled={loading}
                 />
               </Form.Item>
@@ -453,7 +443,6 @@ function Login() {
                 <Col className="password-alert">
                   <Row>
                     <Col span={2}>
-                      {" "}
                       <ExclamationCircleOutlined className="icon" />{" "}
                     </Col>
                     <Col span={22} className="alert-title">
@@ -463,7 +452,7 @@ function Login() {
                     {isLengthValid ? (
                       <Col span={22}></Col>
                     ) : (
-                      <Col style={{ paddingLeft: "3px" }} span={22}>
+                      <Col style={{ paddingLeft: "5px" }} span={22}>
                         En az 8 karakter içermelidir.
                       </Col>
                     )}
@@ -471,7 +460,7 @@ function Login() {
                     {hasLetter ? (
                       <Col span={22}></Col>
                     ) : (
-                      <Col style={{ paddingLeft: "3px" }} span={22}>
+                      <Col style={{ paddingLeft: "5px" }} span={22}>
                         En az bir harf içermelidir.
                       </Col>
                     )}
@@ -479,7 +468,7 @@ function Login() {
                     {hasNumber ? (
                       <Col span={22}></Col>
                     ) : (
-                      <Col style={{ paddingLeft: "3px" }} span={22}>
+                      <Col style={{ paddingLeft: "5px" }} span={22}>
                         En az bir rakam içermelidir.
                       </Col>
                     )}
@@ -489,15 +478,13 @@ function Login() {
                 <Col className="password-success">
                   <Row>
                     <Col span={2}>
-                      {" "}
                       <CheckCircleOutlined className="icon" />{" "}
                     </Col>
                     <Col span={22} className="alert-title">
                       Şifre Kuralları
                     </Col>
                     <Col span={2}></Col>
-                    <Col span={22}>
-                      {" "}
+                    <Col style={{ paddingLeft: "5px" }} span={22}>
                       Lütfen belirlediğiniz şifreyi tekrar yazın
                     </Col>
                   </Row>
@@ -512,7 +499,6 @@ function Login() {
                     color: formIsValid ? "white" : "#00000040",
                     backgroundColor: formIsValid ? "black" : "#0000000A",
                     border: formIsValid ? "#0057D9" : "1px solid #00000026",
-                    maxWidth: "235px",
                   }}
                   type="primary"
                   htmlType="submit"
