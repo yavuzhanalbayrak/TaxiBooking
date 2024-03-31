@@ -178,7 +178,7 @@ function ResetPassword() {
                   type="link"
                   href="login"
                   style={{
-                    color: loading ? "#00000040" : "#000000E0",
+                    color: loading ? "#00000040" : "black",
                   }}
                   primaryColor="Black"
                   textHoverBg="black"
