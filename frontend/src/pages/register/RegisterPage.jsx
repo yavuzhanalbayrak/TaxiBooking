@@ -449,29 +449,14 @@ function Login() {
                       Şifre Kuralları
                     </Col>
                     <Col span={2}></Col>
-                    {isLengthValid ? (
-                      <Col span={22}></Col>
-                    ) : (
-                      <Col style={{ paddingLeft: "5px" }} span={22}>
-                        En az 8 karakter içermelidir.
-                      </Col>
-                    )}
-                    <Col span={2}></Col>
-                    {hasLetter ? (
-                      <Col span={22}></Col>
-                    ) : (
-                      <Col style={{ paddingLeft: "5px" }} span={22}>
-                        En az bir harf içermelidir.
-                      </Col>
-                    )}
-                    <Col span={2}></Col>
-                    {hasNumber ? (
-                      <Col span={22}></Col>
-                    ) : (
-                      <Col style={{ paddingLeft: "5px" }} span={22}>
-                        En az bir rakam içermelidir.
-                      </Col>
-                    )}
+
+                    <Col style={{ paddingLeft: "5px" }} span={22}>
+                      <p>
+                        {!isLengthValid && "En az 8 karakter içermelidir."}{" "}
+                      </p>
+                      <p>{!hasLetter && "En az bir harf içermelidir."} </p>
+                      <p>{!hasNumber && "En az bir rakam içermelidir."}</p>
+                    </Col>
                   </Row>
                 </Col>
               ) : password === password2 ? null : (
