@@ -110,11 +110,11 @@ function Login() {
                 rules={[
                   {
                     type: "email",
-                    message: "The input is not valid E-mail!",
+                    message: "Lütfen e-posta formatı giriniz!",
                   },
                   {
                     required: true,
-                    message: "Please input your E-mail!",
+                    message: "Lütfen e-posta adresinizi giriniz!",
                   },
                 ]}
                 validateStatus={
@@ -176,7 +176,7 @@ function Login() {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    message: "Lütfen şifrenizi giriniz!",
                   },
                 ]}
                 validateStatus={

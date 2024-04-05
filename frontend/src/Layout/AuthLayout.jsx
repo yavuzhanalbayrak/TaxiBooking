@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import loginImage from "../images/uber.jpg";
+import loginImage from "../images/Taxi.jpg";
 import { Row, Col } from "antd";
 import "./style.scss";
 
@@ -12,14 +12,14 @@ function Login({ children }) {
         align="middle"
         style={{
           height: "100vh",
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.95)), url(${loginImage})`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.95)), url(${loginImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         <Col
           style={{
-            backgroundColor: "#ffffffc2",
+            backgroundColor: "#ffffffa2",
             padding: "64px",
             borderRadius: "36px",
           }}
