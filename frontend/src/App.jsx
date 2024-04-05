@@ -13,6 +13,7 @@ import AuthProvider from "react-auth-kit";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
 import RegisterPage from "./pages/register/RegisterPage";
 import ForgotPasswordPage from "./pages/forgot-password/ForgotPasswordPage"
+import Layout from "./Layout/Layout";
 function App() {
   const store = createStore({
     authName: "_auth",
@@ -29,7 +30,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route element={<AuthOutlet fallbackPath="/login" />}>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<Layout link="Home"><HomePage /></Layout>} />
               </Route>
               <Route
                 path="/login"
