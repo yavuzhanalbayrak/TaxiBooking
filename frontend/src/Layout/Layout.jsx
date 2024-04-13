@@ -71,6 +71,7 @@ const App = ({ children, link, icon }) => {
           display: "flex",
           alignItems: "center",
           backgroundColor: "white",
+          borderBottom: `1px solid #0000002f`,
         }}
       >
         <Row style={{ width: "100%" }}>
@@ -83,6 +84,7 @@ const App = ({ children, link, icon }) => {
               style={{
                 flex: 1,
                 minWidth: 0,
+                borderColor: "#0000002f",
               }}
             />
           </Col>
@@ -104,28 +106,13 @@ const App = ({ children, link, icon }) => {
       </Header>
       <Content
         style={{
-          padding: "0 48px",
         }}
       >
-        <Breadcrumb
-          style={{
-            margin: "16px 0",
-          }}
-        >
-          <Breadcrumb.Item>
-            {" "}
-            <Link to="/">
-              <p>
-                <span><HomeOutlined /></span>
-                <span style={{marginLeft:"5px"}}>{link}</span>
-              </p>
-            </Link>{" "}
-          </Breadcrumb.Item>
-        </Breadcrumb>
+
         <div
           style={{
             padding: 24,
-            minHeight: "calc(100vh - 187px)",
+            minHeight: "calc(100vh)",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
