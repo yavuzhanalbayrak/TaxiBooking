@@ -5,7 +5,6 @@ import { Row, Col, Form, Input, Button, Dropdown } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 export default function HomePage() {
-  console.log(`${import.meta.env.VITE_API_PORT2}`);
   const [startPoint, setStartPoint] = useState(null);
   const [destPoint, setDestPoint] = useState(null);
   const onSearch = () => {
@@ -22,7 +21,7 @@ export default function HomePage() {
         <Row gutter={[0, 10]}>
           <Col span={24}>
             <GooglePlacesAutocomplete
-              apiKey={import.meta.env.VITE_API_PORT2}
+              apiKey={import.meta.env.VITE_MAP_API}
               selectProps={{
                 placeholder: "Başlangıç adresinizi giriniz",
                 destPoint,
@@ -42,7 +41,7 @@ export default function HomePage() {
           </Col>
           <Col span={24}>
             <GooglePlacesAutocomplete
-              apiKey={import.meta.env.VITE_API_PORT2}
+              apiKey={import.meta.env.VITE_MAP_API}
               selectProps={{
                 placeholder: "Varış adresinizi giriniz",
                 startPoint,
