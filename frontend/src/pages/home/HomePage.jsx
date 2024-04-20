@@ -9,6 +9,9 @@ import Map from "../../components/Map";
 import LocationInputs from "../../components/LocationInputs";
 
 export default function HomePage() {
+  const [source, setSource] = useState([]);
+  const [destination, setDestination] = useState([]);
+
   return (
     <Row gutter={[10, 10]}>
       <LoadScript
@@ -16,10 +19,10 @@ export default function HomePage() {
         googleMapsApiKey={import.meta.env.VITE_MAP_API}
       >
         <Col span={24} xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
-          <LocationInputs></LocationInputs>
+          <LocationInputs setSource={setSource} setDestination={setDestination} ></LocationInputs>
         </Col>
         <Col span={24} xs={24} sm={24} md={17} lg={17} xl={17} xxl={17}>
-          <Map></Map>
+          <Map source={source} destination={destination} ></Map>
         </Col>
       </LoadScript>
     </Row>

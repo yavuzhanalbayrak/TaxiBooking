@@ -2,20 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { Row, Col, Form, Input, Button, Dropdown } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
-export default function LocationInputs() {
+export default function LocationInputs({setSource,setDestination}) {
   const [startPoint, setStartPoint] = useState(null);
   const [destPoint, setDestPoint] = useState(null);
-  const [source, setSource] = useState([]);
-  const [destination, setDestination] = useState([]);
-
-  useEffect(() => {
-    if (source) {
-      console.log("source: ", source);
-    }
-    if (destination) {
-      console.log("destination: ", destination);
-    }
-  }, [source, destination]);
 
   const onSearch = () => {
     console.log("search");
