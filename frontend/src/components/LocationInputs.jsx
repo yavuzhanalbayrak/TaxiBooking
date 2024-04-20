@@ -57,7 +57,6 @@ export default function LocationInputs() {
       <Row gutter={[0, 10]}>
         <Col span={24}>
           <GooglePlacesAutocomplete
-            apiKey={import.meta.env.VITE_MAP_API}
             selectProps={{
               placeholder: "Başlangıç adresinizi giriniz",
               destPoint,
@@ -81,7 +80,6 @@ export default function LocationInputs() {
         </Col>
         <Col span={24}>
           <GooglePlacesAutocomplete
-            apiKey={import.meta.env.VITE_MAP_API}
             selectProps={{
               placeholder: "Varış adresinizi giriniz",
               startPoint,
