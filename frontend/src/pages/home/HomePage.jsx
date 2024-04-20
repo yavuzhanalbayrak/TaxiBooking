@@ -7,8 +7,48 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 export default function HomePage() {
   const [startPoint, setStartPoint] = useState(null);
   const [destPoint, setDestPoint] = useState(null);
+  const [source, setSource] = useState([]);
+  const [destination, setDestination] = useState([]);
+  //const {destination, setDestination, source, setSource} = useContext(GlobalContext);
+
+  useEffect(() => {
+    if(source){
+      console.log("source: ",source);
+    }
+    if(destination){
+      console.log("destination: ",destination);
+    }
+  }, [source, destination]);
+
   const onSearch = () => {
     console.log("search");
+  };
+  const getLatAndLng = (place, type) => {
+    console.log(type);
+    const placeId = place.value.place_id;
+    const service = new google.maps.places.PlacesService(
+      document.createElement("div")
+    );
+    service.getDetails({ placeId }, (place, status) => {
+      if (status === "OK" && place.geometry && place.geometry.location) {
+        console.log(place.geometry.location.lat());
+        if (type.name === "source") {
+          setSource({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+            name: place.formatted_address,
+            label: place.name,
+          });
+        } else {
+          setDestination({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+            name: place.formatted_address,
+            label: place.name,
+          });
+        }
+      }
+    });
   };
   return (
     <Row>
@@ -25,7 +65,11 @@ export default function HomePage() {
               selectProps={{
                 placeholder: "Başlangıç adresinizi giriniz",
                 destPoint,
-                onChange: setDestPoint,
+                onChange: (place, type) => {
+                  type.name = "source"
+                  setDestPoint();
+                  getLatAndLng(place, type);
+                },
                 isClearable: true,
                 components: {
                   DropdownIndicator: false,
@@ -45,7 +89,11 @@ export default function HomePage() {
               selectProps={{
                 placeholder: "Varış adresinizi giriniz",
                 startPoint,
-                onChange: setStartPoint,
+                onChange: (place, type)=>{
+                  type.name = "source"
+                  setDestPoint();
+                  getLatAndLng(place, type);
+                },
                 isClearable: true,
                 components: {
                   DropdownIndicator: false,
