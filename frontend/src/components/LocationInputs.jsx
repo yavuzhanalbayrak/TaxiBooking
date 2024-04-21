@@ -5,7 +5,7 @@ import location from "../images/location.png";
 import destination from "../images/currentLoc.png";
 import "../styles/global.scss"
 
-export default function LocationInputs({ setSource, setDestination }) {
+export default function LocationInputs({ setSource, setDestination, distance }) {
   const [focus, setFocus] = useState(false);
 
   const onSearch = () => {
@@ -133,6 +133,10 @@ export default function LocationInputs({ setSource, setDestination }) {
           >
             Ara
           </Button>
+        </Col>
+        <Col span={24}>
+          {distance.length!=[] ? `Mesafe: ${distance}`:null}
+          
         </Col>
       </Row>
     </>

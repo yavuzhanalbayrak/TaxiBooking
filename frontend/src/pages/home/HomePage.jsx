@@ -11,6 +11,7 @@ import LocationInputs from "../../components/LocationInputs";
 export default function HomePage() {
   const [source, setSource] = useState([]);
   const [destination, setDestination] = useState([]);
+  const [distance, setDistance] = useState([]);
 
   return (
     <Row gutter={[10, 10]}>
@@ -22,10 +23,11 @@ export default function HomePage() {
           <LocationInputs
             setSource={setSource}
             setDestination={setDestination}
+            distance={distance}
           ></LocationInputs>
         </Col>
         <Col span={24} xs={24} sm={24} md={17} lg={17} xl={17} xxl={17}>
-          <Map source={source} destination={destination}></Map>
+          <Map source={source} destination={destination} setDistance={setDistance}></Map>
         </Col>
       </LoadScript>
     </Row>
