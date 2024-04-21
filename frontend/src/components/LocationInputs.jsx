@@ -3,9 +3,13 @@ import { Row, Col, Form, Input, Button, Dropdown } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import location from "../images/location.png";
 import destination from "../images/currentLoc.png";
-import "../styles/global.scss"
+import "../styles/global.scss";
 
-export default function LocationInputs({ setSource, setDestination, distance }) {
+export default function LocationInputs({
+  setSource,
+  setDestination,
+  distance,
+}) {
   const [focus, setFocus] = useState(false);
 
   const onSearch = () => {
@@ -41,16 +45,18 @@ export default function LocationInputs({ setSource, setDestination, distance }) 
 
   return (
     <>
-      <Row style={{ marginBottom: "5px" }}>
+      <Row
+        style={{
+          backgroundColor: "#FFFFFF",
+          padding: "10px",
+          border: "1px solid #00000045",
+        }}
+        gutter={[0, 10]}
+      >
         <Col span={24}>
           <h2>Taksi</h2>
         </Col>
-      </Row>
-      <Row gutter={[0, 10]}>
-        <Col
-          span={24}
-          className={focus === 1 ? 'input focused' : 'input'}
-        >
+        <Col span={24} className={focus === 1 ? "input focused" : "input"}>
           <Row align="middle">
             <Col span={2}>
               <img
@@ -134,11 +140,22 @@ export default function LocationInputs({ setSource, setDestination, distance }) 
             Ara
           </Button>
         </Col>
-        <Col span={24}>
-          {distance.length!=[] ? `Mesafe: ${distance}`:null}
-          
-        </Col>
       </Row>
+      {distance.length != [] ? (
+        <Row
+          style={{
+            backgroundColor: "#FFFFFF",
+            padding: "10px",
+            border: "1px solid #00000045",
+            marginTop: "10px",
+          }}
+          gutter={[0, 10]}
+        >
+          <Col span={24}>
+            {distance.length != [] ? `Mesafe: ${distance}` : null}
+          </Col>
+        </Row>
+      ):null}
     </>
   );
 }

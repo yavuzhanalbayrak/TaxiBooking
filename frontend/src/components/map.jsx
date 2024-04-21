@@ -110,7 +110,7 @@ function Map({ source, destination, setDistance }) {
   }, []);
 
   return (
-    <>
+    <div style={{border:"1px solid #00000045"}}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -195,7 +195,7 @@ function Map({ source, destination, setDistance }) {
           }}
         ></DirectionsRenderer>
       </GoogleMap>
-    </>
+    </div>
   );
 }
 
