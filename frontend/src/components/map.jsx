@@ -96,8 +96,8 @@ function Map({ source, destination }) {
           icon={{
             url: currentLocation,
             scaledSize: {
-              width: 17,
-              height: 22,
+              width: 20,
+              height: 29,
             },
           }}
           position={{ lat: source.lat, lng: source.lng }}
@@ -128,8 +128,8 @@ function Map({ source, destination }) {
           icon={{
             url: location,
             scaledSize: {
-              width: 17,
-              height: 22,
+              width: 20,
+              height: 29,
             },
           }}
           position={{ lat: destination.lat, lng: destination.lng }}

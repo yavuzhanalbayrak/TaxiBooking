@@ -1,0 +1,11 @@
+.input {
+    background-color: #FFFFFF;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #00000045;
+    transition: border-color 0.3s;
+
+    &.focused {
+        border-color: black;
+    }
+}

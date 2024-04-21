@@ -19,10 +19,13 @@ export default function HomePage() {
         googleMapsApiKey={import.meta.env.VITE_MAP_API}
       >
         <Col span={24} xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
-          <LocationInputs setSource={setSource} setDestination={setDestination} ></LocationInputs>
+          <LocationInputs
+            setSource={setSource}
+            setDestination={setDestination}
+          ></LocationInputs>
         </Col>
         <Col span={24} xs={24} sm={24} md={17} lg={17} xl={17} xxl={17}>
-          <Map source={source} destination={destination} ></Map>
+          <Map source={source} destination={destination}></Map>
         </Col>
       </LoadScript>
     </Row>

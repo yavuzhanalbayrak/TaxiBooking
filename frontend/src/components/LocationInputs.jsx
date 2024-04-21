@@ -3,6 +3,7 @@ import { Row, Col, Form, Input, Button, Dropdown } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import location from "../images/location.png";
 import destination from "../images/currentLoc.png";
+import "../styles/global.scss"
 
 export default function LocationInputs({ setSource, setDestination }) {
   const [focus, setFocus] = useState(false);
@@ -48,13 +49,7 @@ export default function LocationInputs({ setSource, setDestination }) {
       <Row gutter={[0, 10]}>
         <Col
           span={24}
-          style={{
-            backgroundColor: "#00000011",
-            paddingLeft: "10px",
-            borderRadius: "5px",
-            border: "1px solid #00000045",
-            borderColor: focus === 1 ? "black" : "#00000045",
-          }}
+          className={focus === 1 ? 'input focused' : 'input'}
         >
           <Row align="middle">
             <Col span={2}>
@@ -93,16 +88,7 @@ export default function LocationInputs({ setSource, setDestination }) {
             </Col>
           </Row>
         </Col>
-        <Col
-          style={{
-            backgroundColor: "#00000011",
-            paddingLeft: "10px",
-            borderRadius: "5px",
-            border: "1px solid #00000045",
-            borderColor: focus === 2 ? "black" : "#00000045",
-          }}
-          span={24}
-        >
+        <Col className={focus === 2 ? "input focused" : "input"} span={24}>
           <Row align="middle">
             <Col span={2}>
               <img

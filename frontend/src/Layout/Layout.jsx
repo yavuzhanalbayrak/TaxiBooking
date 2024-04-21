@@ -115,6 +115,7 @@ const App = ({ children, link, icon }) => {
             minHeight: "calc(100vh)",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
+            backgroundColor: "#00000011",
           }}
         >
           {children}
