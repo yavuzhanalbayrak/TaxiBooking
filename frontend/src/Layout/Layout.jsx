@@ -44,6 +44,7 @@ const App = ({ children, link, icon }) => {
           style={{ textDecoration: "none" }}
           onClick={() => {
             signOut();
+            window.location.reload();
           }}
           color="inherit"
         >
@@ -104,11 +105,7 @@ const App = ({ children, link, icon }) => {
           </Col>
         </Row>
       </Header>
-      <Content
-        style={{
-        }}
-      >
-
+      <Content style={{}}>
         <div
           style={{
             padding: 24,
