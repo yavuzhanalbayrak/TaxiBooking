@@ -1,8 +1,11 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
 .input {
   background-color: #ffffff;
-  padding-left: 10px;
+  padding: 3px 0px 3px 15px;
   border-radius: 5px;
-  border: 1px solid #00000045;
+  border: 1px solid #00000035;
   transition: border-color 0.3s;
 
   &.focused {
@@ -10,35 +13,52 @@
   }
 }
 
-.card{
-  background-color: #FFFFFF;
+.card {
+  background-color: #ffffff;
   padding: 10px;
   border: 1px solid #00000045;
-  margin-bottom:10px ;
+  margin-bottom: 10px;
 }
 
-:where(.css-dev-only-do-not-override-42nv3w) .drivers .ant-card .ant-card-body  {
-    padding: 0px 0px 20px 0px;
+:where(.css-dev-only-do-not-override-42nv3w) .drivers .ant-card .ant-card-body {
+  padding: 0px 0px 20px 0px;
+  border-radius: 0 0 8px 8px;
+  max-height: calc(61vh + 5px);
+  overflow-y: auto;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w) .map .ant-card .ant-card-body {
+    padding: 0px 0px 0px 0px;
     border-radius: 0 0 8px 8px;
+  }
 
+.driver-card {
+  border-top: 1px solid #00000012;
+  width: 100%;
+  padding: 10px;
+  transition: 0.3s;
 }
 
-.driver-card{
-    border-top: 1px solid #00000012;
-    width: 100%;
-    padding: 10px;
-    transition: 0.3s;
+.driver-card:hover {
+  background-color: #00000015;
+  cursor: pointer;
+}
+.driver-card:active {
+  background-color: #0000002a;
+  cursor: pointer;
 }
 
-.driver-card:hover{
-    background-color: #00000015;
-    cursor: pointer;
-}
-.driver-card:active{
-    background-color: #0000002a;
-    cursor: pointer;
+.driver-info {
+  padding-left: 10px;
 }
 
-.driver-info{
-    padding-left: 10px;
+.driver-info span{
+    font-weight: 500;
+    color: black;
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+
+.driver-info div{
+
 }

@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Row, Col, Form, Input, Button, Dropdown } from "antd";
+import { Row, Col, Form, Input, Button, Dropdown, Card } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import location from "../images/location.png";
 import destination from "../images/currentLoc.png";
 import "../styles/global.scss";
+import PrimaryButton from "../components/buttons/primaryButton"
 
 export default function LocationInputs({
   setSource,
@@ -18,7 +19,6 @@ export default function LocationInputs({
     setSearch(true);
   };
   const getLatAndLng = (place, type) => {
-    console.log(type);
     const placeId = place.value.place_id;
     const service = new window.google.maps.places.PlacesService(
       document.createElement("div")
@@ -47,13 +47,11 @@ export default function LocationInputs({
 
   return (
     <>
+    <Card style={{marginBottom:"10px"}} title="Varış Noktası Seçiniz">
       <Row
-        className="card"
         gutter={[0, 10]}
       >
-        <Col span={24}>
-          <h2>Taksi</h2>
-        </Col>
+        
         <Col span={24} className={focus === 1 ? "input focused" : "input"}>
           <Row align="middle">
             <Col span={2}>
@@ -131,15 +129,15 @@ export default function LocationInputs({
           </Row>
         </Col>
         <Col span={24}>
-          <Button
-            style={{ width: "100%", marginTop: "5px" }}
+          <PrimaryButton
+            style={{ width: "100%", marginTop: "5px", height:"40px" }}
             onClick={() => onSearch()}
           >
             Ara
-          </Button>
+          </PrimaryButton>
         </Col>
       </Row>
-      {distance.length != [] ? (
+      {/* {distance.length != [] ? (
         <Row
         className="card"
           gutter={[0, 10]}
@@ -148,7 +146,8 @@ export default function LocationInputs({
             {distance.length != [] ? `Mesafe: ${distance}` : null}
           </Col>
         </Row>
-      ):null}
+      ):null} */}
+      </Card>
     </>
   );
 }

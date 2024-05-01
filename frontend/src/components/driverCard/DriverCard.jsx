@@ -20,13 +20,13 @@ export default function DriverCard({ driver }) {
         </Col>
         <Col span={16}>
           <Row className="driver-info">
-            <Col span={24}>Araç Sahibi: {driver.driverName}</Col>
-            <Col span={24}>Ücret/KM: {driver.pricePerKM}</Col>
-            <Col span={24}>Marka: {driver.brand}</Col>
-            <Col span={24}>Model: {driver.model}</Col>
-            <Col span={24}>Yıl: {driver.year}</Col>
+            <Col span={24}><span >Araç Sahibi: </span>{driver.driverName}</Col>
+            <Col span={24}><span >Ücret/KM: </span> {driver.pricePerKM}</Col>
+            <Col span={24}><span >Marka: </span> {driver.brand}</Col>
+            <Col span={24}><span >Model: </span> {driver.model}</Col>
+            <Col span={24}><span >Yıl: </span> {driver.year}</Col>
             <Col span={24}>
-              <div>
+              <span>
                 Puan:{" "}
                 {[...Array(filledStars)].map((_, index) => (
                   <StarFilled style={{color:"#ffc800"}} key={index} />
@@ -34,7 +34,7 @@ export default function DriverCard({ driver }) {
                 {[...Array(emptyStars)].map((_, index) => (
                   <StarOutlined key={index} />
                 ))}
-              </div>
+              </span>
             </Col>
           </Row>
         </Col>

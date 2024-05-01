@@ -17,7 +17,7 @@ const drivers = [
     model: "McQueen",
     year: "2004",
     carUrl: null,
-    point:parseInt(4.3),
+    point: parseInt(4.3),
   },
   {
     driverName: "Chick Hicks",
@@ -26,7 +26,34 @@ const drivers = [
     model: "McQueen",
     year: "2024",
     carUrl: null,
-    point:parseInt(3.8),
+    point: parseInt(3.8),
+  },
+  {
+    driverName: "Chick Hicks",
+    pricePerKM: "259",
+    brand: "Şimşek",
+    model: "McQueen",
+    year: "2024",
+    carUrl: null,
+    point: parseInt(3.8),
+  },
+  {
+    driverName: "Chick Hicks",
+    pricePerKM: "259",
+    brand: "Şimşek",
+    model: "McQueen",
+    year: "2024",
+    carUrl: null,
+    point: parseInt(3.8),
+  },
+  {
+    driverName: "Chick Hicks",
+    pricePerKM: "259",
+    brand: "Şimşek",
+    model: "McQueen",
+    year: "2024",
+    carUrl: null,
+    point: parseInt(3.8),
   },
 ];
 
@@ -42,7 +69,7 @@ export default function HomePage() {
         libraries={["places"]}
         googleMapsApiKey={import.meta.env.VITE_MAP_API}
       >
-        <Col span={24} xs={24} sm={24} md={10} lg={10} xl={7} xxl={7}>
+        <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
           <Col>
             <LocationInputs
               setSource={setSource}
@@ -63,12 +90,16 @@ export default function HomePage() {
             </Col>
           )}
         </Col>
-        <Col span={24} xs={24} sm={24} md={14} lg={14} xl={17} xxl={17}>
-          <Map
-            source={source}
-            destination={destination}
-            setDistance={setDistance}
-          ></Map>
+        <Col span={24} xs={24} sm={24} md={14} lg={14} xl={16} xxl={17}>
+          <div className="map">
+            <Card title="Harita" bordered={false}>
+              <Map
+                source={source}
+                destination={destination}
+                setDistance={setDistance}
+              ></Map>
+            </Card>
+          </div>
         </Col>
       </LoadScript>
     </Row>
