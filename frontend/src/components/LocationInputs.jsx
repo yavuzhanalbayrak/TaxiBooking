@@ -9,11 +9,13 @@ export default function LocationInputs({
   setSource,
   setDestination,
   distance,
+  setSearch
 }) {
   const [focus, setFocus] = useState(false);
 
   const onSearch = () => {
     console.log("search");
+    setSearch(true);
   };
   const getLatAndLng = (place, type) => {
     console.log(type);
@@ -46,11 +48,7 @@ export default function LocationInputs({
   return (
     <>
       <Row
-        style={{
-          backgroundColor: "#FFFFFF",
-          padding: "10px",
-          border: "1px solid #00000045",
-        }}
+        className="card"
         gutter={[0, 10]}
       >
         <Col span={24}>
@@ -143,12 +141,7 @@ export default function LocationInputs({
       </Row>
       {distance.length != [] ? (
         <Row
-          style={{
-            backgroundColor: "#FFFFFF",
-            padding: "10px",
-            border: "1px solid #00000045",
-            marginTop: "10px",
-          }}
+        className="card"
           gutter={[0, 10]}
         >
           <Col span={24}>

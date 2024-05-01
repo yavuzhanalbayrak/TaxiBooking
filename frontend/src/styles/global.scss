@@ -1,11 +1,44 @@
 .input {
-    background-color: #FFFFFF;
-    padding-left: 10px;
-    border-radius: 5px;
-    border: 1px solid #00000045;
-    transition: border-color 0.3s;
+  background-color: #ffffff;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #00000045;
+  transition: border-color 0.3s;
 
-    &.focused {
-        border-color: black;
-    }
+  &.focused {
+    border-color: black;
+  }
+}
+
+.card{
+  background-color: #FFFFFF;
+  padding: 10px;
+  border: 1px solid #00000045;
+  margin-bottom:10px ;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w) .drivers .ant-card .ant-card-body  {
+    padding: 0px 0px 20px 0px;
+    border-radius: 0 0 8px 8px;
+
+}
+
+.driver-card{
+    border-top: 1px solid #00000012;
+    width: 100%;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.driver-card:hover{
+    background-color: #00000015;
+    cursor: pointer;
+}
+.driver-card:active{
+    background-color: #0000002a;
+    cursor: pointer;
+}
+
+.driver-info{
+    padding-left: 10px;
 }
