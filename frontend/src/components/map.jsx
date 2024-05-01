@@ -15,7 +15,7 @@ const containerStyle = {
   height: "calc(100vh - 100px)",
 };
 
-function Map({ source, destination, setDistance }) {
+function Map({ source, destination, setDistance, distance }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
@@ -95,7 +95,8 @@ function Map({ source, destination, setDistance }) {
   };
 
   useEffect(() => {
-    if(distanceMatrix.length != []) setDistance(distanceMatrix.rows[0].elements[0].distance.text);
+    if (distanceMatrix.length != [])
+      setDistance(distanceMatrix.rows[0].elements[0].distance.text);
   }, [distanceMatrix]);
 
   const onLoad = React.useCallback(function callback(map) {
@@ -110,7 +111,7 @@ function Map({ source, destination, setDistance }) {
   }, []);
 
   return (
-    <div >
+    <div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -177,7 +178,11 @@ function Map({ source, destination, setDistance }) {
                   boxShadow: "1.5px 1.5px 5px 0px",
                 }}
               >
-                <p> {destination.label} </p>
+                <p>
+                  {`${destination.label}`}
+                  <br />
+                  {`( ${distance} )`}
+                </p>{" "}
               </div>
             </OverlayView>
           </MarkerF>

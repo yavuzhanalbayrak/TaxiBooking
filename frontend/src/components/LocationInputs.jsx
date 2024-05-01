@@ -48,7 +48,7 @@ export default function LocationInputs({
 
   return (
     <>
-    <Card style={{marginBottom:"10px"}} title="Varış Noktası Seçiniz">
+    <Card style={{marginBottom:"15px"}} title="Varış Noktası Seçiniz">
       <Row
         gutter={[0, 10]}
       >

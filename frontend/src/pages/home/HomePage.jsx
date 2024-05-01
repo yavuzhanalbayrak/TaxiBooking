@@ -97,6 +97,7 @@ export default function HomePage() {
                 source={source}
                 destination={destination}
                 setDistance={setDistance}
+                distance={distance}
               ></Map>
             </Card>
           </div>
