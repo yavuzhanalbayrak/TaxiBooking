@@ -130,14 +130,14 @@ export default function LocationInputs({
           </Row>
         </Col>
         <Col span={24}>
-          <Button
+          <PrimaryButton
             style={{ width: "100%", marginTop: "5px", height:"40px" }}
-            onClick={() => onSearch()}
+            onClick={onSearch}
             disabled={loading}
             loading={loading}
           >
             Ara
-          </Button>
+          </PrimaryButton>
         </Col>
       </Row>
       {/* {distance.length != [] ? (
