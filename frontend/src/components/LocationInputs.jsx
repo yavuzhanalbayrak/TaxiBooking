@@ -13,6 +13,7 @@ export default function LocationInputs({
   setSearch
 }) {
   const [focus, setFocus] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSearch = () => {
     console.log("search");
@@ -129,12 +130,14 @@ export default function LocationInputs({
           </Row>
         </Col>
         <Col span={24}>
-          <PrimaryButton
+          <Button
             style={{ width: "100%", marginTop: "5px", height:"40px" }}
             onClick={() => onSearch()}
+            disabled={loading}
+            loading={loading}
           >
             Ara
-          </PrimaryButton>
+          </Button>
         </Col>
       </Row>
       {/* {distance.length != [] ? (
