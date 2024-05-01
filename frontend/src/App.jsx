@@ -14,6 +14,7 @@ import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
 import RegisterPage from "./pages/register/RegisterPage";
 import ForgotPasswordPage from "./pages/forgot-password/ForgotPasswordPage"
 import Layout from "./Layout/Layout";
+import ProfilePage from "./pages/profile/ProfilePage";
 function App() {
   const store = createStore({
     authName: "_auth",
@@ -31,6 +32,7 @@ function App() {
             <Routes>
               <Route element={<AuthOutlet fallbackPath="/login" />}>
                 <Route path="/" element={<Layout link="Home"><HomePage /></Layout>} />
+                <Route path="/profile" element={<Layout link="Home"><ProfilePage /></Layout>} />
               </Route>
               <Route
                 path="/login"

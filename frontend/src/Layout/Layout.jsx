@@ -27,13 +27,9 @@ const App = ({ children, link, icon }) => {
     {
       key: "1",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link to="/profile">
           Profil
-        </a>
+        </Link>
       ),
     },
     {
