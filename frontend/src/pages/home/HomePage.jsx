@@ -34,26 +34,30 @@ export default function HomePage() {
           <Row gutter={[10, 10]}>
             <Col span={24} xs={24} sm={24} md={24} lg={24} xl={24} xxl={17}>
               <div className="map">
-                <Card
-                  title="Harita"
-                  bordered={false}
-                  style={{ borderRadius: "0px" }}
-                >
-                  <div>
+                <Card bordered={false} style={{ borderRadius: "0px" }}>
+                  <div style={{ position: "relative" }}>
+                    <div className="shadow-top"></div>
                     <Map
                       source={source}
                       destination={destination}
                       setDistance={setDistance}
                       distance={distance}
+                      isPhone={true}
                     ></Map>
+                    <div className="shadow-bottom"></div>
                   </div>
-                  <div>
-                    <LocationInputs
-                      setSource={setSource}
-                      setDestination={setDestination}
-                      distance={distance}
-                      setSearch={setSearch}
-                    />
+                  <div className="location-inputs">
+                    <Card
+                      style={{ borderRadius: "0px" }}
+                      title="Varış Noktası Seçiniz"
+                    >
+                      <LocationInputs
+                        setSource={setSource}
+                        setDestination={setDestination}
+                        distance={distance}
+                        setSearch={setSearch}
+                      />
+                    </Card>
                   </div>
                 </Card>
               </div>
@@ -63,12 +67,14 @@ export default function HomePage() {
           <Row style={{ padding: "24px" }} gutter={[10, 10]}>
             <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
               <Col>
-                <LocationInputs
-                  setSource={setSource}
-                  setDestination={setDestination}
-                  distance={distance}
-                  setSearch={setSearch}
-                ></LocationInputs>
+                <Card title="Varış Noktası Seçiniz">
+                  <LocationInputs
+                    setSource={setSource}
+                    setDestination={setDestination}
+                    distance={distance}
+                    setSearch={setSearch}
+                  ></LocationInputs>
+                </Card>
               </Col>
             </Col>
             <Col span={24} xs={24} sm={24} md={14} lg={14} xl={16} xxl={17}>
@@ -79,6 +85,7 @@ export default function HomePage() {
                     destination={destination}
                     setDistance={setDistance}
                     distance={distance}
+                    isPhone={false}
                   ></Map>
                 </Card>
               </div>

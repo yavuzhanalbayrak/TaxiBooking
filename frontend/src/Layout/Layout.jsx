@@ -63,10 +63,8 @@ const App = ({ children, link, icon }) => {
         style={{
           position: "sticky",
           top: 0,
-          zIndex: 1,
+          zIndex: 100,
           width: "100%",
-          display: "flex",
-          alignItems: "center",
           backgroundColor: "white",
           borderBottom: `1px solid #0000002f`,
         }}

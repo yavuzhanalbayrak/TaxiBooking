@@ -10,15 +10,15 @@ import {
 import currentLocation from "../images/currentLoc.png";
 import location from "../images/location.png";
 
-const containerStyle = {
-  width: "100%",
-  height: "calc(70vh - 80px)",
-};
-
-function Map({ source, destination, setDistance, distance }) {
+function Map({ source, destination, setDistance, distance, isPhone }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
+
+  const containerStyle = {
+    width: "100%",
+    height: isPhone ? "calc(70vh - 35px)" : "calc(100vh - 160px)",
+  };
 
   const [center, setCenter] = useState({
     lat: 41.288,

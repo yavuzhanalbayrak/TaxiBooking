@@ -48,7 +48,6 @@ export default function LocationInputs({
 
   return (
     <>
-    <Card style={{marginBottom:"15px"}} title="Varış Noktası Seçiniz">
       <Row
         gutter={[0, 10]}
         justify="center"
@@ -151,7 +150,6 @@ export default function LocationInputs({
           </Col>
         </Row>
       ):null} */}
-      </Card>
     </>
   );
 }
