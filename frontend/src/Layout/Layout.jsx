@@ -60,14 +60,8 @@ const App = ({ children, link, icon }) => {
   return (
     <Layout>
       <Header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          width: "100%",
-          backgroundColor: "white",
-          borderBottom: `1px solid #0000002f`,
-        }}
+      className="navbar"
+       
       >
         <Row style={{ width: "100%" }}>
           <Col span={20}>
@@ -102,7 +96,7 @@ const App = ({ children, link, icon }) => {
       <Content style={{}}>
         <div
           style={{
-            minHeight: "calc(100vh)",
+            minHeight: "calc(100vh - 80px )",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
             backgroundColor: "#00000011",

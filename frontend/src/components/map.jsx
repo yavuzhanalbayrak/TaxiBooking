@@ -17,7 +17,7 @@ function Map({ source, destination, setDistance, distance, isPhone }) {
 
   const containerStyle = {
     width: "100%",
-    height: isPhone ? "calc(70vh - 35px)" : "calc(100vh - 160px)",
+    height: isPhone ? "calc(100vh - 80px)" : "calc(100vh - 160px)",
   };
 
   const [center, setCenter] = useState({

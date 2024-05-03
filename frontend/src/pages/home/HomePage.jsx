@@ -36,7 +36,7 @@ export default function HomePage() {
               <div className="map">
                 <Card bordered={false} style={{ borderRadius: "0px" }}>
                   <div style={{ position: "relative" }}>
-                    <div className="shadow-top"></div>
+                    {/* <div className="shadow-top"></div> */}
                     <Map
                       source={source}
                       destination={destination}
@@ -44,9 +44,11 @@ export default function HomePage() {
                       distance={distance}
                       isPhone={true}
                     ></Map>
-                    <div className="shadow-bottom"></div>
+                    {/* <div className="shadow-bottom"></div> */}
                   </div>
-                  <div className="location-inputs">
+                  <div
+                    className="location-inputs-phone "
+                  >
                     <Card
                       style={{ borderRadius: "0px" }}
                       title="Varış Noktası Seçiniz"

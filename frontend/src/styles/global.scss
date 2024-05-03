@@ -1,12 +1,22 @@
 * {
   font-family: "Roboto", sans-serif;
 }
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid #0000002f;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
 .input {
   background-color: #ffffff;
   padding: 3px 0px 3px 15px;
   border-radius: 25px;
   border: 1px solid #00000035;
-  transition: border-color 0.3s;
+  transition: 0.3s;
 
   &.focused {
     border-color: black;
@@ -19,7 +29,12 @@
   border: 1px solid #00000045;
   margin-bottom: 10px;
 }
-
+.location-inputs-phone{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.2);
+}
 :where(.css-dev-only-do-not-override-42nv3w) .drivers .ant-card .ant-card-body {
   padding: 0px 0px 20px 0px;
   border-radius: 0 0 8px 8px;
@@ -32,9 +47,10 @@
     border-radius: 0 0 8px 8px;
   }
 
-  :where(.css-dev-only-do-not-override-42nv3w) .location-inputs .ant-card .ant-card-body {
-    padding: 20px 10px 2ch 10px;
+  :where(.css-dev-only-do-not-override-42nv3w) .location-inputs-phone .ant-card .ant-card-body {
+    padding: 20px 10px 20px 10px;
     border-radius: 0 0 8px 8px;
+    transition: 0.3s;
   }
 
 .driver-card {
@@ -82,4 +98,7 @@
   height: 30px; 
   background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
   z-index: 1;
+}
+
+.select-location{
 }

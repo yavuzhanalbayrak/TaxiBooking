@@ -49,6 +49,7 @@ export default function LocationInputs({
   return (
     <>
       <Row
+        className="select-location"
         gutter={[0, 10]}
         justify="center"
       >
