@@ -104,7 +104,6 @@ const App = ({ children, link, icon }) => {
       <Content style={{}}>
         <div
           style={{
-            padding: 24,
             minHeight: "calc(100vh)",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,

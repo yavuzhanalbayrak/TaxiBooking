@@ -12,7 +12,7 @@ import location from "../images/location.png";
 
 const containerStyle = {
   width: "100%",
-  height: "calc(100vh - 100px)",
+  height: "calc(70vh - 80px)",
 };
 
 function Map({ source, destination, setDistance, distance }) {

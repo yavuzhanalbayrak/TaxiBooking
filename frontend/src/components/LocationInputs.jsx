@@ -51,9 +51,10 @@ export default function LocationInputs({
     <Card style={{marginBottom:"15px"}} title="Varış Noktası Seçiniz">
       <Row
         gutter={[0, 10]}
+        justify="center"
       >
         
-        <Col span={24} className={focus === 1 ? "input focused" : "input"}>
+        <Col span={23} className={focus === 1 ? "input focused" : "input"}>
           <Row align="middle">
             <Col span={2}>
               <img
@@ -91,7 +92,7 @@ export default function LocationInputs({
             </Col>
           </Row>
         </Col>
-        <Col className={focus === 2 ? "input focused" : "input"} span={24}>
+        <Col className={focus === 2 ? "input focused" : "input"} span={23}>
           <Row align="middle">
             <Col span={2}>
               <img
@@ -129,7 +130,7 @@ export default function LocationInputs({
             </Col>
           </Row>
         </Col>
-        <Col span={24}>
+        <Col span={23}>
           <Button
             style={{ width: "100%", marginTop: "5px", height:"40px" }}
             onClick={onSearch}
