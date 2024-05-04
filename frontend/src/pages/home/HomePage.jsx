@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Modal, Button } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import { LoadScript } from "@react-google-maps/api";
 import Map from "../../components/Map";
 import LocationInputs from "../../components/LocationInputs";
 
 export default function HomePage() {
-  const [source, setSource] = useState([]);
-  const [destination, setDestination] = useState([]);
-  const [distance, setDistance] = useState([]);
-  const [search, setSearch] = useState(false);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+  const [distance, setDistance] = useState("");
   const [isPhone, setIsPhone] = useState(window.innerWidth <= 768);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     function handleResize() {
       setIsPhone(window.innerWidth <= 768);
@@ -23,6 +23,11 @@ export default function HomePage() {
     };
   }, []);
 
+  const startSearchForDriver = () => {
+    if (destination && source) {
+      setIsModalOpen(true);
+    }
+  };
   return (
     <>
       <LoadScript
@@ -46,9 +51,7 @@ export default function HomePage() {
                     ></Map>
                     {/* <div className="shadow-bottom"></div> */}
                   </div>
-                  <div
-                    className="location-inputs-phone "
-                  >
+                  <div className="location-inputs-phone ">
                     <Card
                       style={{ borderRadius: "0px" }}
                       title="Varış Noktası Seçiniz"
@@ -56,8 +59,10 @@ export default function HomePage() {
                       <LocationInputs
                         setSource={setSource}
                         setDestination={setDestination}
+                        destination={destination}
+                        source={source}
                         distance={distance}
-                        setSearch={setSearch}
+                        startSearchForDriver={startSearchForDriver}
                       />
                     </Card>
                   </div>
@@ -73,9 +78,11 @@ export default function HomePage() {
                   <LocationInputs
                     setSource={setSource}
                     setDestination={setDestination}
+                    destination={destination}
+                    source={source}
                     distance={distance}
-                    setSearch={setSearch}
-                  ></LocationInputs>
+                    startSearchForDriver={startSearchForDriver}
+                    ></LocationInputs>
                 </Card>
               </Col>
             </Col>
@@ -95,6 +102,36 @@ export default function HomePage() {
           </Row>
         )}
       </LoadScript>
+      <Modal
+        title="Sürücü Aranıyor"
+        open={isModalOpen}
+        closeIcon={false}
+        footer={false}
+        style={{ paddingTop: "25vh" }}
+      >
+        <Row
+          gutter={[0, 30]}
+          style={{ textAlign: "center", paddingTop: "10px" }}
+        >
+          <Col span={24}>
+            Lütfen Bekleyiniz
+            <Col span={24}>
+              <LoadingOutlined style={{ fontSize: "24px" }} />
+            </Col>
+          </Col>
+
+          <Col span={24}>
+            <Button
+              onClick={() => setIsModalOpen(false)}
+              style={{ width: "30%" }}
+              danger
+              type="primary"
+            >
+              İptal
+            </Button>
+          </Col>
+        </Row>
+      </Modal>
     </>
   );
 }

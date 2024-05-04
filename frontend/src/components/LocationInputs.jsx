@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Row, Col, Form, Input, Button, Dropdown, Card } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import location from "../images/location.png";
-import destination from "../images/currentLoc.png";
+import destinationImg from "../images/currentLoc.png";
 import "../styles/global.scss";
 import PrimaryButton from "../components/buttons/primaryButton"
 
@@ -10,15 +10,14 @@ export default function LocationInputs({
   setSource,
   setDestination,
   distance,
-  setSearch
+  startSearchForDriver,
+  source,
+  destination
 }) {
   const [focus, setFocus] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onSearch = () => {
-    console.log("search");
-    setSearch(true);
-  };
+
   const getLatAndLng = (place, type) => {
     const placeId = place.value.place_id;
     const service = new window.google.maps.places.PlacesService(
@@ -59,7 +58,7 @@ export default function LocationInputs({
             <Col span={2}>
               <img
                 style={{ width: "15px", height: "22px" }}
-                src={destination}
+                src={destinationImg}
                 alt=""
               />
             </Col>
@@ -133,8 +132,8 @@ export default function LocationInputs({
         <Col span={23}>
           <Button
             style={{ width: "100%", marginTop: "5px", height:"40px" }}
-            onClick={onSearch}
-            disabled={loading}
+            onClick={startSearchForDriver}
+            disabled={!destination || !source}
             loading={loading}
           >
             Ara
