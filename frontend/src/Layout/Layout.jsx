@@ -9,6 +9,7 @@ import {
   Avatar,
   Dropdown,
   Button,
+  ConfigProvider,
 } from "antd";
 import { Link } from "react-router-dom";
 import { UserOutlined, HomeOutlined } from "@ant-design/icons";
@@ -19,7 +20,19 @@ const { Header, Content, Footer } = Layout;
 
 const App = ({ children, link, icon }) => {
   const signOut = useSignOut();
-  const {selectedKeys} = React.useContext(GlobalContext);
+  const {selectedKeys, isPhone, setIsPhone} = React.useContext(GlobalContext);
+
+  React.useEffect(() => {
+    function handleResize() {
+      setIsPhone(window.innerWidth <= 768);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -64,12 +77,20 @@ const App = ({ children, link, icon }) => {
   ];
 
   return (
+    <ConfigProvider
+  theme={{
+    components: {
+      Layout: {
+        headerPadding:isPhone?"0px 15px":"0px 60px"
+      },
+    },
+  }}
+>
     <Layout>
       <Header
       className="navbar"
-       
       >
-        <Row style={{ width: "100%" }}>
+        <Row style={{ width: "100%"}}>
           <Col span={20}>
             <Menu
               theme="light"
@@ -122,6 +143,7 @@ const App = ({ children, link, icon }) => {
         Taxi Booking ©{new Date().getFullYear()}
       </Footer>
     </Layout>
+    </ConfigProvider>
   );
 };
 export default App;

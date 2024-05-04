@@ -11,24 +11,11 @@ export default function HomePage() {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [distance, setDistance] = useState("");
-  const [isPhone, setIsPhone] = useState(window.innerWidth <= 768);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {setSelectedKeys} = useContext(GlobalContext);
+  const {setSelectedKeys, isPhone} = useContext(GlobalContext);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
-  }, []);
-
-  useEffect(() => {
-    function handleResize() {
-      setIsPhone(window.innerWidth <= 768);
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
   const startSearchForDriver = () => {
@@ -84,7 +71,7 @@ export default function HomePage() {
               </Col>
             </Row>
           ) : (
-            <Row style={{ padding: "24px" }} gutter={[10, 10]}>
+            <Row style={{ padding: "24px 60px" }} gutter={[10, 10]}>
               <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
                 <Col>
                   <Card title="Varış Noktası Seçiniz">

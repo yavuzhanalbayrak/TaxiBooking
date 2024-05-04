@@ -44,17 +44,18 @@
   text-align: center;
 }
 
-:where(.css-dev-only-do-not-override-42nv3w) .drivers .ant-card .ant-card-body {
+.drivers .ant-card .ant-card-body {
   padding: 0px 0px 20px 0px;
   border-radius: 0 0 8px 8px;
   max-height: calc(61vh + 5px);
   overflow-y: auto;
 }
 
-:where(.css-dev-only-do-not-override-42nv3w) .map .ant-card .ant-card-body {
+.map .ant-card .ant-card-body {
   padding: 0px 0px 0px 0px;
   border-radius: 0 0 8px 8px;
 }
+
 
 .location-inputs-phone .ant-card .ant-card-body {
   padding: 30px 10px 30px 10px;

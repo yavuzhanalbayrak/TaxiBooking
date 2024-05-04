@@ -118,10 +118,17 @@ function Map({ source, destination, setDistance, distance, isPhone }) {
         zoom={12.6}
         onLoad={onLoad}
         onUnmount={onUnmount}
-        options={{ mapId: "7297f202550d6fee",
-        fullscreenControl: false
-         }}
+        options={{
+          mapId: "7297f202550d6fee",
+          fullscreenControl: false,
+          zoomControl: false,
+          gestureHandling: "greedy", // Allow the map to respond to all gestures
+          draggableCursor: "grab", // Set the cursor to grab to indicate the map is draggable
+          streetViewControl: false, // Disable the default street view control
+
+        }}
       >
+        
         {source.length != [] ? (
           <MarkerF
             icon={{
