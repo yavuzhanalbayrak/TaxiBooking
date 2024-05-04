@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const GlobalContext = createContext({
-  example: {},
-  setExample: () => {},
+  selectedKeys: {},
+  setSelectedKeys: () => {},
 });
 
 export default GlobalContext;

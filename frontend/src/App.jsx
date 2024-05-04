@@ -15,6 +15,7 @@ import RegisterPage from "./pages/register/RegisterPage";
 import ForgotPasswordPage from "./pages/forgot-password/ForgotPasswordPage";
 import Layout from "./Layout/Layout";
 import ProfilePage from "./pages/profile/ProfilePage";
+import TravelPage from "./pages/travel/TravelPage";
 
 function App() {
   const store = createStore({
@@ -45,6 +46,14 @@ function App() {
                   element={
                     <Layout link="Home">
                       <ProfilePage />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/travel"
+                  element={
+                    <Layout link="travel">
+                      <TravelPage />
                     </Layout>
                   }
                 />

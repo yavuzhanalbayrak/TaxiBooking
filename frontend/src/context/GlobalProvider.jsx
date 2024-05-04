@@ -3,15 +3,15 @@ import GlobalContext from "./GlobalContext";
 
 // eslint-disable-next-line react/prop-types
 const GlobalProvider = ({ children }) => {
-  const [example, setExamplee] = useState("");
+  const [selectedKeys, setSelectedKeyss] = useState("");
 
-  const setExample = async (response) => {
-    setExamplee(response);
+  const setSelectedKeys = async (response) => {
+    setSelectedKeyss(response);
   };
 
   const values = {
-    example,
-    setExample,
+    selectedKeys,
+    setSelectedKeys,
   };
 
   return (

@@ -13,6 +13,11 @@ export default function HomePage() {
   const [distance, setDistance] = useState("");
   const [isPhone, setIsPhone] = useState(window.innerWidth <= 768);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {setSelectedKeys} = useContext(GlobalContext);
+
+  useEffect(() => {
+    setSelectedKeys(["1"]);
+  }, []);
 
   useEffect(() => {
     function handleResize() {

@@ -13,11 +13,13 @@ import {
 import { Link } from "react-router-dom";
 import { UserOutlined, HomeOutlined } from "@ant-design/icons";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
+import GlobalContext from "../context/GlobalContext";
 
 const { Header, Content, Footer } = Layout;
 
 const App = ({ children, link, icon }) => {
   const signOut = useSignOut();
+  const {selectedKeys} = React.useContext(GlobalContext);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -53,7 +55,11 @@ const App = ({ children, link, icon }) => {
   const items = [
     {
       key: "1",
-      label: <Link to="/">Home</Link>,
+      label: <Link to="/">Araç Bul</Link>,
+    },
+    {
+      key: "2",
+      label: <Link to="/Travel">Yolculuk</Link>,
     },
   ];
 
@@ -68,7 +74,7 @@ const App = ({ children, link, icon }) => {
             <Menu
               theme="light"
               mode="horizontal"
-              defaultSelectedKeys={["2"]}
+              selectedKeys={selectedKeys}
               items={items}
               style={{
                 flex: 1,
