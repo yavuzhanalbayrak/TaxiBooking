@@ -118,7 +118,9 @@ function Map({ source, destination, setDistance, distance, isPhone }) {
         zoom={12.6}
         onLoad={onLoad}
         onUnmount={onUnmount}
-        options={{ mapId: "7297f202550d6fee" }}
+        options={{ mapId: "7297f202550d6fee",
+        fullscreenControl: false
+         }}
       >
         {source.length != [] ? (
           <MarkerF

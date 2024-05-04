@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Modal, Button } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { LoadScript } from "@react-google-maps/api";
 import Map from "../../components/Map";
 import LocationInputs from "../../components/LocationInputs";
+import LoadingModal from "../../components/loadingModal/LoadingModal";
 
 export default function HomePage() {
   const [source, setSource] = useState("");
@@ -11,6 +10,12 @@ export default function HomePage() {
   const [distance, setDistance] = useState("");
   const [isPhone, setIsPhone] = useState(window.innerWidth <= 768);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isScriptLoaded, setScriptLoaded] = useState(false);
+
+  const handleScriptLoad = () => {
+    setScriptLoaded(true);
+  };
+
   useEffect(() => {
     function handleResize() {
       setIsPhone(window.innerWidth <= 768);
@@ -30,10 +35,6 @@ export default function HomePage() {
   };
   return (
     <>
-      <LoadScript
-        libraries={["places"]}
-        googleMapsApiKey={import.meta.env.VITE_MAP_API}
-      >
         {isPhone ? (
           //Phone
           <Row gutter={[10, 10]}>
@@ -41,7 +42,6 @@ export default function HomePage() {
               <div className="map">
                 <Card bordered={false} style={{ borderRadius: "0px" }}>
                   <div style={{ position: "relative" }}>
-                    {/* <div className="shadow-top"></div> */}
                     <Map
                       source={source}
                       destination={destination}
@@ -49,11 +49,10 @@ export default function HomePage() {
                       distance={distance}
                       isPhone={true}
                     ></Map>
-                    {/* <div className="shadow-bottom"></div> */}
                   </div>
                   <div className="location-inputs-phone ">
                     <Card
-                      style={{ borderRadius: "0px" }}
+                      className="location-inputs-card-phone"
                       title="Varış Noktası Seçiniz"
                     >
                       <LocationInputs
@@ -82,7 +81,7 @@ export default function HomePage() {
                     source={source}
                     distance={distance}
                     startSearchForDriver={startSearchForDriver}
-                    ></LocationInputs>
+                  ></LocationInputs>
                 </Card>
               </Col>
             </Col>
@@ -101,37 +100,10 @@ export default function HomePage() {
             </Col>
           </Row>
         )}
-      </LoadScript>
-      <Modal
-        title="Sürücü Aranıyor"
-        open={isModalOpen}
-        closeIcon={false}
-        footer={false}
-        style={{ paddingTop: "25vh" }}
-      >
-        <Row
-          gutter={[0, 30]}
-          style={{ textAlign: "center", paddingTop: "10px" }}
-        >
-          <Col span={24}>
-            Lütfen Bekleyiniz
-            <Col span={24}>
-              <LoadingOutlined style={{ fontSize: "24px" }} />
-            </Col>
-          </Col>
-
-          <Col span={24}>
-            <Button
-              onClick={() => setIsModalOpen(false)}
-              style={{ width: "30%" }}
-              danger
-              type="primary"
-            >
-              İptal
-            </Button>
-          </Col>
-        </Row>
-      </Modal>
+      <LoadingModal
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+      ></LoadingModal>
     </>
   );
 }

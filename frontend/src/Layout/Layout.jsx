@@ -96,10 +96,12 @@ const App = ({ children, link, icon }) => {
       <Content style={{}}>
         <div
           style={{
-            minHeight: "calc(100vh - 80px )",
+            height: "calc(100vh - 64px)",
             background: colorBgContainer,
-            borderRadius: borderRadiusLG,
+            borderRadius: 0,
             backgroundColor: "#00000011",
+            overflowY:"hidden",
+            overflowX:"hidden"
           }}
         >
           {children}
@@ -108,6 +110,7 @@ const App = ({ children, link, icon }) => {
       <Footer
         style={{
           textAlign: "center",
+          zIndex:"200"
         }}
       >
         Taxi Booking ©{new Date().getFullYear()}
