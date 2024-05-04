@@ -75,6 +75,7 @@ export default function HomePage() {
                           source={source}
                           distance={distance}
                           startSearchForDriver={startSearchForDriver}
+                          isPhone={true}
                         />
                       </Card>
                     </div>
@@ -94,6 +95,7 @@ export default function HomePage() {
                       source={source}
                       distance={distance}
                       startSearchForDriver={startSearchForDriver}
+                      isPhone={false}
                     ></LocationInputs>
                   </Card>
                 </Col>

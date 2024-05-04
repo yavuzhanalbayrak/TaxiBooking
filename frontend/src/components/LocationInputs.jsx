@@ -4,7 +4,7 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import location from "../images/location.png";
 import destinationImg from "../images/currentLoc.png";
 import "../styles/global.scss";
-import PrimaryButton from "../components/buttons/primaryButton"
+import PrimaryButton from "../components/buttons/primaryButton";
 
 export default function LocationInputs({
   setSource,
@@ -12,11 +12,11 @@ export default function LocationInputs({
   distance,
   startSearchForDriver,
   source,
-  destination
+  destination,
+  isPhone,
 }) {
   const [focus, setFocus] = useState(false);
   const [loading, setLoading] = useState(false);
-
 
   const getLatAndLng = (place, type) => {
     const placeId = place.value.place_id;
@@ -47,12 +47,7 @@ export default function LocationInputs({
 
   return (
     <>
-      <Row
-        className="select-location"
-        gutter={[0, 10]}
-        justify="center"
-      >
-        
+      <Row className="select-location" gutter={[0, 10]} justify="center">
         <Col span={23} className={focus === 1 ? "input focused" : "input"}>
           <Row align="middle">
             <Col span={2}>
@@ -91,7 +86,11 @@ export default function LocationInputs({
             </Col>
           </Row>
         </Col>
-        <Col className={focus === 2 ? "input focused" : "input"} span={23}>
+        <Col
+          style={{ marginBottom: isPhone ? "50px" : "10px" }}
+          className={focus === 2 ? "input focused" : "input"}
+          span={23}
+        >
           <Row align="middle">
             <Col span={2}>
               <img
@@ -131,7 +130,7 @@ export default function LocationInputs({
         </Col>
         <Col span={23}>
           <Button
-            style={{ width: "100%", marginTop: "5px", height:"40px" }}
+            style={{ width: "100%", marginTop: "5px", height: "45px", borderRadius: "25px",}}
             onClick={startSearchForDriver}
             disabled={!destination || !source}
             loading={loading}

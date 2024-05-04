@@ -17,6 +17,7 @@
   border-radius: 25px;
   border: 1px solid #00000035;
   transition: 0.3s;
+  margin-bottom: 5px;
 
   &.focused {
     border-color: black;
@@ -29,9 +30,9 @@
   border: 1px solid #00000045;
   margin-bottom: 10px;
 }
-.location-inputs-phone{
+.location-inputs-phone {
   position: absolute;
-  bottom: -233px;
+  bottom: -298px;
   width: 100%;
   box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -41,9 +42,7 @@
   padding-top: 20px; // Adjust the padding value as needed
   padding-bottom: 20px; // Adjust the padding value as needed
   text-align: center;
-
 }
-
 
 :where(.css-dev-only-do-not-override-42nv3w) .drivers .ant-card .ant-card-body {
   padding: 0px 0px 20px 0px;
@@ -53,15 +52,15 @@
 }
 
 :where(.css-dev-only-do-not-override-42nv3w) .map .ant-card .ant-card-body {
-    padding: 0px 0px 0px 0px;
-    border-radius: 0 0 8px 8px;
-  }
+  padding: 0px 0px 0px 0px;
+  border-radius: 0 0 8px 8px;
+}
 
-  .location-inputs-phone .ant-card .ant-card-body {
-    padding: 30px 10px 30px 10px;
-    border-radius: 0 0 8px 8px;
-    transition: 0.3s;
-  }
+.location-inputs-phone .ant-card .ant-card-body {
+  padding: 30px 10px 30px 10px;
+  border-radius: 0 0 8px 8px;
+  transition: 0.3s;
+}
 
 .driver-card {
   border-top: 1px solid #00000012;
@@ -83,13 +82,12 @@
   padding-left: 10px;
 }
 
-.driver-info span{
-    font-weight: 500;
-    color: black;
-    font-size: 15px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+.driver-info span {
+  font-weight: 500;
+  color: black;
+  font-size: 15px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-
 
 .select-location {
   transition: display 0.3s; // Apply transition to the display property
@@ -99,8 +97,6 @@
   bottom: -16px;
 }
 
-
-.location-inputs-card-phone{
-border-radius: 0;
+.location-inputs-card-phone {
+  border-radius: 0;
 }
-
