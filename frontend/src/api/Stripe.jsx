@@ -25,7 +25,7 @@ export default function App({ amount, currency, mode }) {
       }
     };
 
-    fetchClientSecret();
+    // fetchClientSecret();
 
     return () => {
       // Cleanup function if needed
@@ -40,7 +40,7 @@ export default function App({ amount, currency, mode }) {
     mode,
     amount,
     currency,
-    clientSecret,
+    // clientSecret,
   };
 
   return (

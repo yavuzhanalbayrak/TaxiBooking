@@ -9,12 +9,12 @@ export default function TravelPage() {
     React.useEffect(() => {
       setSelectedKeys(["2"]);
     }, []);
-
+    
   return (
     <div>TravelPage
         <Row>
             <Col>
-                <Stripe></Stripe>
+                <Stripe amount={100} currency={'usd'} mode={'payment'}/>
             </Col>
         </Row>
     </div>
