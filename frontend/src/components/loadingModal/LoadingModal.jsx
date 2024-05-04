@@ -76,7 +76,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
                 <CheckCircleOutlined
                   style={{ fontSize: "24px", color: "green" }}
                 />
-                <p>Şoför bulundu. Yolculuk başlıyor...</p>
+                <p>Sürücü bulundu. Yolculuk başlıyor...</p>
                 <p>{countdown}</p>
                 <p style={{ display: "none" }}>
                   {setTimeout(() => {
