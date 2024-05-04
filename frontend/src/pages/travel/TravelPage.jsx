@@ -1,13 +1,22 @@
 import React from 'react'
 import GlobalContext from '../../context/GlobalContext';
+import { Col, Row } from 'antd';
+import Stripe from "../../api/Stripe"
+
 export default function TravelPage() {
-    const {setSelectedKeys} = React.useContext(GlobalContext);
+    const {setSelectedKeys, isPhone} = React.useContext(GlobalContext);
 
     React.useEffect(() => {
       setSelectedKeys(["2"]);
     }, []);
-    
+
   return (
-    <div>TravelPage</div>
+    <div>TravelPage
+        <Row>
+            <Col>
+                <Stripe></Stripe>
+            </Col>
+        </Row>
+    </div>
   )
 }
