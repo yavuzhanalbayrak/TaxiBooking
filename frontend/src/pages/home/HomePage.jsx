@@ -19,6 +19,7 @@ export default function HomePage() {
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -28,7 +29,7 @@ export default function HomePage() {
     if (!isLocationClicked) {
       setTimeout(() => {
         setDisplay(true);
-      }, 300);
+      }, 400);
     } else {
       setDisplay(false);
     }
@@ -70,7 +71,7 @@ export default function HomePage() {
                       <Card
                         style={{
                           transform: isLocationClicked
-                            ? `translateY(-217px)`
+                            ? focus?`translateY(-417px)`:`translateY(-217px)`
                             : ``,
                           transition: "transform 0.3s ease-in-out",
                           transformOrigin: "top",
@@ -96,6 +97,7 @@ export default function HomePage() {
                       >
                         <div className="ant-card">
                           <div
+                          style={{paddingTop:"10px",paddingBottom:"200px"}}
                             className={
                               display
                                 ? "ant-card-body clicked"
@@ -110,6 +112,8 @@ export default function HomePage() {
                               distance={distance}
                               startSearchForDriver={startSearchForDriver}
                               isPhone={true}
+                              focus={focus}
+                              setFocus={setFocus}
                             />
                           </div>
                         </div>
@@ -132,6 +136,8 @@ export default function HomePage() {
                       distance={distance}
                       startSearchForDriver={startSearchForDriver}
                       isPhone={false}
+                      focus={focus}
+                      setFocus={setFocus}
                     ></LocationInputs>
                   </Card>
                 </Col>

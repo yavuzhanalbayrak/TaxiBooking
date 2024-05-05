@@ -14,8 +14,9 @@ export default function LocationInputs({
   source,
   destination,
   isPhone,
+  focus,
+  setFocus
 }) {
-  const [focus, setFocus] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const getLatAndLng = (place, type) => {
