@@ -4,7 +4,11 @@ import Map from "../../components/map/Map";
 import LocationInputs from "../../components/LocationInputs";
 import LoadingModal from "../../components/loadingModal/LoadingModal";
 import { useJsApiLoader } from "@react-google-maps/api";
-import { LoadingOutlined } from "@ant-design/icons";
+import {
+  LoadingOutlined,
+  UpCircleOutlined,
+  DownCircleOutlined,
+} from "@ant-design/icons";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function HomePage() {
@@ -12,7 +16,8 @@ export default function HomePage() {
   const [destination, setDestination] = useState("");
   const [distance, setDistance] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {setSelectedKeys, isPhone} = useContext(GlobalContext);
+  const [isLocationClicked, setIsLocationClicked] = useState(false);
+  const { setSelectedKeys, isPhone } = useContext(GlobalContext);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -50,10 +55,31 @@ export default function HomePage() {
                         isPhone={true}
                       ></Map>
                     </div>
-                    <div className="location-inputs-phone ">
+                    <div
+                      className={
+                        isLocationClicked
+                          ? "location-inputs-phone clicked"
+                          : "location-inputs-phone"
+                      }
+                    >
                       <Card
-                        className="location-inputs-card-phone"
-                        title="Varış Noktası Seçiniz"
+                        className="location-inputs-card-phone "
+                        title={
+                          <div
+                            onClick={() =>
+                              setIsLocationClicked((Prevstate) => !Prevstate)
+                            }
+                          >
+                            Varış Noktası Seçiniz{" "}
+                            <span style={{marginLeft:"5px"}}>
+                              {isLocationClicked ? (
+                                <DownCircleOutlined />
+                              ) : (
+                                <UpCircleOutlined />
+                              )}{" "}
+                            </span>
+                          </div>
+                        }
                       >
                         <LocationInputs
                           setSource={setSource}
@@ -103,16 +129,18 @@ export default function HomePage() {
             </Row>
           )}
         </div>
-      ):(<div
-        style={{
-          textAlign: "center",
-          paddingTop: "20px",
-          height: "100vh",
-          alignContent: "center",
-        }}
-      >
-        <p>Harita Yükleniyor</p> <LoadingOutlined></LoadingOutlined>
-      </div>)}
+      ) : (
+        <div
+          style={{
+            textAlign: "center",
+            paddingTop: "20px",
+            height: "100vh",
+            alignContent: "center",
+          }}
+        >
+          <p>Harita Yükleniyor</p> <LoadingOutlined></LoadingOutlined>
+        </div>
+      )}
 
       <LoadingModal
         setIsModalOpen={setIsModalOpen}
