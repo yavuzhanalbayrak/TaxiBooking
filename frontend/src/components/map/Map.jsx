@@ -7,8 +7,8 @@ import {
   DirectionsRenderer,
   DistanceMatrixService,
 } from "@react-google-maps/api";
-import currentLocation from "../images/currentLoc.png";
-import location from "../images/location.png";
+import currentLocation from "../../images/currentLoc.png";
+import location from "../../images/location.png";
 
 function Map({ source, destination, setDistance, distance, isPhone }) {
   const [map, setMap] = React.useState(null);
