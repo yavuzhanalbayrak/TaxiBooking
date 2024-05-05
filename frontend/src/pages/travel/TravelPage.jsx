@@ -14,7 +14,7 @@ export default function TravelPage() {
     <div>TravelPage
         <Row>
             <Col>
-                <Stripe amount={100} currency={'usd'} mode={'payment'}/>
+                {/* <Stripe amount={100} currency={'usd'} mode={'payment'}/> */}
             </Col>
         </Row>
     </div>

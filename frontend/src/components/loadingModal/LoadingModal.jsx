@@ -77,11 +77,11 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
                   style={{ fontSize: "24px", color: "green" }}
                 />
                 <p>Sürücü bulundu. Yolculuk başlıyor...</p>
-                <p>{countdown}</p>
+                {/* <p>{countdown}</p> */}
                 <p style={{ display: "none" }}>
                   {setTimeout(() => {
                     navigate("/travel");
-                  }, 3000)}
+                  }, 2000)}
                 </p>
               </>
             </Col>
