@@ -18,7 +18,7 @@ export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [display, setDisplay] = useState(false);
-  const { setSelectedKeys, isPhone } = useContext(GlobalContext);
+  const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -26,11 +26,10 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!isLocationClicked) {
-      setTimeout(() =>{
+      setTimeout(() => {
         setDisplay(true);
-      },300);
-    }
-    else{
+      }, 300);
+    } else {
       setDisplay(false);
     }
   }, [isLocationClicked]);
@@ -67,14 +66,16 @@ export default function HomePage() {
                         isPhone={true}
                       ></Map>
                     </div>
-                    <div
-                      className={
-                        isLocationClicked
-                          ? "location-inputs-phone clicked"
-                          : "location-inputs-phone"
-                      }
-                    >
+                    <div className={"location-inputs-phone"}>
                       <Card
+                        style={{
+                          transform: isLocationClicked
+                            ? `translateY(-217px)`
+                            : ``,
+                          transition: "transform 0.3s ease-in-out",
+                          transformOrigin: "top",
+                          top: `${height - 137}px`,
+                        }}
                         className={"location-inputs-card-phone "}
                         title={
                           <div
@@ -83,7 +84,7 @@ export default function HomePage() {
                             }
                           >
                             Varış Noktası Seçiniz{" "}
-                            <span style={{marginLeft:"5px"}}>
+                            <span style={{ marginLeft: "5px" }}>
                               {isLocationClicked ? (
                                 <DownCircleOutlined />
                               ) : (
@@ -93,20 +94,25 @@ export default function HomePage() {
                           </div>
                         }
                       >
-                      <div className="ant-card">
-                        <div className={display?"ant-card-body clicked":"ant-card-body"}>
-                        <LocationInputs
-                          setSource={setSource}
-                          setDestination={setDestination}
-                          destination={destination}
-                          source={source}
-                          distance={distance}
-                          startSearchForDriver={startSearchForDriver}
-                          isPhone={true}
-                        />
+                        <div className="ant-card">
+                          <div
+                            className={
+                              display
+                                ? "ant-card-body clicked"
+                                : "ant-card-body"
+                            }
+                          >
+                            <LocationInputs
+                              setSource={setSource}
+                              setDestination={setDestination}
+                              destination={destination}
+                              source={source}
+                              distance={distance}
+                              startSearchForDriver={startSearchForDriver}
+                              isPhone={true}
+                            />
+                          </div>
                         </div>
-                      </div>
-                       
                       </Card>
                     </div>
                   </Card>
