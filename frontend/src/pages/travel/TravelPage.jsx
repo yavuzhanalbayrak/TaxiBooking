@@ -23,7 +23,7 @@ const emptyStars = totalStars - filledStars;
   }, []);
 
   return (
-    <Row style={{ height: `${height - 100}px` }} align="middle">
+    <Row style={{ height: `calc(100vh - 100px)` }} align="middle">
       <Col span={24}>
         <Row justify="center">
           <Col span={22}>

@@ -121,7 +121,7 @@ const App = ({ children, link, icon }) => {
           </Col>
         </Row>
       </Header>
-      <Content style={{}}>
+      <Content >
         <div
           style={{
             height: "calc(100vh - 64px)",
@@ -135,14 +135,14 @@ const App = ({ children, link, icon }) => {
           {children}
         </div>
       </Content>
-      <Footer
+      {!isPhone&&<Footer
         style={{
           textAlign: "center",
           zIndex:"200"
         }}
       >
         Taxi Booking ©{new Date().getFullYear()}
-      </Footer>
+      </Footer>}
     </Layout>
     </ConfigProvider>
   );
