@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Card, Modal, Button } from "antd";
-import Map from "../../components/Map";
+import Map from "../../components/map/Map";
 import LocationInputs from "../../components/LocationInputs";
 import LoadingModal from "../../components/loadingModal/LoadingModal";
 import { useJsApiLoader } from "@react-google-maps/api";
