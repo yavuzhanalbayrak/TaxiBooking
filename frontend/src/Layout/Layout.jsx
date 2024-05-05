@@ -124,7 +124,7 @@ const App = ({ children, link, icon }) => {
       <Content >
         <div
           style={{
-            height: "calc(100vh - 64px)",
+            height: `calc(${height}px - 64px)`,
             background: colorBgContainer,
             borderRadius: 0,
             backgroundColor: "#00000011",
