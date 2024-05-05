@@ -17,11 +17,23 @@ export default function HomePage() {
   const [distance, setDistance] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
+  const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone } = useContext(GlobalContext);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
   }, []);
+
+  useEffect(() => {
+    if (!isLocationClicked) {
+      setTimeout(() =>{
+        setDisplay(true);
+      },300);
+    }
+    else{
+      setDisplay(false);
+    }
+  }, [isLocationClicked]);
 
   const startSearchForDriver = () => {
     if (destination && source) {
@@ -63,7 +75,7 @@ export default function HomePage() {
                       }
                     >
                       <Card
-                        className="location-inputs-card-phone "
+                        className={"location-inputs-card-phone "}
                         title={
                           <div
                             onClick={() =>
@@ -81,6 +93,8 @@ export default function HomePage() {
                           </div>
                         }
                       >
+                      <div className="ant-card">
+                        <div className={display?"ant-card-body clicked":"ant-card-body"}>
                         <LocationInputs
                           setSource={setSource}
                           setDestination={setDestination}
@@ -90,6 +104,9 @@ export default function HomePage() {
                           startSearchForDriver={startSearchForDriver}
                           isPhone={true}
                         />
+                        </div>
+                      </div>
+                       
                       </Card>
                     </div>
                   </Card>

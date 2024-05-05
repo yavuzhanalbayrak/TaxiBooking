@@ -87,7 +87,7 @@ export default function LocationInputs({
           </Row>
         </Col>
         <Col
-          style={{ marginBottom: isPhone ? "50px" : "10px" }}
+          style={{ marginBottom: isPhone ? "20px" : "10px" }}
           className={focus === 2 ? "input focused" : "input"}
           span={23}
         >
@@ -130,7 +130,7 @@ export default function LocationInputs({
         </Col>
         <Col span={23}>
           <Button
-            style={{ width: "100%", marginTop: "5px", height: "45px", borderRadius: "25px",}}
+            style={{ width: "100%", marginTop: "0px",marginBottom: "35px", height: "45px", borderRadius: "25px",}}
             onClick={startSearchForDriver}
             disabled={!destination || !source}
             loading={loading}

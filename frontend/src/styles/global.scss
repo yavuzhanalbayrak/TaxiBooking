@@ -32,14 +32,25 @@
 }
 .location-inputs-phone {
   position: absolute;
-  bottom: -298px;
+  top: 0px;
   width: 100%;
   box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.2);
   transition: 0.3s;
+  transition: transform 0.3s ease-in-out; /* transform özelliğini kullanarak animasyonu tanımlıyoruz */
+  transform-origin: top; /* Animasyonun başlangıç noktasını alt kenardan alıyoruz */
+  transform: translateY(86vh); /* Başlangıçta aşağıda saklı olan elemanı yukarı taşıyoruz */
 
-  &.clicked {
-   bottom: -16px;
+  &.clicked{
+    transform: translateY(62vh); /* .clicked sınıfı eklendiğinde elemanı yukarı hareket ettiriyoruz */
+
+  }
 }
+
+.location-inputs-phone .ant-card .ant-card-body {
+  border-radius: 0 0 8px 8px;
+  &.clicked{
+    display: none;
+  }
 }
 
 .location-inputs-card-phone .ant-card-head {
@@ -50,6 +61,7 @@
 .location-inputs-card-phone .ant-card-head-title {
   text-align: center;
   line-height:70px;
+  
 }
 
 
@@ -58,6 +70,7 @@
   border-radius: 0 0 8px 8px;
   max-height: calc(61vh + 5px);
   overflow-y: auto;
+  
 }
 
 .map .ant-card .ant-card-body {
@@ -66,11 +79,6 @@
 }
 
 
-.location-inputs-phone .ant-card .ant-card-body {
-  padding: 30px 10px 30px 10px;
-  border-radius: 0 0 8px 8px;
-  transition: 0.3s;
-}
 
 .driver-card {
   border-top: 1px solid #00000012;
@@ -101,6 +109,7 @@
 
 .select-location {
   transition: display 0.3s; // Apply transition to the display property
+  
 }
 
 
