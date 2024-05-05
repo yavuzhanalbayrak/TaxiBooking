@@ -2,16 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Modal, Row, Col, Button, Spin } from "antd";
 import { LoadingOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import GlobalContext from "../../context/GlobalContext";
 
 const initialCountdown = 3;
 
 export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
+  const { driver, setDriver } = React.useContext(GlobalContext);
   const [countdown, setCountdown] = useState(initialCountdown);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isDriverFound) {
+      setDriver({
+        name: "driver.name",
+        surname: "driver.surname",
+        email: "driver.email",
+        phone: "driver.phone",
+        car: {
+          band: "driver.band",
+          model: "driver.car.model",
+          year: "driver.car.year",
+        },
+        rating: 3,
+      });
       // Start the countdown timer when the component mounts
       const interval = setInterval(() => {
         setCountdown((prevCountdown) => prevCountdown - 1);
@@ -37,7 +51,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
   return (
     <div>
       <Modal
-        title={isDriverFound?"Sürücü Bulundu":"Sürücü Aranıyor"}
+        title={isDriverFound ? "Sürücü Bulundu" : "Sürücü Aranıyor"}
         open={isModalOpen}
         closeIcon={false}
         footer={false}
