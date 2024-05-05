@@ -9,15 +9,17 @@ import {
 } from "@react-google-maps/api";
 import currentLocation from "../../images/currentLoc.png";
 import location from "../../images/location.png";
+import GlobalContext from "../../context/GlobalContext";
 
 function Map({ source, destination, setDistance, distance, isPhone }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
+  const {height} = React.useContext(GlobalContext);
 
   const containerStyle = {
     width: "100%",
-    height: isPhone ? "calc(100vh - 80px)" : "calc(100vh - 160px)",
+    height: isPhone ? `calc(${height}px - 80px)` : `calc(${height}px - 160px)`,
   };
 
   const [center, setCenter] = useState({

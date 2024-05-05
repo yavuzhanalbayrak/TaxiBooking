@@ -20,11 +20,12 @@ const { Header, Content, Footer } = Layout;
 
 const App = ({ children, link, icon }) => {
   const signOut = useSignOut();
-  const {selectedKeys, isPhone, setIsPhone} = React.useContext(GlobalContext);
+  const {selectedKeys, isPhone, setIsPhone, height, setHeight} = React.useContext(GlobalContext);
 
   React.useEffect(() => {
     function handleResize() {
       setIsPhone(window.innerWidth <= 768);
+      setHeight(window.innerHeight);
     }
 
     window.addEventListener("resize", handleResize);

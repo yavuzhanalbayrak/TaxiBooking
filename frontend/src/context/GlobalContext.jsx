@@ -5,6 +5,8 @@ const GlobalContext = createContext({
   setSelectedKeys: () => {},
   isPhone: {},
   setIsPhone: () => {},
+  height: {},
+  setHeight: () => {},
 });
 
 export default GlobalContext;
