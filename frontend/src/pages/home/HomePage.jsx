@@ -20,32 +20,10 @@ export default function HomePage() {
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
   }, []);
-  
-  useEffect(() => {
-    const handleKeyboardEvent = () => {
-      setIsKeyboardOpen(true); // Klavye açıldığında focus durumunu true yap
-    };
-
-    // Klavye açık olduğunda event listener ekleyin
-    window.addEventListener("keydown", handleKeyboardEvent);
-
-    // Temizlik için event listener'ı kaldırın
-    return () => {
-      window.removeEventListener("keydown", handleKeyboardEvent);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isKeyboardOpen) {
-      // focus durumu true olduğunda sayfayı en üstüne kaydır
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [isKeyboardOpen]);
 
   useEffect(() => {
     if (!isLocationClicked) {
@@ -93,7 +71,7 @@ export default function HomePage() {
                       <Card
                         style={{
                           transform: isLocationClicked
-                            ? focus?`translateY(-417px)`:`translateY(-217px)`
+                            ? `translateY(-217px)`
                             : ``,
                           transition: "transform 0.3s ease-in-out",
                           transformOrigin: "top",
