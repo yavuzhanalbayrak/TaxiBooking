@@ -43,7 +43,7 @@ function Login() {
               type: "Bearer",
             },
             userState: {
-              name: "React User",
+              name: "Yavuzhan Albayrak",
               uid: 123456,
             },
           })

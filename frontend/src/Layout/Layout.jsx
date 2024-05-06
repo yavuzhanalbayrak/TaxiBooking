@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { UserOutlined, HomeOutlined } from "@ant-design/icons";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import GlobalContext from "../context/GlobalContext";
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const { Header, Content, Footer } = Layout;
 
@@ -22,6 +23,9 @@ const App = ({ children, link, icon }) => {
   const signOut = useSignOut();
   const { selectedKeys, isPhone, setIsPhone, height, setHeight } =
     React.useContext(GlobalContext);
+    const auth = useAuthUser()
+
+  console.log(auth.name.substring(0,2).toUpperCase());
 
   React.useEffect(() => {
     function handleResize() {
@@ -116,9 +120,9 @@ const App = ({ children, link, icon }) => {
                 placement="bottomRight"
               >
                 <Avatar
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", backgroundColor:"#2060ff", fontSize:"24px" }}
                   size="large"
-                  icon={<UserOutlined />}
+                  icon={auth.name.substring(0,1).toUpperCase()}
                 />
               </Dropdown>
             </Col>
