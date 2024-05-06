@@ -100,7 +100,7 @@ export default function TravelPage() {
                       </div>
                     </Col>
                   )}
-                  <div style={{ width: "100%" }}>
+                  <div style={{ width: "100%", marginBottom:"16px" }}>
                     <Row className="driver-infos" gutter={[16, 16]}>
                       <Col span={24}>
                         <h2>Sürücü Bilgileri</h2>
