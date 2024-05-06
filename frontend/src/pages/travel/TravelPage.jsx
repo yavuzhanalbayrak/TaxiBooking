@@ -31,7 +31,7 @@ export default function TravelPage() {
   }, []);
 
   return (
-    <Row style={{ height: `calc(100vh - 64px)`,overflowY:"auto" }} align="middle">
+    <Row style={{ height: `calc(${height}px - 64px)`,overflowY:"auto" }} align="middle">
       <Col span={24}>
         <Row justify="center">
           <Col span={isPhone? 24:22}>
