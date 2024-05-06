@@ -26,6 +26,12 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    if (focus) {
+      window.scrollTo({ top: `0px`, behavior: 'smooth' }); // Kaydırılacak yükseklik değeri (top) belirtilmelidir.
+    }
+  },[focus])
+
+  useEffect(() => {
     if (!isLocationClicked) {
       setTimeout(() => {
         setDisplay(true);
