@@ -29,7 +29,7 @@ export default function HomePage() {
     if (focus) {
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Kaydırılacak yükseklik değeri (top) belirtilmelidir.
-      }, 100);
+      }, 1000);
     }
   },[focus])
 
