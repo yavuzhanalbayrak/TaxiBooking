@@ -18,7 +18,7 @@ export default function TravelPage() {
   const totalStars = 5;
   const filledStars = Math.max(0, Math.min(driver?.rating || 0, totalStars));
   const emptyStars = totalStars - filledStars;
-  const [isTravelFinished, setIsTravelFinished] = React.useState(true);
+  const [isTravelFinished, setIsTravelFinished] = React.useState(false);
   const [driverRate, setDriverRate] = React.useState(
     Math.max(0, Math.min(0, totalStars))
   );
@@ -127,7 +127,19 @@ export default function TravelPage() {
                         </Col>
                       </Col>
                     ) : (
-                      <Button style={{ width: "100%" }}>İptal Et</Button>
+                      <Row gutter={[0, 10]}>
+                        <Col span={24}>
+                          <Button
+                            onClick={() => setIsTravelFinished(true)}
+                            style={{ width: "100%" }}
+                          >
+                            Yolculuğu Tamamla
+                          </Button>
+                        </Col>
+                        <Col span={24}>
+                          <Button style={{ width: "100%" }}>İptal Et</Button>
+                        </Col>
+                      </Row>
                     )}
                   </Col>
                 </Row>
