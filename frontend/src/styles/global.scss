@@ -1,5 +1,7 @@
 * {
   font-family: "Roboto", sans-serif;
+  touch-action: manipulation; // Prevent default mobile browser highlighting
+  -webkit-tap-highlight-color: transparent; /* Prevent default tap highlight */
 }
 .navbar {
   position: sticky;
