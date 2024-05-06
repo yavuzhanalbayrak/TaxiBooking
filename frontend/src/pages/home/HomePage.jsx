@@ -97,13 +97,15 @@ export default function HomePage() {
                       >
                         <div className="ant-card">
                           <div
-                          style={{paddingTop:"10px",paddingBottom:"200px"}}
+                          style={{paddingTop:"10px",maxHeight:"217px", overflowY:focus?"auto":"hidden"}}
                             className={
                               display
                                 ? "ant-card-body clicked"
                                 : "ant-card-body"
                             }
                           >
+                            <div style={{height:focus?"400px":"auto"}}>
+
                             <LocationInputs
                               setSource={setSource}
                               setDestination={setDestination}
@@ -114,7 +116,8 @@ export default function HomePage() {
                               isPhone={true}
                               focus={focus}
                               setFocus={setFocus}
-                            />
+                              />
+                              </div>
                           </div>
                         </div>
                       </Card>
