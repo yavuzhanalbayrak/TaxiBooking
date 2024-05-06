@@ -38,14 +38,26 @@ export default function TravelPage() {
             <Card
               title={
                 <div style={{ textAlign: "center" }}>
-                  {driver
-                    ? isTravelFinished?<div>
-                      <CheckCircleOutlined
-                        style={{ fontSize: "24px", color: "green",paddingTop:"20px" }}
-                      />
-                      <p style={{paddingBottom:"20px"}}>Yolculuk Tamamlandı</p>
-                    </div>:"Yolculuk Bilgileri"
-                    : "Henüz Bir Yolculuk Başlatmadınız!"}
+                  {driver ? (
+                    isTravelFinished ? (
+                      <div>
+                        <CheckCircleOutlined
+                          style={{
+                            fontSize: "24px",
+                            color: "green",
+                            paddingTop: "20px",
+                          }}
+                        />
+                        <p style={{ paddingBottom: "20px" }}>
+                          Yolculuk Tamamlandı
+                        </p>
+                      </div>
+                    ) : (
+                      "Yolculuk Bilgileri"
+                    )
+                  ) : (
+                    "Henüz Bir Yolculuk Başlatmadınız!"
+                  )}
                 </div>
               }
               style={{ width: "100%" }}
@@ -54,10 +66,9 @@ export default function TravelPage() {
                 <Row gutter={[0, 5]}>
                   {isTravelFinished && (
                     <Col span={24} style={{ textAlign: "center" }}>
-                     
-                      <p style={{fontSize:"20px"}}>Sürücüyü Puanla</p>
-                        
-                      <p style={{ paddingBottom: "20px", fontSize:"30px" }}>
+                      <p style={{ fontSize: "20px" }}>Sürücüyü Puanla</p>
+
+                      <p style={{ paddingBottom: "20px", fontSize: "30px" }}>
                         {[...Array(driverRate)].map((_, index) => (
                           <StarFilled
                             onClick={() => {
@@ -84,7 +95,6 @@ export default function TravelPage() {
                           />
                         ))}
                       </p>
-                     
                     </Col>
                   )}
                   <Col span={24}>Adı: {driver?.name}</Col>
@@ -108,7 +118,13 @@ export default function TravelPage() {
                   <Col span={24} style={{ paddingTop: "20px" }}>
                     {isTravelFinished ? (
                       <Col span={24} style={{ textAlign: "center" }}>
-                        <Button style={{ width: "100%", height:"40px" }}>Ödeme Yap</Button>
+                        <Col>
+                          <Stripe
+                            amount={100}
+                            currency={"usd"}
+                            mode={"payment"}
+                          />{" "}
+                        </Col>
                       </Col>
                     ) : (
                       <Button style={{ width: "100%" }}>İptal Et</Button>
