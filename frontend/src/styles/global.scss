@@ -8,7 +8,6 @@
   width: 100%;
   background-color: white;
   border-bottom: 1px solid #0000002f;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .input {
@@ -34,7 +33,6 @@
   position: absolute;
   top: 0px;
   width: 100%;
-  box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .location-inputs-phone .ant-card .ant-card-body {
@@ -107,3 +105,47 @@
 .location-inputs-card-phone {
   border-radius: 0;
 }
+
+.rate-stars{
+  margin-right: 5px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: none;
+  font-size: 24px;
+}
+
+.star-filled{
+ color: #ffc800; 
+ transition: 0.3s;
+
+}
+
+.star-filled:hover{
+ color: #bb9200; 
+}
+
+.star-filled:active{
+  color: #795e00; 
+ }
+
+ .star-out-lined{
+  color: #000000; 
+  transition: 0.3s;
+ 
+ }
+ 
+ .star-out-lined:hover{
+  color: #ffc800; 
+ }
+ 
+ .star-out-lined:active{
+   color: #bb9200; 
+  }
+
+  .driver-infos .ant-card .ant-card-body {
+    padding: 12px;
+    border-radius: 0 0 8px 8px;
+}
+ 

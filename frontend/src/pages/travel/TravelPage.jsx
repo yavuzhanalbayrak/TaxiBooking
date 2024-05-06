@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalContext from "../../context/GlobalContext";
-import { Button, Card, Col, Row } from "antd";
+import { Button, Card, Col, Row, Tooltip } from "antd";
 import Stripe from "../../api/Stripe";
 import {
   LeftCircleOutlined,
@@ -10,6 +10,7 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import PrimaryButton from "../../components/buttons/primaryButton";
 
 export default function TravelPage() {
   const { setSelectedKeys, isPhone, height, driver } =
@@ -25,16 +26,26 @@ export default function TravelPage() {
   const [emptyStarsForDriverRate, setEmptyStarsForDriverRate] = React.useState(
     Math.max(0, Math.min(5, totalStars))
   );
+  const { name, surname, email, phone, car } = driver || {};
 
   React.useEffect(() => {
     setSelectedKeys(["2"]);
   }, []);
 
+  const handleStarClick = (index) => {
+    setDriverRate(index + 1);
+  };
+
   return (
-    <Row style={{ height: `calc(${height}px - 64px)`,overflowY:"auto" }} align="middle">
+    <Row
+      style={
+        isPhone && { height: `calc(${height}px - 64px)`, overflowY: "auto" }
+      }
+      align="middle"
+    >
       <Col span={24}>
         <Row justify="center">
-          <Col span={isPhone? 24:22}>
+          <Col span={isPhone ? 24 : 16}>
             <Card
               title={
                 <div style={{ textAlign: "center" }}>
@@ -60,88 +71,174 @@ export default function TravelPage() {
                   )}
                 </div>
               }
-              style={{ width: "100%" }}
+              style={isPhone && { borderRadius: "0px" }}
             >
               {driver ? (
-                <Row gutter={[0, 5]}>
+                <Row
+                  style={{ minHeight: `calc(${height}px - 169px)` }}
+                  gutter={[0, 5]}
+                >
                   {isTravelFinished && (
                     <Col span={24} style={{ textAlign: "center" }}>
                       <p style={{ fontSize: "20px" }}>Sürücüyü Puanla</p>
 
-                      <p style={{ paddingBottom: "20px", fontSize: "30px" }}>
-                        {[...Array(driverRate)].map((_, index) => (
-                          <StarFilled
-                            onClick={() => {
-                              setDriverRate(index + 1);
-                              setEmptyStarsForDriverRate(
-                                totalStars - (index + 1)
-                              );
-                            }}
-                            style={{ color: "#ffc800" }}
-                            key={index}
-                          />
+                      <div>
+                        {[...Array(totalStars)].map((_, index) => (
+                          <Tooltip key={index} title={index + 1}>
+                            <button
+                              className="rate-stars"
+                              onClick={() => handleStarClick(index)}
+                            >
+                              {index < driverRate ? (
+                                <StarFilled className="star-filled" />
+                              ) : (
+                                <StarOutlined className="star-out-lined" />
+                              )}
+                            </button>
+                          </Tooltip>
                         ))}
-                        {[...Array(emptyStarsForDriverRate)].map((_, index) => (
-                          <StarOutlined
-                            onClick={() => {
-                              setDriverRate(
-                                (prevState) => prevState + index + 1
-                              );
-                              setEmptyStarsForDriverRate(
-                                emptyStarsForDriverRate - (index + 1)
-                              );
-                            }}
-                            key={index}
-                          />
-                        ))}
-                      </p>
+                      </div>
                     </Col>
                   )}
-                  <Col span={24}>Adı: {driver?.name}</Col>
-                  <Col span={24}>Soyadı: {driver?.surname}</Col>
-                  <Col span={24}>E-Postası: {driver?.email}</Col>
-                  <Col span={24}>Telefon Numarası: {driver?.phone}</Col>
-                  <Col span={24}>Araç Markası: {driver?.car.band}</Col>
-                  <Col span={24}>Araç Modeli: {driver?.car.model}</Col>
-                  <Col span={24}>Araç Yılı: {driver?.car.year}</Col>
-                  <Col span={24}>
-                    <span>
-                      Puan:{" "}
-                      {[...Array(filledStars)].map((_, index) => (
-                        <StarFilled style={{ color: "#ffc800" }} key={index} />
-                      ))}
-                      {[...Array(emptyStars)].map((_, index) => (
-                        <StarOutlined key={index} />
-                      ))}
-                    </span>
-                  </Col>
-                  <Col span={24} style={{ paddingTop: "20px" }}>
-                    {isTravelFinished ? (
-                      <Col span={24} style={{ textAlign: "center" }}>
-                        <Col>
-                          <Stripe
-                            amount={100}
-                            currency={"usd"}
-                            mode={"payment"}
-                          />{" "}
-                        </Col>
+                  <div style={{ width: "100%" }}>
+                    <Row className="driver-infos" gutter={[16, 16]}>
+                      <Col span={24}>
+                        <h2>Sürücü Bilgileri</h2>
                       </Col>
-                    ) : (
-                      <Row gutter={[0, 10]}>
-                        <Col span={24}>
-                          <Button
-                            onClick={() => setIsTravelFinished(true)}
-                            style={{ width: "100%" }}
-                          >
-                            Yolculuğu Tamamla
-                          </Button>
-                        </Col>
-                        <Col span={24}>
-                          <Button style={{ width: "100%" }}>İptal Et</Button>
-                        </Col>
-                      </Row>
-                    )}
-                  </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Adı</strong>
+                            </Col>
+                            <Col span={8}>{name}</Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Soyadı</strong>
+                            </Col>
+                            <Col span={8}>{surname}</Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Telefon Numarası</strong>
+                            </Col>
+                            <Col span={8}>{phone}</Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Puanı</strong>
+                            </Col>
+                            <Col span={8}>
+                              {[...Array(filledStars)].map((_, index) => (
+                                <StarFilled
+                                  style={{ color: "#ffc800" }}
+                                  key={index}
+                                />
+                              ))}
+                              {[...Array(emptyStars)].map((_, index) => (
+                                <StarOutlined key={index} />
+                              ))}
+                            </Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                      <Col span={24}>
+                        <h2>Araç Bilgileri</h2>
+                      </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Marka</strong>
+                            </Col>
+                            <Col span={8}>{car?.brand}</Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Model</strong>
+                            </Col>
+                            <Col span={8}>{car?.model}</Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                      <Col span={24}>
+                        <Card>
+                          <Row>
+                            <Col span={16}>
+                              <strong>Yıl</strong>
+                            </Col>
+                            <Col span={8}>{car?.year}</Col>
+                          </Row>
+                        </Card>
+                      </Col>
+                    </Row>
+                  </div>
+                  <Row align="bottom" style={{ width: "100%" }}>
+                    <Col span={24} style={{ bottom: "0px" }}>
+                      {isTravelFinished ? (
+                        <Row gutter={[0, 0]}>
+                          <Col span={24}>
+                            <Col style={{padding:"16px 0px"}} span={24}>
+                              <h2>Ödeme Bilgileri</h2>
+                            </Col>
+                            <Col style={{ textAlign: "center" }}>
+                              <Stripe
+                                amount={100}
+                                currency={"usd"}
+                                mode={"payment"}
+                              />{" "}
+                            </Col>
+                          </Col>
+                        </Row>
+                      ) : (
+                        <Row gutter={[0, 10]}>
+                          <Col span={24}>
+                            <Button
+                              type="primary"
+                              onClick={() => setIsTravelFinished(true)}
+                              style={{
+                                width: "100%",
+                                height: "40px",
+                                borderRadius: "25px",
+                              }}
+                            >
+                              Yolculuğu Tamamla
+                            </Button>
+                          </Col>
+                          <Col span={24}>
+                            <Button
+                              danger
+                              type="primary"
+                              style={{
+                                width: "100%",
+                                height: "40px",
+                                borderRadius: "25px",
+                              }}
+                            >
+                              İptal Et
+                            </Button>
+                          </Col>
+                        </Row>
+                      )}
+                    </Col>
+                  </Row>
                 </Row>
               ) : (
                 <Row style={{ textAlign: "center" }}>
@@ -162,8 +259,6 @@ export default function TravelPage() {
             </Card>
           </Col>
         </Row>
-
-        {/* <Stripe amount={100} currency={'usd'} mode={'payment'}/> */}
       </Col>
     </Row>
   );

@@ -20,7 +20,8 @@ const { Header, Content, Footer } = Layout;
 
 const App = ({ children, link, icon }) => {
   const signOut = useSignOut();
-  const {selectedKeys, isPhone, setIsPhone, height, setHeight} = React.useContext(GlobalContext);
+  const { selectedKeys, isPhone, setIsPhone, height, setHeight } =
+    React.useContext(GlobalContext);
 
   React.useEffect(() => {
     function handleResize() {
@@ -42,11 +43,7 @@ const App = ({ children, link, icon }) => {
   const profileItems = [
     {
       key: "1",
-      label: (
-        <Link to="/profile">
-          Profil
-        </Link>
-      ),
+      label: <Link to="/profile">Profil</Link>,
     },
     {
       key: "2",
@@ -79,71 +76,81 @@ const App = ({ children, link, icon }) => {
 
   return (
     <ConfigProvider
-  theme={{
-    components: {
-      Layout: {
-        headerPadding:isPhone?"0px 15px":"0px 60px"
-      },
-    },
-  }}
->
-    <Layout>
-      <Header
-      className="navbar"
-      >
-        <Row style={{ width: "100%"}}>
-          <Col span={20}>
-            <Menu
-              theme="light"
-              mode="horizontal"
-              selectedKeys={selectedKeys}
-              items={items}
-              style={{
-                flex: 1,
-                minWidth: 0,
-                borderColor: "#0000002f",
-              }}
-            />
-          </Col>
-          <Col style={{ textAlign: "end" }} span={4}>
-            <Dropdown
-              menu={{
-                items: profileItems,
-              }}
-              placement="bottomRight"
-            >
-              <Avatar
-                style={{ cursor: "pointer" }}
-                size="large"
-                icon={<UserOutlined />}
-              />
-            </Dropdown>
-          </Col>
-        </Row>
-      </Header>
-      <Content >
-        <div
+      theme={{
+        components: {
+          Layout: {
+            headerPadding: isPhone ? "0px 15px" : "0px 60px",
+          },
+        },
+      }}
+    >
+      <Layout>
+        <Header
+          className="navbar"
           style={{
-            height: `calc(${height}px - 64px)`,
-            background: colorBgContainer,
-            borderRadius: 0,
-            backgroundColor: "#00000011",
-            overflowY:"hidden",
-            overflowX:"hidden"
+            boxShadow:
+              isPhone &&
+              selectedKeys == 1 &&
+              "0px 10px 20px rgba(0, 0, 0, 0.2)",
           }}
         >
-          {children}
-        </div>
-      </Content>
-      {!isPhone&&<Footer
-        style={{
-          textAlign: "center",
-          zIndex:"200"
-        }}
-      >
-        Taxi Booking ©{new Date().getFullYear()}
-      </Footer>}
-    </Layout>
+          <Row style={{ width: "100%" }}>
+            <Col span={20}>
+              <Menu
+                theme="light"
+                mode="horizontal"
+                selectedKeys={selectedKeys}
+                items={items}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  borderColor: "#0000002f",
+                }}
+              />
+            </Col>
+            <Col style={{ textAlign: "end" }} span={4}>
+              <Dropdown
+                menu={{
+                  items: profileItems,
+                }}
+                placement="bottomRight"
+              >
+                <Avatar
+                  style={{ cursor: "pointer" }}
+                  size="large"
+                  icon={<UserOutlined />}
+                />
+              </Dropdown>
+            </Col>
+          </Row>
+        </Header>
+        <Content>
+          <div
+            style={{
+              height: isPhone && `calc(${height}px - 64px)`,
+              minHeight: !isPhone && `calc(${height}px - 64px)`,
+              background: colorBgContainer,
+              borderRadius: 0,
+              backgroundColor: "#00000011",
+              overflowY: "hidden",
+              overflowX: "hidden",
+              padding: !isPhone && "32px 60px",
+            }}
+          >
+            {children}
+          </div>
+        </Content>
+        {!isPhone && (
+          <Footer
+            style={{
+              textAlign: "center",
+              zIndex: "200",
+            }}
+          >
+            Taxi Booking ©{new Date().getFullYear()}
+          </Footer>
+        )}
+      </Layout>
     </ConfigProvider>
   );
 };

@@ -20,7 +20,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
         email: "driver.email",
         phone: "driver.phone",
         car: {
-          band: "driver.band",
+          brand: "driver.brand",
           model: "driver.car.model",
           year: "driver.car.year",
         },

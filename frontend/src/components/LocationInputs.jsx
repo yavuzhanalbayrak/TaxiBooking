@@ -135,6 +135,7 @@ export default function LocationInputs({
             onClick={startSearchForDriver}
             disabled={!destination || !source}
             loading={loading}
+            type="primary"
           >
             Ara
           </Button>

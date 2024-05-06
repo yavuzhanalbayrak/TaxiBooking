@@ -70,6 +70,7 @@ export default function HomePage() {
                     <div className={"location-inputs-phone"}>
                       <Card
                         style={{
+                          boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
                           transform: isLocationClicked
                             ? `translateY(-217px)`
                             : ``,
@@ -97,27 +98,30 @@ export default function HomePage() {
                       >
                         <div className="ant-card">
                           <div
-                          style={{paddingTop:"10px",maxHeight:"217px", overflowY:focus?"auto":"hidden"}}
+                            style={{
+                              paddingTop: "10px",
+                              maxHeight: "217px",
+                              overflowY: focus ? "auto" : "hidden",
+                            }}
                             className={
                               display
                                 ? "ant-card-body clicked"
                                 : "ant-card-body"
                             }
                           >
-                            <div style={{height:focus?"400px":"auto"}}>
-
-                            <LocationInputs
-                              setSource={setSource}
-                              setDestination={setDestination}
-                              destination={destination}
-                              source={source}
-                              distance={distance}
-                              startSearchForDriver={startSearchForDriver}
-                              isPhone={true}
-                              focus={focus}
-                              setFocus={setFocus}
+                            <div style={{ height: focus ? "400px" : "auto" }}>
+                              <LocationInputs
+                                setSource={setSource}
+                                setDestination={setDestination}
+                                destination={destination}
+                                source={source}
+                                distance={distance}
+                                startSearchForDriver={startSearchForDriver}
+                                isPhone={true}
+                                focus={focus}
+                                setFocus={setFocus}
                               />
-                              </div>
+                            </div>
                           </div>
                         </div>
                       </Card>
@@ -127,7 +131,7 @@ export default function HomePage() {
               </Col>
             </Row>
           ) : (
-            <Row style={{ padding: "24px 60px" }} gutter={[10, 10]}>
+            <Row gutter={[10, 10]}>
               <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
                 <Col>
                   <Card title="Varış Noktası Seçiniz">
