@@ -47,7 +47,7 @@ export default function TravelPage() {
         <Row justify="center">
           <Col span={isPhone ? 24 : 16}>
             <Card
-              title={
+              title={!isPhone&&
                 <div style={{ textAlign: "center" }}>
                   {driver ? (
                     isTravelFinished ? (
@@ -75,7 +75,7 @@ export default function TravelPage() {
             >
               {driver ? (
                 <Row
-                  style={{ minHeight: `calc(${height}px - 169px)` }}
+                  style={{ minHeight: `calc(${height}px - 114px)` }}
                   gutter={[0, 5]}
                 >
                   {isTravelFinished && (
