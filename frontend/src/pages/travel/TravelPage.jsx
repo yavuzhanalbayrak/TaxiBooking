@@ -31,10 +31,10 @@ export default function TravelPage() {
   }, []);
 
   return (
-    <Row style={{ height: `calc(100vh - 100px)` }} align="middle">
+    <Row style={{ height: `calc(100vh - 64px)`,overflowY:"auto" }} align="middle">
       <Col span={24}>
         <Row justify="center">
-          <Col span={22}>
+          <Col span={isPhone? 24:22}>
             <Card
               title={
                 <div style={{ textAlign: "center" }}>
