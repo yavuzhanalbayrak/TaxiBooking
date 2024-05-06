@@ -26,6 +26,12 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    if (focus) {
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Kaydırılacak yükseklik değeri (top) belirtilmelidir.
+    }
+  },[focus])
+
+  useEffect(() => {
     if (!isLocationClicked) {
       setTimeout(() => {
         setDisplay(true);
@@ -71,7 +77,7 @@ export default function HomePage() {
                       <Card
                         style={{
                           transform: isLocationClicked
-                            ? `translateY(-217px)`
+                            ? focus?`translateY(-417px)`:`translateY(-217px)`
                             : ``,
                           transition: "transform 0.3s ease-in-out",
                           transformOrigin: "top",
@@ -97,7 +103,7 @@ export default function HomePage() {
                       >
                         <div className="ant-card">
                           <div
-                          style={{paddingTop:"10px"}}
+                          style={{paddingTop:"10px",paddingBottom:"200px"}}
                             className={
                               display
                                 ? "ant-card-body clicked"
