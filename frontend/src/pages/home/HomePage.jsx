@@ -27,7 +27,9 @@ export default function HomePage() {
 
   useEffect(() => {
     if (focus) {
-      window.scrollTo({ top: 0, behavior: 'smooth' }); // Kaydırılacak yükseklik değeri (top) belirtilmelidir.
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Kaydırılacak yükseklik değeri (top) belirtilmelidir.
+      }, 100);
     }
   },[focus])
 
