@@ -123,14 +123,14 @@ const App = ({ children, link, icon }) => {
                   style={{
                     cursor: "pointer",
                     backgroundColor: "#2060ff",
-                    fontSize: "24px",  
+                    fontSize: "22px",  
                     fontWeight: "bold", // Bold font weight
                     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Shadow for depth
                     touchAction: "manipulation", // Prevent default mobile browser highlighting
                     WebkitTapHighlightColor: "transparent", 
-
+                    height:"35px",
+                    width:"35px",
                   }}
-                  size="large"
                   icon={auth.name.substring(0, 1).toUpperCase()}
                 />
               </Dropdown>

@@ -5,7 +5,11 @@ import GlobalContext from "../../context/GlobalContext";
 import "./Profile.scss";
 
 export default function ProfilePage() {
-  const { isPhone, height } = React.useContext(GlobalContext);
+  const { isPhone, height, setSelectedKeys } = React.useContext(GlobalContext);
+
+  useEffect(() => {
+    setSelectedKeys(0);
+  },[]);
 
   const user = {
     name: "Yavuzhan",
