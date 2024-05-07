@@ -37,7 +37,7 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
       setCenter({ lat: source.lat, lng: source.lng });
     }
 
-    if (source?.length != [] && destination?.length != []) {
+    if ( destination?.length != []) {
       directionRoute();
     }
   }, [source]);
