@@ -21,6 +21,10 @@ export default function LocationInputs({
 }) {
   const [loading, setLoading] = useState(false);
 
+  const clearInput = ()=>{
+    setSource([]);
+  };
+
   const getLatAndLng = (place, type) => {
     const placeId = place.value.place_id;
     const service = new window.google.maps.places.PlacesService(
@@ -60,7 +64,7 @@ export default function LocationInputs({
                 alt=""
               />
             </Col>
-            <Col span={22}>
+            <Col span={21}>
               <GooglePlacesAutocomplete
                 selectProps={{
                   placeholder: "Başlangıç adresinizi giriniz",
@@ -70,7 +74,7 @@ export default function LocationInputs({
                     type.name = "source";
                     getLatAndLng(place, type);
                   },
-                  isClearable: true,
+                  isClearable: false,
                   components: {
                     DropdownIndicator: false,
                   },
@@ -86,6 +90,9 @@ export default function LocationInputs({
                   },
                 }}
               />{" "}
+            </Col>
+            <Col span={1}>
+              <Button onClick={clearInput} style={{fontWeight:"600", padding:"0px", border:"none"}}>X</Button>
             </Col>
           </Row>
         </Col>

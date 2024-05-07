@@ -65,7 +65,7 @@ export default function HomePage() {
   }, [isLocationClicked]);
 
   const startSearchForDriver = () => {
-    if (destination && source) {
+    if (destination && (source || (lat && lng))) {
       setIsModalOpen(true);
     }
   };
