@@ -1,90 +1,86 @@
-import { Avatar, Col, Row } from "antd";
+import { Avatar, Card, Col, Row } from "antd";
 import React, { useEffect } from "react";
 import { UserOutlined, HomeOutlined } from "@ant-design/icons";
+import GlobalContext from "../../context/GlobalContext";
 import "./Profile.scss";
 
 export default function ProfilePage() {
-  const [lat, setLat] = React.useState("");
-  const [lng, setLng] = React.useState("");
+  const { isPhone, height } = React.useContext(GlobalContext);
 
-  useEffect(() => {
-    // Check if the Geolocation API is supported by the browser
-    if ("geolocation" in navigator) {
-      // Request the user's location
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // Access the user's latitude and longitude
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
-
-          // Now you can use the latitude and longitude to perform location-based tasks
-          console.log("Latitude:", position.coords.latitude);
-          console.log("Longitude:", position.coords.longitude);
-
-          // You might want to send this information to your server for further processing
-        },
-        (error) => {
-          // Handle errors if location retrieval fails
-          console.error("Error getting user location:", error);
-        }
-      );
-    } else {
-      // Geolocation is not supported by the browser
-      console.error("Geolocation is not supported by this browser.");
-    }
-  }, []);
+  const user = {
+    name: "Yavuzhan",
+    surname: "Albayrak",
+    phone: "+505 923 43 21",
+    email: "yavuzhan@gmail.com",
+    address: "Samsun/Atakum",
+  }
 
   return (
     <Row justify="center">
-      <Col className="" span={16} sm={24} md={16}>
-        <Col className="profile-card">
+      <Col className="" span={24} sm={24} md={16}>
+        <Col
+          style={isPhone ? {height:`calc(${height}px - 64px)`}:{ borderRadius: "20px" }}
+          className="profile-card"
+        >
           <Row>
-            <Col
-              className="profile-image"
-              span={8}
-              sm={24}
-              md={24}
-              lg={12}
-              xl={8}
-            >
+            <Col span={24} className="profile-image">
               <Avatar
-                style={{ height: "25vh", width: "25vh", fontSize: "20vh" }}
-                size="large"
+                style={{ height: "100px", width: "100px", fontSize: "50px" }}
                 icon={<UserOutlined />}
               />
             </Col>
-            <Col span={16} sm={24} md={24} lg={12} xl={16}>
+            <Col span={24}>
               <Col className="profile-title" span={24}>
                 Kullanıcı Bilgileri
               </Col>
 
               <Col className="user-info">
                 <Row gutter={[0, 10]}>
-                  <Col className="profile-field" span={24}>
-                    Adı Soyadı:
-                  </Col>
-                  <Col className="profile-field" span={24}>
-                    E-Posta:
-                  </Col>
-                  <Col className="profile-field" span={24}>
-                    Telefon Numarası:
-                  </Col>
-                  <Col className="profile-field" span={24}>
-                    Adres Lat:{lat}
-                  </Col>
-                  <Col className="profile-field" span={24}>
-                    Adres Lng:{lng}
-                  </Col>
+                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
+                    <Col className="profile-field" span={24}>
+                      <Row>
+                        <Col span={12}>Adı Soyadı</Col>
+                        <Col style={{ textAlign: "right" }} span={12}>
+                        {user.name + " "+ user.surname }
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Card>
+                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
+                    <Col className="profile-field" span={24}>
+                      <Row>
+                        <Col span={12}>Telefon Numarası</Col>
+                        <Col style={{ textAlign: "right" }} span={12}>
+                          {user.phone}
+                        </Col>
+                      </Row>{" "}
+                    </Col>
+                  </Card>
+                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
+                    <Col className="profile-field" span={24}>
+                      <Row>
+                        <Col span={12}>E-Posta</Col>
+                        <Col style={{ textAlign: "right" }} span={12}>
+                          {user.email}
+                        </Col>
+                      </Row>{" "}
+                    </Col>
+                  </Card>
+                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
+                    <Col className="profile-field" span={24}>
+                      <Row>
+                        <Col span={12}>Adres</Col>
+                        <Col style={{ textAlign: "right" }} span={12}>
+                          {user.address}
+                        </Col>
+                      </Row>{" "}
+                    </Col>
+                  </Card>
                 </Row>
               </Col>
             </Col>
           </Row>
         </Col>
-        <Row>
-          <Col className="profile-card" span={24}>
-            asdas
-          </Col>
-        </Row>
       </Col>
     </Row>
   );
