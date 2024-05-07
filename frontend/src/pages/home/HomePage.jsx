@@ -20,6 +20,38 @@ export default function HomePage() {
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
+  const [lat, setLat] = React.useState("");
+  const [lng, setLng] = React.useState("");
+
+  useEffect(() => {
+    // Check if the Geolocation API is supported by the browser
+if ("geolocation" in navigator) {
+  // Request continuous updates of the user's location
+  const watchId = navigator.geolocation.watchPosition(
+    (position) => {
+      // Access the user's latitude and longitude
+      setLat(position.coords.latitude);
+      setLng(position.coords.longitude);
+
+  
+
+      // You might want to send this information to your server for further processing
+    },
+    (error) => {
+      // Handle errors if location retrieval fails
+      console.error("Error getting user location:", error);
+    }
+  );
+
+  // To stop watching for location updates, you can use the clearWatch method
+  // For example, to stop watching after 10 seconds (10000 milliseconds):
+  // setTimeout(() => navigator.geolocation.clearWatch(watchId), 10000);
+} else {
+  // Geolocation is not supported by the browser
+  console.error("Geolocation is not supported by this browser.");
+}
+
+  }, []);
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -65,6 +97,8 @@ export default function HomePage() {
                         setDistance={setDistance}
                         distance={distance}
                         isPhone={true}
+                        lat={lat}
+                        lng={lng}
                       ></Map>
                     </div>
                     <div className={"location-inputs-phone"}>
@@ -158,6 +192,8 @@ export default function HomePage() {
                       setDistance={setDistance}
                       distance={distance}
                       isPhone={false}
+                      lat={lat}
+                      lng={lng}
                     ></Map>
                   </Card>
                 </div>

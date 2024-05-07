@@ -11,7 +11,7 @@ import currentLocation from "../../images/currentLoc.png";
 import location from "../../images/location.png";
 import GlobalContext from "../../context/GlobalContext";
 
-function Map({ source, destination, setDistance, distance, isPhone }) {
+function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
@@ -23,8 +23,8 @@ function Map({ source, destination, setDistance, distance, isPhone }) {
   };
 
   const [center, setCenter] = useState({
-    lat: 41.288,
-    lng: 36.333,
+    lat: lat||41.288,
+    lng: lng||36.333,
   });
 
   useEffect(() => {
