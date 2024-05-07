@@ -15,7 +15,9 @@ export default function LocationInputs({
   destination,
   isPhone,
   focus,
-  setFocus
+  setFocus,
+  lat,
+  lng
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -133,7 +135,7 @@ export default function LocationInputs({
           <Button
             style={{ width: "100%", marginTop: "0px",marginBottom: "35px", height: "45px", borderRadius: "25px",}}
             onClick={startSearchForDriver}
-            disabled={!destination || !source}
+            disabled={!destination || (!source && (!lat || !lng))}
             loading={loading}
             type="primary"
           >

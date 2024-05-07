@@ -9,6 +9,7 @@ import {
 } from "@react-google-maps/api";
 import currentLocation from "../../images/currentLoc.png";
 import location from "../../images/location.png";
+import blueCircle from "../../images/blue-circle.png";
 import GlobalContext from "../../context/GlobalContext";
 
 function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
@@ -27,6 +28,10 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
     lng: lng||36.333,
   });
 
+  useEffect(()=>{
+    if(lat && lng && source?.length == []) setCenter({lat,lng})
+  },[lat,lng])
+
   useEffect(() => {
     if (source?.length != []) {
       setCenter({ lat: source.lat, lng: source.lng });
@@ -42,7 +47,7 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
       setCenter({ lat: destination.lat, lng: destination.lng });
     }
 
-    if (source?.length != [] && destination?.length != []) {
+    if ( destination?.length != []) {
       directionRoute();
     }
   }, [destination]);
@@ -53,12 +58,12 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
     DirectionsService.route(
       {
         origin: {
-          lat: source.lat,
-          lng: source.lng,
+          lat: source.lat || lat,
+          lng: source.lng || lng,
         },
         destination: {
-          lat: destination.lat,
-          lng: destination.lng,
+          lat: destination.lat || lat,
+          lng: destination.lng || lng,
         },
         travelMode: google.maps.TravelMode.DRIVING,
       },
@@ -80,7 +85,7 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
     const service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
       {
-        origins: [new google.maps.LatLng(source.lat, source.lng)],
+        origins: [new google.maps.LatLng(source.lat||lat, source.lng||lng)],
         destinations: [
           new google.maps.LatLng(destination.lat, destination.lng),
         ],
@@ -130,6 +135,18 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
 
         }}
       >
+
+          <MarkerF
+            icon={{
+              url: blueCircle,
+              scaledSize: {
+                width: 15,
+                height:15,
+              },
+            }}
+            position={{ lat, lng}}
+          >
+          </MarkerF>
         
         {source.length != [] ? (
           <MarkerF
