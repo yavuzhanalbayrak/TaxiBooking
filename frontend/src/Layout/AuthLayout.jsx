@@ -11,7 +11,7 @@ function Login({ children }) {
         justify="center"
         align="middle"
         style={{
-          height: "100vh",
+          minHeight: "100vh",
           backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.95)), url(${loginImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -20,18 +20,18 @@ function Login({ children }) {
         <Col
           style={{
             backgroundColor: "#ffffffa2",
-            padding: "64px",
             borderRadius: "36px",
+            padding:"32px"
           }}
           xxl={7}
           xl={8}
           lg={10}
           md={14}
           sm={16}
-          xs={20}
+          xs={22}
         >
-          <Row justify="center" align="middle">
-            <Col>{children}</Col>
+          <Row justify="center">
+            <Col span={24}>{children}</Col>
           </Row>{" "}
         </Col>
       </Row>

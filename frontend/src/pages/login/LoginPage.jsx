@@ -63,7 +63,7 @@ function Login() {
   return (
     <>
       <Row>
-        <Col style={{ width: "500px" }}>
+        <Col span={24}>
           <Col className="form-title" span={20}>
             Giriş
           </Col>
