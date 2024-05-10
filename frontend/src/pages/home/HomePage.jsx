@@ -206,8 +206,7 @@ export default function HomePage() {
         <div
           style={{
             textAlign: "center",
-            paddingTop: "20px",
-            height: `${height}px`,
+            height: `${height-100}px`,
             alignContent: "center",
           }}
         >

@@ -44,7 +44,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
     if (isModalOpen) {
       setTimeout(() => {
         setIsDriverFound(true);
-      }, 1500000);
+      }, 150);
     }
   }, [isModalOpen]);
 
@@ -55,7 +55,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
         open={isModalOpen}
         closeIcon={false}
         footer={false}
-        style={{ paddingTop: `${height/4}px` }}
+        style={{ paddingTop: `${height/5}px` }}
       >
         {!isDriverFound ? (
           <Row
