@@ -8,7 +8,7 @@ const initialCountdown = 3;
 
 export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
-  const { driver, setDriver } = React.useContext(GlobalContext);
+  const { driver, setDriver, height } = React.useContext(GlobalContext);
   const [countdown, setCountdown] = useState(initialCountdown);
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
     }
   }, [isDriverFound]);
 
-  //Example
+  //Search Example
   useEffect(() => {
     setIsDriverFound(false);
     setCountdown(initialCountdown);
@@ -44,7 +44,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
     if (isModalOpen) {
       setTimeout(() => {
         setIsDriverFound(true);
-      }, 1500);
+      }, 1500000);
     }
   }, [isModalOpen]);
 
@@ -55,7 +55,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
         open={isModalOpen}
         closeIcon={false}
         footer={false}
-        style={{ paddingTop: "25vh" }}
+        style={{ paddingTop: `${height/4}px` }}
       >
         {!isDriverFound ? (
           <Row

@@ -207,7 +207,7 @@ export default function HomePage() {
           style={{
             textAlign: "center",
             paddingTop: "20px",
-            height: "100vh",
+            height: `${height}px`,
             alignContent: "center",
           }}
         >
