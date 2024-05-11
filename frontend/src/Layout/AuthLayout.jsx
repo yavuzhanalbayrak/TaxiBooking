@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import loginImage from "../images/Taxi.jpg";
 import { Row, Col } from "antd";
 import "./style.scss";
+import GlobalContext from "../context/GlobalContext";
 
 // eslint-disable-next-line react/prop-types
 function Login({ children }) {
+  const { height} = useContext(GlobalContext);
+
   return (
     <>
       <Row justify="center" align="middle"
         style={{
-          minHeight: "100vh",
+          minHeight: `${height}px`,
           backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.95)), url(${loginImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
