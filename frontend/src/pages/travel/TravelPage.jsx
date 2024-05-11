@@ -171,8 +171,8 @@ export default function TravelPage() {
                     <Field
                       title={"Varış Noktası"}
                       field={detailInfos.historyDetails.title}
-                      titleSpan={8}
-                      fieldSpan={16}
+                      titleSpan={12}
+                      fieldSpan={12}
                     />
                     <Field
                       title={"Mesafe"}
@@ -357,6 +357,8 @@ export default function TravelPage() {
                                     <Field
                                       title={"Varış Noktası"}
                                       field={driver.destination.label}
+                                      titleSpan={12}
+                                      fieldSpan={12}
                                     />
                                     <Field
                                       title={"Mesafe"}
