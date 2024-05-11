@@ -34,7 +34,7 @@ const CheckoutForm = () => {
   return (
     <form>
       <PaymentElement />
-      <Button type='primary' style={{width:"100%", marginTop:"20px", height:"40px"}} onClick={handleSubmit} disabled={!stripe}>Ödeme Yap</Button>
+      <Button type='primary' size='large' style={{width:"100%", marginTop:"20px"}} onClick={handleSubmit} disabled={!stripe}>Ödeme Yap</Button>
     </form>
   )
 };
