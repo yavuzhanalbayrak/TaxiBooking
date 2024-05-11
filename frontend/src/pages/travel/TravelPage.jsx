@@ -11,18 +11,22 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/buttons/primaryButton";
+import AreUSureModal from "../../components/AreYouSureModal";
+import { useNavigate } from "react-router-dom";
 
 export default function TravelPage() {
-  const { setSelectedKeys, isPhone, height, driver } =
+  const { setSelectedKeys, isPhone, height, driver, setDriver } =
     React.useContext(GlobalContext);
 
   const totalStars = 5;
   const filledStars = Math.max(0, Math.min(driver?.rating || 0, totalStars));
   const emptyStars = totalStars - filledStars;
   const [isTravelFinished, setIsTravelFinished] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const [driverRate, setDriverRate] = React.useState(
     Math.max(0, Math.min(0, totalStars))
   );
+  const navigate = useNavigate();
   const [emptyStarsForDriverRate, setEmptyStarsForDriverRate] = React.useState(
     Math.max(0, Math.min(5, totalStars))
   );
@@ -112,7 +116,17 @@ export default function TravelPage() {
                             currency={"usd"}
                             mode={"payment"}
                           />{" "}
-                          <Button size="large" danger type="primary" onClick={()=>{setIsTravelFinished(false)}} style={{width:"100%",marginTop:"10px"}}>Geri Dön</Button>
+                          <Button
+                            size="large"
+                            danger
+                            type="primary"
+                            onClick={() => {
+                              setIsTravelFinished(false);
+                            }}
+                            style={{ width: "100%", marginTop: "10px" }}
+                          >
+                            Geri Dön
+                          </Button>
                         </Col>
                       </Col>
                     </Row>
@@ -123,7 +137,7 @@ export default function TravelPage() {
                           <h2>Sürücü Bilgileri</h2>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Adı</strong>
@@ -133,7 +147,7 @@ export default function TravelPage() {
                           </Card>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Soyadı</strong>
@@ -143,7 +157,7 @@ export default function TravelPage() {
                           </Card>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Telefon Numarası</strong>
@@ -153,7 +167,7 @@ export default function TravelPage() {
                           </Card>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Puanı</strong>
@@ -176,7 +190,7 @@ export default function TravelPage() {
                           <h2>Araç Bilgileri</h2>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Marka</strong>
@@ -186,7 +200,7 @@ export default function TravelPage() {
                           </Card>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Model</strong>
@@ -196,7 +210,7 @@ export default function TravelPage() {
                           </Card>
                         </Col>
                         <Col span={24}>
-                          <Card style={{backgroundColor:"#f9f9f9"}}>
+                          <Card style={{ backgroundColor: "#f9f9f9" }}>
                             <Row>
                               <Col span={16}>
                                 <strong>Yıl</strong>
@@ -206,8 +220,8 @@ export default function TravelPage() {
                           </Card>
                         </Col>
                       </Row>
-                      <Row style={{ width: "100%",paddingTop:"32px" }}>
-                        <Col span={24} >
+                      <Row style={{ width: "100%", paddingTop: "32px" }}>
+                        <Col span={24}>
                           <Row gutter={[0, 10]}>
                             <Col span={24}>
                               <Button
@@ -231,6 +245,7 @@ export default function TravelPage() {
                                   width: "100%",
                                   borderRadius: "25px",
                                 }}
+                                onClick={() => setOpen(true)}
                               >
                                 İptal Et
                               </Button>
@@ -261,6 +276,17 @@ export default function TravelPage() {
           </Col>
         </Row>
       </Col>
+      <AreUSureModal
+        title={"Yolculuğu sonlandırmak istediğinize emin misiniz?"}
+        description={""}
+        onOkModal={() => {
+          setDriver(false);
+          navigate("/");
+        }}
+        isModalOpen={open}
+        setIsModalOpen={setOpen}
+        loading={false}
+      ></AreUSureModal>
     </Row>
   );
 }

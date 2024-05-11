@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
-import PrimaryButton from "../buttons/primaryButton";
-import { useTranslation } from "react-i18next";
 
 const App = ({
   title,
@@ -11,7 +9,6 @@ const App = ({
   setIsModalOpen,
   loading,
 }) => {
-  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -30,25 +27,23 @@ const App = ({
           <div>
             <div>
               <Button
-                style={{ height: "32px", marginRight: "5px" }}
+                style={{ marginRight: "5px" }}
                 type="primary"
                 danger
                 onClick={() => setIsModalOpen(false)}
               >
-                {t("areUSure.no")}
+                {"Hayır"}
               </Button>
-              <PrimaryButton
-                style={{ height: "32px" }}
-                onClick={(e) => {
-                  onOkModal(e).then(() => {
-                    setIsModalOpen(false);
-                  });
+              <Button
+                onClick={() => {
+                  onOkModal()
                 }}
+                type="primary"
                 loading={loading}
                 disabled={loading}
               >
-                {t("areUSure.yes")}
-              </PrimaryButton>
+                { "Evet"}
+              </Button>
             </div>
           </div>
         )}
