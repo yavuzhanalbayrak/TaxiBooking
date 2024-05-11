@@ -7,21 +7,24 @@ import "./style.scss";
 function Login({ children }) {
   return (
     <>
-      <Row
-        justify="center"
-        align="middle"
+      <Row justify="center" align="middle"
         style={{
           minHeight: "100vh",
           backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.95)), url(${loginImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundAttachment:"fixed",
+          position:"sticky",
+          paddingTop:"32px",
+          paddingBottom:"32px",
         }}
       >
         <Col
           style={{
             backgroundColor: "#ffffffa2",
             borderRadius: "36px",
-            padding:"32px"
+            padding:"32px",
+            height:"auto",
           }}
           xxl={7}
           xl={8}

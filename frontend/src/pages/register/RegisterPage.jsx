@@ -74,7 +74,7 @@ function Login() {
 
   return (
     <>
-      <Row style={{ height: "80vh" }}>
+      <Row>
         <Col style={{ width: "500px" }}>
           <Col className="form-title" span={20}>
             Kaydol
