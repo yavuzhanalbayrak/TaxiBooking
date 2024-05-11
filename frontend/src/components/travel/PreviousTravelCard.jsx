@@ -8,9 +8,20 @@ export default function PreviousTravelCard(props) {
     const historyDetails={
         title: props.travelHistory.title,
         date: props.travelHistory.date,
+        time: props.travelHistory.time,
         status: props.travelHistory.status,
         distance: props.travelHistory.distance,
-        price: props.travelHistory.price
+        price: props.travelHistory.price,
+        phone: "+90 539 202 61 06",
+        name: "Yavuzhan Albayrak",
+        surname: "Albayrak",
+        email: "yavuzalbayrak@gmail.com",
+        car: {
+          brand: "Honda",
+          model: "pcx",
+          year: "2021",
+        },
+        rating: 3,
     }
   return (
     <div className="prev-card">
@@ -47,7 +58,7 @@ export default function PreviousTravelCard(props) {
         <Row style={{ padding: "24px" }}>
           <Col span={24}>
             <Row>
-              <CheckOutlined style={{ fontSize: "16px" }} />
+              <CheckOutlined style={{ fontSize: "16px", color:"#00bb00" }} />
               <Col className="prev-travel-status">{props.travelHistory.status}</Col>
             </Row>
           </Col>

@@ -4,7 +4,7 @@ import "../travel/travelStyle.scss";
 
 export default function Field(props) {
   return (
-    <Col span={24} style={{ margin: "10px 0px" }}>
+    <Col span={24} style={{ margin: "5px 0px" }}>
       <Card>
         <Row>
           <Col className="title" span={props.titleSpan || 16}>

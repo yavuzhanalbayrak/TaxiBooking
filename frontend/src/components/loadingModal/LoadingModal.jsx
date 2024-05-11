@@ -6,7 +6,13 @@ import GlobalContext from "../../context/GlobalContext";
 
 const initialCountdown = 3;
 
-export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
+export default function LoadingModal({
+  isModalOpen,
+  setIsModalOpen,
+  destination,
+  distance,
+  source,
+}) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
   const { driver, setDriver, height } = React.useContext(GlobalContext);
   const [countdown, setCountdown] = useState(initialCountdown);
@@ -15,16 +21,20 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
   useEffect(() => {
     if (isDriverFound) {
       setDriver({
-        name: "driver.name",
-        surname: "driver.surname",
-        email: "driver.email",
-        phone: "driver.phone",
+        name: "Yavuzhan Albayrak",
+        surname: "Albayrak",
+        email: "yavuzalbayrak@gmail.com",
+        phone: "+905392026105",
         car: {
-          brand: "driver.brand",
-          model: "driver.car.model",
-          year: "driver.car.year",
+          brand: "Honda",
+          model: "pcx",
+          year: "2021",
         },
         rating: 3,
+        destination,
+        distance,
+        source,
+        price: parseInt(distance.match(/\d+/)[0])*10,
       });
       // Start the countdown timer when the component mounts
       const interval = setInterval(() => {
@@ -55,7 +65,7 @@ export default function LoadingModal({ isModalOpen, setIsModalOpen }) {
         open={isModalOpen}
         closeIcon={false}
         footer={false}
-        style={{ paddingTop: `${height/5}px` }}
+        style={{ paddingTop: `${height / 5}px` }}
       >
         {!isDriverFound ? (
           <Row

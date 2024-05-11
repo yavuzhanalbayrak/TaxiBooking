@@ -8,6 +8,9 @@ import {
   StarOutlined,
   StarFilled,
   CheckCircleOutlined,
+  LeftOutlined,
+  CaretLeftOutlined,
+  LeftCircleFilled,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/buttons/primaryButton";
@@ -65,7 +68,7 @@ export default function TravelPage() {
       distance: "12.3 Km",
       date: "21.08.2002",
       time: "17.02",
-      price: "200 TL",
+      price: "120 TL",
       status: "Tamamlandı",
     },
     {
@@ -143,13 +146,14 @@ export default function TravelPage() {
                 {showDetails ? (
                   <div className="driver-infos">
                     <Button
-                      danger
+                      ghost
                       type="primary"
                       onClick={() => {
                         setShowDetails(false);
                       }}
+                      style={{ marginBottom: "10px" }}
                     >
-                      Geri Dön
+                      <LeftCircleFilled /> Geri Dön
                     </Button>
                     <Col span={24}>
                       <h2>Yolculuk Bilgileri</h2>
@@ -159,6 +163,11 @@ export default function TravelPage() {
                       field={detailInfos.historyDetails.status}
                       type="success"
                     />
+                    <Field
+                      title={"Başlangıç Noktası"}
+                      field={driver?.source?.label || "Konumunuz"}
+                    />
+
                     <Field
                       title={"Varış Noktası"}
                       field={detailInfos.historyDetails.title}
@@ -173,21 +182,53 @@ export default function TravelPage() {
                     />
                     <Field
                       title={"Tarih"}
-                      field={detailInfos.historyDetails.date}
+                      field={`${detailInfos.historyDetails.date} / ${detailInfos.historyDetails.time}`}
+                      titleSpan={8}
+                      fieldSpan={16}
                     />
-                    <Field title={"Fiyat"} field={detailInfos.historyDetails.price} />
+                    <Field
+                      title={"Fiyat"}
+                      field={detailInfos.historyDetails.price}
+                    />
                     <Col span={24}></Col>
                     <Col span={24}>
                       <h2>Sürücü Bilgileri</h2>
                     </Col>
-                    <Field title={"Adı"} field={detailInfos.driverName} />
-                    <Field title={"Adı"} field={detailInfos.driverName} />
-                    <Field title={"Adı"} field={detailInfos.driverName} />
+                    <Field
+                      title={"Adı"}
+                      field={detailInfos.historyDetails.name}
+                      titleSpan={8}
+                      fieldSpan={16}
+                    />
+                    <Field
+                      title={"Telefon Numarası"}
+                      field={detailInfos.historyDetails.phone}
+                      titleSpan={12}
+                      fieldSpan={12}
+                    />
+                    <Field
+                      title={"Puan"}
+                      field={
+                        <>
+                          {[...Array(detailInfos.historyDetails.rating)].map((_, index) => (
+                            <StarFilled
+                              style={{ color: "#ffc800" }}
+                              key={index}
+                            />
+                          ))}
+                          {[...Array(5-detailInfos.historyDetails.rating)].map((_, index) => (
+                            <StarOutlined key={index} />
+                          ))}
+                        </>
+                      }
+                    />
+
                     <Col span={24}>
                       <h2>Araç Bilgileri</h2>
                     </Col>
-                    <Field title={"Adı"} field={detailInfos.driverName} />
-                    <Field title={"Adı"} field={detailInfos.driverName} />
+                    <Field title={"Marka"} field={detailInfos.historyDetails.car?.brand} />
+                    <Field title={"Model"} field={detailInfos.historyDetails.car?.model} />
+                    <Field title={"Yıl"} field={detailInfos.historyDetails.car?.year} />
                   </div>
                 ) : (
                   <div>
@@ -302,17 +343,38 @@ export default function TravelPage() {
                                 >
                                   <Row
                                     className="driver-infos"
-                                    gutter={[16, 16]}
+                                    gutter={[16, 0]}
                                   >
+                                    <Col span={24}>
+                                      <h2>Yolculuk Bilgileri</h2>
+                                    </Col>
+                                    <Field
+                                      title={"Başlangıç Noktası"}
+                                      field={
+                                        driver?.source?.label || "Konumunuz"
+                                      }
+                                    />
+                                    <Field
+                                      title={"Varış Noktası"}
+                                      field={driver.destination.label}
+                                    />
+                                    <Field
+                                      title={"Mesafe"}
+                                      field={driver.distance}
+                                    />
+                                    <Field
+                                      title={"Fiyat"}
+                                      field={`${driver.price} TL`}
+                                    />
                                     <Col span={24}>
                                       <h2>Sürücü Bilgileri</h2>
                                     </Col>
-                                    <Field title={"Adı"} field={driver.name} />
                                     <Field
-                                      title={"Soyadı"}
-                                      field={driver.surname}
+                                      title={"Adı"}
+                                      field={driver.name}
+                                      titleSpan={8}
+                                      fieldSpan={16}
                                     />
-
                                     <Field
                                       title={"Telefon Numarası"}
                                       field={driver.phone}
@@ -425,6 +487,7 @@ export default function TravelPage() {
                                   setDetailInfos={setDetailInfos}
                                   setShowDetails={setShowDetails}
                                   travelHistory={travelHistory}
+                                  driverHistory={driver}
                                 />
                               </div>
                             );

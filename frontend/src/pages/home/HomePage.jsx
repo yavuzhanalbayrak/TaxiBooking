@@ -217,6 +217,9 @@ export default function HomePage() {
       <LoadingModal
         setIsModalOpen={setIsModalOpen}
         isModalOpen={isModalOpen}
+        destination={destination}
+        distance={distance}
+        source={source}
       ></LoadingModal>
     </>
   );
