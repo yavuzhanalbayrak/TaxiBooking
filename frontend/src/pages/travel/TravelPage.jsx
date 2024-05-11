@@ -62,13 +62,40 @@ export default function TravelPage() {
     setDriverRate(index + 1);
   };
 
+  const currencyList = [
+    {
+      value: "TRY",
+      ad: "TRY",
+      prefix: "₺",
+      thousandSeparator: ".",
+      decimalSeparator: ",",
+      decimalDigits: 2,
+    },
+    {
+      value: "USD",
+      ad: "USD",
+      prefix: "$",
+      thousandSeparator: ",",
+      decimalSeparator: ".",
+      decimalDigits: 2,
+    },
+    {
+      value: "EUR",
+      ad: "EUR",
+      prefix: "€",
+      thousandSeparator: ".",
+      decimalSeparator: ",",
+      decimalDigits: 2,
+    },
+  ];
+
   const prevTravels = [
     {
       title: "Samsun - Atakum",
       distance: "12.3 Km",
       date: "21.08.2002",
       time: "17.02",
-      price: "120 TL",
+      price: "120",
       status: "Tamamlandı",
     },
     {
@@ -76,7 +103,7 @@ export default function TravelPage() {
       distance: "7.3 Km",
       date: "13.08.2023",
       time: "19.15",
-      price: "569 TL",
+      price: "569",
       status: "Tamamlandı",
     },
     {
@@ -84,7 +111,7 @@ export default function TravelPage() {
       distance: "12.3 Km",
       date: "21.08.2002",
       time: "17.02",
-      price: "200 TL",
+      price: "200",
       status: "Tamamlandı",
     },
     {
@@ -92,7 +119,7 @@ export default function TravelPage() {
       distance: "12.3 Km",
       date: "21.08.2002",
       time: "17.02",
-      price: "200 TL",
+      price: "200",
       status: "Tamamlandı",
     },
   ];
@@ -108,32 +135,6 @@ export default function TravelPage() {
         <Row justify="center">
           <Col span={isPhone ? 24 : 16}>
             <Card
-              // title={
-              //   !isPhone && (
-              //     <div style={{ textAlign: "center" }}>
-              //       {driver ? (
-              //         isTravelFinished ? (
-              //           <div>
-              //             <CheckCircleOutlined
-              //               style={{
-              //                 fontSize: "24px",
-              //                 color: "green",
-              //                 paddingTop: "20px",
-              //               }}
-              //             />
-              //             <p style={{ paddingBottom: "20px" }}>
-              //               Yolculuk Tamamlandı
-              //             </p>
-              //           </div>
-              //         ) : (
-              //           "Yolculuk Bilgileri"
-              //         )
-              //       ) : (
-              //         "Henüz Bir Yolculuk Başlatmadınız!"
-              //       )}
-              //     </div>
-              //   )
-              // }
               style={
                 isPhone && { borderRadius: "0px", backgroundColor: "#f9f9f9" }
               }
@@ -188,7 +189,18 @@ export default function TravelPage() {
                     />
                     <Field
                       title={"Fiyat"}
-                      field={detailInfos.historyDetails.price}
+                      field={() =>{
+                        const currency = currencyList.find(
+                          (item) => item.value === detailInfos.historyDetails.currency
+                        );
+                        const formattedPaymentRate = `${
+                          currency.prefix
+                        } ${detailInfos.historyDetails.price.toLocaleString(undefined, {
+                          minimumFractionDigits: currency.decimalDigits,
+                          maximumFractionDigits: currency.decimalDigits,
+                        })}`;
+                        return <p>{formattedPaymentRate}</p>}
+                        }
                     />
                     <Col span={24}></Col>
                     <Col span={24}>
@@ -366,7 +378,18 @@ export default function TravelPage() {
                                     />
                                     <Field
                                       title={"Fiyat"}
-                                      field={`${driver.price} TL`}
+                                      field={() =>{
+                                        const currency = currencyList.find(
+                                          (item) => item.value === driver.currency
+                                        );
+                                        const formattedPaymentRate = `${
+                                          currency.prefix
+                                        } ${driver.price.toLocaleString(undefined, {
+                                          minimumFractionDigits: currency.decimalDigits,
+                                          maximumFractionDigits: currency.decimalDigits,
+                                        })}`;
+                                        return <p>{formattedPaymentRate}</p>}
+                                        }
                                     />
                                     <Col span={24}>
                                       <h2>Sürücü Bilgileri</h2>
@@ -380,6 +403,8 @@ export default function TravelPage() {
                                     <Field
                                       title={"Telefon Numarası"}
                                       field={driver.phone}
+                                      fieldSpan={12}
+                                      titleSpan={12}
                                     />
 
                                     <Field

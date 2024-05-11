@@ -15,7 +15,7 @@ export default function Field(props) {
             span={props.fieldSpan || 8}
             style={{ color: props.type == "success" && "#00bb00" }}
           >
-            {props.field}
+            {typeof props.field === "function" ? props.field() : props.field}
           </Col>
         </Row>
       </Card>

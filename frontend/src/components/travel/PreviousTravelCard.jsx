@@ -12,6 +12,7 @@ export default function PreviousTravelCard(props) {
         status: props.travelHistory.status,
         distance: props.travelHistory.distance,
         price: props.travelHistory.price,
+        currency:"TRY",
         phone: "+90 539 202 61 06",
         name: "Yavuzhan Albayrak",
         surname: "Albayrak",

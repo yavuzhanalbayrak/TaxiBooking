@@ -24,7 +24,7 @@ export default function LoadingModal({
         name: "Yavuzhan Albayrak",
         surname: "Albayrak",
         email: "yavuzalbayrak@gmail.com",
-        phone: "+905392026105",
+        phone: "+90 539 202 61 05",
         car: {
           brand: "Honda",
           model: "pcx",
@@ -35,6 +35,7 @@ export default function LoadingModal({
         distance,
         source,
         price: parseInt(distance.match(/\d+/)[0])*10,
+        currency: "TRY"
       });
       // Start the countdown timer when the component mounts
       const interval = setInterval(() => {
