@@ -8,6 +8,9 @@ export default function PreviousTravelCard(props) {
     const historyDetails={
         title: props.travelHistory.title,
         date: props.travelHistory.date,
+        status: props.travelHistory.status,
+        distance: props.travelHistory.distance,
+        price: props.travelHistory.price
     }
   return (
     <div className="prev-card">

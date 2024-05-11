@@ -105,32 +105,32 @@ export default function TravelPage() {
         <Row justify="center">
           <Col span={isPhone ? 24 : 16}>
             <Card
-              title={
-                !isPhone && (
-                  <div style={{ textAlign: "center" }}>
-                    {driver ? (
-                      isTravelFinished ? (
-                        <div>
-                          <CheckCircleOutlined
-                            style={{
-                              fontSize: "24px",
-                              color: "green",
-                              paddingTop: "20px",
-                            }}
-                          />
-                          <p style={{ paddingBottom: "20px" }}>
-                            Yolculuk Tamamlandı
-                          </p>
-                        </div>
-                      ) : (
-                        "Yolculuk Bilgileri"
-                      )
-                    ) : (
-                      "Henüz Bir Yolculuk Başlatmadınız!"
-                    )}
-                  </div>
-                )
-              }
+              // title={
+              //   !isPhone && (
+              //     <div style={{ textAlign: "center" }}>
+              //       {driver ? (
+              //         isTravelFinished ? (
+              //           <div>
+              //             <CheckCircleOutlined
+              //               style={{
+              //                 fontSize: "24px",
+              //                 color: "green",
+              //                 paddingTop: "20px",
+              //               }}
+              //             />
+              //             <p style={{ paddingBottom: "20px" }}>
+              //               Yolculuk Tamamlandı
+              //             </p>
+              //           </div>
+              //         ) : (
+              //           "Yolculuk Bilgileri"
+              //         )
+              //       ) : (
+              //         "Henüz Bir Yolculuk Başlatmadınız!"
+              //       )}
+              //     </div>
+              //   )
+              // }
               style={
                 isPhone && { borderRadius: "0px", backgroundColor: "#f9f9f9" }
               }
@@ -141,7 +141,7 @@ export default function TravelPage() {
                 }}
               >
                 {showDetails ? (
-                  <div>
+                  <div className="driver-infos">
                     <Button
                       danger
                       type="primary"
@@ -155,23 +155,31 @@ export default function TravelPage() {
                       <h2>Yolculuk Bilgileri</h2>
                     </Col>
                     <Field
-                      title={"Rota"}
+                      title={"Durum"}
+                      field={detailInfos.historyDetails.status}
+                      type="success"
+                    />
+                    <Field
+                      title={"Varış Noktası"}
                       field={detailInfos.historyDetails.title}
+                      titleSpan={8}
+                      fieldSpan={16}
+                    />
+                    <Field
+                      title={"Mesafe"}
+                      field={detailInfos.historyDetails.distance}
+                      titleSpan={8}
+                      fieldSpan={16}
                     />
                     <Field
                       title={"Tarih"}
                       field={detailInfos.historyDetails.date}
                     />
-                    <Field title={"Adı"} field={detailInfos.driverName} />
-                    <Field title={"Adı"} field={detailInfos.driverName} />
+                    <Field title={"Fiyat"} field={detailInfos.historyDetails.price} />
                     <Col span={24}></Col>
                     <Col span={24}>
                       <h2>Sürücü Bilgileri</h2>
                     </Col>
-                    <Field
-                      title={"Rota"}
-                      field={detailInfos.historyDetails.driverName}
-                    />
                     <Field title={"Adı"} field={detailInfos.driverName} />
                     <Field title={"Adı"} field={detailInfos.driverName} />
                     <Field title={"Adı"} field={detailInfos.driverName} />
@@ -185,13 +193,17 @@ export default function TravelPage() {
                   <div>
                     <Col
                       span={24}
-                      style={{ textAlign: "end", marginBottom: "24px" }}
+                      style={{
+                        textAlign: isPhone ? "center" : "end",
+                        marginBottom: "24px",
+                      }}
                     >
                       <Button
                         style={{
                           borderRadius: " 8px 0 0 8px ",
                           backgroundColor: futureTravel ? "#1890ff" : "#f0f0f0",
                           color: futureTravel ? "#fff" : "#000",
+                          width: "150px",
                         }}
                         onClick={() => handleFutureTravel()}
                       >
@@ -204,6 +216,7 @@ export default function TravelPage() {
                             ? "#1890ff"
                             : "#f0f0f0",
                           color: travelHistory ? "#fff" : "#000",
+                          width: "150px",
                         }}
                         onClick={() => handleTravelHistory()}
                       >
