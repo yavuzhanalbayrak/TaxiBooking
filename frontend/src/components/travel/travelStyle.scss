@@ -34,8 +34,32 @@
 
 .prev-travel-details {
   color: #f17624;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
+.prev-travel-details:hover {
+    color: #fd9f11;
+  }
+  
+  .prev-travel-details:active {
+    color: #cc6600; 
+  }
 
 .prev-card .ant-card .ant-card-body {
   padding: 0px;
+}
+
+.driver-infos{
+    .title{
+        font-size: 16px;
+        font-weight: 600;
+        color:#000000cc;
+
+    }
+    .field{
+        font-size: 14px;
+        font-weight: 400;
+        color:#f17624;
+    }
 }
