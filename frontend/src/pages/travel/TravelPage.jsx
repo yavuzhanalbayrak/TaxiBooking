@@ -156,7 +156,7 @@ export default function TravelPage() {
                     >
                       <LeftCircleFilled /> Geri Dön
                     </Button>
-                    <Col span={24}>
+                    <Col style={{marginTop:"15px"}} span={24}>
                       <h2>Yolculuk Bilgileri</h2>
                     </Col>
                     <Field
@@ -203,7 +203,7 @@ export default function TravelPage() {
                         }
                     />
                     <Col span={24}></Col>
-                    <Col span={24}>
+                    <Col style={{marginTop:"15px"}} span={24}>
                       <h2>Sürücü Bilgileri</h2>
                     </Col>
                     <Field
@@ -235,7 +235,7 @@ export default function TravelPage() {
                       }
                     />
 
-                    <Col span={24}>
+                    <Col style={{marginTop:"15px"}} span={24}>
                       <h2>Araç Bilgileri</h2>
                     </Col>
                     <Field title={"Marka"} field={detailInfos.historyDetails.car?.brand} />
@@ -391,7 +391,7 @@ export default function TravelPage() {
                                         return <p>{formattedPaymentRate}</p>}
                                         }
                                     />
-                                    <Col span={24}>
+                                    <Col style={{marginTop:"15px"}} span={24}>
                                       <h2>Sürücü Bilgileri</h2>
                                     </Col>
                                     <Field
@@ -428,7 +428,7 @@ export default function TravelPage() {
                                       }
                                     />
 
-                                    <Col span={24}>
+                                    <Col style={{marginTop:"15px"}} span={24}>
                                       <h2>Araç Bilgileri</h2>
                                     </Col>
                                     <Field title={"Marka"} field={car?.brand} />
