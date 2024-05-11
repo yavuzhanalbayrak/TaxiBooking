@@ -12,10 +12,11 @@ import {
   ConfigProvider,
 } from "antd";
 import { Link } from "react-router-dom";
-import { UserOutlined, HomeOutlined } from "@ant-design/icons";
+import { UserOutlined, HomeOutlined, LogoutOutlined } from "@ant-design/icons";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import GlobalContext from "../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 const { Header, Content, Footer } = Layout;
 
@@ -47,7 +48,11 @@ const App = ({ children, link, icon }) => {
   const profileItems = [
     {
       key: "1",
-      label: <Link to="/profile">Profil</Link>,
+      label: (
+        <Link to="/profile">
+          <UserOutlined style={{fontSize:"15px"}} /><span style={{marginLeft:"3px"}}>Profil</span>
+        </Link>
+      ),
     },
     {
       key: "2",
@@ -61,7 +66,12 @@ const App = ({ children, link, icon }) => {
           }}
           color="inherit"
         >
-          Çıkış Yap
+          <Row>
+            <Col style={{paddingTop:"4px"}}>
+              <LogoutOutlinedIcon style={{ fontSize: "16px" }} />
+            </Col>
+            <Col style={{marginLeft:"3px"}}>Çıkış Yap</Col>
+          </Row>
         </Link>
       ),
     },
@@ -123,13 +133,13 @@ const App = ({ children, link, icon }) => {
                   style={{
                     cursor: "pointer",
                     backgroundColor: "#2060ff",
-                    fontSize: "22px",  
+                    fontSize: "22px",
                     fontWeight: "bold", // Bold font weight
                     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Shadow for depth
                     touchAction: "manipulation", // Prevent default mobile browser highlighting
-                    WebkitTapHighlightColor: "transparent", 
-                    height:"35px",
-                    width:"35px",
+                    WebkitTapHighlightColor: "transparent",
+                    height: "35px",
+                    width: "35px",
                   }}
                   icon={auth.name.substring(0, 1).toUpperCase()}
                 />
