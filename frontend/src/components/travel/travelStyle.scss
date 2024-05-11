@@ -1,0 +1,41 @@
+.prev-travel-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #000000;
+}
+
+.prev-travel-date {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 26px;
+  color: #000000c9;
+  .time {
+    color: #f17624;
+  }
+}
+
+.prev-travel-price {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #000000aa;
+  .price {
+    color: #f17624;
+  }
+}
+
+.prev-travel-status {
+  font-size: 14px;
+  font-weight: 600;
+  color: #00bb00;
+  margin-left: 10px;
+}
+
+.prev-travel-details {
+  color: #f17624;
+}
+
+.prev-card .ant-card .ant-card-body {
+  padding: 0px;
+}
