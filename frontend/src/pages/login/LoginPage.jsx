@@ -43,7 +43,11 @@ function Login() {
               type: "Bearer",
             },
             userState: {
-              name: "Yavuzhan Albayrak",
+              name: "Yavuzhan",
+              surname: "Albayrak",
+              phone: "+90 539 202 61 05",
+              email: "yavuzhan@gmail.com",
+              address: "Samsun/Atakum",
               uid: 123456,
             },
           })
@@ -258,7 +262,7 @@ function Login() {
                 <Button
                   className="submit"
                   style={{
-                    width:"100%",
+                    width: "100%",
                     color: formIsValid ? "white" : "#00000040",
                     backgroundColor: formIsValid ? "black" : "#0000000A",
                     border: formIsValid ? "#0057D9" : "1px solid #00000026",

@@ -3,27 +3,27 @@ import React, { useEffect } from "react";
 import { UserOutlined, HomeOutlined } from "@ant-design/icons";
 import GlobalContext from "../../context/GlobalContext";
 import "./Profile.scss";
+import Field from "../../components/field/Field";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 export default function ProfilePage() {
   const { isPhone, height, setSelectedKeys } = React.useContext(GlobalContext);
 
   useEffect(() => {
     setSelectedKeys(0);
-  },[]);
+  }, []);
 
-  const user = {
-    name: "Yavuzhan",
-    surname: "Albayrak",
-    phone: "+505 923 43 21",
-    email: "yavuzhan@gmail.com",
-    address: "Samsun/Atakum",
-  }
+  const user = useAuthUser();
 
   return (
     <Row justify="center">
       <Col className="" span={24} sm={24} md={16}>
         <Col
-          style={isPhone ? {height:`calc(${height}px - 64px)`}:{ borderRadius: "20px" }}
+          style={
+            isPhone
+              ? { height: `calc(${height}px - 64px)` }
+              : { borderRadius: "20px" }
+          }
           className="profile-card"
         >
           <Row>
@@ -38,48 +38,12 @@ export default function ProfilePage() {
                 Kullanıcı Bilgileri
               </Col>
 
-              <Col className="user-info">
-                <Row gutter={[0, 10]}>
-                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
-                    <Col className="profile-field" span={24}>
-                      <Row>
-                        <Col span={12}>Adı Soyadı</Col>
-                        <Col style={{ textAlign: "right" }} span={12}>
-                        {user.name + " "+ user.surname }
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Card>
-                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
-                    <Col className="profile-field" span={24}>
-                      <Row>
-                        <Col span={12}>Telefon Numarası</Col>
-                        <Col style={{ textAlign: "right" }} span={12}>
-                          {user.phone}
-                        </Col>
-                      </Row>{" "}
-                    </Col>
-                  </Card>
-                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
-                    <Col className="profile-field" span={24}>
-                      <Row>
-                        <Col span={12}>E-Posta</Col>
-                        <Col style={{ textAlign: "right" }} span={12}>
-                          {user.email}
-                        </Col>
-                      </Row>{" "}
-                    </Col>
-                  </Card>
-                  <Card style={{ width: "100%", backgroundColor:"#f9f9f9" }}>
-                    <Col className="profile-field" span={24}>
-                      <Row>
-                        <Col span={12}>Adres</Col>
-                        <Col style={{ textAlign: "right" }} span={12}>
-                          {user.address}
-                        </Col>
-                      </Row>{" "}
-                    </Col>
-                  </Card>
+              <Col className="user-info driver-infos">
+                <Row>
+                  <Field title={"Adı Soyadı"} field={user.name + " " + user.surname} titleSpan={8} fieldSpan={16}></Field>
+                  <Field title={"Telefon Numarası"} field={user.phone} titleSpan={12} fieldSpan={12}></Field>
+                  <Field title={"E-Posta"} field={user.email} titleSpan={12} fieldSpan={12}></Field>
+                  <Field title={"Adres"} field={user.address}></Field>
                 </Row>
               </Col>
             </Col>
