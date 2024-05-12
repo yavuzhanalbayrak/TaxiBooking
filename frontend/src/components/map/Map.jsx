@@ -12,11 +12,20 @@ import location from "../../images/location.png";
 import blueCircle from "../../images/blue-circle.png";
 import GlobalContext from "../../context/GlobalContext";
 
-function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
+function Map({
+  source,
+  destination,
+  setDistance,
+  distance,
+  isPhone,
+  lat,
+  lng,
+  setDestination,
+}) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
-  const {height} = React.useContext(GlobalContext);
+  const { height } = React.useContext(GlobalContext);
 
   const containerStyle = {
     width: "100%",
@@ -24,30 +33,60 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
   };
 
   const [center, setCenter] = useState({
-    lat: lat||41.288,
-    lng: lng||36.333,
+    lat: lat || 41.288,
+    lng: lng || 36.333,
   });
 
-  useEffect(()=>{
-    if(lat && lng && source?.length == []) setCenter({lat,lng})
-  },[lat,lng])
+  // Function to fetch location information
+  const getLocationInfo = (lat, lng) => {
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          const locationName = results[0].formatted_address;
+
+          setDestination({ lat, lng, label: locationName });
+
+        } else {
+          console.log("No results found");
+        }
+      } else {
+        console.error("Geocoder failed due to:", status);
+      }
+    });
+
+    console.log("Clicked location coordinates:", lat, lng);
+  };
+
+  const handleMapClick = (event) => {
+    const clickedLat = event.latLng.lat();
+    const clickedLng = event.latLng.lng();
+
+    // Call a function to handle getting location information
+    getLocationInfo(clickedLat, clickedLng);
+  };
+
+  useEffect(() => {
+    if (lat && lng && source?.length == []) setCenter({ lat, lng });
+  }, [lat, lng]);
 
   useEffect(() => {
     if (source?.length != []) {
       setCenter({ lat: source.lat, lng: source.lng });
     }
 
-    if ( destination?.length != []) {
+    if (destination?.length != []) {
       directionRoute();
     }
-  }, [source]);
+  }, []);
 
   useEffect(() => {
     if (destination?.length != []) {
       setCenter({ lat: destination.lat, lng: destination.lng });
     }
 
-    if ( destination?.length != []) {
+    if (destination?.length != []) {
       directionRoute();
     }
   }, [destination]);
@@ -85,7 +124,7 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
     const service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
       {
-        origins: [new google.maps.LatLng(source.lat||lat, source.lng||lng)],
+        origins: [new google.maps.LatLng(source.lat || lat, source.lng || lng)],
         destinations: [
           new google.maps.LatLng(destination.lat, destination.lng),
         ],
@@ -125,6 +164,7 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
         zoom={12.6}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        onClick={handleMapClick} // Add onClick event handler to the GoogleMap component
         options={{
           mapId: "7297f202550d6fee",
           fullscreenControl: false,
@@ -132,22 +172,19 @@ function Map({ source, destination, setDistance, distance, isPhone,lat,lng }) {
           gestureHandling: "greedy", // Allow the map to respond to all gestures
           draggableCursor: "grab", // Set the cursor to grab to indicate the map is draggable
           streetViewControl: false, // Disable the default street view control
-
         }}
       >
+        <MarkerF
+          icon={{
+            url: blueCircle,
+            scaledSize: {
+              width: 15,
+              height: 15,
+            },
+          }}
+          position={{ lat, lng }}
+        ></MarkerF>
 
-          <MarkerF
-            icon={{
-              url: blueCircle,
-              scaledSize: {
-                width: 15,
-                height:15,
-              },
-            }}
-            position={{ lat, lng}}
-          >
-          </MarkerF>
-        
         {source.length != [] ? (
           <MarkerF
             icon={{

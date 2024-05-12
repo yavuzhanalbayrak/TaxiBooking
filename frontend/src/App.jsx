@@ -1,4 +1,4 @@
-import {} from "react";
+import {useState} from "react";
 import "./App.css";
 import GlobalProvider from "./context/GlobalProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,6 +18,9 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import TravelPage from "./pages/travel/TravelPage";
 
 function App() {
+  const [locationName, setLocationName] = useState(false);
+
+
   const store = createStore({
     authName: "_auth",
     authType: "cookie",
@@ -37,7 +40,7 @@ function App() {
                   path="/"
                   element={
                     <Layout link="Home">
-                      <HomePage />
+                      <HomePage setLocationName={setLocationName} />
                     </Layout>
                   }
                 />
@@ -53,7 +56,7 @@ function App() {
                   path="/travel"
                   element={
                     <Layout link="travel">
-                      <TravelPage />
+                      <TravelPage locationName={locationName} />
                     </Layout>
                   }
                 />

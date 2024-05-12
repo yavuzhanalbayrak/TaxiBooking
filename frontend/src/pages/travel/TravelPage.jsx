@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import PreviousTravelCard from "../../components/travel/PreviousTravelCard";
 import Field from "../../components/field/Field";
 
-export default function TravelPage() {
+export default function TravelPage({locationName}) {
   const { setSelectedKeys, isPhone, height, driver, setDriver } =
     React.useContext(GlobalContext);
 
@@ -167,13 +167,16 @@ export default function TravelPage() {
                     <Field
                       title={"Başlangıç Noktası"}
                       field={driver?.source?.label || "Konumunuz"}
+                      
+                      titleSpan={8}
+                      fieldSpan={16}
                     />
 
                     <Field
                       title={"Varış Noktası"}
                       field={detailInfos.historyDetails.title}
-                      titleSpan={12}
-                      fieldSpan={12}
+                      titleSpan={8}
+                      fieldSpan={16}
                     />
                     <Field
                       title={"Mesafe"}
@@ -363,14 +366,16 @@ export default function TravelPage() {
                                     <Field
                                       title={"Başlangıç Noktası"}
                                       field={
-                                        driver?.source?.label || "Konumunuz"
+                                        driver?.source?.label || locationName
                                       }
+                                      titleSpan={8}
+                                      fieldSpan={16}
                                     />
                                     <Field
                                       title={"Varış Noktası"}
                                       field={driver.destination.label}
-                                      titleSpan={12}
-                                      fieldSpan={12}
+                                      titleSpan={8}
+                                      fieldSpan={16}
                                     />
                                     <Field
                                       title={"Mesafe"}

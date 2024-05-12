@@ -49,6 +49,7 @@ function Login() {
               email: "yavuzhan@gmail.com",
               address: "Samsun/Atakum",
               uid: 123456,
+              role:"user"
             },
           })
         ) {
