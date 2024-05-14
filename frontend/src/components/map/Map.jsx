@@ -79,7 +79,7 @@ function Map({
     if (destination?.length != []) {
       directionRoute();
     }
-  }, []);
+  }, [source]);
 
   useEffect(() => {
     if (destination?.length != []) {
@@ -88,6 +88,9 @@ function Map({
 
     if (destination?.length != []) {
       directionRoute();
+    }
+    else{
+      setDirectionRoutePoints([]);
     }
   }, [destination]);
 
@@ -253,7 +256,8 @@ function Map({
           </MarkerF>
         ) : null}
 
-        <DirectionsRenderer
+        {destination.length != [] &&
+          <DirectionsRenderer
           directions={directionRoutePoints}
           options={{
             polylineOptions: {
@@ -263,7 +267,7 @@ function Map({
             },
             suppressMarkers: true,
           }}
-        ></DirectionsRenderer>
+        ></DirectionsRenderer>}
       </GoogleMap>
     </div>
   );

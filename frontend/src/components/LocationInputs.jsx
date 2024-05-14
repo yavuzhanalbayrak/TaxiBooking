@@ -17,13 +17,9 @@ export default function LocationInputs({
   focus,
   setFocus,
   lat,
-  lng
+  lng,
 }) {
   const [loading, setLoading] = useState(false);
-
-  const clearInput = ()=>{
-    setSource([]);
-  };
 
   const getLatAndLng = (place, type) => {
     const placeId = place.value.place_id;
@@ -64,7 +60,7 @@ export default function LocationInputs({
                 alt=""
               />
             </Col>
-            <Col span={21}>
+            <Col span={20}>
               <GooglePlacesAutocomplete
                 selectProps={{
                   placeholder: "Başlangıç adresinizi giriniz",
@@ -91,8 +87,18 @@ export default function LocationInputs({
                 }}
               />{" "}
             </Col>
-            <Col span={1}>
-              <Button onClick={clearInput} style={{fontWeight:"600", padding:"0px", border:"none"}}>X</Button>
+            <Col span={2}>
+              <Button
+                onClick={()=>{setSource([]);}}
+                style={{
+                  fontWeight: "600",
+                  padding: "0px",
+                  border: "none",
+                  color: "#00000070",
+                }}
+              >
+                X
+              </Button>
             </Col>
           </Row>
         </Col>
@@ -109,7 +115,7 @@ export default function LocationInputs({
                 alt=""
               />
             </Col>
-            <Col span={22}>
+            <Col span={20}>
               <GooglePlacesAutocomplete
                 selectProps={{
                   placeholder: "Varış adresinizi giriniz",
@@ -119,9 +125,9 @@ export default function LocationInputs({
                     type.name = "destination";
                     getLatAndLng(place, type);
                   },
-                  isClearable: true,
                   components: {
                     DropdownIndicator: false,
+
                   },
                   styles: {
                     control: (provided) => ({
@@ -136,11 +142,30 @@ export default function LocationInputs({
                 }}
               />
             </Col>
+            <Col span={2}>
+              <Button
+                onClick={()=>{setDestination([]);}}
+                style={{
+                  fontWeight: "600",
+                  padding: "0px",
+                  border: "none",
+                  color: "#00000070",
+                }}
+              >
+                X
+              </Button>
+            </Col>
           </Row>
         </Col>
         <Col span={23}>
           <Button
-            style={{ width: "100%", marginTop: "0px",marginBottom: "35px", height: "45px", borderRadius: "25px",}}
+            style={{
+              width: "100%",
+              marginTop: "0px",
+              marginBottom: "35px",
+              height: "45px",
+              borderRadius: "25px",
+            }}
             onClick={startSearchForDriver}
             disabled={!destination || (!source && (!lat || !lng))}
             loading={loading}
