@@ -48,8 +48,7 @@ function Login() {
               phone: "+90 539 202 61 05",
               email: "yavuzhan@gmail.com",
               address: "Samsun/Atakum",
-              uid: 123456,
-              role:"user"
+              role:"driver"
             },
           })
         ) {

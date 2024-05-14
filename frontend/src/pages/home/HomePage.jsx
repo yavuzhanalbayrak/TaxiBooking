@@ -10,11 +10,13 @@ import {
   DownCircleOutlined,
 } from "@ant-design/icons";
 import GlobalContext from "../../context/GlobalContext";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-export default function HomePage({setLocationName}) {
+export default function HomePage({ setLocationName }) {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [distance, setDistance] = useState("");
+  const [distanceToPerson, setDistanceToPerson] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [display, setDisplay] = useState(false);
@@ -22,6 +24,7 @@ export default function HomePage({setLocationName}) {
   const [focus, setFocus] = useState(false);
   const [lat, setLat] = React.useState(false);
   const [lng, setLng] = React.useState(false);
+  const user = useAuthUser();
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -30,13 +33,11 @@ export default function HomePage({setLocationName}) {
           setLat(position.coords.latitude);
           setLng(position.coords.longitude);
           getLocationName(position.coords.latitude, position.coords.longitude);
-
         },
         (error) => {
           console.error("Error getting user location:", error);
         }
       );
-
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
@@ -44,13 +45,12 @@ export default function HomePage({setLocationName}) {
 
   const getLocationName = (lat, lng) => {
     const geocoder = new google.maps.Geocoder();
-  
+
     geocoder.geocode({ location: { lat, lng } }, (results, status) => {
       if (status === "OK") {
         if (results[0]) {
           const locationName = results[0].formatted_address;
           setLocationName(locationName);
-  
         } else {
           console.log("No results found");
         }
@@ -103,99 +103,116 @@ export default function HomePage({setLocationName}) {
                         destination={destination}
                         setDistance={setDistance}
                         distance={distance}
+                        setDistanceToPerson={setDistanceToPerson}
+                        distanceToPerson={distanceToPerson}
                         isPhone={true}
                         lat={lat}
                         lng={lng}
                         setDestination={setDestination}
+                        setSource={setSource}
                       ></Map>
                     </div>
-                    <div className={"location-inputs-phone"}>
-                      <Card
-                        style={{
-                          boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
-                          transform: isLocationClicked
-                            ? `translateY(-217px)`
-                            : ``,
-                          transition: "transform 0.3s ease-in-out",
-                          transformOrigin: "top",
-                          top: `${height - 137}px`,
-                        }}
-                        className={"location-inputs-card-phone "}
-                        title={
-                          <div
-                            onClick={() =>
-                              setIsLocationClicked((Prevstate) => !Prevstate)
-                            }
-                          >
-                            Varış Noktası Seçiniz{" "}
-                            <span style={{ marginLeft: "5px" }}>
-                              {isLocationClicked ? (
-                                <DownCircleOutlined />
-                              ) : (
-                                <UpCircleOutlined />
-                              )}{" "}
-                            </span>
-                          </div>
-                        }
-                      >
-                        <div className="ant-card">
-                          <div
-                            style={{
-                              paddingTop: "10px",
-                              maxHeight: "217px",
-                              overflowY: focus ? "auto" : "hidden",
-                            }}
-                            className={
-                              display
-                                ? "ant-card-body clicked"
-                                : "ant-card-body"
-                            }
-                          >
-                            <div style={{ height: focus ? "400px" : "auto" }}>
-                              <LocationInputs
-                                setSource={setSource}
-                                setDestination={setDestination}
-                                destination={destination}
-                                source={source}
-                                distance={distance}
-                                startSearchForDriver={startSearchForDriver}
-                                isPhone={true}
-                                focus={focus}
-                                setFocus={setFocus}
-                                lat={lat}
-                                lng={lng}
-                              />
+                    {user.role == "user" && (
+                      <div className={"location-inputs-phone"}>
+                        <Card
+                          style={{
+                            boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
+                            transform: isLocationClicked
+                              ? `translateY(-217px)`
+                              : ``,
+                            transition: "transform 0.3s ease-in-out",
+                            transformOrigin: "top",
+                            top: `${height - 137}px`,
+                          }}
+                          className={"location-inputs-card-phone "}
+                          title={
+                            <div
+                              onClick={() =>
+                                setIsLocationClicked((Prevstate) => !Prevstate)
+                              }
+                            >
+                              Varış Noktası Seçiniz{" "}
+                              <span style={{ marginLeft: "5px" }}>
+                                {isLocationClicked ? (
+                                  <DownCircleOutlined />
+                                ) : (
+                                  <UpCircleOutlined />
+                                )}{" "}
+                              </span>
+                            </div>
+                          }
+                        >
+                          <div className="ant-card">
+                            <div
+                              style={{
+                                paddingTop: "10px",
+                                maxHeight: "217px",
+                                overflowY: focus ? "auto" : "hidden",
+                              }}
+                              className={
+                                display
+                                  ? "ant-card-body clicked"
+                                  : "ant-card-body"
+                              }
+                            >
+                              <div style={{ height: focus ? "400px" : "auto" }}>
+                                <LocationInputs
+                                  setSource={setSource}
+                                  setDestination={setDestination}
+                                  destination={destination}
+                                  source={source}
+                                  distance={distance}
+                                  startSearchForDriver={startSearchForDriver}
+                                  isPhone={true}
+                                  focus={focus}
+                                  setFocus={setFocus}
+                                  lat={lat}
+                                  lng={lng}
+                                />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Card>
-                    </div>
+                        </Card>
+                      </div>
+                    )}
                   </Card>
                 </div>
               </Col>
             </Row>
           ) : (
             <Row gutter={[10, 10]}>
-              <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
-                <Col>
-                  <Card title="Varış Noktası Seçiniz">
-                    <LocationInputs
-                      setSource={setSource}
-                      setDestination={setDestination}
-                      destination={destination}
-                      source={source}
-                      distance={distance}
-                      startSearchForDriver={startSearchForDriver}
-                      isPhone={false}
-                      focus={focus}
-                      setFocus={setFocus}
-                      lat={lat}
-                      lng={lng}
-                    ></LocationInputs>
-                  </Card>
+              {user.role == "user" && (
+                <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
+                  <Col>
+                    <Card title="Varış Noktası Seçiniz">
+                      <LocationInputs
+                        setSource={setSource}
+                        setDestination={setDestination}
+                        destination={destination}
+                        source={source}
+                        distance={distance}
+                        setDistanceToPerson={setDistanceToPerson}
+                        distanceToPerson={distanceToPerson}
+                        startSearchForDriver={startSearchForDriver}
+                        isPhone={false}
+                        focus={focus}
+                        setFocus={setFocus}
+                        lat={lat}
+                        lng={lng}
+                      ></LocationInputs>
+                    </Card>
+                  </Col>
                 </Col>
-              </Col>
-              <Col span={24} xs={24} sm={24} md={14} lg={14} xl={16} xxl={17}>
+              )}
+              <Col
+                span={24}
+                xs={24}
+                sm={24}
+                md={user.role == "user" ? 14 : 24}
+                lg={user.role == "user" ? 14 : 24}
+                xl={user.role == "user" ? 16 : 24}
+                xxl={user.role == "user" ? 17 : 24}
+              >
                 <div className="map">
                   <Card title="Harita" bordered={false}>
                     <Map
@@ -207,6 +224,7 @@ export default function HomePage({setLocationName}) {
                       lat={lat}
                       lng={lng}
                       setDestination={setDestination}
+                      setSource={setSource}
                     ></Map>
                   </Card>
                 </div>
@@ -218,7 +236,7 @@ export default function HomePage({setLocationName}) {
         <div
           style={{
             textAlign: "center",
-            height: `${height-100}px`,
+            height: `${height - 100}px`,
             alignContent: "center",
           }}
         >

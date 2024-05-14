@@ -10,7 +10,10 @@ import {
 import currentLocation from "../../images/currentLoc.png";
 import location from "../../images/location.png";
 import blueCircle from "../../images/blue-circle.png";
+import motor from "../../images/motor.png";
+import personPng from "../../images/person.png";
 import GlobalContext from "../../context/GlobalContext";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 function Map({
   source,
@@ -21,15 +24,49 @@ function Map({
   lat,
   lng,
   setDestination,
+  setSource,
+  setDistanceToPerson,
+  distanceToPerson
 }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
+  const [personDirectionRoutePoints, setPersonDirectionRoutePoints] = useState(
+    []
+  );
   const [distanceMatrix, setDistanceMatrix] = useState([]);
+  const [distanceMatrixToPerson, setDistanceMatrixToPerson] = useState([]);
   const { height } = React.useContext(GlobalContext);
+  const user = useAuthUser();
+
+  //DRIVER EXAMPLE
+  const driver = {
+    lat: lat + 0.1,
+    lng: lng + 0.1,
+  };
+
+  //PERSON EXAMPLE
+  const person = {
+    lat: lat + 0.1,
+    lng: lng + 0.1,
+    destination: {
+      lat: lat + 0.1,
+      lng: lng,
+    },
+  };
+
+  useEffect(() => {
+    if (person) {
+      setSource(person);
+      setDestination(person.destination);
+      directionRoute();
+    } else {
+      setDirectionRoutePoints([]);
+    }
+  }, []);
 
   const containerStyle = {
     width: "100%",
-    height: isPhone ? `calc(${height}px - 80px)` : `calc(${height}px - 160px)`,
+    height: isPhone ? `calc(${height}px - 64px)` : `calc(${height}px - 160px)`,
   };
 
   const [center, setCenter] = useState({
@@ -47,7 +84,6 @@ function Map({
           const locationName = results[0].formatted_address;
 
           setDestination({ lat, lng, label: locationName });
-
         } else {
           console.log("No results found");
         }
@@ -88,8 +124,7 @@ function Map({
 
     if (destination?.length != []) {
       directionRoute();
-    }
-    else{
+    } else {
       setDirectionRoutePoints([]);
     }
   }, [destination]);
@@ -121,6 +156,33 @@ function Map({
         }
       }
     );
+
+    if (user.role == "driver") {
+      DirectionsService.route(
+        {
+          origin: {
+            lat: lat,
+            lng: lng,
+          },
+          destination: {
+            lat: source.lat,
+            lng: source.lng,
+          },
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (result) => {
+          console.log("RES: ", result.status);
+
+          if (result.status === "OK") {
+            console.log("RES: ", result);
+            setPersonDirectionRoutePoints(result);
+            calculateDistanceMatrixToPerson();
+          } else {
+            console.log("Error");
+          }
+        }
+      );
+    }
   };
 
   const calculateDistanceMatrix = () => {
@@ -143,10 +205,33 @@ function Map({
     );
   };
 
+  const calculateDistanceMatrixToPerson = () => {
+    const service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+      {
+        origins: [new google.maps.LatLng( lat,  lng)],
+        destinations: [
+          new google.maps.LatLng(source.lat, source.lng),
+        ],
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (response, status) => {
+        if (status === "OK") {
+          setDistanceMatrixToPerson(response);
+        } else {
+          console.error("Error calculating distance matrix:", status);
+        }
+      }
+    );
+  };
+
   useEffect(() => {
     if (distanceMatrix.length != [])
       setDistance(distanceMatrix.rows[0].elements[0].distance.text);
-  }, [distanceMatrix]);
+
+    if (distanceMatrixToPerson.length != [])
+      setDistanceToPerson(distanceMatrixToPerson.rows[0].elements[0].distance.text);
+  }, [distanceMatrix, distanceMatrixToPerson]);
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -167,7 +252,7 @@ function Map({
         zoom={12.6}
         onLoad={onLoad}
         onUnmount={onUnmount}
-        onClick={handleMapClick} // Add onClick event handler to the GoogleMap component
+        onClick={user.role == "user" && handleMapClick} // Add onClick event handler to the GoogleMap component
         options={{
           mapId: "7297f202550d6fee",
           fullscreenControl: false,
@@ -188,13 +273,26 @@ function Map({
           position={{ lat, lng }}
         ></MarkerF>
 
+        {user.role == "user" && driver && (
+          <MarkerF
+            icon={{
+              url: motor,
+              scaledSize: {
+                width: 30,
+                height: 20,
+              },
+            }}
+            position={{ lat: driver?.lat, lng: driver?.lng }}
+          ></MarkerF>
+        )}
+
         {source.length != [] ? (
           <MarkerF
             icon={{
-              url: currentLocation,
+              url: user.role=="user"?currentLocation:personPng,
               scaledSize: {
                 width: 20,
-                height: 29,
+                height: user.role=="user"?29:20,
               },
             }}
             position={{ lat: source.lat, lng: source.lng }}
@@ -214,7 +312,7 @@ function Map({
                   boxShadow: "1.5px 1.5px 5px 0px",
                 }}
               >
-                <p> {source.label} </p>
+                <p> {source.label} {distanceToPerson} </p>
               </div>
             </OverlayView>
           </MarkerF>
@@ -256,18 +354,33 @@ function Map({
           </MarkerF>
         ) : null}
 
-        {destination.length != [] &&
+        {destination.length != [] && (
           <DirectionsRenderer
-          directions={directionRoutePoints}
-          options={{
-            polylineOptions: {
-              strokeColor: "blue",
-              strokeOpacity: 0.8,
-              strokeWeight: 5,
-            },
-            suppressMarkers: true,
-          }}
-        ></DirectionsRenderer>}
+            directions={directionRoutePoints}
+            options={{
+              polylineOptions: {
+                strokeColor: "blue",
+                strokeOpacity: 0.8,
+                strokeWeight: 5,
+              },
+              suppressMarkers: true,
+            }}
+          ></DirectionsRenderer>
+        )}
+
+        {source.length != [] && user.role == "driver" && (
+          <DirectionsRenderer
+            directions={personDirectionRoutePoints}
+            options={{
+              polylineOptions: {
+                strokeColor: "red",
+                strokeOpacity: 0.8,
+                strokeWeight: 5,
+              },
+              suppressMarkers: true,
+            }}
+          ></DirectionsRenderer>
+        )}
       </GoogleMap>
     </div>
   );
