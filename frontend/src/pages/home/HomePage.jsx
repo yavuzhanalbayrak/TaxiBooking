@@ -27,6 +27,7 @@ export default function HomePage({
   const [distanceToPerson, setDistanceToPerson] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
+  const [isPersonSearching, setIsPersonSearching] = useState(false);
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
@@ -87,7 +88,7 @@ export default function HomePage({
                         setLocationName={setLocationName}
                       ></Map>
                     </div>
-                    {user.role == "user" && (
+                    {user.role == "user" ? (
                       <div className={"location-inputs-phone"}>
                         <Card
                           style={{
@@ -146,6 +147,98 @@ export default function HomePage({
                                 />
                               </div>
                             </div>
+                          </div>
+                        </Card>
+                      </div>
+                    ) : (
+                      <div className={"location-inputs-phone"}>
+                        <Card
+                          style={{
+                            boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
+                            transform: isLocationClicked
+                              ? `translateY(-188px)`
+                              : ``,
+                            transition: "transform 0.3s ease-in-out",
+                            transformOrigin: "top",
+                            top: `${height - 137}px`,
+                          }}
+                          className={"location-inputs-card-phone "}
+                          title={
+                            !isPersonSearching ? (
+                              <Button
+                              onClick={()=>{setIsPersonSearching(true)}}
+                                type="primary"
+                                size="large"
+                                style={{ width: "40%", borderRadius: "25px" }}
+                              >
+                                Yolcu Ara
+                              </Button>
+                            ) : (
+                              <Button
+                              onClick={()=>{setIsPersonSearching(false)}}
+                              danger
+                                type="primary"
+                                size="large"
+                                style={{ width: "40%", borderRadius: "25px" }}
+                              
+                              > <LoadingOutlined style={{position:"absolute", left:"30%", top:"30%"}}></LoadingOutlined> İptal et</Button>
+                            )
+                          }
+                        >
+                          <div style={{ padding: "24px" }}>
+                            <Row>
+                              <Col span={24}>
+                                <p
+                                  style={{
+                                    margin: 0,
+                                    fontSize: "16px",
+                                    color: "#555",
+                                  }}
+                                >
+                                  <strong>Toplam Mesafe:</strong>{" "}
+                                  <span style={{ color: "#f17624" }}>
+                                    15 KM
+                                  </span>
+                                </p>
+                                <p
+                                  style={{
+                                    margin: 0,
+                                    fontSize: "16px",
+                                    color: "#555",
+                                  }}
+                                >
+                                  <strong>Ücret:</strong>{" "}
+                                  <span style={{ color: "#f17624" }}>
+                                    210 TL
+                                  </span>
+                                </p>
+                              </Col>
+                            </Row>
+                            <Row style={{ marginTop: "20px" }} gutter={[0, 5]}>
+                              <Col span={24}>
+                                <Button
+                                  type="primary"
+                                  style={{
+                                    width: "100%",
+                                    borderRadius: "25px",
+                                  }}
+                                >
+                                  Kabul et
+                                </Button>
+                              </Col>
+                              <Col span={24}>
+                                <Button
+                                  danger
+                                  type="primary"
+                                  style={{
+                                    width: "100%",
+                                    borderRadius: "25px",
+                                  }}
+                                >
+                                  Reddet
+                                </Button>
+                              </Col>
+                            </Row>
                           </div>
                         </Card>
                       </div>
