@@ -15,15 +15,7 @@ import personPng from "../../images/person.png";
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
- //PERSON EXAMPLE
- const person = {
-  lat: 40 + 0.7,
-  lng: 30 + 0.1,
-  destination: {
-    lat: 40 + 0.7,
-    lng: 30,
-  },
-};
+
 
 function Map({
   source,
@@ -40,6 +32,7 @@ function Map({
   setDistanceToPerson,
   distanceToPerson,
   setLocationName,
+  person,
 }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);

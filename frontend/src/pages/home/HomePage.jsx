@@ -12,6 +12,16 @@ import {
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
+ //PERSON EXAMPLE
+ const person = {
+  lat: 40 + 0.7,
+  lng: 30 + 0.1,
+  destination: {
+    lat: 40 + 0.7,
+    lng: 30,
+  },
+};
+
 export default function HomePage({
   setLocationName,
   lat,
@@ -86,6 +96,7 @@ export default function HomePage({
                         setDestination={setDestination}
                         setSource={setSource}
                         setLocationName={setLocationName}
+                        person={person}
                       ></Map>
                     </div>
                     {user.role == "user" ? (
@@ -298,6 +309,7 @@ export default function HomePage({
                       setDestination={setDestination}
                       setSource={setSource}
                       setLocationName={setLocationName}
+                      person={person}
                     ></Map>
                   </Card>
                 </div>
