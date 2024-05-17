@@ -12,9 +12,17 @@ import {
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-export default function HomePage({ setLocationName }) {
-  const [source, setSource] = useState("");
-  const [destination, setDestination] = useState("");
+export default function HomePage({
+  setLocationName,
+  lat,
+  lng,
+  setLat,
+  setLng,
+  source,
+  setSource,
+  destination,
+  setDestination,
+}) {
   const [distance, setDistance] = useState("");
   const [distanceToPerson, setDistanceToPerson] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,43 +30,7 @@ export default function HomePage({ setLocationName }) {
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
-  const [lat, setLat] = React.useState(false);
-  const [lng, setLng] = React.useState(false);
   const user = useAuthUser();
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
-          getLocationName(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          console.error("Error getting user location:", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  }, []);
-
-  const getLocationName = (lat, lng) => {
-    const geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      if (status === "OK") {
-        if (results[0]) {
-          const locationName = results[0].formatted_address;
-          setLocationName(locationName);
-        } else {
-          console.log("No results found");
-        }
-      } else {
-        console.error("Geocoder failed due to:", status);
-      }
-    });
-  };
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -108,8 +80,11 @@ export default function HomePage({ setLocationName }) {
                         isPhone={true}
                         lat={lat}
                         lng={lng}
+                        setLat={setLat}
+                        setLng={setLng}
                         setDestination={setDestination}
                         setSource={setSource}
+                        setLocationName={setLocationName}
                       ></Map>
                     </div>
                     {user.role == "user" && (
@@ -220,11 +195,16 @@ export default function HomePage({ setLocationName }) {
                       destination={destination}
                       setDistance={setDistance}
                       distance={distance}
+                      setDistanceToPerson={setDistanceToPerson}
+                      distanceToPerson={distanceToPerson}
                       isPhone={false}
                       lat={lat}
                       lng={lng}
+                      setLat={setLat}
+                      setLng={setLng}
                       setDestination={setDestination}
                       setSource={setSource}
+                      setLocationName={setLocationName}
                     ></Map>
                   </Card>
                 </div>

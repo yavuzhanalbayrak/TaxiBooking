@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import GlobalProvider from "./context/GlobalProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -19,7 +19,44 @@ import TravelPage from "./pages/travel/TravelPage";
 
 function App() {
   const [locationName, setLocationName] = useState(false);
+  const [lat, setLat] = React.useState(false);
+  const [lng, setLng] = React.useState(false);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
 
+  React.useEffect(() => {
+    if ("geolocation" in navigator) {
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+          getLocationName(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  const getLocationName = (lat, lng) => {
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          const locationName = results[0].formatted_address;
+          setLocationName(locationName);
+        } else {
+          console.log("No results found");
+        }
+      } else {
+        console.error("Geocoder failed due to:", status);
+      }
+    });
+  };
 
   const store = createStore({
     authName: "_auth",
@@ -40,7 +77,18 @@ function App() {
                   path="/"
                   element={
                     <Layout link="Home">
-                      <HomePage setLocationName={setLocationName} />
+                      <HomePage
+                        setLocationName={setLocationName}
+                        locationName={locationName}
+                        lat={lat}
+                        lng={lng}
+                        setLat={setLat}
+                        setLng={setLng}
+                        source={source}
+                        setSource={setSource}
+                        destination={destination}
+                        setDestination={setDestination}
+                      />
                     </Layout>
                   }
                 />

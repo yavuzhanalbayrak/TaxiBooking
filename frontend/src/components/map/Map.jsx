@@ -15,6 +15,16 @@ import personPng from "../../images/person.png";
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
+ //PERSON EXAMPLE
+ const person = {
+  lat: 40 + 0.7,
+  lng: 30 + 0.1,
+  destination: {
+    lat: 40 + 0.7,
+    lng: 30,
+  },
+};
+
 function Map({
   source,
   destination,
@@ -23,46 +33,38 @@ function Map({
   isPhone,
   lat,
   lng,
+  setLng,
+  setLat,
   setDestination,
   setSource,
   setDistanceToPerson,
-  distanceToPerson
+  distanceToPerson,
+  setLocationName,
 }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
-  const [personDirectionRoutePoints, setPersonDirectionRoutePoints] = useState(
-    []
-  );
+  const [personDirectionRoutePoints, setPersonDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
   const [distanceMatrixToPerson, setDistanceMatrixToPerson] = useState([]);
   const { height } = React.useContext(GlobalContext);
   const user = useAuthUser();
-
   //DRIVER EXAMPLE
   const driver = {
     lat: lat + 0.1,
     lng: lng + 0.1,
   };
 
-  //PERSON EXAMPLE
-  const person = {
-    lat: lat + 0.1,
-    lng: lng + 0.1,
-    destination: {
-      lat: lat + 0.1,
-      lng: lng,
-    },
-  };
+  
 
   useEffect(() => {
-    if (person) {
+    if (user.role=="driver" && person) {
       setSource(person);
       setDestination(person.destination);
       directionRoute();
     } else {
       setDirectionRoutePoints([]);
     }
-  }, []);
+  }, [person]);
 
   const containerStyle = {
     width: "100%",
@@ -105,7 +107,7 @@ function Map({
 
   useEffect(() => {
     if (lat && lng && source?.length == []) setCenter({ lat, lng });
-  }, [lat, lng]);
+  }, [lat, lng, source]);
 
   useEffect(() => {
     if (source?.length != []) {
@@ -115,7 +117,7 @@ function Map({
     if (destination?.length != []) {
       directionRoute();
     }
-  }, [source]);
+  }, [source, destination]);
 
   useEffect(() => {
     if (destination?.length != []) {
