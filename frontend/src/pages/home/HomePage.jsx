@@ -13,14 +13,14 @@ import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
  //PERSON EXAMPLE
- const person = {
-  lat: 40 + 0.7,
-  lng: 30 + 0.1,
-  destination: {
-    lat: 40 + 0.7,
-    lng: 30,
-  },
-};
+//  const person = {
+//   lat: 40 + 0.7,
+//   lng: 30 + 0.1,
+//   destination: {
+//     lat: 40 + 0.7,
+//     lng: 30,
+//   },
+// };
 
 export default function HomePage({
   setLocationName,
@@ -41,7 +41,34 @@ export default function HomePage({
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
+  const [person, setPerson] = useState(false);
   const user = useAuthUser();
+
+  useEffect(() => {
+    let timeoutId;
+
+    if (isPersonSearching) {
+      timeoutId = setTimeout(() => {
+        setPerson({
+          lat: 40 + 0.7,
+          lng: 30 + 0.1,
+          destination: {
+            lat: 40 + 0.7,
+            lng: 30,
+          },
+        });
+        setIsPersonSearching(false);
+      }, 2000);
+    }
+
+    // Cleanup function to clear the timeout if isPersonSearching changes
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [isPersonSearching]);
+
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -166,8 +193,8 @@ export default function HomePage({
                         <Card
                           style={{
                             boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
-                            transform: isLocationClicked
-                              ? `translateY(-188px)`
+                            transform: person
+                              ? `translateY(-187px)`
                               : ``,
                             transition: "transform 0.3s ease-in-out",
                             transformOrigin: "top",
@@ -175,6 +202,9 @@ export default function HomePage({
                           }}
                           className={"location-inputs-card-phone "}
                           title={
+                            person?
+                            "Yolcu Bulundu!"
+                            :
                             !isPersonSearching ? (
                               <Button
                               onClick={()=>{setIsPersonSearching(true)}}
@@ -192,7 +222,7 @@ export default function HomePage({
                                 size="large"
                                 style={{ width: "40%", borderRadius: "25px" }}
                               
-                              > <LoadingOutlined style={{position:"absolute", left:"30%", top:"30%"}}></LoadingOutlined> İptal et</Button>
+                              > <LoadingOutlined></LoadingOutlined> İptal et</Button>
                             )
                           }
                         >
@@ -233,6 +263,9 @@ export default function HomePage({
                                     width: "100%",
                                     borderRadius: "25px",
                                   }}
+                                  onClick={()=>{
+                                    
+                                  }}
                                 >
                                   Kabul et
                                 </Button>
@@ -244,6 +277,12 @@ export default function HomePage({
                                   style={{
                                     width: "100%",
                                     borderRadius: "25px",
+                                  }}
+                                  onClick={()=>{
+                                    setPerson("");
+                                    setDestination("");
+                                    setSource("");
+                                    setIsPersonSearching(true);
                                   }}
                                 >
                                   Reddet

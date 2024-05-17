@@ -56,6 +56,7 @@ function Map({
       directionRoute();
     } else {
       setDirectionRoutePoints([]);
+      setPersonDirectionRoutePoints([]);
     }
   }, [person]);
 
@@ -169,7 +170,6 @@ function Map({
           console.log("RES: ", result.status);
 
           if (result.status === "OK") {
-            console.log("RES: ", result);
             setPersonDirectionRoutePoints(result);
             calculateDistanceMatrixToPerson();
           } else {
@@ -363,7 +363,7 @@ function Map({
           ></DirectionsRenderer>
         )}
 
-        {source.length != [] && user.role == "driver" && (
+        {source.length != [] && user.role == "driver" && person && (
           <DirectionsRenderer
             directions={personDirectionRoutePoints}
             options={{
