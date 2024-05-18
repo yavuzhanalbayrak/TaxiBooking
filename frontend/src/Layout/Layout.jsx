@@ -140,7 +140,7 @@ const App = ({ children, link, icon }) => {
                 <Avatar
                   style={{
                     cursor: "pointer",
-                    backgroundColor: "#2060ff",
+                    backgroundColor: "#1677ff",
                     fontSize: "22px",
                     fontWeight: "bold", // Bold font weight
                     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)", // Shadow for depth
