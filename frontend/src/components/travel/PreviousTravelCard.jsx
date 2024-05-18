@@ -3,27 +3,40 @@ import React from "react";
 import { CheckOutlined, RightOutlined } from "@ant-design/icons";
 import "./travelStyle.scss";
 
-export default function PreviousTravelCard(props) {
+const historyDetails = {
+  title: "props.travelHistory.title",
+  date: "props.travelHistory.date",
+  time: "props.travelHistory.time",
+  status: "Tamamlandı",
+  distance: "props.travelHistory.distance",
+  price: 150,
+  currency: "TRY",
+  phone: "+90 539 202 61 06",
+  name: "Yavuzhan Albayrak",
+  surname: "Albayrak",
+  email: "yavuzalbayrak@gmail.com",
+  car: {
+    brand: "Honda",
+    model: "pcx",
+    year: "2021",
+  },
+  rating: 3,
+};
 
-    const historyDetails={
-        title: props.travelHistory.title,
-        date: props.travelHistory.date,
-        time: props.travelHistory.time,
-        status: props.travelHistory.status,
-        distance: props.travelHistory.distance,
-        price: props.travelHistory.price,
-        currency:"TRY",
-        phone: "+90 539 202 61 06",
-        name: "Yavuzhan Albayrak",
-        surname: "Albayrak",
-        email: "yavuzalbayrak@gmail.com",
-        car: {
-          brand: "Honda",
-          model: "pcx",
-          year: "2021",
-        },
-        rating: 3,
-    }
+export default function PreviousTravelCard(props) {
+  const [formattedPaymentRate, setFormattedPaymentRate] = React.useState(() => {
+    const currency = props.currencyList.find(
+      (item) => item.value === historyDetails.currency
+    );
+    const formattedPaymentRate = `${
+      currency.prefix
+    } ${historyDetails.price.toLocaleString(undefined, {
+      minimumFractionDigits: currency.decimalDigits,
+      maximumFractionDigits: currency.decimalDigits,
+    })}`;
+    return <p>{formattedPaymentRate}</p>;
+  });
+
   return (
     <div className="prev-card">
       <Card style={{ width: "100%" }}>
@@ -38,13 +51,16 @@ export default function PreviousTravelCard(props) {
             </Col>
             <Row style={{ width: "100%" }}>
               <Col className="prev-travel-price" span={12}>
-                Fiyat: <span className="price">{props.travelHistory.price}</span>
+                <Row gutter={5}>
+                  <Col>Fiyat:</Col>
+                  <Col style={{color:"#f17624"}}>{formattedPaymentRate}</Col>
+                </Row>
               </Col>
               <Col
                 onClick={() => {
                   props.setShowDetails(true);
                   props.setDetailInfos({
-                    historyDetails
+                    historyDetails,
                   });
                 }}
                 className="prev-travel-details"
@@ -59,8 +75,10 @@ export default function PreviousTravelCard(props) {
         <Row style={{ padding: "24px" }}>
           <Col span={24}>
             <Row>
-              <CheckOutlined style={{ fontSize: "16px", color:"#00bb00" }} />
-              <Col className="prev-travel-status">{props.travelHistory.status}</Col>
+              <CheckOutlined style={{ fontSize: "16px", color: "#00bb00" }} />
+              <Col className="prev-travel-status">
+                {props.travelHistory.status}
+              </Col>
             </Row>
           </Col>
         </Row>

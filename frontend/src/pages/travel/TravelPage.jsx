@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import PreviousTravelCard from "../../components/travel/PreviousTravelCard";
 import Field from "../../components/field/Field";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import { useTranslation } from "react-i18next";
 
 export default function TravelPage({ locationName }) {
   const { setSelectedKeys, isPhone, height, travel, setTravel } =
@@ -35,6 +36,7 @@ export default function TravelPage({ locationName }) {
   const [driverRate, setDriverRate] = React.useState(
     Math.max(0, Math.min(0, totalStars))
   );
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [emptyStarsForDriverRate, setEmptyStarsForDriverRate] = React.useState(
     Math.max(0, Math.min(5, totalStars))
@@ -92,6 +94,7 @@ export default function TravelPage({ locationName }) {
     },
   ];
 
+  //EXAMPLE PREV
   const prevTravels = [
     {
       title: "Samsun - Atakum",
@@ -211,6 +214,9 @@ export default function TravelPage({ locationName }) {
                         return <p>{formattedPaymentRate}</p>;
                       }}
                     />
+                    
+                    {user.role == "user" ?
+                      <>
                     <Col span={24}></Col>
                     <Col style={{ marginTop: "15px" }} span={24}>
                       <h2>Sürücü Bilgileri</h2>
@@ -247,22 +253,31 @@ export default function TravelPage({ locationName }) {
                         </>
                       }
                     />
-
-                    <Col style={{ marginTop: "15px" }} span={24}>
-                      <h2>Araç Bilgileri</h2>
-                    </Col>
-                    <Field
-                      title={"Marka"}
-                      field={detailInfos.historyDetails.car?.brand}
-                    />
-                    <Field
-                      title={"Model"}
-                      field={detailInfos.historyDetails.car?.model}
-                    />
-                    <Field
-                      title={"Yıl"}
-                      field={detailInfos.historyDetails.car?.year}
-                    />
+                        <Col style={{ marginTop: "15px" }} span={24}>
+                          <h2>Araç Bilgileri</h2>
+                        </Col>
+                        <Field
+                          title={"Marka"}
+                          field={detailInfos.historyDetails.car?.brand}
+                        />
+                        <Field
+                          title={"Model"}
+                          field={detailInfos.historyDetails.car?.model}
+                        />
+                        <Field
+                          title={"Yıl"}
+                          field={detailInfos.historyDetails.car?.year}
+                        />
+                      </>
+                      :
+                      <>
+                      <Col style={{ marginTop: "15px" }} span={24}>
+                      <h2>Yolcu Bilgileri</h2>
+                      <Field title={t("profile.fullname")} field={"Yavuzhan Albayrak"}></Field>
+                      <Field title={t("profile.number")} field={"+90 234 213 41 23"}></Field>
+                      </Col>
+                      </>
+                    }
                   </div>
                 ) : (
                   <div>
@@ -524,7 +539,7 @@ export default function TravelPage({ locationName }) {
                                     width: "100%",
                                   }}
                                 >
-                                  {user.role === "user"?
+                                  {user.role === "user" ? (
                                     <>
                                       <Col
                                         style={{ fontSize: "30px" }}
@@ -542,9 +557,9 @@ export default function TravelPage({ locationName }) {
                                         </Link>
                                       </Col>
                                     </>
-                                    :
+                                  ) : (
                                     <>
-                                    <Col
+                                      <Col
                                         style={{ fontSize: "30px" }}
                                         span={24}
                                       >
@@ -560,7 +575,7 @@ export default function TravelPage({ locationName }) {
                                         </Link>
                                       </Col>
                                     </>
-                                  }
+                                  )}
                                 </Card>
                               </Row>
                             </>
@@ -576,6 +591,7 @@ export default function TravelPage({ locationName }) {
                                   setShowDetails={setShowDetails}
                                   travelHistory={travelHistory}
                                   driverHistory={travel}
+                                  currencyList={currencyList}
                                 />
                               </div>
                             );
