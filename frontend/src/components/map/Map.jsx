@@ -39,7 +39,7 @@ function Map({
   const [personDirectionRoutePoints, setPersonDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
   const [distanceMatrixToPerson, setDistanceMatrixToPerson] = useState([]);
-  const { height } = React.useContext(GlobalContext);
+  const { height, travel } = React.useContext(GlobalContext);
   const user = useAuthUser();
   //DRIVER EXAMPLE
   const driver = {
@@ -247,7 +247,7 @@ function Map({
         zoom={12.6}
         onLoad={onLoad}
         onUnmount={onUnmount}
-        onClick={user.role == "user" && handleMapClick} // Add onClick event handler to the GoogleMap component
+        onClick={user.role == "user" && !travel && handleMapClick} // Add onClick event handler to the GoogleMap component
         options={{
           mapId: "7297f202550d6fee",
           fullscreenControl: false,
