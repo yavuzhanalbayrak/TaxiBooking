@@ -50,7 +50,8 @@ const App = ({ children, link, icon }) => {
       key: "1",
       label: (
         <Link to="/profile">
-          <UserOutlined style={{fontSize:"15px"}} /><span style={{marginLeft:"3px"}}>Profil</span>
+          <UserOutlined style={{ fontSize: "15px" }} />
+          <span style={{ marginLeft: "3px" }}>Profil</span>
         </Link>
       ),
     },
@@ -67,10 +68,10 @@ const App = ({ children, link, icon }) => {
           color="inherit"
         >
           <Row>
-            <Col style={{paddingTop:"4px"}}>
+            <Col style={{ paddingTop: "4px" }}>
               <LogoutOutlinedIcon style={{ fontSize: "16px" }} />
             </Col>
-            <Col style={{marginLeft:"3px"}}>Çıkış Yap</Col>
+            <Col style={{ marginLeft: "3px" }}>Çıkış Yap</Col>
           </Row>
         </Link>
       ),
@@ -102,6 +103,7 @@ const App = ({ children, link, icon }) => {
         <Header
           className="navbar"
           style={{
+            backgroundColor: "#00007f",
             boxShadow:
               isPhone &&
               selectedKeys == 1 &&
@@ -111,7 +113,7 @@ const App = ({ children, link, icon }) => {
           <Row style={{ width: "100%" }}>
             <Col span={20}>
               <Menu
-                theme="light"
+                theme="dark"
                 mode="horizontal"
                 selectedKeys={selectedKeys}
                 items={items}
@@ -119,6 +121,7 @@ const App = ({ children, link, icon }) => {
                   flex: 1,
                   minWidth: 0,
                   borderColor: "#0000002f",
+                  backgroundColor: "#00007f",
                 }}
               />
             </Col>

@@ -12,7 +12,7 @@ import {
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
- //PERSON EXAMPLE
+//PERSON EXAMPLE
 //  const person = {
 //   lat: 40 + 0.7,
 //   lng: 30 + 0.1,
@@ -44,13 +44,14 @@ export default function HomePage({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [display, setDisplay] = useState(false);
-  const { setSelectedKeys, isPhone, height, setTravel } = useContext(GlobalContext);
+  const { setSelectedKeys, isPhone, height, setTravel } =
+    useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
   const user = useAuthUser();
 
   useEffect(() => {
     let timeoutId;
-console.log("pppp",isPersonSearching);
+    console.log("pppp", isPersonSearching);
     if (isPersonSearching) {
       timeoutId = setTimeout(() => {
         setPerson({
@@ -61,6 +62,7 @@ console.log("pppp",isPersonSearching);
             lng: 30,
           },
         });
+        setIsLocationClicked(true);
         setIsPersonSearching(false);
       }, 2000);
     }
@@ -72,7 +74,6 @@ console.log("pppp",isPersonSearching);
       }
     };
   }, [isPersonSearching]);
-
 
   useEffect(() => {
     setSelectedKeys(["1"]);
@@ -197,50 +198,72 @@ console.log("pppp",isPersonSearching);
                         <Card
                           style={{
                             boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
-                            transform: person && !isPersonApproved
-                              ? `translateY(-187px)`
-                              : ``,
+                            transform:
+                              person && !isPersonApproved
+                                ? `translateY(-185px)`
+                                : ``,
                             transition: "transform 0.3s ease-in-out",
                             transformOrigin: "top",
-                            top: `${height - 137}px`,
+                            top: `${height - 134}px`,
+                            border: "none",
+                            backgroundColor: "#efefff",
                           }}
                           className={"location-inputs-card-phone "}
                           title={
-                            person?
-                            isPersonApproved?
-                            "İyi Yolculuklar!"
-                            :
-                            "Yolcu Bulundu!"
-                            :
-                            !isPersonSearching ? (
-                              <Button
-                              onClick={()=>{setIsPersonSearching(true)}}
-                                type="primary"
-                                size="large"
-                                style={{ width: "40%", borderRadius: "25px" }}
-                              >
-                                Yolcu Ara
-                              </Button>
-                            ) : (
-                              <Button
-                              onClick={()=>{setIsPersonSearching(false)}}
-                              danger
-                                type="primary"
-                                size="large"
-                                style={{ width: "40%", borderRadius: "25px" }}
-                              
-                              > <LoadingOutlined></LoadingOutlined> İptal et</Button>
-                            )
+                            <div
+                              style={{
+                                backgroundColor: "#00007f",
+                                color: "#efefff",
+                              }}
+                            >
+                              {person ? (
+                                isPersonApproved ? (
+                                  "İyi Yolculuklar!"
+                                ) : (
+                                  "Yolcu Bulundu!"
+                                )
+                              ) : !isPersonSearching ? (
+                                <Button
+                                  onClick={() => {
+                                    setIsPersonSearching(true);
+                                  }}
+                                  type="primary"
+                                  size="large"
+                                  style={{ width: "40%", borderRadius: "25px" }}
+                                >
+                                  Yolcu Ara
+                                </Button>
+                              ) : (
+                                <Button
+                                  onClick={() => {
+                                    setIsPersonSearching(false);
+                                  }}
+                                  danger
+                                  type="primary"
+                                  size="large"
+                                  style={{ width: "40%", borderRadius: "25px" }}
+                                >
+                                  {" "}
+                                  <LoadingOutlined></LoadingOutlined> İptal et
+                                </Button>
+                              )}
+                            </div>
                           }
                         >
-                          <div style={{ padding: "24px" }}>
+                          <div
+                            className={
+                              display
+                                ? "ant-card-body clicked"
+                                : "ant-card-body"
+                            }
+                            style={{ padding: "24px", color: "#000000" }}
+                          >
                             <Row>
                               <Col span={24}>
                                 <p
                                   style={{
                                     margin: 0,
                                     fontSize: "16px",
-                                    color: "#555",
                                   }}
                                 >
                                   <strong>Toplam Mesafe:</strong>{" "}
@@ -252,7 +275,6 @@ console.log("pppp",isPersonSearching);
                                   style={{
                                     margin: 0,
                                     fontSize: "16px",
-                                    color: "#555",
                                   }}
                                 >
                                   <strong>Ücret:</strong>{" "}
@@ -270,7 +292,7 @@ console.log("pppp",isPersonSearching);
                                     width: "100%",
                                     borderRadius: "25px",
                                   }}
-                                  onClick={()=>{
+                                  onClick={() => {
                                     setIsPersonApproved(true);
                                     setTravel({
                                       name: "Yavuzhan Albayrak",
@@ -286,8 +308,9 @@ console.log("pppp",isPersonSearching);
                                       destination,
                                       distance,
                                       source,
-                                      price: parseInt(distance.match(/\d+/)[0])*10,
-                                      currency: "TRY"
+                                      price:
+                                        parseInt(distance.match(/\d+/)[0]) * 10,
+                                      currency: "TRY",
                                     });
                                   }}
                                 >
@@ -302,11 +325,13 @@ console.log("pppp",isPersonSearching);
                                     width: "100%",
                                     borderRadius: "25px",
                                   }}
-                                  onClick={()=>{
+                                  onClick={() => {
                                     setPerson("");
                                     setDestination("");
                                     setSource("");
                                     setIsPersonSearching(true);
+                                    setIsLocationClicked(false);
+                                    setIsLocationClicked(false);
                                   }}
                                 >
                                   Reddet
