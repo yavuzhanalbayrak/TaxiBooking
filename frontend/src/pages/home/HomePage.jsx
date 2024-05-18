@@ -141,7 +141,9 @@ export default function HomePage({
                               : ``,
                             transition: "transform 0.3s ease-in-out",
                             transformOrigin: "top",
-                            top: `${height - 137}px`,
+                            top: `${height - 134}px`,
+                            border: "none",
+                            backgroundColor: "#efefff",
                           }}
                           className={"location-inputs-card-phone "}
                           title={
@@ -149,6 +151,7 @@ export default function HomePage({
                               onClick={() =>
                                 setIsLocationClicked((Prevstate) => !Prevstate)
                               }
+                              style={{backgroundColor: "#00007f", color:"#efefff"}}
                             >
                               Varış Noktası Seçiniz{" "}
                               <span style={{ marginLeft: "5px" }}>
