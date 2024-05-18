@@ -148,7 +148,7 @@ export default function HomePage({
                                   );
                               }}
                               style={{
-                                backgroundColor: "#00007f",
+                                backgroundColor: "#00305f",
                                 color: "#efefff",
                               }}
                             >
@@ -218,7 +218,7 @@ export default function HomePage({
                           title={
                             <div
                               style={{
-                                backgroundColor: "#00007f",
+                                backgroundColor: "#00305f",
                                 color: "#efefff",
                               }}
                             >
@@ -385,7 +385,7 @@ export default function HomePage({
                       title={
                         <div
                           style={{
-                            backgroundColor: "#00007f",
+                            backgroundColor: "#00305f",
                             color: "#efefff",
                           }}
                         >

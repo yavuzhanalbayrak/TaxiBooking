@@ -108,7 +108,7 @@ const App = ({ children, link, icon }) => {
         <Header
           className="navbar"
           style={{
-            backgroundColor: "#00007f",
+            backgroundColor: "#00305f",
             boxShadow:
               isPhone &&
               selectedKeys == 1 &&
@@ -126,7 +126,7 @@ const App = ({ children, link, icon }) => {
                   flex: 1,
                   minWidth: 0,
                   borderColor: "#0000002f",
-                  backgroundColor: "#00007f",
+                  backgroundColor: "#00305f",
                 }}
               />
             </Col>
