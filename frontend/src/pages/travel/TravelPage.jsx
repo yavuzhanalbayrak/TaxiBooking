@@ -22,7 +22,7 @@ import Field from "../../components/field/Field";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useTranslation } from "react-i18next";
 
-export default function TravelPage({ locationName }) {
+export default function TravelPage({ locationName, setPerson, setSource, setDestination, setIsPersonApproved }) {
   const { setSelectedKeys, isPhone, height, travel, setTravel } =
     React.useContext(GlobalContext);
 
@@ -636,7 +636,11 @@ export default function TravelPage({ locationName }) {
         description={""}
         onOkModal={() => {
           setTravel(false);
+          setPerson(null);
           navigate("/");
+          setSource("");
+          setDestination("");
+          setIsPersonApproved(false);
         }}
         isModalOpen={open}
         setIsModalOpen={setOpen}

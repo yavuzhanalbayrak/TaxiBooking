@@ -119,7 +119,7 @@ function App() {
                   path="/travel"
                   element={
                     <Layout link="travel">
-                      <TravelPage locationName={locationName} />
+                      <TravelPage locationName={locationName} setPerson={setPerson} setSource={setSource} setDestination={setDestination} setIsPersonApproved={setIsPersonApproved} />
                     </Layout>
                   }
                 />
