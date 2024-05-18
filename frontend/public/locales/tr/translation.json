@@ -33,7 +33,8 @@
     "passenger": "Passenger",
     "driver": "Driver",
     "passengerfound": "Yolcu bulundu!",
-    "haveagjourney":"İyi yolculuklar"
+    "haveagjourney":"İyi yolculuklar",
+    "maploading": "Harita yükleniyor..."
 
   }
 }

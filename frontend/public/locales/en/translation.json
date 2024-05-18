@@ -33,6 +33,7 @@
     "passenger": "Passenger",
     "driver": "Driver",
     "passengerfound": "Passenger found!",
-    "haveagjourney": "Have a good joourney!"
+    "haveagjourney": "Have a good joourney!",
+    "maploading":"Map loading..."
   }
 }

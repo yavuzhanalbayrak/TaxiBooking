@@ -488,7 +488,7 @@ export default function HomePage({
                                 });
                               }}
                             >
-                              Kabul et
+                              {t("homepage.approve")}
                             </Button>
                           </Col>
                           <Col span={24}>
@@ -508,7 +508,7 @@ export default function HomePage({
                                 setIsLocationClicked(false);
                               }}
                             >
-                              Reddet
+                              {t("homepage.reject")}
                             </Button>
                           </Col>
                         </Row>
@@ -519,7 +519,7 @@ export default function HomePage({
               </Col>
               <Col span={24} xs={24} sm={24} md={14} lg={14} xl={16} xxl={17}>
                 <div className="map">
-                  <Card title="Harita" bordered={false}>
+                  <Card title={t("layout.map")} bordered={false}>
                     <Map
                       source={source}
                       destination={destination}
@@ -551,7 +551,7 @@ export default function HomePage({
             alignContent: "center",
           }}
         >
-          <p>Harita Yükleniyor</p> <LoadingOutlined></LoadingOutlined>
+          <p>{t("homepage.maploading")}</p> <LoadingOutlined></LoadingOutlined>
         </div>
       )}
 
