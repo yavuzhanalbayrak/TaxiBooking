@@ -206,7 +206,7 @@ export default function HomePage({
                             boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
                             transform:
                               person && !isPersonApproved
-                                ? `translateY(-185px)`
+                                ? `translateY(-159px)`
                                 : ``,
                             transition: "transform 0.3s ease-in-out",
                             transformOrigin: "top",
@@ -290,14 +290,15 @@ export default function HomePage({
                                 </p>
                               </Col>
                             </Row>
-                            <Row style={{ marginTop: "20px" }} gutter={[0, 5]}>
-                              <Col span={24}>
+                            <Row style={{ marginTop: "20px" }} gutter={[10, 5]}>
+                              <Col span={12}>
                                 <Button
                                   type="primary"
                                   style={{
                                     width: "100%",
                                     borderRadius: "25px",
                                   }}
+                                  size="large"
                                   onClick={() => {
                                     setIsPersonApproved(true);
                                     setTravel({
@@ -323,7 +324,7 @@ export default function HomePage({
                                   Kabul et
                                 </Button>
                               </Col>
-                              <Col span={24}>
+                              <Col span={12}>
                                 <Button
                                   danger
                                   type="primary"
@@ -331,6 +332,7 @@ export default function HomePage({
                                     width: "100%",
                                     borderRadius: "25px",
                                   }}
+                                  size="large"
                                   onClick={() => {
                                     setPerson("");
                                     setDestination("");
