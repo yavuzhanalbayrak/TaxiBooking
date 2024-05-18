@@ -36,5 +36,20 @@
     "passengerfound": "Passenger found!",
     "haveagjourney": "Have a good joourney!",
     "maploading":"Map loading..."
+  },
+  "travelpage": {
+    "currenttravel": "Current Travel",
+    "prevtravels": "Previous Travels",
+    "details": "Details",
+    "price": "Price:",
+    "completed":"Completed",
+    "travelinfo": "Travel Informations",
+    "status": "Status",
+    "source": "Start Point",
+    "dest": "Destination",
+    "distance": "Distance",
+    "date": "Date",
+    "passinfo": "Passenger Informations",
+    "back":"Back"
   }
 }

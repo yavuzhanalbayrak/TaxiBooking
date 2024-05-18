@@ -1,6 +1,7 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
 import { CheckOutlined, RightOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 import "./travelStyle.scss";
 
 const historyDetails = {
@@ -24,6 +25,7 @@ const historyDetails = {
 };
 
 export default function PreviousTravelCard(props) {
+  const { t } = useTranslation();
   const [formattedPaymentRate, setFormattedPaymentRate] = React.useState(() => {
     const currency = props.currencyList.find(
       (item) => item.value === historyDetails.currency
@@ -52,7 +54,7 @@ export default function PreviousTravelCard(props) {
             <Row style={{ width: "100%" }}>
               <Col className="prev-travel-price" span={12}>
                 <Row gutter={5}>
-                  <Col>Fiyat:</Col>
+                  <Col>{t("travelpage.price")}</Col>
                   <Col style={{color:"#f17624"}}>{formattedPaymentRate}</Col>
                 </Row>
               </Col>
@@ -67,7 +69,7 @@ export default function PreviousTravelCard(props) {
                 span={12}
                 style={{ textAlign: "end" }}
               >
-                Detaylar <RightOutlined />
+                {t("travelpage.details")} <RightOutlined />
               </Col>
             </Row>
           </div>

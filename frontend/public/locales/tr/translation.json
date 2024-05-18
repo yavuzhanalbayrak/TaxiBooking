@@ -37,5 +37,20 @@
     "haveagjourney":"İyi yolculuklar",
     "maploading": "Harita yükleniyor..."
 
+  },
+  "travelpage": {
+    "currenttravel": "Aktif Yolculuk",
+    "prevtravels": "Geçmiş Yolculuklar",
+    "details": "Detaylar",
+    "price": "Ücret:",
+    "completed":"Tamamlandı",
+    "travelinfo": "Yolculuk Bilgileri",
+    "status": "Durum",
+    "source": "Başlangıç Noktası",
+    "dest": "Varış Noktası",
+    "distance": "Mesafe",
+    "date": "Tarih",
+    "passinfo": "Yolcu Bilgileri",
+    "back":"Geri Dön"
   }
 }

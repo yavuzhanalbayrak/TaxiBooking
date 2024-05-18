@@ -1,6 +1,7 @@
 import React from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { Button, Card, Col, Row, Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 import Stripe from "../../api/Stripe";
 import {
   LeftCircleOutlined,
@@ -20,12 +21,16 @@ import { useNavigate } from "react-router-dom";
 import PreviousTravelCard from "../../components/travel/PreviousTravelCard";
 import Field from "../../components/field/Field";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import { useTranslation } from "react-i18next";
 
-export default function TravelPage({ locationName, setPerson, setSource, setDestination, setIsPersonApproved }) {
+export default function TravelPage({
+  locationName,
+  setPerson,
+  setSource,
+  setDestination,
+  setIsPersonApproved,
+}) {
   const { setSelectedKeys, isPhone, height, travel, setTravel } =
     React.useContext(GlobalContext);
-
   const totalStars = 5;
   const filledStars = Math.max(0, Math.min(travel?.rating || 0, totalStars));
   const emptyStars = totalStars - filledStars;
@@ -160,43 +165,43 @@ export default function TravelPage({ locationName, setPerson, setSource, setDest
                       }}
                       style={{ marginBottom: "10px" }}
                     >
-                      <LeftCircleFilled /> Geri Dön
+                      <LeftCircleFilled /> {t("travelpage.back")}
                     </Button>
                     <Col style={{ marginTop: "15px" }} span={24}>
-                      <h2>Yolculuk Bilgileri</h2>
+                      <h2>{t("travelpage.travelinfo")}</h2>
                     </Col>
                     <Field
-                      title={"Durum"}
+                      title={t("travelpage.status")}
                       field={detailInfos.historyDetails.status}
                       type="success"
                     />
                     <Field
-                      title={"Başlangıç Noktası"}
+                      title={t("travelpage.source")}
                       field={travel?.source?.label || "Konumunuz"}
                       titleSpan={8}
                       fieldSpan={16}
                     />
 
                     <Field
-                      title={"Varış Noktası"}
+                      title={t("travelpage.dest")}
                       field={detailInfos.historyDetails.title}
                       titleSpan={8}
                       fieldSpan={16}
                     />
                     <Field
-                      title={"Mesafe"}
+                      title={t("travelpage.distance")}
                       field={detailInfos.historyDetails.distance}
                       titleSpan={8}
                       fieldSpan={16}
                     />
                     <Field
-                      title={"Tarih"}
+                      title={t("travelpage.date")}
                       field={`${detailInfos.historyDetails.date} / ${detailInfos.historyDetails.time}`}
                       titleSpan={8}
                       fieldSpan={16}
                     />
                     <Field
-                      title={"Fiyat"}
+                      title={t("homepage.price")}
                       field={() => {
                         const currency = currencyList.find(
                           (item) =>
@@ -272,7 +277,7 @@ export default function TravelPage({ locationName, setPerson, setSource, setDest
                     ) : (
                       <>
                         <Col style={{ marginTop: "15px" }} span={24}>
-                          <h2>Yolcu Bilgileri</h2>
+                          <h2>{t("travelpage.passinfo")}</h2>
                           <Field
                             title={t("profile.fullname")}
                             field={"Yavuzhan Albayrak"}
@@ -303,7 +308,7 @@ export default function TravelPage({ locationName, setPerson, setSource, setDest
                         }}
                         onClick={() => handleFutureTravel()}
                       >
-                        Aktif Yolculuk
+                        {t("travelpage.currenttravel")}
                       </Button>
                       <Button
                         style={{
@@ -317,7 +322,7 @@ export default function TravelPage({ locationName, setPerson, setSource, setDest
                         onClick={() => handleTravelHistory()}
                       >
                         {" "}
-                        Geçmiş Yolculuklar
+                        {t("travelpage.prevtravels")}
                       </Button>
                     </Col>
                     <Row gutter={[0, 5]}>
@@ -384,7 +389,7 @@ export default function TravelPage({ locationName, setPerson, setSource, setDest
                                           marginTop: "10px",
                                         }}
                                       >
-                                        Geri Dön
+                                        {t("travelpage.back")}
                                       </Button>
                                     </Col>
                                   </Col>
@@ -401,10 +406,10 @@ export default function TravelPage({ locationName, setPerson, setSource, setDest
                                     gutter={[16, 0]}
                                   >
                                     <Col span={24}>
-                                      <h2>Yolculuk Bilgileri</h2>
+                                      <h2>{t("travelpage.travelinfo")}</h2>
                                     </Col>
                                     <Field
-                                      title={"Başlangıç Noktası"}
+                                      title={t("travelpage.source")}
                                       field={
                                         travel?.source?.label || locationName
                                       }

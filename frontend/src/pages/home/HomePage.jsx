@@ -12,6 +12,7 @@ import {
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useTranslation } from "react-i18next";
+
 export default function HomePage({
   setLocationName,
   lat,
