@@ -34,8 +34,8 @@ export default function LoadingModal({
         destination,
         distance,
         source,
-        price: parseInt(distance.match(/\d+/)[0])*10,
-        currency: "TRY"
+        price: parseInt(distance.match(/\d+/)[0]) * 10,
+        currency: "TRY",
       });
       // Start the countdown timer when the component mounts
       const interval = setInterval(() => {
@@ -53,9 +53,12 @@ export default function LoadingModal({
     setCountdown(initialCountdown);
 
     if (isModalOpen) {
-      setTimeout(() => {
+      const interval = setTimeout(() => {
         setIsDriverFound(true);
-      }, 150);
+      }, 1500);
+
+      return () => clearInterval(interval);
+      
     }
   }, [isModalOpen]);
 
@@ -82,7 +85,10 @@ export default function LoadingModal({
 
             <Col span={24}>
               <Button
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setIsDriverFound(false);
+                }}
                 style={{ width: "30%" }}
                 danger
                 type="primary"

@@ -44,7 +44,7 @@ export default function HomePage({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [display, setDisplay] = useState(false);
-  const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
+  const { setSelectedKeys, isPhone, height, setTravel } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
   const user = useAuthUser();
 
@@ -272,6 +272,23 @@ console.log("pppp",isPersonSearching);
                                   }}
                                   onClick={()=>{
                                     setIsPersonApproved(true);
+                                    setTravel({
+                                      name: "Yavuzhan Albayrak",
+                                      surname: "Albayrak",
+                                      email: "yavuzalbayrak@gmail.com",
+                                      phone: "+90 539 202 61 05",
+                                      car: {
+                                        brand: "Honda",
+                                        model: "pcx",
+                                        year: "2021",
+                                      },
+                                      rating: 3,
+                                      destination,
+                                      distance,
+                                      source,
+                                      price: parseInt(distance.match(/\d+/)[0])*10,
+                                      currency: "TRY"
+                                    });
                                   }}
                                 >
                                   Kabul et
