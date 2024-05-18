@@ -23,6 +23,9 @@ function App() {
   const [lng, setLng] = React.useState(false);
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+  const [isPersonSearching, setIsPersonSearching] = useState(false);
+  const [isPersonApproved, setIsPersonApproved] = useState(false);
+  const [person, setPerson] = useState(false);
 
   React.useEffect(() => {
     if ("geolocation" in navigator) {
@@ -88,6 +91,12 @@ function App() {
                         setSource={setSource}
                         destination={destination}
                         setDestination={setDestination}
+                        person={person}
+                        setPerson={setPerson}
+                        isPersonSearching={isPersonSearching}
+                        setIsPersonSearching={setIsPersonSearching}
+                        setIsPersonApproved={setIsPersonApproved}
+                        isPersonApproved={isPersonApproved}
                       />
                     </Layout>
                   }

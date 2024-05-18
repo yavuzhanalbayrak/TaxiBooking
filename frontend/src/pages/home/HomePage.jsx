@@ -32,21 +32,25 @@ export default function HomePage({
   setSource,
   destination,
   setDestination,
+  isPersonApproved,
+  setIsPersonApproved,
+  isPersonSearching,
+  setIsPersonSearching,
+  person,
+  setPerson,
 }) {
   const [distance, setDistance] = useState("");
   const [distanceToPerson, setDistanceToPerson] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
-  const [isPersonSearching, setIsPersonSearching] = useState(false);
   const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
-  const [person, setPerson] = useState(false);
   const user = useAuthUser();
 
   useEffect(() => {
     let timeoutId;
-
+console.log("pppp",isPersonSearching);
     if (isPersonSearching) {
       timeoutId = setTimeout(() => {
         setPerson({
@@ -193,7 +197,7 @@ export default function HomePage({
                         <Card
                           style={{
                             boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
-                            transform: person
+                            transform: person && !isPersonApproved
                               ? `translateY(-187px)`
                               : ``,
                             transition: "transform 0.3s ease-in-out",
@@ -203,6 +207,9 @@ export default function HomePage({
                           className={"location-inputs-card-phone "}
                           title={
                             person?
+                            isPersonApproved?
+                            "İyi Yolculuklar!"
+                            :
                             "Yolcu Bulundu!"
                             :
                             !isPersonSearching ? (
@@ -264,7 +271,7 @@ export default function HomePage({
                                     borderRadius: "25px",
                                   }}
                                   onClick={()=>{
-                                    
+                                    setIsPersonApproved(true);
                                   }}
                                 >
                                   Kabul et

@@ -6,14 +6,14 @@ const GlobalProvider = ({ children }) => {
   const [selectedKeys, setSelectedKeyss] = useState("");
   const [isPhone, setIsPhonee] = useState(window.innerWidth <= 768);
   const [height, setHeightt] = useState(window.innerHeight);
-  const [driver, setDriverr] = useState(null);
+  const [travel, setTravell] = useState(null);
 
   const setSelectedKeys = async (response) => {
     setSelectedKeyss(response);
   };
 
-  const setDriver = async (response) => {
-    setDriverr(response);
+  const setTravel = async (response) => {
+    setTravell(response);
   };
 
   const setHeight = async (response) => {
@@ -31,8 +31,8 @@ const GlobalProvider = ({ children }) => {
     setIsPhone,
     height,
     setHeight,
-    driver,
-    setDriver,
+    travel,
+    setTravel,
   };
 
   return (

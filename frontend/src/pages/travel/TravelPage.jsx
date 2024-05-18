@@ -20,11 +20,11 @@ import PreviousTravelCard from "../../components/travel/PreviousTravelCard";
 import Field from "../../components/field/Field";
 
 export default function TravelPage({locationName}) {
-  const { setSelectedKeys, isPhone, height, driver, setDriver } =
+  const { setSelectedKeys, isPhone, height, travel, setTravel } =
     React.useContext(GlobalContext);
 
   const totalStars = 5;
-  const filledStars = Math.max(0, Math.min(driver?.rating || 0, totalStars));
+  const filledStars = Math.max(0, Math.min(travel?.rating || 0, totalStars));
   const emptyStars = totalStars - filledStars;
   const [isTravelFinished, setIsTravelFinished] = React.useState(false);
   const [showDetails, setShowDetails] = React.useState(false);
@@ -39,7 +39,7 @@ export default function TravelPage({locationName}) {
   );
   const [futureTravel, setFutureTravel] = React.useState(false);
   const [travelHistory, setTravelHistory] = React.useState(true);
-  const { name, surname, email, phone, car } = driver || {};
+  const { name, surname, email, phone, car } = travel || {};
 
   const handleFutureTravel = () => {
     setFutureTravel(true);
@@ -53,7 +53,7 @@ export default function TravelPage({locationName}) {
 
   React.useEffect(() => {
     setSelectedKeys(["2"]);
-    if (driver) {
+    if (travel) {
       handleFutureTravel();
     }
   }, []);
@@ -166,7 +166,7 @@ export default function TravelPage({locationName}) {
                     />
                     <Field
                       title={"Başlangıç Noktası"}
-                      field={driver?.source?.label || "Konumunuz"}
+                      field={travel?.source?.label || "Konumunuz"}
                       
                       titleSpan={8}
                       fieldSpan={16}
@@ -283,7 +283,7 @@ export default function TravelPage({locationName}) {
                     <Row gutter={[0, 5]}>
                       {futureTravel ? (
                         <>
-                          {driver ? (
+                          {travel ? (
                             <>
                               {isTravelFinished ? (
                                 <Row style={{ width: "100%" }} gutter={[0, 0]}>
@@ -366,30 +366,30 @@ export default function TravelPage({locationName}) {
                                     <Field
                                       title={"Başlangıç Noktası"}
                                       field={
-                                        driver?.source?.label || locationName
+                                        travel?.source?.label || locationName
                                       }
                                       titleSpan={8}
                                       fieldSpan={16}
                                     />
                                     <Field
                                       title={"Varış Noktası"}
-                                      field={driver.destination.label}
+                                      field={travel.destination.label}
                                       titleSpan={8}
                                       fieldSpan={16}
                                     />
                                     <Field
                                       title={"Mesafe"}
-                                      field={driver.distance}
+                                      field={travel.distance}
                                     />
                                     <Field
                                       title={"Fiyat"}
                                       field={() =>{
                                         const currency = currencyList.find(
-                                          (item) => item.value === driver.currency
+                                          (item) => item.value === travel.currency
                                         );
                                         const formattedPaymentRate = `${
                                           currency.prefix
-                                        } ${driver.price.toLocaleString(undefined, {
+                                        } ${travel.price.toLocaleString(undefined, {
                                           minimumFractionDigits: currency.decimalDigits,
                                           maximumFractionDigits: currency.decimalDigits,
                                         })}`;
@@ -401,13 +401,13 @@ export default function TravelPage({locationName}) {
                                     </Col>
                                     <Field
                                       title={"Adı"}
-                                      field={driver.name}
+                                      field={travel.name}
                                       titleSpan={8}
                                       fieldSpan={16}
                                     />
                                     <Field
                                       title={"Telefon Numarası"}
-                                      field={driver.phone}
+                                      field={travel.phone}
                                       fieldSpan={12}
                                       titleSpan={12}
                                     />
@@ -519,7 +519,7 @@ export default function TravelPage({locationName}) {
                                   setDetailInfos={setDetailInfos}
                                   setShowDetails={setShowDetails}
                                   travelHistory={travelHistory}
-                                  driverHistory={driver}
+                                  driverHistory={travel}
                                 />
                               </div>
                             );
@@ -538,7 +538,7 @@ export default function TravelPage({locationName}) {
         title={"Yolculuğu sonlandırmak istediğinize emin misiniz?"}
         description={""}
         onOkModal={() => {
-          setDriver(false);
+          setTravel(false);
           navigate("/");
         }}
         isModalOpen={open}

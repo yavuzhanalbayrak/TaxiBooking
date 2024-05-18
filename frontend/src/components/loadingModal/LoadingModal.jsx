@@ -14,13 +14,13 @@ export default function LoadingModal({
   source,
 }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
-  const { driver, setDriver, height } = React.useContext(GlobalContext);
+  const { travel, setTravel, height } = React.useContext(GlobalContext);
   const [countdown, setCountdown] = useState(initialCountdown);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isDriverFound) {
-      setDriver({
+      setTravel({
         name: "Yavuzhan Albayrak",
         surname: "Albayrak",
         email: "yavuzalbayrak@gmail.com",

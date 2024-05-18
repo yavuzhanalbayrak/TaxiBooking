@@ -7,8 +7,8 @@ const GlobalContext = createContext({
   setIsPhone: () => {},
   height: {},
   setHeight: () => {},
-  driver: {},
-  setDriver: () => {},
+  travel: {},
+  setTravel: () => {},
 });
 
 export default GlobalContext;

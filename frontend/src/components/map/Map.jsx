@@ -363,7 +363,7 @@ function Map({
           ></DirectionsRenderer>
         )}
 
-        {source.length != [] && user.role == "driver" && person && (
+        {source.length != [] && user.role == "driver" &&  (
           <DirectionsRenderer
             directions={personDirectionRoutePoints}
             options={{
