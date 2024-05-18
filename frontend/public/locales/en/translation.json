@@ -10,7 +10,11 @@
     "editProfile": "Edit Profile",
     "save": "Save",
     "edit": "Edit Profile",
-    "language": "Language"
+    "language": "Language",
+    "placeholder": {
+      "name":"Enter full name",
+      "email":"Enter email address"
+    }
   },
   "layout":{
     "map":"Map",

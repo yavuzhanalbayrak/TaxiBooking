@@ -10,7 +10,11 @@
     "editProfile": "Profili Düzenle",
     "save": "Kaydet",
     "edit": "Profili Düzenle",
-    "language": "Dil"
+    "language": "Dil",
+    "placeholder": {
+      "name":"İsim giriniz",
+      "email":"E-Posta giriniz"
+    }
   },
   "layout":{
     "map":"Harita",

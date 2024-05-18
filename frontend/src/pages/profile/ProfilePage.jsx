@@ -34,9 +34,9 @@ export default function ProfilePage() {
   });
 
   const fields = [
-    { title: t("profile.fullname"), field: userInfo.name, value: "name" },
+    { title: t("profile.fullname"), field: userInfo.name, value: "name", placeholder:t("profile.placeholder.name") },
     { title: t("profile.number"), field: userInfo.phone, value: "phone" },
-    { title: t("profile.email"), field: userInfo.email, value: "email" },
+    { title: t("profile.email"), field: userInfo.email, value: "email", placeholder:t("profile.placeholder.email") },
     {
       title: t("profile.address"),
       field: userInfo.address?.label,
@@ -163,7 +163,7 @@ export default function ProfilePage() {
                         toast.success(t("profile.saved"));
                       }}
                     >
-                      Save
+                      {t("profile.save")}
                     </Button>
                   </Col>
                 </Row>
@@ -181,6 +181,7 @@ export default function ProfilePage() {
                       fieldValue={fieldValue}
                       onFieldChange={setFieldValue}
                       value={fieldConfig.value}
+                      placeholder={fieldConfig.placeholder}
                     />
                   ))}
                   <Field

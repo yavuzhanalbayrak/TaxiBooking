@@ -84,6 +84,7 @@ export default function Field(props) {
               ) : (
                 <Input
                   value={props.fieldValue?.[props.value]}
+                  placeholder={props.placeholder}
                   onChange={(e) =>
                     props.onFieldChange((prevstate) => ({
                       ...prevstate,
