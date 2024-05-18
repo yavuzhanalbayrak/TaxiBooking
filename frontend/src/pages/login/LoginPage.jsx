@@ -46,7 +46,7 @@ function Login() {
               name: "Dandun Mesut",
               phone: "+90 539 202 61 05",
               email: "dandun@gmail.com",
-              address: "Samsun/Atakum",
+              address: {label:"Samsun/Atakum"},
               role:"driver"
             },
           })

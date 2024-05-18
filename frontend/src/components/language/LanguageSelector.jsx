@@ -24,7 +24,7 @@ const LanguageSelector = () => {
     <div className="select-container">
       <Select
         defaultValue={t("profile.language")}
-        style={{ width: 120 }}
+        style={{ width: 120, textAlign: "start" }}
         onChange={changeLanguage}
       >
         {languages.map(lng => (

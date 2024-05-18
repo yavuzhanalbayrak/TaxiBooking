@@ -23,29 +23,35 @@ export default function ProfilePage() {
   const [edit, setEdit] = React.useState(false);
   const [profilePhotoSelect, setProfilePhotoSelect] = React.useState(false);
   const user = useAuthUser();
+  const [userInfo, setUserInfo] = React.useState(user);
   const fileInputRef = useRef(null);
 
   const [fieldValue, setFieldValue] = React.useState({
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
-    address: user.address,
+    name: userInfo.name,
+    email: userInfo.email,
+    phone: userInfo.phone,
+    address: userInfo.address,
   });
 
   const fields = [
-    { title: t("profile.fullname"), field: user.name, value: "name" },
-    { title: t("profile.number"), field: user.phone, value: "phone" },
-    { title: t("profile.email"), field: user.email, value: "email" },
-    { title: t("profile.address"), field: user.address, value: "address" },
+    { title: t("profile.fullname"), field: userInfo.name, value: "name" },
+    { title: t("profile.number"), field: userInfo.phone, value: "phone" },
+    { title: t("profile.email"), field: userInfo.email, value: "email" },
+    {
+      title: t("profile.address"),
+      field: userInfo.address?.label,
+      value: "address",
+    },
   ];
 
   useEffect(() => {
     setSelectedKeys(0);
   }, []);
 
+  //AXIOS PUT & GET
   useEffect(() => {
-    console.log("field", fieldValue);
-  }, [fieldValue]);
+    console.log("userInfo:", userInfo);
+  }, [userInfo]);
 
   const handleImageClick = () => {
     if (fileInputRef.current) {
@@ -152,6 +158,7 @@ export default function ProfilePage() {
                     <Button
                       type="primary"
                       onClick={() => {
+                        setUserInfo(fieldValue);
                         setEdit(false);
                         toast.success(t("profile.saved"));
                       }}
