@@ -1,17 +1,21 @@
 {
   "profile": {
-    "personalinformation": "Personal Information",
-    "name": "Full Name",
-    "surname": "Surname",
+    "personalinformation": "User Information",
+    "fullname": "Full Name",
+    "number": "Phone Number",
     "email": "Email",
-    "phone": "Phone",
-    "contactSelection": "Contact Selection",
+    "address": "Address",
     "city": "City",
-    "country": "Country",
     "languageOption": "Language Option",
     "editProfile": "Edit Profile",
     "save": "Save",
     "edit": "Edit Profile",
     "language": "Language"
-  }  
+  },
+  "layout":{
+    "map":"Map",
+    "travel": "Travel",
+    "profile": "Profile",
+    "logout": "Log out"
+  }
 }

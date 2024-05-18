@@ -1,17 +1,21 @@
 {
   "profile": {
-    "personalinformation": "Kişisel Bilgiler",
-    "name": "Adı Soyadı",
-    "surname": "Soyad",
-    "email": "E-posta",
-    "phone": "Telefon",
-    "contactSelection": "İletişim Seçimi",
+    "personalinformation": "Kullanıcı Bilgileri",
+    "fullname": "Adı Soyadı",
+    "number": "Telefon Numarası",
+    "email": "E-Posta",
+    "address": "Adres",
     "city": "Şehir",
-    "country": "Ülke",
     "languageOption": "Dil Seçeneği",
     "editProfile": "Profili Düzenle",
     "save": "Kaydet",
     "edit": "Profili Düzenle",
     "language": "Dil"
+  },
+  "layout":{
+    "map":"Harita",
+    "travel": "Yolculuk",
+    "profile": "Profil",
+    "logout": "Çıkış Yap"
   }
 }

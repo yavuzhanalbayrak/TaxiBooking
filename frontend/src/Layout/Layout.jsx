@@ -17,6 +17,7 @@ import useSignOut from "react-auth-kit/hooks/useSignOut";
 import GlobalContext from "../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { useTranslation } from "react-i18next";
 
 const { Header, Content, Footer } = Layout;
 
@@ -25,8 +26,8 @@ const App = ({ children, link, icon }) => {
   const { selectedKeys, isPhone, setIsPhone, height, setHeight } =
     React.useContext(GlobalContext);
   const auth = useAuthUser();
+  const { t } = useTranslation();
 
-  console.log(auth.name.substring(0, 2).toUpperCase());
 
   React.useEffect(() => {
     function handleResize() {
@@ -51,7 +52,7 @@ const App = ({ children, link, icon }) => {
       label: (
         <Link to="/profile">
           <UserOutlined style={{ fontSize: "15px" }} />
-          <span style={{ marginLeft: "3px" }}>Profil</span>
+          <span style={{ marginLeft: "3px" }}>{t("layout.profile")}</span>
         </Link>
       ),
     },
@@ -71,7 +72,7 @@ const App = ({ children, link, icon }) => {
             <Col style={{ paddingTop: "4px" }}>
               <LogoutOutlinedIcon style={{ fontSize: "16px" }} />
             </Col>
-            <Col style={{ marginLeft: "3px" }}>Çıkış Yap</Col>
+            <Col style={{ marginLeft: "3px" }}> {t("layout.logout")} </Col>
           </Row>
         </Link>
       ),
@@ -81,11 +82,15 @@ const App = ({ children, link, icon }) => {
   const items = [
     {
       key: "1",
-      label: <Link to="/">Harita</Link>,
+      label: <Link to="/">
+        {t("layout.map")}
+      </Link>,
     },
     {
       key: "2",
-      label: <Link to="/Travel">Yolculuk</Link>,
+      label: <Link to="/Travel">
+        {t("layout.travel")}
+      </Link>,
     },
   ];
 
@@ -171,6 +176,8 @@ const App = ({ children, link, icon }) => {
             style={{
               textAlign: "center",
               zIndex: "200",
+              backgroundColor: "#00007f",
+              color:"#ffffff"
             }}
           >
             Taxi Booking ©{new Date().getFullYear()}

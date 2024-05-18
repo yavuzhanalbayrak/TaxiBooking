@@ -38,16 +38,16 @@ export default function ProfilePage() {
             </Col>
             <Col span={24}>
               <Col className="profile-title" span={24}>
-                Kullanıcı Bilgileri
+                {t("profile.personalinformation")}
               </Col>
 
               <Col className="user-info driver-infos">
                 <Row>
-                  <Field title={t("profile.name")} field={user.name + " " + user.surname} titleSpan={8} fieldSpan={16}></Field>
-                  <Field title={"Telefon Numarası"} field={user.phone} titleSpan={12} fieldSpan={12}></Field>
-                  <Field title={"E-Posta"} field={user.email} titleSpan={12} fieldSpan={12}></Field>
-                  <Field title={"Adres"} field={user.address}></Field>
-                  <Field title={"Dil"} field={<LanguageSelector />}></Field>
+                  <Field title={t("profile.fullname")} field={user.name + " " + user.surname} titleSpan={8} fieldSpan={16}></Field>
+                  <Field title={t("profile.number")} field={user.phone} titleSpan={12} fieldSpan={12}></Field>
+                  <Field title={t("profile.email")} field={user.email} titleSpan={12} fieldSpan={12}></Field>
+                  <Field title={t("profile.address")} field={user.address}></Field>
+                  <Field title={t("profile.languageOption")} field={<LanguageSelector />}></Field>
                 </Row>
               </Col>
             </Col>
