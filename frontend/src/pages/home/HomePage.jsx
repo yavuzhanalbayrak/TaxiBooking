@@ -38,12 +38,14 @@ export default function HomePage({
   setIsPersonSearching,
   person,
   setPerson,
+  display,
+  setDisplay,
+  isLocationClicked,
+  setIsLocationClicked,
 }) {
   const [distance, setDistance] = useState("");
   const [distanceToPerson, setDistanceToPerson] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLocationClicked, setIsLocationClicked] = useState(false);
-  const [display, setDisplay] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel } =
     useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
@@ -151,7 +153,10 @@ export default function HomePage({
                               onClick={() =>
                                 setIsLocationClicked((Prevstate) => !Prevstate)
                               }
-                              style={{backgroundColor: "#00007f", color:"#efefff"}}
+                              style={{
+                                backgroundColor: "#00007f",
+                                color: "#efefff",
+                              }}
                             >
                               Varış Noktası Seçiniz{" "}
                               <span style={{ marginLeft: "5px" }}>
