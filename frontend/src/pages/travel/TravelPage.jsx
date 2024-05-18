@@ -214,45 +214,45 @@ export default function TravelPage({ locationName }) {
                         return <p>{formattedPaymentRate}</p>;
                       }}
                     />
-                    
-                    {user.role == "user" ?
+
+                    {user.role == "user" ? (
                       <>
-                    <Col span={24}></Col>
-                    <Col style={{ marginTop: "15px" }} span={24}>
-                      <h2>Sürücü Bilgileri</h2>
-                    </Col>
-                    <Field
-                      title={"Adı"}
-                      field={detailInfos.historyDetails.name}
-                      titleSpan={8}
-                      fieldSpan={16}
-                    />
-                    <Field
-                      title={"Telefon Numarası"}
-                      field={detailInfos.historyDetails.phone}
-                      titleSpan={12}
-                      fieldSpan={12}
-                    />
-                    <Field
-                      title={"Puan"}
-                      field={
-                        <>
-                          {[...Array(detailInfos.historyDetails.rating)].map(
-                            (_, index) => (
-                              <StarFilled
-                                style={{ color: "#ffc800" }}
-                                key={index}
-                              />
-                            )
-                          )}
-                          {[
-                            ...Array(5 - detailInfos.historyDetails.rating),
-                          ].map((_, index) => (
-                            <StarOutlined key={index} />
-                          ))}
-                        </>
-                      }
-                    />
+                        <Col span={24}></Col>
+                        <Col style={{ marginTop: "15px" }} span={24}>
+                          <h2>Sürücü Bilgileri</h2>
+                        </Col>
+                        <Field
+                          title={"Adı"}
+                          field={detailInfos.historyDetails.name}
+                          titleSpan={8}
+                          fieldSpan={16}
+                        />
+                        <Field
+                          title={"Telefon Numarası"}
+                          field={detailInfos.historyDetails.phone}
+                          titleSpan={12}
+                          fieldSpan={12}
+                        />
+                        <Field
+                          title={"Puan"}
+                          field={
+                            <>
+                              {[
+                                ...Array(detailInfos.historyDetails.rating),
+                              ].map((_, index) => (
+                                <StarFilled
+                                  style={{ color: "#ffc800" }}
+                                  key={index}
+                                />
+                              ))}
+                              {[
+                                ...Array(5 - detailInfos.historyDetails.rating),
+                              ].map((_, index) => (
+                                <StarOutlined key={index} />
+                              ))}
+                            </>
+                          }
+                        />
                         <Col style={{ marginTop: "15px" }} span={24}>
                           <h2>Araç Bilgileri</h2>
                         </Col>
@@ -269,15 +269,21 @@ export default function TravelPage({ locationName }) {
                           field={detailInfos.historyDetails.car?.year}
                         />
                       </>
-                      :
+                    ) : (
                       <>
-                      <Col style={{ marginTop: "15px" }} span={24}>
-                      <h2>Yolcu Bilgileri</h2>
-                      <Field title={t("profile.fullname")} field={"Yavuzhan Albayrak"}></Field>
-                      <Field title={t("profile.number")} field={"+90 234 213 41 23"}></Field>
-                      </Col>
+                        <Col style={{ marginTop: "15px" }} span={24}>
+                          <h2>Yolcu Bilgileri</h2>
+                          <Field
+                            title={t("profile.fullname")}
+                            field={"Yavuzhan Albayrak"}
+                          ></Field>
+                          <Field
+                            title={t("profile.number")}
+                            field={"+90 234 213 41 23"}
+                          ></Field>
+                        </Col>
                       </>
-                    }
+                    )}
                   </div>
                 ) : (
                   <div>
@@ -440,7 +446,11 @@ export default function TravelPage({ locationName }) {
                                       style={{ marginTop: "15px" }}
                                       span={24}
                                     >
-                                      <h2>Sürücü Bilgileri</h2>
+                                      <h2>
+                                        {user.role == "user"
+                                          ? "Sürücü Bilgileri"
+                                          : "Yolcu Bilgileri"}
+                                      </h2>
                                     </Col>
                                     <Field
                                       title={"Adı"}
@@ -454,37 +464,50 @@ export default function TravelPage({ locationName }) {
                                       fieldSpan={12}
                                       titleSpan={12}
                                     />
-
-                                    <Field
-                                      title={"Puan"}
-                                      field={
-                                        <>
-                                          {[...Array(filledStars)].map(
-                                            (_, index) => (
-                                              <StarFilled
-                                                style={{ color: "#ffc800" }}
-                                                key={index}
-                                              />
-                                            )
-                                          )}
-                                          {[...Array(emptyStars)].map(
-                                            (_, index) => (
-                                              <StarOutlined key={index} />
-                                            )
-                                          )}
-                                        </>
-                                      }
-                                    />
-
-                                    <Col
-                                      style={{ marginTop: "15px" }}
-                                      span={24}
-                                    >
-                                      <h2>Araç Bilgileri</h2>
-                                    </Col>
-                                    <Field title={"Marka"} field={car?.brand} />
-                                    <Field title={"Model"} field={car?.model} />
-                                    <Field title={"Yıl"} field={car?.year} />
+                                    {user.role == "user" && (
+                                      <Field
+                                        title={"Puan"}
+                                        field={
+                                          <>
+                                            {[...Array(filledStars)].map(
+                                              (_, index) => (
+                                                <StarFilled
+                                                  style={{ color: "#ffc800" }}
+                                                  key={index}
+                                                />
+                                              )
+                                            )}
+                                            {[...Array(emptyStars)].map(
+                                              (_, index) => (
+                                                <StarOutlined key={index} />
+                                              )
+                                            )}
+                                          </>
+                                        }
+                                      />
+                                    )}
+                                    {user.role == "user" && (
+                                      <>
+                                        <Col
+                                          style={{ marginTop: "15px" }}
+                                          span={24}
+                                        >
+                                          <h2>Araç Bilgileri</h2>
+                                        </Col>
+                                        <Field
+                                          title={"Marka"}
+                                          field={car?.brand}
+                                        />
+                                        <Field
+                                          title={"Model"}
+                                          field={car?.model}
+                                        />
+                                        <Field
+                                          title={"Yıl"}
+                                          field={car?.year}
+                                        />
+                                      </>
+                                    )}
                                   </Row>
                                   <Row
                                     style={{
@@ -494,21 +517,23 @@ export default function TravelPage({ locationName }) {
                                   >
                                     <Col span={24}>
                                       <Row gutter={[0, 10]}>
-                                        <Col span={24}>
-                                          <Button
-                                            type="primary"
-                                            size="large"
-                                            onClick={() =>
-                                              setIsTravelFinished(true)
-                                            }
-                                            style={{
-                                              width: "100%",
-                                              borderRadius: "25px",
-                                            }}
-                                          >
-                                            Yolculuğu Tamamla
-                                          </Button>
-                                        </Col>
+                                        {user.role == "user" && (
+                                          <Col span={24}>
+                                            <Button
+                                              type="primary"
+                                              size="large"
+                                              onClick={() =>
+                                                setIsTravelFinished(true)
+                                              }
+                                              style={{
+                                                width: "100%",
+                                                borderRadius: "25px",
+                                              }}
+                                            >
+                                              Yolculuğu Tamamla
+                                            </Button>
+                                          </Col>
+                                        )}
                                         <Col span={24}>
                                           <Button
                                             danger

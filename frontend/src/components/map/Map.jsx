@@ -135,8 +135,8 @@ function Map({
           lng: source.lng || lng,
         },
         destination: {
-          lat: destination.lat || lat,
-          lng: destination.lng || lng,
+          lat: destination.lat ,
+          lng: destination.lng ,
         },
         travelMode: google.maps.TravelMode.DRIVING,
       },

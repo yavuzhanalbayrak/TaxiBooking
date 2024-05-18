@@ -44,7 +44,6 @@ export default function HomePage({
 
   useEffect(() => {
     let timeoutId;
-    console.log("pppp", isPersonSearching);
     if (isPersonSearching) {
       timeoutId = setTimeout(() => {
         setPerson({
@@ -53,6 +52,7 @@ export default function HomePage({
           destination: {
             lat: 40 + 0.7,
             lng: 30,
+            label:"Sakarya"
           },
         });
         setIsLocationClicked(true);
