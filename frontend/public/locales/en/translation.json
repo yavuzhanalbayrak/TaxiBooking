@@ -1,0 +1,17 @@
+{
+  "profile": {
+    "personalinformation": "Personal Information",
+    "name": "Full Name",
+    "surname": "Surname",
+    "email": "Email",
+    "phone": "Phone",
+    "contactSelection": "Contact Selection",
+    "city": "City",
+    "country": "Country",
+    "languageOption": "Language Option",
+    "editProfile": "Edit Profile",
+    "save": "Save",
+    "edit": "Edit Profile",
+    "language": "Language"
+  }  
+}

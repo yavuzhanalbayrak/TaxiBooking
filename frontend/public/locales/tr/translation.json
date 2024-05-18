@@ -1,0 +1,17 @@
+{
+  "profile": {
+    "personalinformation": "Kişisel Bilgiler",
+    "name": "Adı Soyadı",
+    "surname": "Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "contactSelection": "İletişim Seçimi",
+    "city": "Şehir",
+    "country": "Ülke",
+    "languageOption": "Dil Seçeneği",
+    "editProfile": "Profili Düzenle",
+    "save": "Kaydet",
+    "edit": "Profili Düzenle",
+    "language": "Dil"
+  }
+}

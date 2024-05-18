@@ -5,9 +5,12 @@ import GlobalContext from "../../context/GlobalContext";
 import "./Profile.scss";
 import Field from "../../components/field/Field";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import LanguageSelector from "../../components/language/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilePage() {
   const { isPhone, height, setSelectedKeys } = React.useContext(GlobalContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSelectedKeys(0);
@@ -40,10 +43,11 @@ export default function ProfilePage() {
 
               <Col className="user-info driver-infos">
                 <Row>
-                  <Field title={"Adı Soyadı"} field={user.name + " " + user.surname} titleSpan={8} fieldSpan={16}></Field>
+                  <Field title={t("profile.name")} field={user.name + " " + user.surname} titleSpan={8} fieldSpan={16}></Field>
                   <Field title={"Telefon Numarası"} field={user.phone} titleSpan={12} fieldSpan={12}></Field>
                   <Field title={"E-Posta"} field={user.email} titleSpan={12} fieldSpan={12}></Field>
                   <Field title={"Adres"} field={user.address}></Field>
+                  <Field title={"Dil"} field={<LanguageSelector />}></Field>
                 </Row>
               </Col>
             </Col>
