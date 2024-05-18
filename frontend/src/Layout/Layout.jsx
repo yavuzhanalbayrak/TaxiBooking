@@ -81,7 +81,7 @@ const App = ({ children, link, icon }) => {
   const items = [
     {
       key: "1",
-      label: <Link to="/">Araç Bul</Link>,
+      label: <Link to="/">Harita</Link>,
     },
     {
       key: "2",

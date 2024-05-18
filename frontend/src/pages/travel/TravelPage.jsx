@@ -11,6 +11,7 @@ import {
   LeftOutlined,
   CaretLeftOutlined,
   LeftCircleFilled,
+  UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/buttons/primaryButton";
@@ -18,8 +19,9 @@ import AreUSureModal from "../../components/AreYouSureModal";
 import { useNavigate } from "react-router-dom";
 import PreviousTravelCard from "../../components/travel/PreviousTravelCard";
 import Field from "../../components/field/Field";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-export default function TravelPage({locationName}) {
+export default function TravelPage({ locationName }) {
   const { setSelectedKeys, isPhone, height, travel, setTravel } =
     React.useContext(GlobalContext);
 
@@ -40,6 +42,7 @@ export default function TravelPage({locationName}) {
   const [futureTravel, setFutureTravel] = React.useState(false);
   const [travelHistory, setTravelHistory] = React.useState(true);
   const { name, surname, email, phone, car } = travel || {};
+  const user = useAuthUser();
 
   const handleFutureTravel = () => {
     setFutureTravel(true);
@@ -156,7 +159,7 @@ export default function TravelPage({locationName}) {
                     >
                       <LeftCircleFilled /> Geri Dön
                     </Button>
-                    <Col style={{marginTop:"15px"}} span={24}>
+                    <Col style={{ marginTop: "15px" }} span={24}>
                       <h2>Yolculuk Bilgileri</h2>
                     </Col>
                     <Field
@@ -167,7 +170,6 @@ export default function TravelPage({locationName}) {
                     <Field
                       title={"Başlangıç Noktası"}
                       field={travel?.source?.label || "Konumunuz"}
-                      
                       titleSpan={8}
                       fieldSpan={16}
                     />
@@ -192,21 +194,25 @@ export default function TravelPage({locationName}) {
                     />
                     <Field
                       title={"Fiyat"}
-                      field={() =>{
+                      field={() => {
                         const currency = currencyList.find(
-                          (item) => item.value === detailInfos.historyDetails.currency
+                          (item) =>
+                            item.value === detailInfos.historyDetails.currency
                         );
                         const formattedPaymentRate = `${
                           currency.prefix
-                        } ${detailInfos.historyDetails.price.toLocaleString(undefined, {
-                          minimumFractionDigits: currency.decimalDigits,
-                          maximumFractionDigits: currency.decimalDigits,
-                        })}`;
-                        return <p>{formattedPaymentRate}</p>}
-                        }
+                        } ${detailInfos.historyDetails.price.toLocaleString(
+                          undefined,
+                          {
+                            minimumFractionDigits: currency.decimalDigits,
+                            maximumFractionDigits: currency.decimalDigits,
+                          }
+                        )}`;
+                        return <p>{formattedPaymentRate}</p>;
+                      }}
                     />
                     <Col span={24}></Col>
-                    <Col style={{marginTop:"15px"}} span={24}>
+                    <Col style={{ marginTop: "15px" }} span={24}>
                       <h2>Sürücü Bilgileri</h2>
                     </Col>
                     <Field
@@ -225,25 +231,38 @@ export default function TravelPage({locationName}) {
                       title={"Puan"}
                       field={
                         <>
-                          {[...Array(detailInfos.historyDetails.rating)].map((_, index) => (
-                            <StarFilled
-                              style={{ color: "#ffc800" }}
-                              key={index}
-                            />
-                          ))}
-                          {[...Array(5-detailInfos.historyDetails.rating)].map((_, index) => (
+                          {[...Array(detailInfos.historyDetails.rating)].map(
+                            (_, index) => (
+                              <StarFilled
+                                style={{ color: "#ffc800" }}
+                                key={index}
+                              />
+                            )
+                          )}
+                          {[
+                            ...Array(5 - detailInfos.historyDetails.rating),
+                          ].map((_, index) => (
                             <StarOutlined key={index} />
                           ))}
                         </>
                       }
                     />
 
-                    <Col style={{marginTop:"15px"}} span={24}>
+                    <Col style={{ marginTop: "15px" }} span={24}>
                       <h2>Araç Bilgileri</h2>
                     </Col>
-                    <Field title={"Marka"} field={detailInfos.historyDetails.car?.brand} />
-                    <Field title={"Model"} field={detailInfos.historyDetails.car?.model} />
-                    <Field title={"Yıl"} field={detailInfos.historyDetails.car?.year} />
+                    <Field
+                      title={"Marka"}
+                      field={detailInfos.historyDetails.car?.brand}
+                    />
+                    <Field
+                      title={"Model"}
+                      field={detailInfos.historyDetails.car?.model}
+                    />
+                    <Field
+                      title={"Yıl"}
+                      field={detailInfos.historyDetails.car?.year}
+                    />
                   </div>
                 ) : (
                   <div>
@@ -383,20 +402,29 @@ export default function TravelPage({locationName}) {
                                     />
                                     <Field
                                       title={"Fiyat"}
-                                      field={() =>{
+                                      field={() => {
                                         const currency = currencyList.find(
-                                          (item) => item.value === travel.currency
+                                          (item) =>
+                                            item.value === travel.currency
                                         );
                                         const formattedPaymentRate = `${
                                           currency.prefix
-                                        } ${travel.price.toLocaleString(undefined, {
-                                          minimumFractionDigits: currency.decimalDigits,
-                                          maximumFractionDigits: currency.decimalDigits,
-                                        })}`;
-                                        return <p>{formattedPaymentRate}</p>}
-                                        }
+                                        } ${travel.price.toLocaleString(
+                                          undefined,
+                                          {
+                                            minimumFractionDigits:
+                                              currency.decimalDigits,
+                                            maximumFractionDigits:
+                                              currency.decimalDigits,
+                                          }
+                                        )}`;
+                                        return <p>{formattedPaymentRate}</p>;
+                                      }}
                                     />
-                                    <Col style={{marginTop:"15px"}} span={24}>
+                                    <Col
+                                      style={{ marginTop: "15px" }}
+                                      span={24}
+                                    >
                                       <h2>Sürücü Bilgileri</h2>
                                     </Col>
                                     <Field
@@ -433,7 +461,10 @@ export default function TravelPage({locationName}) {
                                       }
                                     />
 
-                                    <Col style={{marginTop:"15px"}} span={24}>
+                                    <Col
+                                      style={{ marginTop: "15px" }}
+                                      span={24}
+                                    >
                                       <h2>Araç Bilgileri</h2>
                                     </Col>
                                     <Field title={"Marka"} field={car?.brand} />
@@ -493,18 +524,43 @@ export default function TravelPage({locationName}) {
                                     width: "100%",
                                   }}
                                 >
-                                  <Col style={{ fontSize: "30px" }} span={24}>
-                                    <CarOutlined />
-                                  </Col>
+                                  {user.role === "user"?
+                                    <>
+                                      <Col
+                                        style={{ fontSize: "30px" }}
+                                        span={24}
+                                      >
+                                        <CarOutlined />
+                                      </Col>
 
-                                  <Col span={24}>
-                                    <Link to="/">
-                                      <Button>
-                                        {" "}
-                                        <LeftCircleOutlined /> Araç Bul{" "}
-                                      </Button>
-                                    </Link>
-                                  </Col>
+                                      <Col span={24}>
+                                        <Link to="/">
+                                          <Button>
+                                            {" "}
+                                            <LeftCircleOutlined /> Araç Bul{" "}
+                                          </Button>
+                                        </Link>
+                                      </Col>
+                                    </>
+                                    :
+                                    <>
+                                    <Col
+                                        style={{ fontSize: "30px" }}
+                                        span={24}
+                                      >
+                                        <UserOutlined />
+                                      </Col>
+
+                                      <Col span={24}>
+                                        <Link to="/">
+                                          <Button>
+                                            {" "}
+                                            <LeftCircleOutlined /> Yolcu Bul{" "}
+                                          </Button>
+                                        </Link>
+                                      </Col>
+                                    </>
+                                  }
                                 </Card>
                               </Row>
                             </>
