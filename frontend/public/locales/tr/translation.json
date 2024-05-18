@@ -21,5 +21,19 @@
     "travel": "Yolculuk",
     "profile": "Profil",
     "logout": "Çıkış Yap"
+  },
+  "homepage": {
+    "search": "Yolcu ara",
+    "cancel": "İptal et",
+    "approve": "Onayla",
+    "reject": "Reddet",
+    "distance": "Mesafe",
+    "time": "Tahmini süre",
+    "price": "Ücret",
+    "passenger": "Passenger",
+    "driver": "Driver",
+    "passengerfound": "Yolcu bulundu!",
+    "haveagjourney":"İyi yolculuklar"
+
   }
 }

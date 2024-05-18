@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-
+import { useTranslation } from "react-i18next";
 export default function HomePage({
   setLocationName,
   lat,
@@ -40,6 +40,7 @@ export default function HomePage({
     useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
   const user = useAuthUser();
+  const { t } = useTranslation();
 
   useEffect(() => {
     let timeoutId;
@@ -153,7 +154,7 @@ export default function HomePage({
                               }}
                             >
                               {travel
-                                ? `İyi yolculuklar, ${user.name}`
+                                ? `${t("homepage.haveagjourney")}, ${user.name}`
                                 : "Varış Noktası Seçiniz"}
                               {!travel && (
                                 <span style={{ marginLeft: "5px" }}>
@@ -224,9 +225,9 @@ export default function HomePage({
                             >
                               {person ? (
                                 isPersonApproved ? (
-                                  "İyi Yolculuklar!"
+                                  t("homepage.haveagjourney")
                                 ) : (
-                                  "Yolcu Bulundu!"
+                                  t("homepage.passengerfound")
                                 )
                               ) : !isPersonSearching ? (
                                 <Button
@@ -237,7 +238,7 @@ export default function HomePage({
                                   size="large"
                                   style={{ width: "40%", borderRadius: "25px" }}
                                 >
-                                  Yolcu Ara
+                                  {t("homepage.search")}
                                 </Button>
                               ) : (
                                 <Button
@@ -250,7 +251,7 @@ export default function HomePage({
                                   style={{ width: "40%", borderRadius: "25px" }}
                                 >
                                   {" "}
-                                  <LoadingOutlined></LoadingOutlined> İptal et
+                                  <LoadingOutlined></LoadingOutlined> {t("homepage.cancel")}
                                 </Button>
                               )}
                             </div>
@@ -272,7 +273,7 @@ export default function HomePage({
                                     fontSize: "16px",
                                   }}
                                 >
-                                  <strong>Toplam Mesafe:</strong>{" "}
+                                  <strong>{t("homepage.distance")}:</strong>{" "}
                                   <span style={{ color: "#f17624" }}>
                                     15 KM
                                   </span>
@@ -283,7 +284,7 @@ export default function HomePage({
                                     fontSize: "16px",
                                   }}
                                 >
-                                  <strong>Ücret:</strong>{" "}
+                                  <strong>{t("homepage.price")}:</strong>{" "}
                                   <span style={{ color: "#f17624" }}>
                                     210 TL
                                   </span>
@@ -321,7 +322,7 @@ export default function HomePage({
                                     });
                                   }}
                                 >
-                                  Kabul et
+                                  {t("homepage.approve")}
                                 </Button>
                               </Col>
                               <Col span={12}>
@@ -342,7 +343,7 @@ export default function HomePage({
                                     setIsLocationClicked(false);
                                   }}
                                 >
-                                  Reddet
+                                  {t("homepage.reject")}
                                 </Button>
                               </Col>
                             </Row>
@@ -393,9 +394,9 @@ export default function HomePage({
                         >
                           {person ? (
                             isPersonApproved ? (
-                              "İyi Yolculuklar!"
+                              t("homepage.haveagjourney")
                             ) : (
-                              "Yolcu Bulundu!"
+                              t("homepage.passengerfound")
                             )
                           ) : !isPersonSearching ? (
                             <Button
@@ -406,7 +407,7 @@ export default function HomePage({
                               size="large"
                               style={{ width: "40%", borderRadius: "25px" }}
                             >
-                              Yolcu Ara
+                              {t("homepage.search")}
                             </Button>
                           ) : (
                             <Button
@@ -419,7 +420,7 @@ export default function HomePage({
                               style={{ width: "40%", borderRadius: "25px" }}
                             >
                               {" "}
-                              <LoadingOutlined></LoadingOutlined> İptal et
+                              <LoadingOutlined></LoadingOutlined> {t("homepage.cancel")}
                             </Button>
                           )}
                         </div>
@@ -443,7 +444,7 @@ export default function HomePage({
                                 fontSize: "16px",
                               }}
                             >
-                              <strong>Toplam Mesafe:</strong>{" "}
+                              <strong>{t("homepage.distance")}:</strong>{" "}
                               <span style={{ color: "#f17624" }}>15 KM</span>
                             </p>
                             <p
@@ -452,7 +453,7 @@ export default function HomePage({
                                 fontSize: "16px",
                               }}
                             >
-                              <strong>Ücret:</strong>{" "}
+                              <strong>{t("homepage.price")}:</strong>{" "}
                               <span style={{ color: "#f17624" }}>210 TL</span>
                             </p>
                           </Col>

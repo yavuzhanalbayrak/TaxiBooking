@@ -21,5 +21,18 @@
     "travel": "Travel",
     "profile": "Profile",
     "logout": "Log out"
+  },
+  "homepage": {
+    "search": "Search passenger",
+    "cancel": "Cancel",
+    "approve": "Approve",
+    "reject": "Reject",
+    "distance": "Distance",
+    "time": "Time",
+    "price": "Price",
+    "passenger": "Passenger",
+    "driver": "Driver",
+    "passengerfound": "Passenger found!",
+    "haveagjourney": "Have a good joourney!"
   }
 }
