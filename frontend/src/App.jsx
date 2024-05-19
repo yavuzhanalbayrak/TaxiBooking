@@ -16,6 +16,8 @@ import ForgotPasswordPage from "./pages/forgot-password/ForgotPasswordPage";
 import Layout from "./Layout/Layout";
 import ProfilePage from "./pages/profile/ProfilePage";
 import TravelPage from "./pages/travel/TravelPage";
+import io from "socket.io-client";
+const socket =  io.connect(`${import.meta.env.VITE_API_PORT}`);
 
 function App() {
   const [locationName, setLocationName] = useState(false);
@@ -30,6 +32,14 @@ function App() {
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [distance, setDistance] = useState("");
   const [distanceToPerson, setDistanceToPerson] = useState("");
+  const [userId, setUserId] = useState(1);
+  React.useEffect(() => {
+    if (userId) {
+      socket.emit("register", userId);
+
+    return
+    }
+  }, [userId]);
 
   React.useEffect(() => {
     if ("geolocation" in navigator) {
@@ -109,6 +119,7 @@ function App() {
                         setDistance={setDistance}
                         distanceToPerson={distanceToPerson}
                         setDistanceToPerson={setDistanceToPerson}
+                        socket={socket}
                       />
                     </Layout>
                   }

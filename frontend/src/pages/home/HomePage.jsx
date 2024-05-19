@@ -37,16 +37,27 @@ export default function HomePage({
   setDistance,
   distanceToPerson,
   setDistanceToPerson,
+  socket,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel, travel } =
     useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
   const [totalDistance, setTotalDistance] = useState(false);
+  const [mes, setMes] = useState(false);
   const user = useAuthUser();
   const { t } = useTranslation();
   const [distanceNumber, unit] = distance.split(" ");
   const [distanceToPersonNumber] = distanceToPerson.split(" ");
+
+  // toUserId idsine sahip cliente mesaj atar.
+  // React.useEffect(() => {
+  //   socket.emit("privateMessage", { message: "özel333", toUserId: 1 });
+   
+  //   socket.on('privateMessage', (message) => {
+  //     setMes(`Private message received: ${message}`);
+  //   });
+  // }, []);
 
   useEffect(() => {
     setTotalDistance(
@@ -251,7 +262,11 @@ export default function HomePage({
                                   }}
                                   type="primary"
                                   size="large"
-                                  style={{ width: "40%", borderRadius: "25px", minWidth:"170px" }}
+                                  style={{
+                                    width: "40%",
+                                    borderRadius: "25px",
+                                    minWidth: "170px",
+                                  }}
                                 >
                                   {t("homepage.search")}
                                 </Button>
@@ -263,7 +278,11 @@ export default function HomePage({
                                   danger
                                   type="primary"
                                   size="large"
-                                  style={{ width: "40%", borderRadius: "25px", minWidth:"170px" }}
+                                  style={{
+                                    width: "40%",
+                                    borderRadius: "25px",
+                                    minWidth: "170px",
+                                  }}
                                 >
                                   {" "}
                                   <LoadingOutlined></LoadingOutlined>{" "}
