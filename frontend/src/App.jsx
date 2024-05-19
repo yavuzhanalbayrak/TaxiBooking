@@ -28,6 +28,8 @@ function App() {
   const [person, setPerson] = useState(false);
   const [display, setDisplay] = useState(false);
   const [isLocationClicked, setIsLocationClicked] = useState(false);
+  const [distance, setDistance] = useState("");
+  const [distanceToPerson, setDistanceToPerson] = useState("");
 
   React.useEffect(() => {
     if ("geolocation" in navigator) {
@@ -103,6 +105,10 @@ function App() {
                         setDisplay={setDisplay}
                         isLocationClicked={isLocationClicked}
                         setIsLocationClicked={setIsLocationClicked}
+                        distance={distance}
+                        setDistance={setDistance}
+                        distanceToPerson={distanceToPerson}
+                        setDistanceToPerson={setDistanceToPerson}
                       />
                     </Layout>
                   }

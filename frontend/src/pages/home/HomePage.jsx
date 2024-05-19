@@ -33,15 +33,26 @@ export default function HomePage({
   setDisplay,
   isLocationClicked,
   setIsLocationClicked,
+  distance,
+  setDistance,
+  distanceToPerson,
+  setDistanceToPerson,
 }) {
-  const [distance, setDistance] = useState("");
-  const [distanceToPerson, setDistanceToPerson] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel, travel } =
     useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
+  const [totalDistance, setTotalDistance] = useState(false);
   const user = useAuthUser();
   const { t } = useTranslation();
+  const [distanceNumber, unit] = distance.split(" ");
+  const [distanceToPersonNumber] = distanceToPerson.split(" ");
+
+  useEffect(() => {
+    setTotalDistance(
+      parseFloat(distanceNumber) + parseFloat(distanceToPersonNumber)
+    );
+  }, [distanceNumber, distanceToPersonNumber]);
 
   useEffect(() => {
     let timeoutId;
@@ -155,7 +166,9 @@ export default function HomePage({
                               }}
                             >
                               {travel
-                                ? `${t("homepage.haveagjourney")}, ${user.name}!`
+                                ? `${t("homepage.haveagjourney")}, ${
+                                    user.name
+                                  }!`
                                 : t("homepage.select")}
                               {!travel && (
                                 <span style={{ marginLeft: "5px" }}>
@@ -227,7 +240,7 @@ export default function HomePage({
                             >
                               {person ? (
                                 isPersonApproved ? (
-                                  t("homepage.haveagjourney")+"!"
+                                  t("homepage.haveagjourney") + "!"
                                 ) : (
                                   t("homepage.passengerfound")
                                 )
@@ -253,7 +266,8 @@ export default function HomePage({
                                   style={{ width: "40%", borderRadius: "25px" }}
                                 >
                                   {" "}
-                                  <LoadingOutlined></LoadingOutlined> {t("homepage.cancel")}
+                                  <LoadingOutlined></LoadingOutlined>{" "}
+                                  {t("homepage.cancel")}
                                 </Button>
                               )}
                             </div>
@@ -277,7 +291,7 @@ export default function HomePage({
                                 >
                                   <strong>{t("homepage.distance")}:</strong>{" "}
                                   <span style={{ color: "#f17624" }}>
-                                    15 KM
+                                    {totalDistance + " " + unit}
                                   </span>
                                 </p>
                                 <p
@@ -397,7 +411,7 @@ export default function HomePage({
                         >
                           {person ? (
                             isPersonApproved ? (
-                              t("homepage.haveagjourney")+"!"
+                              t("homepage.haveagjourney") + "!"
                             ) : (
                               t("homepage.passengerfound")
                             )
@@ -423,7 +437,8 @@ export default function HomePage({
                               style={{ width: "40%", borderRadius: "25px" }}
                             >
                               {" "}
-                              <LoadingOutlined></LoadingOutlined> {t("homepage.cancel")}
+                              <LoadingOutlined></LoadingOutlined>{" "}
+                              {t("homepage.cancel")}
                             </Button>
                           )}
                         </div>
