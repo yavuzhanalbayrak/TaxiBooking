@@ -34,8 +34,12 @@
     "passenger": "Passenger",
     "driver": "Driver",
     "passengerfound": "Passenger found!",
-    "haveagjourney": "Have a good joourney!",
-    "maploading":"Map loading..."
+    "haveagjourney": "Have a good joourney",
+    "maploading":"Map loading...",
+    "select": "Select destination",
+    "searchdriver": "Search",
+    "entersource": "Enter starting address",
+    "enterdestination": "Enter destination address"
   },
   "travelpage": {
     "currenttravel": "Current Travel",
@@ -44,6 +48,7 @@
     "price": "Price:",
     "complete":"Complete",
     "completed":"Completed",
+    "canceled":"Canceled",
     "travelinfo": "Travel Informations",
     "status": "Status",
     "source": "Start Point",
@@ -64,6 +69,14 @@
     "paymentinfo":"Payment Informations",
     "ratedriver":"Rate Driver",
     "pay":"Pay"
+
+  },
+  "loadingmodal": {
+    "searching": "Driver searching",
+    "found": "Driver found",
+    "driverfound": "Driver found. Travel starting...",
+    "countdown": "Sürücü bulundu. Yolculuk başlıyor...",
+    "wait": "Please wait..."
 
   }
 }

@@ -47,7 +47,7 @@ function Login() {
               phone: "+90 539 202 61 05",
               email: "dandun@gmail.com",
               address: {label:"Samsun/Atakum"},
-              role:"user"
+              role:"driver"
             },
           })
         ) {

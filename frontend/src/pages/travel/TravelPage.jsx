@@ -13,6 +13,8 @@ import {
   CaretLeftOutlined,
   LeftCircleFilled,
   UserOutlined,
+  CheckOutlined,
+  CloseCircleOutlined
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/buttons/primaryButton";
@@ -107,7 +109,7 @@ export default function TravelPage({
       date: "21.08.2002",
       time: "17.02",
       price: "120",
-      status: "Tamamlandı",
+      status: "completed",
     },
     {
       title: "Sakarya - Mavi Durak",
@@ -115,7 +117,7 @@ export default function TravelPage({
       date: "13.08.2023",
       time: "19.15",
       price: "569",
-      status: "Tamamlandı",
+      status: "canceled",
     },
     {
       title: "Samsun - Atakum",
@@ -123,7 +125,7 @@ export default function TravelPage({
       date: "21.08.2002",
       time: "17.02",
       price: "200",
-      status: "Tamamlandı",
+      status: "completed",
     },
     {
       title: "Samsun - Atakum",
@@ -131,7 +133,7 @@ export default function TravelPage({
       date: "21.08.2002",
       time: "17.02",
       price: "200",
-      status: "Tamamlandı",
+      status: "canceled",
     },
   ];
 
@@ -172,8 +174,24 @@ export default function TravelPage({
                     </Col>
                     <Field
                       title={t("travelpage.status")}
-                      field={detailInfos.historyDetails.status}
-                      type="success"
+                      field={detailInfos.historyDetails.status == "completed" ? (
+                        <p className="completed">
+                          {" "}
+                          <CheckOutlined
+                            style={{ fontSize: "16px"}}
+                          />{" "}
+                          {t("travelpage.completed")}{" "}
+                        </p>
+                      ) : (
+                        <p className="canceled">
+                          {" "}
+                          <CloseCircleOutlined 
+                            style={{ fontSize: "16px" }}
+                          />{" "}
+                          {t("travelpage.canceled")}{" "}
+                        </p>
+                      )}
+                      type={detailInfos.historyDetails.status == "completed"?"success":"danger"}
                     />
                     <Field
                       title={t("travelpage.source")}
@@ -455,7 +473,7 @@ export default function TravelPage({
                                       <h2>
                                         {user.role == "user"
                                           ? t("travelpage.driverinfo")
-                                          : "Yolcu Bilgileri"}
+                                          : t("travelpage.passinfo")}
                                       </h2>
                                     </Col>
                                     <Field

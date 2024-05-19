@@ -176,7 +176,7 @@ const App = ({ children, link, icon }) => {
             style={{
               textAlign: "center",
               zIndex: "200",
-              backgroundColor: "#00007f",
+              backgroundColor: "#00305f",
               color:"#ffffff"
             }}
           >

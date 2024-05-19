@@ -12,6 +12,7 @@ export default function LoadingModal({
   destination,
   distance,
   source,
+  t
 }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
   const { travel, setTravel, height } = React.useContext(GlobalContext);
@@ -65,7 +66,7 @@ export default function LoadingModal({
   return (
     <div>
       <Modal
-        title={isDriverFound ? "Sürücü Bulundu" : "Sürücü Aranıyor"}
+        title={isDriverFound ?  t("loadingmodal.found") : t("loadingmodal.searching")}
         open={isModalOpen}
         closeIcon={false}
         footer={false}
@@ -77,7 +78,7 @@ export default function LoadingModal({
             style={{ textAlign: "center", paddingTop: "10px" }}
           >
             <Col span={24}>
-              Lütfen Bekleyiniz
+              {t("loadingmodal.wait")}
               <Col span={24} style={{ paddingTop: "10px" }}>
                 <LoadingOutlined style={{ fontSize: "24px" }} />
               </Col>
@@ -93,7 +94,7 @@ export default function LoadingModal({
                 danger
                 type="primary"
               >
-                İptal
+                {t("homepage.cancel")}
               </Button>
             </Col>
           </Row>
@@ -107,7 +108,7 @@ export default function LoadingModal({
                 <CheckCircleOutlined
                   style={{ fontSize: "24px", color: "green" }}
                 />
-                <p>Sürücü bulundu. Yolculuk başlıyor...</p>
+                <p>{t("loadingmodal.driverfound")}</p>
                 {/* <p>{countdown}</p> */}
                 <p style={{ display: "none" }}>
                   {setTimeout(() => {

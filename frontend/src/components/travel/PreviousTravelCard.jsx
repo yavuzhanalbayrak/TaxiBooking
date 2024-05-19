@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
-import { CheckOutlined, RightOutlined } from "@ant-design/icons";
+import { CheckOutlined, RightOutlined,CloseCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import "./travelStyle.scss";
 
@@ -8,7 +8,7 @@ const historyDetails = {
   title: "props.travelHistory.title",
   date: "props.travelHistory.date",
   time: "props.travelHistory.time",
-  status: "Tamamlandı",
+  status: "completed",
   distance: "props.travelHistory.distance",
   price: 150,
   currency: "TRY",
@@ -55,7 +55,7 @@ export default function PreviousTravelCard(props) {
               <Col className="prev-travel-price" span={12}>
                 <Row gutter={5}>
                   <Col>{t("travelpage.price")}</Col>
-                  <Col style={{color:"#f17624"}}>{formattedPaymentRate}</Col>
+                  <Col style={{ color: "#f17624" }}>{formattedPaymentRate}</Col>
                 </Row>
               </Col>
               <Col
@@ -77,9 +77,24 @@ export default function PreviousTravelCard(props) {
         <Row style={{ padding: "24px" }}>
           <Col span={24}>
             <Row>
-              <CheckOutlined style={{ fontSize: "16px", color: "#00bb00" }} />
               <Col className="prev-travel-status">
-                {props.travelHistory.status}
+                {props.travelHistory.status == "completed" ? (
+                  <p className="completed">
+                    {" "}
+                    <CheckOutlined
+                      style={{ fontSize: "16px"}}
+                    />{" "}
+                    {t("travelpage.completed")}{" "}
+                  </p>
+                ) : (
+                  <p className="canceled">
+                    {" "}
+                    <CloseCircleOutlined 
+                      style={{ fontSize: "16px" }}
+                    />{" "}
+                    {t("travelpage.canceled")}{" "}
+                  </p>
+                )}
               </Col>
             </Row>
           </Col>

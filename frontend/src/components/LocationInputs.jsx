@@ -18,6 +18,7 @@ export default function LocationInputs({
   setFocus,
   lat,
   lng,
+  t
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -63,7 +64,7 @@ export default function LocationInputs({
             <Col span={20}>
               <GooglePlacesAutocomplete
                 selectProps={{
-                  placeholder: "Başlangıç adresinizi giriniz",
+                  placeholder: t("homepage.entersource"),
                   onFocus: () => setFocus(1),
                   onBlur: () => setFocus(false),
                   onChange: (place, type) => {
@@ -118,7 +119,7 @@ export default function LocationInputs({
             <Col span={20}>
               <GooglePlacesAutocomplete
                 selectProps={{
-                  placeholder: "Varış adresinizi giriniz",
+                  placeholder: t("homepage.enterdestination"),
                   onFocus: () => setFocus(2),
                   onBlur: () => setFocus(false),
                   onChange: (place, type) => {
@@ -171,7 +172,7 @@ export default function LocationInputs({
             loading={loading}
             type="primary"
           >
-            Ara
+            {t("homepage.searchdriver")}
           </Button>
         </Col>
       </Row>

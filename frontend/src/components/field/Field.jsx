@@ -23,7 +23,14 @@ export default function Field(props) {
           <Col
             className="field"
             span={props.fieldSpan || 8}
-            style={{ color: props.type === "success" ? "#00bb00" : undefined }}
+            style={{
+              color:
+                props.type === "success"
+                  ? "#00bb00"
+                  : props.type == "danger"
+                  ? "#da0000"
+                  : undefined,
+            }}
           >
             {props.edit ? (
               props.value == "phone" ? (

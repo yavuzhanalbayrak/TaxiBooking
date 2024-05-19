@@ -35,8 +35,11 @@
     "driver": "Driver",
     "passengerfound": "Yolcu bulundu!",
     "haveagjourney":"İyi yolculuklar",
-    "maploading": "Harita yükleniyor..."
-
+    "maploading": "Harita yükleniyor...",
+    "select":"Varış noktası seçiniz",
+    "searchdriver": "Ara",
+    "entersource": "Başlangıç adresi giriniz",
+    "enterdestination":"Varış adresi giriniz"
   },
   "travelpage": {
     "currenttravel": "Aktif Yolculuk",
@@ -45,6 +48,7 @@
     "price": "Ücret:",
     "complete":"Yolculuğu Tamamla",
     "completed":"Tamamlandı",
+    "canceled":"İptal edildi",
     "travelinfo": "Yolculuk Bilgileri",
     "status": "Durum",
     "source": "Başlangıç Noktası",
@@ -65,5 +69,13 @@
     "paymentinfo":"Ödeme Bilgileri",
     "ratedriver":"Sürücüyü Puanla",
     "pay":"Ödeme Yap"
+  },
+  "loadingmodal": {
+    "searching": "Sürücü aranıyor",
+    "found": "Sürücü bulundu",
+    "driverfound": "Sürücü bulundu. Yolculuk başlıyor...",
+    "countdown": "Sürücü bulundu. Yolculuk başlıyor...",
+    "wait": "Lütfen bekleyiniz..."
+
   }
 }

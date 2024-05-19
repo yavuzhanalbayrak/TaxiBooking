@@ -28,8 +28,13 @@
 .prev-travel-status {
   font-size: 14px;
   font-weight: 600;
-  color: #00bb00;
   margin-left: 10px;
+  .completed{
+    color: #00bb00;
+  }
+  .canceled{
+    color: #da0000;
+  }
 }
 
 .prev-travel-details {

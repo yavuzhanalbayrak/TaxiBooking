@@ -155,8 +155,8 @@ export default function HomePage({
                               }}
                             >
                               {travel
-                                ? `${t("homepage.haveagjourney")}, ${user.name}`
-                                : "Varış Noktası Seçiniz"}
+                                ? `${t("homepage.haveagjourney")}, ${user.name}!`
+                                : t("homepage.select")}
                               {!travel && (
                                 <span style={{ marginLeft: "5px" }}>
                                   {isLocationClicked ? (
@@ -195,6 +195,7 @@ export default function HomePage({
                                   setFocus={setFocus}
                                   lat={lat}
                                   lng={lng}
+                                  t={t}
                                 />
                               </div>
                             </div>
@@ -226,7 +227,7 @@ export default function HomePage({
                             >
                               {person ? (
                                 isPersonApproved ? (
-                                  t("homepage.haveagjourney")
+                                  t("homepage.haveagjourney")+"!"
                                 ) : (
                                   t("homepage.passengerfound")
                                 )
@@ -376,6 +377,7 @@ export default function HomePage({
                         setFocus={setFocus}
                         lat={lat}
                         lng={lng}
+                        t={t}
                       ></LocationInputs>
                     </Card>
                   ) : (
@@ -395,7 +397,7 @@ export default function HomePage({
                         >
                           {person ? (
                             isPersonApproved ? (
-                              t("homepage.haveagjourney")
+                              t("homepage.haveagjourney")+"!"
                             ) : (
                               t("homepage.passengerfound")
                             )
@@ -562,6 +564,7 @@ export default function HomePage({
         destination={destination}
         distance={distance}
         source={source}
+        t={t}
       ></LoadingModal>
     </>
   );
