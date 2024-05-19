@@ -8,6 +8,7 @@ const App = ({
   isModalOpen,
   setIsModalOpen,
   loading,
+  t
 }) => {
 
   return (
@@ -32,7 +33,7 @@ const App = ({
                 danger
                 onClick={() => setIsModalOpen(false)}
               >
-                {"Hayır"}
+                {t("travelpage.no")}
               </Button>
               <Button
                 onClick={() => {
@@ -42,7 +43,7 @@ const App = ({
                 loading={loading}
                 disabled={loading}
               >
-                { "Evet"}
+                {t("travelpage.yes")}
               </Button>
             </div>
           </div>

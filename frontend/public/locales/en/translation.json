@@ -42,6 +42,7 @@
     "prevtravels": "Previous Travels",
     "details": "Details",
     "price": "Price:",
+    "complete":"Complete",
     "completed":"Completed",
     "travelinfo": "Travel Informations",
     "status": "Status",
@@ -50,6 +51,19 @@
     "distance": "Distance",
     "date": "Date",
     "passinfo": "Passenger Informations",
-    "back":"Back"
+    "back":"Back",
+    "driverinfo":"Driver Informations",
+    "rate": "Rate",
+    "carinfo": "Car Informations",
+    "brand":"Brand",
+    "model":"Model",
+    "year": "Year",
+    "areusure":"Are you sure to cancel this travel?",
+    "yes":"Yes",
+    "no":"No",
+    "paymentinfo":"Payment Informations",
+    "ratedriver":"Rate Driver",
+    "pay":"Pay"
+
   }
 }

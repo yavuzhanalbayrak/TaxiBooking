@@ -43,6 +43,7 @@
     "prevtravels": "Geçmiş Yolculuklar",
     "details": "Detaylar",
     "price": "Ücret:",
+    "complete":"Yolculuğu Tamamla",
     "completed":"Tamamlandı",
     "travelinfo": "Yolculuk Bilgileri",
     "status": "Durum",
@@ -51,6 +52,18 @@
     "distance": "Mesafe",
     "date": "Tarih",
     "passinfo": "Yolcu Bilgileri",
-    "back":"Geri Dön"
+    "back":"Geri Dön",
+    "driverinfo":"Sürücü Bilgileri",
+    "rate": "Puan",
+    "carinfo": "Araç Bilgileri",
+    "brand":"Marka",
+    "model":"Model",
+    "year": "Yıl",
+    "areusure":"Yolculuğu sonlandırmak istediğinize emin misiniz?",
+    "yes":"Evet",
+    "no": "Hayır",
+    "paymentinfo":"Ödeme Bilgileri",
+    "ratedriver":"Sürücüyü Puanla",
+    "pay":"Ödeme Yap"
   }
 }

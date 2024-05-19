@@ -224,22 +224,22 @@ export default function TravelPage({
                       <>
                         <Col span={24}></Col>
                         <Col style={{ marginTop: "15px" }} span={24}>
-                          <h2>Sürücü Bilgileri</h2>
+                          <h2>{t("travelpage.driverinfo")}</h2>
                         </Col>
                         <Field
-                          title={"Adı"}
+                          title={t("profile.fullname")}
                           field={detailInfos.historyDetails.name}
                           titleSpan={8}
                           fieldSpan={16}
                         />
                         <Field
-                          title={"Telefon Numarası"}
+                          title={t("profile.number")}
                           field={detailInfos.historyDetails.phone}
                           titleSpan={12}
                           fieldSpan={12}
                         />
                         <Field
-                          title={"Puan"}
+                          title={t("travelpage.rate")}
                           field={
                             <>
                               {[
@@ -259,18 +259,18 @@ export default function TravelPage({
                           }
                         />
                         <Col style={{ marginTop: "15px" }} span={24}>
-                          <h2>Araç Bilgileri</h2>
+                          <h2>{t("travelpage.carinfo")}</h2>
                         </Col>
                         <Field
-                          title={"Marka"}
+                          title={t("travelpage.brand")}
                           field={detailInfos.historyDetails.car?.brand}
                         />
                         <Field
-                          title={"Model"}
+                          title={t("travelpage.model")}
                           field={detailInfos.historyDetails.car?.model}
                         />
                         <Field
-                          title={"Yıl"}
+                          title={t("travelpage.year")}
                           field={detailInfos.historyDetails.car?.year}
                         />
                       </>
@@ -338,7 +338,7 @@ export default function TravelPage({
                                       style={{ textAlign: "center" }}
                                     >
                                       <p style={{ fontSize: "20px" }}>
-                                        Sürücüyü Puanla
+                                        {t("travelpage.ratedriver")}
                                       </p>
 
                                       <div>
@@ -369,10 +369,11 @@ export default function TravelPage({
                                       style={{ padding: "16px 0px" }}
                                       span={24}
                                     >
-                                      <h2>Ödeme Bilgileri</h2>
+                                      <h2>{t("travelpage.paymentinfo")}</h2>
                                     </Col>
                                     <Col style={{ textAlign: "center" }}>
                                       <Stripe
+                                        t={t}
                                         amount={100}
                                         currency={"usd"}
                                         mode={"payment"}
@@ -417,17 +418,17 @@ export default function TravelPage({
                                       fieldSpan={16}
                                     />
                                     <Field
-                                      title={"Varış Noktası"}
+                                      title={t("travelpage.dest")}
                                       field={travel.destination.label}
                                       titleSpan={8}
                                       fieldSpan={16}
                                     />
                                     <Field
-                                      title={"Mesafe"}
+                                      title={t("travelpage.distance")}
                                       field={travel.distance}
                                     />
                                     <Field
-                                      title={"Fiyat"}
+                                      title={t("travelpage.price")}
                                       field={() => {
                                         const currency = currencyList.find(
                                           (item) =>
@@ -453,25 +454,25 @@ export default function TravelPage({
                                     >
                                       <h2>
                                         {user.role == "user"
-                                          ? "Sürücü Bilgileri"
+                                          ? t("travelpage.driverinfo")
                                           : "Yolcu Bilgileri"}
                                       </h2>
                                     </Col>
                                     <Field
-                                      title={"Adı"}
+                                      title={t("profile.fullname")}
                                       field={travel.name}
                                       titleSpan={8}
                                       fieldSpan={16}
                                     />
                                     <Field
-                                      title={"Telefon Numarası"}
+                                      title={t("profile.number")}
                                       field={travel.phone}
                                       fieldSpan={12}
                                       titleSpan={12}
                                     />
                                     {user.role == "user" && (
                                       <Field
-                                        title={"Puan"}
+                                        title={t("travelpage.rate")}
                                         field={
                                           <>
                                             {[...Array(filledStars)].map(
@@ -497,18 +498,18 @@ export default function TravelPage({
                                           style={{ marginTop: "15px" }}
                                           span={24}
                                         >
-                                          <h2>Araç Bilgileri</h2>
+                                          <h2>{t("travelpage.carinfo")}</h2>
                                         </Col>
                                         <Field
-                                          title={"Marka"}
+                                          title={t("travelpage.brand")}
                                           field={car?.brand}
                                         />
                                         <Field
-                                          title={"Model"}
+                                          title={t("travelpage.model")}
                                           field={car?.model}
                                         />
                                         <Field
-                                          title={"Yıl"}
+                                          title={t("travelpage.year")}
                                           field={car?.year}
                                         />
                                       </>
@@ -535,7 +536,7 @@ export default function TravelPage({
                                                 borderRadius: "25px",
                                               }}
                                             >
-                                              Yolculuğu Tamamla
+                                              {t("travelpage.complete")}
                                             </Button>
                                           </Col>
                                         )}
@@ -550,7 +551,7 @@ export default function TravelPage({
                                             }}
                                             onClick={() => setOpen(true)}
                                           >
-                                            İptal Et
+                                            {t("homepage.cancel")}
                                           </Button>
                                         </Col>
                                       </Row>
@@ -637,7 +638,8 @@ export default function TravelPage({
         </Row>
       </Col>
       <AreUSureModal
-        title={"Yolculuğu sonlandırmak istediğinize emin misiniz?"}
+        title={t("travelpage.areusure")}
+        t={t}
         description={""}
         onOkModal={() => {
           setTravel(false);

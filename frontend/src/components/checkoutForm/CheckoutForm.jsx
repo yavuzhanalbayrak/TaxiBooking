@@ -2,7 +2,7 @@ import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { Button } from 'antd';
 import React from 'react';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({t}) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -34,7 +34,7 @@ const CheckoutForm = () => {
   return (
     <form>
       <PaymentElement />
-      <Button type='primary' size='large' style={{width:"100%", marginTop:"20px"}} onClick={handleSubmit} disabled={!stripe}>Ödeme Yap</Button>
+      <Button type='primary' size='large' style={{width:"100%", marginTop:"20px"}} onClick={handleSubmit} disabled={!stripe}>{t("travelpage.pay")}</Button>
     </form>
   )
 };

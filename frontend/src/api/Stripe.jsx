@@ -9,7 +9,7 @@ const publisherKey = import.meta.env.VITE_STRIPE_PUBLISHER_KEY;
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(publisherKey);
 
-export default function App({ amount, currency, mode }) {
+export default function App({ amount, currency, mode, t }) {
   const [clientSecret, setClientSecret] = useState(null);
   const [loadingError, setLoadingError] = useState(null);
 
@@ -45,7 +45,7 @@ export default function App({ amount, currency, mode }) {
 
   return (
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm />
+      <CheckoutForm t={t} />
     </Elements>
   );
 }
