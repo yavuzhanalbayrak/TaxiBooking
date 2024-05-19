@@ -251,7 +251,7 @@ export default function HomePage({
                                   }}
                                   type="primary"
                                   size="large"
-                                  style={{ width: "40%", borderRadius: "25px" }}
+                                  style={{ width: "40%", borderRadius: "25px", minWidth:"170px" }}
                                 >
                                   {t("homepage.search")}
                                 </Button>
@@ -263,7 +263,7 @@ export default function HomePage({
                                   danger
                                   type="primary"
                                   size="large"
-                                  style={{ width: "40%", borderRadius: "25px" }}
+                                  style={{ width: "40%", borderRadius: "25px", minWidth:"170px" }}
                                 >
                                   {" "}
                                   <LoadingOutlined></LoadingOutlined>{" "}

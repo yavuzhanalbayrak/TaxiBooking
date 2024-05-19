@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import "./travelStyle.scss";
 
 const historyDetails = {
-  title: "props.travelHistory.title",
-  date: "props.travelHistory.date",
-  time: "props.travelHistory.time",
+  title: "props.travelHistory .title",
+  date: "props.travelHistory .date",
+  time: "props.travelHistory .time",
   status: "completed",
   distance: "props.travelHistory.distance",
   price: 150,

@@ -175,8 +175,8 @@ export default function ProfilePage() {
                       key={fieldConfig.value}
                       title={fieldConfig.title}
                       field={fieldConfig.field}
-                      titleSpan={12}
-                      fieldSpan={12}
+                      titleSpan={10}
+                      fieldSpan={14}
                       edit={edit}
                       fieldValue={fieldValue}
                       onFieldChange={setFieldValue}
@@ -187,6 +187,8 @@ export default function ProfilePage() {
                   <Field
                     title={t("profile.languageOption")}
                     field={<LanguageSelector />}
+                    titleSpan={10}
+                    fieldSpan={14}
                   ></Field>
                 </Row>
               </Col>

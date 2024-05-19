@@ -17,12 +17,12 @@ export default function Field(props) {
     <Col span={24} style={{ margin: "5px 0px" }}>
       <Card>
         <Row>
-          <Col className="title" span={props.titleSpan || 16}>
+          <Col className="title" span={props.titleSpan || 12}>
             {props.title}
           </Col>
           <Col
             className="field"
-            span={props.fieldSpan || 8}
+            span={props.fieldSpan || 12}
             style={{
               color:
                 props.type === "success"
@@ -35,6 +35,7 @@ export default function Field(props) {
             {props.edit ? (
               props.value == "phone" ? (
                 <PhoneInput
+                  style={{ textAlign: "start" }}
                   country={"tr"}
                   value={props.fieldValue?.[props.value]}
                   onChange={(value) =>
