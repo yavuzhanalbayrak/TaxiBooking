@@ -114,7 +114,7 @@ export default function HomePage({
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: config.mapApi,
+    googleMapsApiKey: config.env.mapApi,
     libraries: ["places"],
   });
 

@@ -10,7 +10,7 @@ import config from "../../config";
 export default function Field(props) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: config.mapApi,
+    googleMapsApiKey: config.env.mapApi,
     libraries: ["places"],
   });
 

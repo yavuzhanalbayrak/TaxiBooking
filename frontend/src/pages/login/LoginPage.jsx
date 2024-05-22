@@ -10,6 +10,8 @@ import GlobalContext from "../../context/GlobalContext.jsx";
 import { toast } from "react-toastify";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 import config from "../../config.js";
+import api from "../../utils/api.jsx";
+
 function Login() {
   const { currentUser, setCurrentUser } = useContext(GlobalContext);
   const [form] = Form.useForm();
@@ -30,8 +32,8 @@ function Login() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    await axios
-      .post(`${config.apiUrl}/api/users/login`, {
+    await api
+      .post(`${config.urls.login}`, {
         email,
         password,
       })
