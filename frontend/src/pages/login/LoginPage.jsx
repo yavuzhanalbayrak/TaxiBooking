@@ -9,7 +9,7 @@ import { Alert, Space } from "antd";
 import GlobalContext from "../../context/GlobalContext.jsx";
 import { toast } from "react-toastify";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
-
+import config from "../../config.js";
 function Login() {
   const { currentUser, setCurrentUser } = useContext(GlobalContext);
   const [form] = Form.useForm();
@@ -31,7 +31,7 @@ function Login() {
   const handleSubmit = async () => {
     setLoading(true);
     await axios
-      .post(`${import.meta.env.VITE_API_PORT}/api/users/login`, {
+      .post(`${config.apiUrl}/api/users/login`, {
         email,
         password,
       })

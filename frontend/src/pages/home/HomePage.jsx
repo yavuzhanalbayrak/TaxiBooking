@@ -12,6 +12,7 @@ import {
 import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useTranslation } from "react-i18next";
+import config from "../../config";
 
 export default function HomePage({
   setLocationName,
@@ -113,7 +114,7 @@ export default function HomePage({
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: import.meta.env.VITE_MAP_API,
+    googleMapsApiKey: config.mapApi,
     libraries: ["places"],
   });
 

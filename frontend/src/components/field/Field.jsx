@@ -5,11 +5,12 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { useJsApiLoader } from "@react-google-maps/api";
 import "react-phone-input-2/lib/style.css";
 import "../travel/travelStyle.scss";
+import config from "../../config";
 
 export default function Field(props) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: import.meta.env.VITE_MAP_API,
+    googleMapsApiKey: config.mapApi,
     libraries: ["places"],
   });
 
