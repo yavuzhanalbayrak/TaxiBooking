@@ -238,7 +238,7 @@ export default function TravelPage({
                       }}
                     />
 
-                    {user.role == "user" ? (
+                    {user.role == "USER" ? (
                       <>
                         <Col span={24}></Col>
                         <Col style={{ marginTop: "15px" }} span={24}>
@@ -471,7 +471,7 @@ export default function TravelPage({
                                       span={24}
                                     >
                                       <h2>
-                                        {user.role == "user"
+                                        {user.role == "USER"
                                           ? t("travelpage.driverinfo")
                                           : t("travelpage.passinfo")}
                                       </h2>
@@ -488,7 +488,7 @@ export default function TravelPage({
                                       fieldSpan={12}
                                       titleSpan={12}
                                     />
-                                    {user.role == "user" && (
+                                    {user.role == "USER" && (
                                       <Field
                                         title={t("travelpage.rate")}
                                         field={
@@ -510,7 +510,7 @@ export default function TravelPage({
                                         }
                                       />
                                     )}
-                                    {user.role == "user" && (
+                                    {user.role == "USER" && (
                                       <>
                                         <Col
                                           style={{ marginTop: "15px" }}
@@ -541,7 +541,7 @@ export default function TravelPage({
                                   >
                                     <Col span={24}>
                                       <Row gutter={[0, 10]}>
-                                        {user.role == "user" && (
+                                        {user.role == "USER" && (
                                           <Col span={24}>
                                             <Button
                                               type="primary"
@@ -588,7 +588,7 @@ export default function TravelPage({
                                     width: "100%",
                                   }}
                                 >
-                                  {user.role === "user" ? (
+                                  {user.role === "USER" ? (
                                     <>
                                       <Col
                                         style={{ fontSize: "30px" }}

@@ -38,23 +38,24 @@ function Login() {
         password,
       })
       .then((result) => {
+        console.log(result);
         if (
           signIn({
             auth: {
-              token: result.data.accessToken,
+              token: result.data.token,
               type: "Bearer",
             },
             userState: {
-              name: "Dandun Mesut",
-              phone: "+90 539 202 61 05",
-              email: "dandun@gmail.com",
+              name: `${result.data.customer.user.firstName} ${result.data.customer.user.lastName}`,
+              phone: result.data.customer.user.mobileNumber,
+              email: result.data.customer.user.email,
               address: {label:"Samsun/Atakum"},
-              role:"driver"
+              role: result.data.customer.user.role
             },
           })
         ) {
           navigate("/");
-          localStorage.setItem("token", result.data.accessToken);
+          localStorage.setItem("token", result.data.token);
         } else {
           toast.error("Kullanıcı Bilgileri Hatalı!");
         }

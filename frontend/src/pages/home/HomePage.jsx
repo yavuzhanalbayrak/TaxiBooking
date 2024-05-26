@@ -148,7 +148,7 @@ export default function HomePage({
                         person={person}
                       ></Map>
                     </div>
-                    {user.role == "user" ? (
+                    {user.role == "USER" ? (
                       <div className={"location-inputs-phone"}>
                         <Card
                           style={{
@@ -395,7 +395,7 @@ export default function HomePage({
             <Row gutter={[10, 10]}>
               <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
                 <Col>
-                  {user.role == "user" ? (
+                  {user.role == "USER" ? (
                     <Card title="Varış Noktası Seçiniz">
                       <LocationInputs
                         setSource={setSource}

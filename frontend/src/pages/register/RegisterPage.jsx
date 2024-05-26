@@ -11,6 +11,8 @@ import {
   ExclamationCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import api from "../../utils/api.jsx";
+import config from "../../config.js";
 
 function Login() {
   const [form] = Form.useForm();
@@ -54,22 +56,25 @@ function Login() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    if (true) {
-      console.log("name: " + name);
-      console.log("surname: " + surname);
-      console.log("email: " + email);
-      console.log("password: " + password);
-      console.log("password2: " + password2);
-      setTimeout(() => {
-        toast.success("Kayıt Başarılı!");
+
+    await api
+      .post(`${config.urls.register}`, {
+        firstName: name,
+        lastName: surname,
+        email,
+        password,
+        mobileNumber: "+0",
+        gender: "MALE",
+      })
+      .then((result) => {
+        toast.success("Kayıt olma başarılı.");
         navigate("/login");
-      }, 3000);
-    } else {
-      setTimeout(() => {
-        toast.error("Kayıt Başarısız!");
+      })
+      .catch((error) => {
+        toast.error("Kayıt olma başarısız.");
         setLoading(false);
-      }, 3000);
-    }
+      });
+    setLoading(false);
   };
 
   return (

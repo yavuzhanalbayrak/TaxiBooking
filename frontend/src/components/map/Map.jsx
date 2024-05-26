@@ -50,7 +50,7 @@ function Map({
   
 
   useEffect(() => {
-    if (user.role=="driver" && person) {
+    if (user.role=="DRIVER" && person) {
       setSource(person);
       setDestination(person.destination);
       directionRoute();
@@ -153,7 +153,7 @@ function Map({
       }
     );
 
-    if (user.role == "driver") {
+    if (user.role == "DRIVER") {
       DirectionsService.route(
         {
           origin: {
@@ -247,7 +247,7 @@ function Map({
         zoom={12.6}
         onLoad={onLoad}
         onUnmount={onUnmount}
-        onClick={user.role == "user" && !travel && handleMapClick} // Add onClick event handler to the GoogleMap component
+        onClick={user.role == "USER" && !travel && handleMapClick} // Add onClick event handler to the GoogleMap component
         options={{
           mapId: "7297f202550d6fee",
           fullscreenControl: false,
@@ -268,7 +268,7 @@ function Map({
           position={{ lat, lng }}
         ></MarkerF>
 
-        {user.role == "user" && driver && (
+        {user.role == "USER" && driver && (
           <MarkerF
             icon={{
               url: motor,
@@ -284,10 +284,10 @@ function Map({
         {source.length != [] ? (
           <MarkerF
             icon={{
-              url: user.role=="user"?currentLocation:personPng,
+              url: user.role=="USER"?currentLocation:personPng,
               scaledSize: {
                 width: 20,
-                height: user.role=="user"?29:20,
+                height: user.role=="USER"?29:20,
               },
             }}
             position={{ lat: source.lat, lng: source.lng }}
@@ -363,7 +363,7 @@ function Map({
           ></DirectionsRenderer>
         )}
 
-        {source.length != [] && user.role == "driver" &&  (
+        {source.length != [] && user.role == "DRIVER" &&  (
           <DirectionsRenderer
             directions={personDirectionRoutePoints}
             options={{

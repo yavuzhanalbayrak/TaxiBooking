@@ -4,7 +4,8 @@ const config = {
         mapApi: import.meta.env.VITE_MAP_API,
     },
     urls:{
-        login:`/api/users/login`,
+        login:`/api/v1/auth/sign/signin`,
+        register:`/api/v1/auth/sign/signup`,
     }
 };
 

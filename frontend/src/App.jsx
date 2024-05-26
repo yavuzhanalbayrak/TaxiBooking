@@ -17,7 +17,9 @@ import Layout from "./Layout/Layout";
 import ProfilePage from "./pages/profile/ProfilePage";
 import TravelPage from "./pages/travel/TravelPage";
 import io from "socket.io-client";
-const socket =  io.connect(`${import.meta.env.VITE_API_PORT}`);
+import config from "./config";
+
+const socket =  io.connect(`${config.env.apiUrl}`);
 
 function App() {
   const [locationName, setLocationName] = useState(false);
