@@ -12,7 +12,7 @@ import useSignIn from "react-auth-kit/hooks/useSignIn";
 import config from "../../config.js";
 import api from "../../utils/api.jsx";
 
-function Login() {
+function Login(props) {
   const { currentUser, setCurrentUser } = useContext(GlobalContext);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -50,12 +50,14 @@ function Login() {
               phone: result.data.customer.user.mobileNumber,
               email: result.data.customer.user.email,
               address: {label:"Samsun/Atakum"},
-              role: result.data.customer.user.role
+              role: result.data.customer.user.role,
+              id: result.data.customer.id
             },
           })
         ) {
           navigate("/");
           localStorage.setItem("token", result.data.token);
+          props.setUserId(result.data.customer.id);
         } else {
           toast.error("Kullanıcı Bilgileri Hatalı!");
         }

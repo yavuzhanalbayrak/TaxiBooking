@@ -39,6 +39,7 @@ export default function HomePage({
   distanceToPerson,
   setDistanceToPerson,
   socket,
+  setUserId
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel, travel } =
@@ -52,13 +53,19 @@ export default function HomePage({
   const [distanceToPersonNumber] = distanceToPerson.split(" ");
 
   // toUserId idsine sahip cliente mesaj atar.
-  // React.useEffect(() => {
-  //   socket.emit("privateMessage", { message: "özel333", toUserId: 1 });
+  React.useEffect(() => {
+    socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
    
-  //   socket.on('privateMessage', (message) => {
-  //     setMes(`Private message received: ${message}`);
-  //   });
-  // }, []);
+    socket.on('privateMessage', (message) => {
+      setMes(`Private message received: ${message}`);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setUserId(user.id);
+    }
+  }, [user]);
 
   useEffect(() => {
     setTotalDistance(
@@ -120,6 +127,7 @@ export default function HomePage({
 
   return (
     <>
+    {mes}
       {isLoaded ? (
         <div>
           {isPhone ? (

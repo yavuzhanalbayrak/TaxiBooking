@@ -19,7 +19,7 @@ import TravelPage from "./pages/travel/TravelPage";
 import io from "socket.io-client";
 import config from "./config";
 
-const socket =  io.connect(`${config.env.apiUrl}`);
+const socket =  io.connect(`${config.env.socketUrl}`);
 
 function App() {
   const [locationName, setLocationName] = useState(false);
@@ -34,7 +34,7 @@ function App() {
   const [isLocationClicked, setIsLocationClicked] = useState(false);
   const [distance, setDistance] = useState("");
   const [distanceToPerson, setDistanceToPerson] = useState("");
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState("");
   React.useEffect(() => {
     if (userId) {
       socket.emit("register", userId);
@@ -122,6 +122,7 @@ function App() {
                         distanceToPerson={distanceToPerson}
                         setDistanceToPerson={setDistanceToPerson}
                         socket={socket}
+                        setUserId={setUserId}
                       />
                     </Layout>
                   }
@@ -153,7 +154,7 @@ function App() {
                 path="/login"
                 element={
                   <AuthLayout>
-                    <LoginPage />
+                    <LoginPage setUserId={setUserId} />
                   </AuthLayout>
                 }
               />

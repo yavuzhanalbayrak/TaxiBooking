@@ -1,6 +1,7 @@
 const config = {
     env:{
         apiUrl: import.meta.env.VITE_API_PORT,
+        socketUrl: import.meta.env.VITE_SOCKET_PORT,
         mapApi: import.meta.env.VITE_MAP_API,
     },
     urls:{
