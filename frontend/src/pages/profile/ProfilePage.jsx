@@ -5,6 +5,7 @@ import {
   HomeOutlined,
   EditOutlined,
   CameraOutlined,
+  CloseCircleOutlined
 } from "@ant-design/icons";
 import GlobalContext from "../../context/GlobalContext";
 import "./Profile.scss";
@@ -134,7 +135,7 @@ export default function ProfilePage() {
                   <Button
                     type="primary"
                     shape="circle"
-                    icon={edit ? <strong>X</strong> : <EditOutlined />}
+                    icon={edit ? <CloseCircleOutlined style={{fontSize:"21px"}} /> : <EditOutlined />}
                     style={{
                       position: "absolute",
                       bottom: 0, // Adjust this value as needed

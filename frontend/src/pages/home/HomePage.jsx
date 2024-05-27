@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Row, Col, Card, Modal, Button } from "antd";
+import { Row, Col, Card, Modal, Button, ConfigProvider } from "antd";
 import Map from "../../components/map/Map";
 import LocationInputs from "../../components/LocationInputs";
 import LoadingModal from "../../components/loadingModal/LoadingModal";
@@ -39,7 +39,7 @@ export default function HomePage({
   distanceToPerson,
   setDistanceToPerson,
   socket,
-  setUserId
+  setUserId,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel, travel } =
@@ -55,8 +55,8 @@ export default function HomePage({
   // toUserId idsine sahip cliente mesaj atar.
   React.useEffect(() => {
     socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
-   
-    socket.on('privateMessage', (message) => {
+
+    socket.on("privateMessage", (message) => {
       setMes(`Private message received: ${message}`);
     });
   }, []);
@@ -127,7 +127,7 @@ export default function HomePage({
 
   return (
     <>
-    {mes}
+      {/* {mes} */}
       {isLoaded ? (
         <div>
           {isPhone ? (
@@ -424,6 +424,9 @@ export default function HomePage({
                     </Card>
                   ) : (
                     <Card
+                      bodyStyle={{
+                        padding: "0px",
+                      }}
                       style={{
                         boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
                         border: "none",
@@ -473,13 +476,11 @@ export default function HomePage({
                       }
                     >
                       <div
-                        className={
-                          display ? "ant-card-body clicked" : "ant-card-body"
-                        }
+                        className="ant-card-body"
                         style={{
                           padding: "24px",
                           color: "#000000",
-                          display: (display || isPersonApproved) && "none",
+                          display: !(person && !isPersonApproved) && "none",
                         }}
                       >
                         <Row>
