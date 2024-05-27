@@ -251,6 +251,8 @@ export default function HomePage({
                             top: `${height - 134}px`,
                             border: "none",
                             backgroundColor: "#efefff",
+                            position: "absolute",
+                            width: "100%",
                           }}
                           className={"location-inputs-card-phone "}
                           title={
