@@ -8,6 +8,8 @@ const config = {
         login:`/api/v1/auth/sign/signin`,
         register:`/api/v1/auth/sign/signup`,
         changeDriverStatus:`/api/v1/Driver/user`,
+        setDriverAvailable:`/api/v1/Driver/avilable`,
+        setDriverUnAvailable:`/api/v1/Driver/notavilable`,
     }
 };
 

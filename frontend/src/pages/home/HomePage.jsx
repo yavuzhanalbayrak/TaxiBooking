@@ -127,11 +127,25 @@ export default function HomePage({
   });
 
   const handleSearchPerson = async() => {
-    console.log("handleSearchPerson");
-    const res = await api.get(`${config.urls.changeDriverStatus}/${user.id}`)
-    const driverId = res.data.id
-    console.log("driver",driverId);
-    console.log("driverloc",lat,lng);
+    const driver = await api.get(`${config.urls.changeDriverStatus}/${user.id}`)
+    const driverId = driver.data.id
+    await api.post(`${config.urls.setDriverAvailable}`,{
+      driverId,
+      location: {
+        address:"address" ,
+        latitude: lat,
+        longitude: lng
+      }
+    })
+
+  }
+
+  const handleCancelSearchPerson = async()=>{
+    const driver = await api.get(`${config.urls.changeDriverStatus}/${user.id}`)
+    const driverId = driver.data.id
+
+    await api.post(`${config.urls.setDriverUnAvailable}/${driverId}`)
+
   }
 
   return (
@@ -475,6 +489,7 @@ export default function HomePage({
                             <Button
                               onClick={() => {
                                 setIsPersonSearching(false);
+                                handleCancelSearchPerson();
                               }}
                               danger
                               type="primary"
