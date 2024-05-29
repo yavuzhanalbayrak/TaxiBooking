@@ -13,6 +13,7 @@ import GlobalContext from "../../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useTranslation } from "react-i18next";
 import config from "../../config";
+import api from "../../utils/api";
 
 export default function HomePage({
   setLocationName,
@@ -124,6 +125,14 @@ export default function HomePage({
     googleMapsApiKey: config.env.mapApi,
     libraries: ["places"],
   });
+
+  const handleSearchPerson = async() => {
+    console.log("handleSearchPerson");
+    const res = await api.get(`${config.urls.changeDriverStatus}/${user.id}`)
+    const driverId = res.data.id
+    console.log("driver",driverId);
+    console.log("driverloc",lat,lng);
+  }
 
   return (
     <>
@@ -454,6 +463,7 @@ export default function HomePage({
                             <Button
                               onClick={() => {
                                 setIsPersonSearching(true);
+                                handleSearchPerson();
                               }}
                               type="primary"
                               size="large"

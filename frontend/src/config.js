@@ -7,6 +7,7 @@ const config = {
     urls:{
         login:`/api/v1/auth/sign/signin`,
         register:`/api/v1/auth/sign/signup`,
+        changeDriverStatus:`/api/v1/Driver/user`,
     }
 };
 
