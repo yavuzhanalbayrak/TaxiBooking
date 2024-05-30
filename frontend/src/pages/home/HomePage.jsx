@@ -132,7 +132,7 @@ export default function HomePage({
     await api.post(`${config.urls.setDriverAvailable}`,{
       driverId,
       location: {
-        address:"address" ,
+        address:"sakarya" ,
         latitude: lat,
         longitude: lng
       }
@@ -295,6 +295,7 @@ export default function HomePage({
                                 <Button
                                   onClick={() => {
                                     setIsPersonSearching(true);
+                                    handleSearchPerson();
                                   }}
                                   type="primary"
                                   size="large"
@@ -310,6 +311,7 @@ export default function HomePage({
                                 <Button
                                   onClick={() => {
                                     setIsPersonSearching(false);
+                                    handleCancelSearchPerson();
                                   }}
                                   danger
                                   type="primary"
