@@ -16,7 +16,7 @@ export default function Field(props) {
 
   return (
     <Col span={24} style={{ margin: "5px 0px" }}>
-      <Card>
+      <Card loading={props.loading}>
         <Row>
           <Col className="title" span={props.titleSpan || 12}>
             {props.title}

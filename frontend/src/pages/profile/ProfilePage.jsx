@@ -5,7 +5,7 @@ import {
   HomeOutlined,
   EditOutlined,
   CameraOutlined,
-  CloseCircleOutlined
+  CloseCircleOutlined,
 } from "@ant-design/icons";
 import GlobalContext from "../../context/GlobalContext";
 import "./Profile.scss";
@@ -15,6 +15,8 @@ import LanguageSelector from "../../components/language/LanguageSelector";
 import { useTranslation } from "react-i18next";
 import profileImage from "../../images/dandun.jpg";
 import { toast } from "react-toastify";
+import api from "../../utils/api";
+import config from "../../config";
 
 export default function ProfilePage() {
   const { isPhone, height, setSelectedKeys } = React.useContext(GlobalContext);
@@ -35,9 +37,19 @@ export default function ProfilePage() {
   });
 
   const fields = [
-    { title: t("profile.fullname"), field: userInfo.name, value: "name", placeholder:t("profile.placeholder.name") },
+    {
+      title: t("profile.fullname"),
+      field: userInfo.name,
+      value: "name",
+      placeholder: t("profile.placeholder.name"),
+    },
     { title: t("profile.number"), field: userInfo.phone, value: "phone" },
-    { title: t("profile.email"), field: userInfo.email, value: "email", placeholder:t("profile.placeholder.email") },
+    {
+      title: t("profile.email"),
+      field: userInfo.email,
+      value: "email",
+      placeholder: t("profile.placeholder.email"),
+    },
     {
       title: t("profile.address"),
       field: userInfo.address?.label,
@@ -60,12 +72,52 @@ export default function ProfilePage() {
     }
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setProfilePhotoSelect(file);
+  const [file, setFile] = React.useState(null);
+  const [uploadedFilePath, setUploadedFilePath] = React.useState("");
+  const [retrievedImage, setRetrievedImage] = React.useState(null);
+  const [isPhotoLoading, setIsPhotoLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleFileChange = async (event) => {
+    setFile(event.target.files[0]);
+
+    await handleUpload();
+    await handleRetrieve();
+  };
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+    formData.append("photo", file);
+
+    try {
+      const res = await api.post(`${config.urls.setImage}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setUploadedFilePath(res.data.filePath);
+    } catch (err) {
+      console.error("Error uploading file:", err);
     }
   };
+
+  const handleRetrieve = async () => {
+    setIsPhotoLoading(true);
+    try {
+      const res = await api.get(`${config.urls.getImage}/${user.id}`, {
+        responseType: "blob",
+      });
+      const imageUrl = URL.createObjectURL(res.data);
+      setRetrievedImage(imageUrl);
+    } catch (err) {
+      console.error("Error retrieving file:", err);
+    }
+    setIsPhotoLoading(false);
+  };
+
+  React.useEffect(() => {
+    handleRetrieve();
+  }, []);
 
   return (
     <Row justify="center">
@@ -98,9 +150,10 @@ export default function ProfilePage() {
                       style={{ display: "none" }}
                       onChange={handleFileChange}
                     />
+
                     <img
                       className="profile-image"
-                      src={profileImage}
+                      src={retrievedImage || profileImage}
                       alt="profil fotoğrafı"
                       style={{
                         opacity: focus ? (isActive ? "0.60" : "0.75") : "1",
@@ -135,7 +188,13 @@ export default function ProfilePage() {
                   <Button
                     type="primary"
                     shape="circle"
-                    icon={edit ? <CloseCircleOutlined style={{fontSize:"21px"}} /> : <EditOutlined />}
+                    icon={
+                      edit ? (
+                        <CloseCircleOutlined style={{ fontSize: "21px" }} />
+                      ) : (
+                        <EditOutlined />
+                      )
+                    }
                     style={{
                       position: "absolute",
                       bottom: 0, // Adjust this value as needed
@@ -183,6 +242,7 @@ export default function ProfilePage() {
                       onFieldChange={setFieldValue}
                       value={fieldConfig.value}
                       placeholder={fieldConfig.placeholder}
+                      loading={isLoading}
                     />
                   ))}
                   <Field
