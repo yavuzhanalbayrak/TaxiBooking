@@ -136,13 +136,13 @@ export default function ProfilePage() {
                 <Col>
                   <div
                     onMouseEnter={() => {
-                      setFocus(true);
+                      !isPhotoLoading && setFocus(true);
                     }}
                     onMouseLeave={() => setFocus(false)}
                     onMouseDown={() => setIsActive(true)}
                     onMouseUp={() => setIsActive(false)}
                     style={{ cursor: "pointer" }}
-                    onClick={handleImageClick}
+                    onClick={!isPhotoLoading && handleImageClick}
                   >
                     <input
                       type="file"
@@ -151,14 +151,20 @@ export default function ProfilePage() {
                       onChange={handleFileChange}
                     />
 
-                    <img
-                      className="profile-image"
-                      src={retrievedImage || profileImage}
-                      alt="profil fotoğrafı"
-                      style={{
-                        opacity: focus ? (isActive ? "0.60" : "0.75") : "1",
-                      }}
-                    />
+                    {isPhotoLoading ? (
+                      <div className="profile-image">
+                        <div className="skeleton"></div>
+                      </div>
+                    ) : (
+                      <img
+                        className="profile-image"
+                        src={retrievedImage || profileImage}
+                        alt="profil fotoğrafı"
+                        style={{
+                          opacity: "1",
+                        }}
+                      />
+                    )}
 
                     <div
                       style={{
