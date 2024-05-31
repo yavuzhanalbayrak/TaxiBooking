@@ -41,6 +41,7 @@ export default function HomePage({
   setDistanceToPerson,
   socket,
   setUserId,
+  locationName
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel, travel } =
@@ -117,6 +118,25 @@ export default function HomePage({
   const startSearchForDriver = () => {
     if (destination && (source || (lat && lng))) {
       setIsModalOpen(true);
+
+      api.post(config.urls.taxiBooking,{
+        fromLocation: {
+          address: source.label || locationName ,
+          latitude: source.lat || lat,
+          longitude: source.lng || lng
+        },
+        toLocation: {
+          address: destination.label,
+          latitude: destination.lat,
+          longitude: destination.lng
+        },
+        totalDistanceMeters: 0,
+        city: "sakarya",
+        customerId: user.id,
+        vehicleType: "string"
+      }).then((taxiBooking) => {
+        console.log(taxiBooking);
+      });
     }
   };
 

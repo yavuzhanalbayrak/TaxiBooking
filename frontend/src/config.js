@@ -10,6 +10,7 @@ const config = {
         changeDriverStatus:`/api/v1/Driver/user`,
         setDriverAvailable:`/api/v1/Driver/avilable`,
         setDriverUnAvailable:`/api/v1/Driver/notavilable`,
+        taxiBooking:`/api/v1/TaxiBooking`,
     }
 };
 
