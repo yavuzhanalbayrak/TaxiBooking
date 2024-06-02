@@ -307,7 +307,7 @@ function Map({
                   boxShadow: "1.5px 1.5px 5px 0px",
                 }}
               >
-                <p> {source.label} {distanceToPerson} </p>
+                <p> {source.label} {"( "+distanceToPerson+" )"} </p>
               </div>
             </OverlayView>
           </MarkerF>
