@@ -56,10 +56,11 @@ export default function HomePage({
 
   // toUserId idsine sahip cliente mesaj atar.
   React.useEffect(() => {
-    socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
+    //socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
 
     socket.on("privateMessage", (message) => {
       setMes(`Private message received: ${message}`);
+      console.log("SOCKETMESSAGE:",message);
     });
   }, []);
 
@@ -115,6 +116,8 @@ export default function HomePage({
     }
   }, [isLocationClicked]);
 
+  const [taxiBooking, setTaxiBooking] = useState("");
+
   const startSearchForDriver = () => {
     if (destination && (source || (lat && lng))) {
       setIsModalOpen(true);
@@ -136,6 +139,7 @@ export default function HomePage({
         vehicleType: "string"
       }).then((taxiBooking) => {
         console.log(taxiBooking);
+        setTaxiBooking(taxiBooking.data)
       });
     }
   };
@@ -660,6 +664,8 @@ export default function HomePage({
         distance={distance}
         source={source}
         t={t}
+        taxiBooking={taxiBooking}
+        socket={socket}
       ></LoadingModal>
     </>
   );

@@ -3,6 +3,8 @@ import { Modal, Row, Col, Button, Spin } from "antd";
 import { LoadingOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import config from "../../config";
+import api from "../../utils/api";
 
 const initialCountdown = 3;
 
@@ -12,7 +14,9 @@ export default function LoadingModal({
   destination,
   distance,
   source,
-  t
+  t,
+  taxiBooking,
+  socket,
 }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
   const { travel, setTravel, height } = React.useContext(GlobalContext);
@@ -50,23 +54,25 @@ export default function LoadingModal({
 
   //Search Example
   useEffect(() => {
-    setIsDriverFound(false);
-    setCountdown(initialCountdown);
+    console.log(taxiBooking);
+    api.post(`${config.urls.findDriver}/${taxiBooking.id}`).then((response) => {
+      console.log(response.data);
+      response.data.forEach((res) => {
+        
+        socket.emit("privateMessage", { message: taxiBooking, toUserId: res.driver.user.id });
 
-    if (isModalOpen) {
-      const interval = setTimeout(() => {
-        setIsDriverFound(true);
-      }, 1500);
+      });
 
-      return () => clearInterval(interval);
-      
-    }
+      //setIsDriverFound(true)
+    });
   }, [isModalOpen]);
 
   return (
     <div>
       <Modal
-        title={isDriverFound ?  t("loadingmodal.found") : t("loadingmodal.searching")}
+        title={
+          isDriverFound ? t("loadingmodal.found") : t("loadingmodal.searching")
+        }
         open={isModalOpen}
         closeIcon={false}
         footer={false}

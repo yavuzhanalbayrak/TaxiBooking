@@ -12,7 +12,8 @@ const config = {
         setDriverUnAvailable:`/api/v1/Driver/notavilable`,
         taxiBooking:`/api/v1/TaxiBooking`,
         getImage:``,
-        setImage:``,
+        setImage:`/api/v1/User/uploadImage`,
+        findDriver:`/api/v1/TaxiBooking/driver/find`,
     }
 };
 

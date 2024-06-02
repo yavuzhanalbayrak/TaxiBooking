@@ -79,18 +79,19 @@ export default function ProfilePage() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleFileChange = async (event) => {
+    const file = event.target.files[0];
     setFile(event.target.files[0]);
 
-    await handleUpload();
+    await handleUpload(file);
     await handleRetrieve();
   };
 
-  const handleUpload = async () => {
+  const handleUpload = async (file) => {
     const formData = new FormData();
     formData.append("photo", file);
 
     try {
-      const res = await api.post(`${config.urls.setImage}`, formData, {
+      const res = await api.post(`${config.urls.setImage}/${user.id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
