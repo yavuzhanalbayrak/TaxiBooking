@@ -54,12 +54,11 @@ export default function LoadingModal({
 
   //Search Example
   useEffect(() => {
-    console.log(taxiBooking);
-    if(isModalOpen==true) {
+    if(isModalOpen==true && taxiBooking) {
     api.post(`${config.urls.findDriver}/${taxiBooking.id}`).then((response) => {
       console.log(response.data);
       response.data.forEach((res) => {
-        
+        console.log("taxibooooking",taxiBooking);
         socket.emit("privateMessage", { message: taxiBooking, toUserId: res.driver.user.id });
 
       });
@@ -67,7 +66,7 @@ export default function LoadingModal({
       //setIsDriverFound(true)
     });
   }
-  }, [isModalOpen]);
+  }, [isModalOpen, taxiBooking]);
 
   return (
     <div>

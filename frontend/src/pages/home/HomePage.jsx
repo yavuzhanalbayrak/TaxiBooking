@@ -41,7 +41,7 @@ export default function HomePage({
   setDistanceToPerson,
   socket,
   setUserId,
-  locationName
+  locationName,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height, setTravel, travel } =
@@ -57,11 +57,23 @@ export default function HomePage({
   // toUserId idsine sahip cliente mesaj atar.
   React.useEffect(() => {
     //socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
-
-    socket.on("privateMessage", (message) => {
-      setMes(`Private message received: ${message}`);
-      console.log("SOCKETMESSAGE:",message);
-    });
+    if (user.role == "DRIVER") {
+      socket.on("privateMessage", (message) => {
+        setMes(`Private message received: ${message}`);
+        console.log("SOCKETMESSAGE:", message);
+        setPerson({
+          lat: message.route[1].latitude,
+          lng: message.route[1].longitude,
+          destination: {
+            lat: message.route[0].latitude,
+            lng: message.route[0].longitude,
+            label: message.route[0].address,
+          },
+        });
+        setIsLocationClicked(true);
+        setIsPersonSearching(false);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -122,25 +134,27 @@ export default function HomePage({
     if (destination && (source || (lat && lng))) {
       setIsModalOpen(true);
 
-      api.post(config.urls.taxiBooking,{
-        fromLocation: {
-          address: source.label || locationName ,
-          latitude: source.lat || lat,
-          longitude: source.lng || lng
-        },
-        toLocation: {
-          address: destination.label,
-          latitude: destination.lat,
-          longitude: destination.lng
-        },
-        totalDistanceMeters: 0,
-        city: "sakarya",
-        customerId: user.id,
-        vehicleType: "string"
-      }).then((taxiBooking) => {
-        console.log(taxiBooking);
-        setTaxiBooking(taxiBooking.data)
-      });
+      api
+        .post(config.urls.taxiBooking, {
+          fromLocation: {
+            address: source.label || locationName,
+            latitude: source.lat || lat,
+            longitude: source.lng || lng,
+          },
+          toLocation: {
+            address: destination.label,
+            latitude: destination.lat,
+            longitude: destination.lng,
+          },
+          totalDistanceMeters: 0,
+          city: "sakarya",
+          customerId: user.id,
+          vehicleType: "string",
+        })
+        .then((taxiBooking) => {
+          console.log(taxiBooking);
+          setTaxiBooking(taxiBooking.data);
+        });
     }
   };
 
@@ -150,27 +164,29 @@ export default function HomePage({
     libraries: ["places"],
   });
 
-  const handleSearchPerson = async() => {
-    const driver = await api.get(`${config.urls.changeDriverStatus}/${user.id}`)
-    const driverId = driver.data.id
-    await api.post(`${config.urls.setDriverAvailable}`,{
+  const handleSearchPerson = async () => {
+    const driver = await api.get(
+      `${config.urls.changeDriverStatus}/${user.id}`
+    );
+    const driverId = driver.data.id;
+    await api.post(`${config.urls.setDriverAvailable}`, {
       driverId,
       location: {
-        address:"sakarya" ,
+        address: "sakarya",
         latitude: lat,
-        longitude: lng
-      }
-    })
+        longitude: lng,
+      },
+    });
+  };
 
-  }
+  const handleCancelSearchPerson = async () => {
+    const driver = await api.get(
+      `${config.urls.changeDriverStatus}/${user.id}`
+    );
+    const driverId = driver.data.id;
 
-  const handleCancelSearchPerson = async()=>{
-    const driver = await api.get(`${config.urls.changeDriverStatus}/${user.id}`)
-    const driverId = driver.data.id
-
-    await api.post(`${config.urls.setDriverUnAvailable}/${driverId}`)
-
-  }
+    await api.post(`${config.urls.setDriverUnAvailable}/${driverId}`);
+  };
 
   return (
     <>
@@ -335,7 +351,7 @@ export default function HomePage({
                                 <Button
                                   onClick={() => {
                                     setIsPersonSearching(false);
-                                    handleCancelSearchPerson();
+                                    handleCancelSearchPerson("");
                                   }}
                                   danger
                                   type="primary"
