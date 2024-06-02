@@ -11,7 +11,7 @@ const config = {
         setDriverAvailable:`/api/v1/Driver/avilable`,
         setDriverUnAvailable:`/api/v1/Driver/notavilable`,
         taxiBooking:`/api/v1/TaxiBooking`,
-        getImage:``,
+        getImage:`/api/v1/User/downloadImage`,
         setImage:`/api/v1/User/uploadImage`,
         findDriver:`/api/v1/TaxiBooking/driver/find`,
     }
