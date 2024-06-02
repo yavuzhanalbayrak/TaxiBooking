@@ -17,56 +17,93 @@ export default function LoadingModal({
   t,
   taxiBooking,
   socket,
-  user
+  user,
 }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
   const { travel, setTravel, height } = React.useContext(GlobalContext);
   const [countdown, setCountdown] = useState(initialCountdown);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isDriverFound) {
-      setTravel({
-        name: "Yavuzhan Albayrak",
-        surname: "Albayrak",
-        email: "yavuzalbayrak@gmail.com",
-        phone: "+90 539 202 61 05",
-        car: {
-          brand: "Honda",
-          model: "pcx",
-          year: "2021",
-        },
-        rating: 3,
-        destination,
-        distance,
-        source,
-        price: parseInt(distance.match(/\d+/)[0]) * 10,
-        currency: "TRY",
-      });
-      // Start the countdown timer when the component mounts
-      const interval = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 1);
-      }, 1000);
+  React.useEffect(() => {
+    //socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
+    if (user.role == "USER") {
+      socket.on("privateMessage", (message) => {
+        console.log("driverFounda:",message)
+        try{
 
-      // Clear the interval when the component unmounts
-      return () => clearInterval(interval);
+          setTravel({
+            name: message.name,
+            email: message.email,
+            phone: message.phone,
+            car: message.car,
+            rating: 3,
+            destination:{
+              label:message.taxiBooking.route[0].address
+            },
+            distance: message.distance,
+            source:{
+              label:message.taxiBooking.route[1].address
+            },
+            price: 100,
+            currency: "TRY",
+          });
+        }
+        catch(err){
+          console.log(err)
+        }
+        setIsDriverFound(true)
+        navigate("/travel");
+      });
     }
-  }, [isDriverFound]);
+  }, []);
+
+  // useEffect(() => {
+  //   if (isDriverFound) {
+      // setTravel({
+      //   name: "Yavuzhan Albayrak",
+      //   surname: "Albayrak",
+      //   email: "yavuzalbayrak@gmail.com",
+      //   phone: "+90 539 202 61 05",
+      //   car: {
+      //     brand: "Honda",
+      //     model: "pcx",
+      //     year: "2021",
+      //   },
+      //   rating: 3,
+      //   destination,
+      //   distance,
+      //   source,
+      //   price: parseInt(distance.match(/\d+/)[0]) * 10,
+      //   currency: "TRY",
+      // });
+  //     // Start the countdown timer when the component mounts
+  //     const interval = setInterval(() => {
+  //       setCountdown((prevCountdown) => prevCountdown - 1);
+  //     }, 1000);
+
+  //     // Clear the interval when the component unmounts
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [isDriverFound]);
 
   //Search Example
   useEffect(() => {
-    if(isModalOpen==true && taxiBooking) {
-    api.post(`${config.urls.findDriver}/${taxiBooking.id}`).then((response) => {
-      console.log(response.data);
-      response.data.forEach((res) => {
-        console.log("taxibooooking",taxiBooking);
-        socket.emit("privateMessage", { message: {taxiBooking,user}, toUserId: res.driver.user.id });
+    if (isModalOpen == true && taxiBooking) {
+      api
+        .post(`${config.urls.findDriver}/${taxiBooking.id}`)
+        .then((response) => {
+          console.log(response.data);
+          response.data.forEach((res) => {
+            console.log("taxibooooking", taxiBooking);
+            socket.emit("privateMessage", {
+              message: { taxiBooking, user },
+              toUserId: res.driver.user.id,
+            });
+          });
 
-      });
-
-      //setIsDriverFound(true)
-    });
-  }
+          //setIsDriverFound(true)
+        });
+    }
   }, [isModalOpen, taxiBooking]);
 
   return (

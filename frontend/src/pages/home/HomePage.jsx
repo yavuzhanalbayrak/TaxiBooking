@@ -64,14 +64,15 @@ export default function HomePage({
         setPerson({
           lat: message.taxiBooking.route[1].latitude,
           lng: message.taxiBooking.route[1].longitude,
-          label:message.taxiBooking.route[1].address,
+          label: message.taxiBooking.route[1].address,
           destination: {
             lat: message.taxiBooking.route[0].latitude,
             lng: message.taxiBooking.route[0].longitude,
             label: message.taxiBooking.route[0].address,
           },
-          user: message.user
+          user: message.user,
         });
+        setTaxiBooking(message.taxiBooking);
         setIsLocationClicked(true);
         setIsPersonSearching(false);
       });
@@ -434,6 +435,20 @@ export default function HomePage({
                                         parseInt(distance.match(/\d+/)[0]) * 10,
                                       currency: "TRY",
                                     });
+
+                                    socket.emit("privateMessage", { message: {
+                                      name: user.name,
+                                      email: user.email,
+                                      phone: user.phone,
+                                      taxiBooking,
+                                      distance,
+                                      car: {
+                                        brand: "Honda",
+                                        model: "pcx",
+                                        year: "2021",
+                                      },
+                                      rating: 3,
+                                    }, toUserId: person.user.id });
                                   }}
                                 >
                                   {t("homepage.approve")}
