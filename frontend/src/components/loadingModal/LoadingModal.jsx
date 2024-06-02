@@ -17,6 +17,7 @@ export default function LoadingModal({
   t,
   taxiBooking,
   socket,
+  user
 }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
   const { travel, setTravel, height } = React.useContext(GlobalContext);
@@ -59,7 +60,7 @@ export default function LoadingModal({
       console.log(response.data);
       response.data.forEach((res) => {
         console.log("taxibooooking",taxiBooking);
-        socket.emit("privateMessage", { message: taxiBooking, toUserId: res.driver.user.id });
+        socket.emit("privateMessage", { message: {taxiBooking,user}, toUserId: res.driver.user.id });
 
       });
 

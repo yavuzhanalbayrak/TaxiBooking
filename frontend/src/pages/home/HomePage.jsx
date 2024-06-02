@@ -62,13 +62,15 @@ export default function HomePage({
         setMes(`Private message received: ${message}`);
         console.log("SOCKETMESSAGE:", message);
         setPerson({
-          lat: message.route[1].latitude,
-          lng: message.route[1].longitude,
+          lat: message.taxiBooking.route[1].latitude,
+          lng: message.taxiBooking.route[1].longitude,
+          label:message.taxiBooking.route[1].address,
           destination: {
-            lat: message.route[0].latitude,
-            lng: message.route[0].longitude,
-            label: message.route[0].address,
+            lat: message.taxiBooking.route[0].latitude,
+            lng: message.taxiBooking.route[0].longitude,
+            label: message.taxiBooking.route[0].address,
           },
+          user: message.user
         });
         setIsLocationClicked(true);
         setIsPersonSearching(false);
@@ -416,10 +418,9 @@ export default function HomePage({
                                   onClick={() => {
                                     setIsPersonApproved(true);
                                     setTravel({
-                                      name: "Yavuzhan Albayrak",
-                                      surname: "Albayrak",
-                                      email: "yavuzalbayrak@gmail.com",
-                                      phone: "+90 539 202 61 05",
+                                      name: person.user.name,
+                                      email: person.user.email,
+                                      phone: person.user.phone,
                                       car: {
                                         brand: "Honda",
                                         model: "pcx",
@@ -682,6 +683,7 @@ export default function HomePage({
         t={t}
         taxiBooking={taxiBooking}
         socket={socket}
+        user={user}
       ></LoadingModal>
     </>
   );
