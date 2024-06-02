@@ -76,31 +76,31 @@ export default function HomePage({
     );
   }, [distanceNumber, distanceToPersonNumber]);
 
-  useEffect(() => {
-    let timeoutId;
-    if (isPersonSearching) {
-      timeoutId = setTimeout(() => {
-        setPerson({
-          lat: 40 + 0.7,
-          lng: 30 + 0.1,
-          destination: {
-            lat: 40 + 0.7,
-            lng: 30,
-            label: "Sakarya",
-          },
-        });
-        setIsLocationClicked(true);
-        setIsPersonSearching(false);
-      }, 2000);
-    }
+  // useEffect(() => {
+  //   let timeoutId;
+  //   if (isPersonSearching) {
+  //     timeoutId = setTimeout(() => {
+  //       setPerson({
+  //         lat: 40 + 0.7,
+  //         lng: 30 + 0.1,
+  //         destination: {
+  //           lat: 40 + 0.7,
+  //           lng: 30,
+  //           label: "Sakarya",
+  //         },
+  //       });
+  //       setIsLocationClicked(true);
+  //       setIsPersonSearching(false);
+  //     }, 2000);
+  //   }
 
-    // Cleanup function to clear the timeout if isPersonSearching changes
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [isPersonSearching]);
+  //   // Cleanup function to clear the timeout if isPersonSearching changes
+  //   return () => {
+  //     if (timeoutId) {
+  //       clearTimeout(timeoutId);
+  //     }
+  //   };
+  // }, [isPersonSearching]);
 
   useEffect(() => {
     setSelectedKeys(["1"]);

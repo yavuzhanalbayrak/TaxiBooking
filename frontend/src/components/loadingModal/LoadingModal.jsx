@@ -55,6 +55,7 @@ export default function LoadingModal({
   //Search Example
   useEffect(() => {
     console.log(taxiBooking);
+    if(isModalOpen==true) {
     api.post(`${config.urls.findDriver}/${taxiBooking.id}`).then((response) => {
       console.log(response.data);
       response.data.forEach((res) => {
@@ -65,6 +66,7 @@ export default function LoadingModal({
 
       //setIsDriverFound(true)
     });
+  }
   }, [isModalOpen]);
 
   return (
