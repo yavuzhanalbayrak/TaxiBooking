@@ -94,6 +94,7 @@ export default function Field(props) {
                 <Input
                   value={props.fieldValue?.[props.value]}
                   placeholder={props.placeholder}
+                  disabled={props.value === "email"}
                   onChange={(e) =>
                     props.onFieldChange((prevstate) => ({
                       ...prevstate,

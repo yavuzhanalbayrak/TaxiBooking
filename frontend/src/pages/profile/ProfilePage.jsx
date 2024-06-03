@@ -76,7 +76,7 @@ export default function ProfilePage() {
   const [uploadedFilePath, setUploadedFilePath] = React.useState("");
   const [retrievedImage, setRetrievedImage] = React.useState(null);
   const [isPhotoLoading, setIsPhotoLoading] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -119,6 +119,51 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
     handleRetrieve();
+  }, []);
+
+  const handleEditInfo = async () => {
+    try {
+      const res = await api.put(`${config.urls.user}`, {
+        id: user.id,
+        firstName: fieldValue.name.split(" ").slice(0, -1).join(" "),
+        lastName:
+          fieldValue.name.split(" ")[fieldValue.name.split(" ").length - 1],
+        mobileNumber: fieldValue.phone,
+        gender: "MALE",
+        //address: fieldValue.address,
+      });
+      console.log(
+        "UPPPDDDAA",
+        fieldValue.name.split(" ")[fieldValue.name.split(" ").length - 1]
+      );
+    } catch (err) {
+      console.error("Error updating user:", err);
+    }
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    api
+      .get(`${config.urls.user}/${user.id}`)
+      .then((response) => {
+        console.log("USERINFOO:", response.data);
+        setUserInfo({
+          name: response.data.firstName + " " + response.data.lastName,
+          phone: "+" + response.data.mobileNumber,
+          email: response.data.email,
+          address: {label:"Sakarya / Serdivan"},
+        });
+        setFieldValue({
+          name: response.data.firstName + " " + response.data.lastName,
+          phone: response.data.mobileNumber,
+          email: response.data.email,
+          address: {label:"Sakarya / Serdivan"}
+        });
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -228,6 +273,7 @@ export default function ProfilePage() {
                       onClick={() => {
                         setUserInfo(fieldValue);
                         setEdit(false);
+                        handleEditInfo();
                         toast.success(t("profile.saved"));
                       }}
                     >
