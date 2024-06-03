@@ -16,6 +16,7 @@ export default function LoadingModal({
   source,
   t,
   taxiBooking,
+  setTaxiBooking,
   socket,
   user,
 }) {
@@ -88,21 +89,33 @@ export default function LoadingModal({
 
   //Search Example
   useEffect(() => {
-    if (isModalOpen == true && taxiBooking) {
-      api
-        .post(`${config.urls.findDriver}/${taxiBooking.id}`)
-        .then((response) => {
-          console.log(response.data);
-          response.data.forEach((res) => {
-            console.log("taxibooooking", taxiBooking);
-            socket.emit("privateMessage", {
-              message: { taxiBooking, user },
-              toUserId: res.driver.user.id,
-            });
-          });
+    let intervalId;
 
-          //setIsDriverFound(true)
-        });
+    if (isModalOpen == true && taxiBooking) {
+      intervalId = setInterval(() => {
+        api.post(`${config.urls.findDriver}/${taxiBooking.id}`)
+          .then((response) => {
+            console.log(response.data);
+            response.data.forEach((res) => {
+
+              socket.emit("privateMessage", {
+                message: { taxiBooking, user },
+                toUserId: res.driver.user.id,
+              });
+            });
+
+            //setIsDriverFound(true)
+          })
+          .catch((error) => {
+            console.error("Error finding driver:", error);
+          });
+      }, 2000);
+
+      return () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
     }
   }, [taxiBooking]);
 
@@ -134,6 +147,7 @@ export default function LoadingModal({
                 onClick={() => {
                   setIsModalOpen(false);
                   setIsDriverFound(false);
+                  setTaxiBooking(false);
                 }}
                 style={{ width: "30%" }}
                 danger

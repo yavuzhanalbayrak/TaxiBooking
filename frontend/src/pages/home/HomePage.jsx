@@ -704,6 +704,7 @@ export default function HomePage({
         source={source}
         t={t}
         taxiBooking={taxiBooking}
+        setTaxiBooking={setTaxiBooking}
         socket={socket}
         user={user}
       ></LoadingModal>
