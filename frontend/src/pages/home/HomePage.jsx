@@ -424,6 +424,7 @@ export default function HomePage({
                                   }}
                                   size="large"
                                   onClick={() => {
+                                    handleCancelSearchPerson();
                                     setIsPersonApproved(true);
                                     setTravel({
                                       name: person.user.name,
