@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Breadcrumb,
   Layout,
@@ -18,6 +18,8 @@ import GlobalContext from "../context/GlobalContext";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useTranslation } from "react-i18next";
+import config from "../config";
+import api from "../utils/api";
 
 const { Header, Content, Footer } = Layout;
 
@@ -27,7 +29,6 @@ const App = ({ children, link, icon }) => {
     React.useContext(GlobalContext);
   const auth = useAuthUser();
   const { t } = useTranslation();
-
 
   React.useEffect(() => {
     function handleResize() {
@@ -82,17 +83,26 @@ const App = ({ children, link, icon }) => {
   const items = [
     {
       key: "1",
-      label: <Link to="/">
-        {t("layout.map")}
-      </Link>,
+      label: <Link to="/">{t("layout.map")}</Link>,
     },
     {
       key: "2",
-      label: <Link to="/Travel">
-        {t("layout.travel")}
-      </Link>,
+      label: <Link to="/Travel">{t("layout.travel")}</Link>,
     },
   ];
+
+  const handleCancelSearchPerson = async () => {
+    const driver = await api.get(
+      `${config.urls.changeDriverStatus}/${auth.id}`
+    );
+    const driverId = driver.data.id;
+
+    await api.post(`${config.urls.setDriverUnAvailable}/${driverId}`);
+  };
+
+  useEffect(() => {
+    if (auth.role === "DRIVER") handleCancelSearchPerson();
+  }, []);
 
   return (
     <ConfigProvider
@@ -177,7 +187,7 @@ const App = ({ children, link, icon }) => {
               textAlign: "center",
               zIndex: "200",
               backgroundColor: "#00305f",
-              color:"#ffffff"
+              color: "#ffffff",
             }}
           >
             Taxi Booking ©{new Date().getFullYear()}
