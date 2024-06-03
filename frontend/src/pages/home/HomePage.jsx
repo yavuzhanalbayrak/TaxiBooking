@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Row, Col, Card, Modal, Button, ConfigProvider } from "antd";
+import { Row, Col, Card, Modal, Button, ConfigProvider, message } from "antd";
 import Map from "../../components/map/Map";
 import LocationInputs from "../../components/LocationInputs";
 import LoadingModal from "../../components/loadingModal/LoadingModal";
@@ -59,25 +59,30 @@ export default function HomePage({
     //socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
     if (user.role == "DRIVER") {
       socket.on("privateMessage", (message) => {
-        setMes(`Private message received: ${message}`);
-        console.log("SOCKETMESSAGE:", message);
-        setPerson({
-          lat: message.taxiBooking.route[1].latitude,
-          lng: message.taxiBooking.route[1].longitude,
-          label: message.taxiBooking.route[1].address,
-          destination: {
-            lat: message.taxiBooking.route[0].latitude,
-            lng: message.taxiBooking.route[0].longitude,
-            label: message.taxiBooking.route[0].address,
-          },
-          user: message.user,
-        });
-        setTaxiBooking(message.taxiBooking);
-        setIsLocationClicked(true);
-        setIsPersonSearching(false);
+      console.log("MESS", message);
+        setMes(message);
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (!person && mes) {
+      setPerson({
+        lat: mes.taxiBooking.route[1].latitude,
+        lng: mes.taxiBooking.route[1].longitude,
+        label: mes.taxiBooking.route[1].address,
+        destination: {
+          lat: mes.taxiBooking.route[0].latitude,
+          lng: mes.taxiBooking.route[0].longitude,
+          label: mes.taxiBooking.route[0].address,
+        },
+        user: mes.user,
+      });
+      setTaxiBooking(mes.taxiBooking);
+      setIsLocationClicked(true);
+      setIsPersonSearching(false);
+    }
+  }, [mes]);
 
   useEffect(() => {
     if (user) {
@@ -354,6 +359,8 @@ export default function HomePage({
                                 <Button
                                   onClick={() => {
                                     setIsPersonSearching(false);
+                                    setPerson("");
+                                    setMes("");
                                     handleCancelSearchPerson("");
                                   }}
                                   danger

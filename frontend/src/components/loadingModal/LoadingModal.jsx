@@ -104,7 +104,7 @@ export default function LoadingModal({
           //setIsDriverFound(true)
         });
     }
-  }, [isModalOpen, taxiBooking]);
+  }, [taxiBooking]);
 
   return (
     <div>
