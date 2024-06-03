@@ -429,7 +429,7 @@ export default function HomePage({
                                       },
                                       rating: 3,
                                       destination,
-                                      distance,
+                                      distance: `${totalDistance} km` || distance,
                                       source,
                                       price:
                                         parseInt(distance.match(/\d+/)[0]) * 10,

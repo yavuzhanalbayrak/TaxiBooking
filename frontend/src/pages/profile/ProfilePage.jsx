@@ -88,10 +88,11 @@ export default function ProfilePage() {
 
   const handleUpload = async (file) => {
     const formData = new FormData();
-    formData.append("photo", file);
+    formData.append("image", file); // "image" should match the key in Postman
+    formData.append("id", `${user.id}`);
 
     try {
-      const res = await api.post(`${config.urls.setImage}/${user.id}`, formData, {
+      const res = await api.post(`${config.urls.setImage}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
