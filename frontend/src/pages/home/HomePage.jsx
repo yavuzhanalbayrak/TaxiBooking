@@ -398,7 +398,7 @@ export default function HomePage({
                                 >
                                   <strong>{t("homepage.distance")}:</strong>{" "}
                                   <span style={{ color: "#f17624" }}>
-                                    {totalDistance + " " + unit}
+                                    {totalDistance?.toFixed(1) + " " + unit}
                                   </span>
                                 </p>
                                 <p
