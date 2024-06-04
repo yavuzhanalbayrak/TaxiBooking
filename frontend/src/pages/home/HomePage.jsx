@@ -198,7 +198,6 @@ export default function HomePage({
 
   return (
     <>
-      {/* {mes} */}
       {isLoaded ? (
         <div>
           {isPhone ? (
