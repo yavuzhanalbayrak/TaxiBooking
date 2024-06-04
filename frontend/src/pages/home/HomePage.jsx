@@ -186,7 +186,7 @@ export default function HomePage({
       },
     });
   };
-//
+
   const handleCancelSearchPerson = async () => {
     const driver = await api.get(
       `${config.urls.changeDriverStatus}/${user.id}`
