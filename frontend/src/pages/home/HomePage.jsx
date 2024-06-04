@@ -195,7 +195,7 @@ export default function HomePage({
 
     await api.post(`${config.urls.setDriverUnAvailable}/${driverId}`);
   };
-//
+
   return (
     <>
       {isLoaded ? (
