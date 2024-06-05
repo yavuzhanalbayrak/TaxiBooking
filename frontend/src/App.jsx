@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import GlobalProvider from "./context/GlobalProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
@@ -35,6 +35,7 @@ function App() {
   const [distance, setDistance] = useState("");
   const [distanceToPerson, setDistanceToPerson] = useState("");
   const [userId, setUserId] = useState("");
+  const [travel, setTravel] = useState("");
   React.useEffect(() => {
     if (userId) {
       socket.emit("register", userId);
@@ -84,6 +85,22 @@ function App() {
     cookieSecure: window.location.protocol === "https:",
   });
 
+  React.useEffect(() => {
+    socket.on("completeTravel", (message) => {
+      setTravel(false);
+      setPerson(null);
+      setSource("");
+      setDestination("");
+      setIsPersonApproved(false);
+      if(message.status==="success"){
+        toast.success("Yolculuk tamamlandı!");
+      }
+      else{
+        toast.error("Yolculuk iptal edildi!");
+      }
+    });
+  }, []);
+
   return (
     <>
       <ToastContainer style={{ zIndex: 9999 }} />
@@ -123,6 +140,8 @@ function App() {
                         setDistanceToPerson={setDistanceToPerson}
                         socket={socket}
                         setUserId={setUserId}
+                        travel={travel}
+                        setTravel={setTravel}
                       />
                     </Layout>
                   }
@@ -146,6 +165,8 @@ function App() {
                         setDestination={setDestination}
                         setIsPersonApproved={setIsPersonApproved}
                         socket={socket}
+                        travel={travel}
+                        setTravel={setTravel}
                       />
                     </Layout>
                   }

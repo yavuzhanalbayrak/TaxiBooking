@@ -42,9 +42,11 @@ export default function HomePage({
   socket,
   setUserId,
   locationName,
+  setTravel,
+  travel
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setSelectedKeys, isPhone, height, setTravel, travel } =
+  const { setSelectedKeys, isPhone, height } =
     useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
   const [totalDistance, setTotalDistance] = useState(false);
@@ -763,6 +765,7 @@ export default function HomePage({
         destination={destination}
         distance={distance}
         source={source}
+        setTravel={setTravel}
         t={t}
         taxiBooking={taxiBooking}
         setTaxiBooking={setTaxiBooking}

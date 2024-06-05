@@ -19,9 +19,10 @@ export default function LoadingModal({
   setTaxiBooking,
   socket,
   user,
+  setTravel
 }) {
   const [isDriverFound, setIsDriverFound] = React.useState(false);
-  const { travel, setTravel, height } = React.useContext(GlobalContext);
+  const { travel, height } = React.useContext(GlobalContext);
   const [countdown, setCountdown] = useState(initialCountdown);
   const navigate = useNavigate();
 

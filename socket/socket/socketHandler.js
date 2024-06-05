@@ -38,13 +38,13 @@ function initializeSocket(httpServer) {
       }
     });
 
-    socket.on("cancelTravel", ({ message, toUserId }) => {
+    socket.on("completeTravel", ({ message, toUserId }) => {
       const toSocketId = users[toUserId];
       console.log(
         `Received private message: ${message} to user: ${toUserId} with socket id: ${socket.id}`
       );
       if (toSocketId) {
-        io.to(toSocketId).emit("cancelTravel", message);
+        io.to(toSocketId).emit("completeTravel", message);
       }
     });
 

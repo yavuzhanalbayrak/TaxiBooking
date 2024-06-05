@@ -35,8 +35,10 @@ export default function TravelPage({
   setDestination,
   setIsPersonApproved,
   socket,
+  travel,
+  setTravel
 }) {
-  const { setSelectedKeys, isPhone, height, travel, setTravel } =
+  const { setSelectedKeys, isPhone, height } =
     React.useContext(GlobalContext);
   const totalStars = 5;
   const filledStars = Math.max(0, Math.min(travel?.rating || 0, totalStars));
@@ -162,6 +164,12 @@ export default function TravelPage({
         setDestination("");
         setIsPersonApproved(false);
         setIsPaymentLoading(false);
+        socket.emit("completeTravel", {
+          message: {
+            status: "success",
+          },
+          toUserId: 2,
+        });
 
         toast.success("Ödeme Başarılı!");
       })
@@ -172,18 +180,6 @@ export default function TravelPage({
         toast.error("Ödeme Başarısız!");
       });
   };
-
-  React.useEffect(() => {
-    socket.on("cancelTravel", (message) => {
-      setTravel(false);
-      setPerson(null);
-      navigate("/");
-      setSource("");
-      setDestination("");
-      setIsPersonApproved(false);
-      toast.error("Yolculuk iptal edildi!");
-    });
-  }, []);
 
   return (
     <Row
@@ -735,6 +731,12 @@ export default function TravelPage({
           setDestination("");
           setIsPersonApproved(false);
           toast.error("Yolculuk iptal edildi!");
+          socket.emit("completeTravel", {
+            message: {
+              status: "canceled",
+            },
+            toUserId: 2,
+          });
         }}
         isModalOpen={open}
         setIsModalOpen={setOpen}
