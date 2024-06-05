@@ -59,7 +59,7 @@ export default function HomePage({
     //socket.emit("privateMessage", { message: "özel333", toUserId: 2 });
     if (user.role == "DRIVER") {
       socket.on("privateMessage", (message) => {
-      console.log("MESS", message);
+        console.log("MESS", message);
         setMes(message);
       });
     }
@@ -195,6 +195,8 @@ export default function HomePage({
 
     await api.post(`${config.urls.setDriverUnAvailable}/${driverId}`);
   };
+
+  const [isApproveLoading, setIsApproveLoading] = useState(false);
 
   return (
     <>
@@ -421,7 +423,9 @@ export default function HomePage({
                                     borderRadius: "25px",
                                   }}
                                   size="large"
-                                  onClick={() => {
+                                  disabled={isApproveLoading}
+                                  onClick={async () => {
+                                    setIsApproveLoading(true);
                                     handleCancelSearchPerson();
                                     setIsPersonApproved(true);
                                     setTravel({
@@ -435,26 +439,47 @@ export default function HomePage({
                                       },
                                       rating: 3,
                                       destination,
-                                      distance: `${totalDistance} km` || distance,
+                                      distance:
+                                        `${totalDistance} km` || distance,
                                       source,
                                       price:
                                         parseInt(distance.match(/\d+/)[0]) * 10,
                                       currency: "TRY",
                                     });
 
-                                    socket.emit("privateMessage", { message: {
-                                      name: user.name,
-                                      email: user.email,
-                                      phone: user.phone,
-                                      taxiBooking,
-                                      distance,
-                                      car: {
-                                        brand: "Honda",
-                                        model: "pcx",
-                                        year: "2021",
+                                    socket.emit("privateMessage", {
+                                      message: {
+                                        name: user.name,
+                                        email: user.email,
+                                        phone: user.phone,
+                                        taxiBooking,
+                                        distance,
+                                        car: {
+                                          brand: "Honda",
+                                          model: "pcx",
+                                          year: "2021",
+                                        },
+                                        rating: 3,
                                       },
-                                      rating: 3,
-                                    }, toUserId: person.user.id });
+                                      toUserId: person.user.id,
+                                    });
+
+                                    const driver = await api.get(
+                                      `${config.urls.changeDriverStatus}/${user.id}`
+                                    );
+                                    const driverId = driver.data.id;
+                                    try {
+                                      await api.post(
+                                        `${config.urls.driverDeliver}`,
+                                        {
+                                          driverId,
+                                          taxiId: taxiBooking.id,
+                                        }
+                                      );
+                                      setIsApproveLoading(false);
+                                    } catch {
+                                      setIsApproveLoading(false);
+                                    }
                                   }}
                                 >
                                   {t("homepage.approve")}
@@ -468,6 +493,7 @@ export default function HomePage({
                                     width: "100%",
                                     borderRadius: "25px",
                                   }}
+                                  disabled={isApproveLoading}
                                   size="large"
                                   onClick={() => {
                                     setPerson("");
@@ -606,13 +632,14 @@ export default function HomePage({
                                 width: "100%",
                                 borderRadius: "25px",
                               }}
-                              onClick={() => {
+                              onClick={async () => {
+                                setIsApproveLoading(true);
+                                handleCancelSearchPerson();
                                 setIsPersonApproved(true);
                                 setTravel({
-                                  name: "Yavuzhan Albayrak",
-                                  surname: "Albayrak",
-                                  email: "yavuzalbayrak@gmail.com",
-                                  phone: "+90 539 202 61 05",
+                                  name: person.user.name,
+                                  email: person.user.email,
+                                  phone: person.user.phone,
                                   car: {
                                     brand: "Honda",
                                     model: "pcx",
@@ -620,12 +647,47 @@ export default function HomePage({
                                   },
                                   rating: 3,
                                   destination,
-                                  distance,
+                                  distance:
+                                    `${totalDistance} km` || distance,
                                   source,
                                   price:
                                     parseInt(distance.match(/\d+/)[0]) * 10,
                                   currency: "TRY",
                                 });
+
+                                socket.emit("privateMessage", {
+                                  message: {
+                                    name: user.name,
+                                    email: user.email,
+                                    phone: user.phone,
+                                    taxiBooking,
+                                    distance,
+                                    car: {
+                                      brand: "Honda",
+                                      model: "pcx",
+                                      year: "2021",
+                                    },
+                                    rating: 3,
+                                  },
+                                  toUserId: person.user.id,
+                                });
+
+                                const driver = await api.get(
+                                  `${config.urls.changeDriverStatus}/${user.id}`
+                                );
+                                const driverId = driver.data.id;
+                                try {
+                                  await api.post(
+                                    `${config.urls.driverDeliver}`,
+                                    {
+                                      driverId,
+                                      taxiId: taxiBooking.id,
+                                    }
+                                  );
+                                  setIsApproveLoading(false);
+                                } catch {
+                                  setIsApproveLoading(false);
+                                }
                               }}
                             >
                               {t("homepage.approve")}

@@ -145,6 +145,7 @@ function App() {
                         setSource={setSource}
                         setDestination={setDestination}
                         setIsPersonApproved={setIsPersonApproved}
+                        socket={socket}
                       />
                     </Layout>
                   }

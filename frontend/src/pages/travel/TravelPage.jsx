@@ -34,6 +34,7 @@ export default function TravelPage({
   setSource,
   setDestination,
   setIsPersonApproved,
+  socket,
 }) {
   const { setSelectedKeys, isPhone, height, travel, setTravel } =
     React.useContext(GlobalContext);
@@ -171,6 +172,18 @@ export default function TravelPage({
         toast.error("Ödeme Başarısız!");
       });
   };
+
+  React.useEffect(() => {
+    socket.on("cancelTravel", (message) => {
+      setTravel(false);
+      setPerson(null);
+      navigate("/");
+      setSource("");
+      setDestination("");
+      setIsPersonApproved(false);
+      toast.error("Yolculuk iptal edildi!");
+    });
+  }, []);
 
   return (
     <Row
@@ -445,7 +458,11 @@ export default function TravelPage({
                                         disabled={isPaymentLoading}
                                         onClick={handleSubmitMimic}
                                       >
-                                        {isPaymentLoading? <LoadingOutlined/>: t("travelpage.pay")}
+                                        {isPaymentLoading ? (
+                                          <LoadingOutlined />
+                                        ) : (
+                                          t("travelpage.pay")
+                                        )}
                                       </Button>
                                       <Button
                                         size="large"
@@ -717,6 +734,7 @@ export default function TravelPage({
           setSource("");
           setDestination("");
           setIsPersonApproved(false);
+          toast.error("Yolculuk iptal edildi!");
         }}
         isModalOpen={open}
         setIsModalOpen={setOpen}

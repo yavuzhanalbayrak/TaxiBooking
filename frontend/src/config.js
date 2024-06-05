@@ -16,6 +16,7 @@ const config = {
         findDriver:`/api/v1/TaxiBooking/driver/find`,
         user:`/api/v1/User`,
         paymentCharge:`/api/payment/charge`,
+        driverDeliver:`/api/v1/TaxiBooking/driver/deliver`
         
     }
 };

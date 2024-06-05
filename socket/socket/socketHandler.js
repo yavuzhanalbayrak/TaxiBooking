@@ -38,6 +38,16 @@ function initializeSocket(httpServer) {
       }
     });
 
+    socket.on("cancelTravel", ({ message, toUserId }) => {
+      const toSocketId = users[toUserId];
+      console.log(
+        `Received private message: ${message} to user: ${toUserId} with socket id: ${socket.id}`
+      );
+      if (toSocketId) {
+        io.to(toSocketId).emit("cancelTravel", message);
+      }
+    });
+
     socket.on("disconnect", () => {
       console.log("Client disconnected");
       for (let userId in users) {
