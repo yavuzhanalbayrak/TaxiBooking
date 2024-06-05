@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { Button, Card, Col, Row, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,8 @@ import {
   LeftCircleFilled,
   UserOutlined,
   CheckOutlined,
-  CloseCircleOutlined
+  CloseCircleOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/buttons/primaryButton";
@@ -23,6 +24,9 @@ import { useNavigate } from "react-router-dom";
 import PreviousTravelCard from "../../components/travel/PreviousTravelCard";
 import Field from "../../components/field/Field";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import api from "../../utils/api";
+import { toast } from "react-toastify";
+import config from "../../config";
 
 export default function TravelPage({
   locationName,
@@ -137,6 +141,37 @@ export default function TravelPage({
     },
   ];
 
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+
+  const handleSubmitMimic = () => {
+    setIsPaymentLoading(true);
+    api
+      .post(`${config.urls.paymentCharge}`, {
+        currency: "USD",
+        amount: 100.0,
+        description: "Taxi booking",
+        token: "tok_visa",
+      })
+      .then((response) => {
+        console.log("RESPAYMENT:", response.data);
+        setTravel(false);
+        setPerson(null);
+        navigate("/");
+        setSource("");
+        setDestination("");
+        setIsPersonApproved(false);
+        setIsPaymentLoading(false);
+
+        toast.success("Ödeme Başarılı!");
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsPaymentLoading(false);
+
+        toast.error("Ödeme Başarısız!");
+      });
+  };
+
   return (
     <Row
       style={
@@ -174,24 +209,28 @@ export default function TravelPage({
                     </Col>
                     <Field
                       title={t("travelpage.status")}
-                      field={detailInfos.historyDetails.status == "completed" ? (
-                        <p className="completed">
-                          {" "}
-                          <CheckOutlined
-                            style={{ fontSize: "16px"}}
-                          />{" "}
-                          {t("travelpage.completed")}{" "}
-                        </p>
-                      ) : (
-                        <p className="canceled">
-                          {" "}
-                          <CloseCircleOutlined 
-                            style={{ fontSize: "16px" }}
-                          />{" "}
-                          {t("travelpage.canceled")}{" "}
-                        </p>
-                      )}
-                      type={detailInfos.historyDetails.status == "completed"?"success":"danger"}
+                      field={
+                        detailInfos.historyDetails.status == "completed" ? (
+                          <p className="completed">
+                            {" "}
+                            <CheckOutlined style={{ fontSize: "16px" }} />{" "}
+                            {t("travelpage.completed")}{" "}
+                          </p>
+                        ) : (
+                          <p className="canceled">
+                            {" "}
+                            <CloseCircleOutlined
+                              style={{ fontSize: "16px" }}
+                            />{" "}
+                            {t("travelpage.canceled")}{" "}
+                          </p>
+                        )
+                      }
+                      type={
+                        detailInfos.historyDetails.status == "completed"
+                          ? "success"
+                          : "danger"
+                      }
                     />
                     <Field
                       title={t("travelpage.source")}
@@ -392,10 +431,22 @@ export default function TravelPage({
                                     <Col style={{ textAlign: "center" }}>
                                       <Stripe
                                         t={t}
-                                        amount={100}
+                                        amount={100.0}
                                         currency={"usd"}
                                         mode={"payment"}
                                       />{" "}
+                                      <Button
+                                        type="primary"
+                                        size="large"
+                                        style={{
+                                          width: "100%",
+                                          marginTop: "20px",
+                                        }}
+                                        disabled={isPaymentLoading}
+                                        onClick={handleSubmitMimic}
+                                      >
+                                        {isPaymentLoading? <LoadingOutlined/>: t("travelpage.pay")}
+                                      </Button>
                                       <Button
                                         size="large"
                                         danger

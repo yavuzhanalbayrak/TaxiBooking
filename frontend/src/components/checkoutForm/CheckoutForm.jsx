@@ -1,8 +1,15 @@
-import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-import { Button } from 'antd';
-import React from 'react';
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
+import { Button } from "antd";
+import React from "react";
+import { toast } from "react-toastify";
+import api from "../../utils/api";
+import config from "../../config";
 
-const CheckoutForm = ({t}) => {
+const CheckoutForm = ({ t, options }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -21,7 +28,6 @@ const CheckoutForm = ({t}) => {
       },
     });
 
-
     if (result.error) {
       console.log(result.error.message);
     } else {
@@ -34,9 +40,8 @@ const CheckoutForm = ({t}) => {
   return (
     <form>
       <PaymentElement />
-      <Button type='primary' size='large' style={{width:"100%", marginTop:"20px"}} onClick={handleSubmit} disabled={!stripe}>{t("travelpage.pay")}</Button>
     </form>
-  )
+  );
 };
 
 export default CheckoutForm;

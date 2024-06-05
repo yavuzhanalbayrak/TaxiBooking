@@ -45,7 +45,7 @@ export default function App({ amount, currency, mode, t }) {
 
   return (
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm t={t} />
+      <CheckoutForm t={t} options={options} />
     </Elements>
   );
 }

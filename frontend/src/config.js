@@ -15,6 +15,8 @@ const config = {
         setImage:`/api/v1/User/uploadImage`,
         findDriver:`/api/v1/TaxiBooking/driver/find`,
         user:`/api/v1/User`,
+        paymentCharge:`/api/payment/charge`,
+        
     }
 };
 
