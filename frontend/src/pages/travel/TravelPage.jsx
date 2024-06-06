@@ -170,19 +170,22 @@ export default function TravelPage({
               },
               toUserId,
             });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        setTravel(false);
-        setPerson(null);
-        navigate("/");
-        setSource("");
-        setDestination("");
-        setIsPersonApproved(false);
-        setIsPaymentLoading(false);
 
-        toast.success("Ödeme Başarılı!");
+            await api.post(`${config.urls.taxiBookingPayment}`, {
+              id: taxibooking.id,
+              amount: travel.price,
+            });
+
+            setTravel(false);
+            setPerson(null);
+            navigate("/");
+            setSource("");
+            setDestination("");
+            setIsPersonApproved(false);
+            setIsPaymentLoading(false);
+
+            toast.success("Ödeme Başarılı!");
+          })
       })
       .catch((error) => {
         console.log(error);
@@ -747,7 +750,7 @@ export default function TravelPage({
               } else {
                 toUserId = response.data.taxiCustomerId;
               }
-              socket.emit("completeTravel", { 
+              socket.emit("completeTravel", {
                 message: {
                   status: "canceled",
                 },

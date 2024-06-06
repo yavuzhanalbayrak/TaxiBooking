@@ -46,7 +46,7 @@ export default function LoadingModal({
             source:{
               label:message.taxiBooking.route[1].address
             },
-            price: 100,
+            price: parseInt(message.distance) * 10,
             currency: "TRY",
           });
         }
