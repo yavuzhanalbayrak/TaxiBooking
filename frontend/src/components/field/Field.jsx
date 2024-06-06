@@ -92,6 +92,8 @@ export default function Field(props) {
                 </div>
               ) : (
                 <Input
+                  maxLength={30}
+                  showCount
                   value={props.fieldValue?.[props.value]}
                   placeholder={props.placeholder}
                   disabled={props.value === "email"}

@@ -31,6 +31,7 @@ export default function ProfilePage() {
 
   const [fieldValue, setFieldValue] = React.useState({
     name: userInfo.name,
+    surname: userInfo.surname,
     email: userInfo.email,
     phone: userInfo.phone,
     address: userInfo.address,
@@ -38,9 +39,15 @@ export default function ProfilePage() {
 
   const fields = [
     {
-      title: t("profile.fullname"),
+      title: t("profile.firstname"),
       field: userInfo.name,
       value: "name",
+      placeholder: t("profile.placeholder.name"),
+    },
+    {
+      title: t("profile.lastname"),
+      field: userInfo.surname,
+      value: "surname",
       placeholder: t("profile.placeholder.name"),
     },
     { title: t("profile.number"), field: userInfo.phone, value: "phone" },
@@ -125,9 +132,9 @@ export default function ProfilePage() {
     try {
       const res = await api.put(`${config.urls.user}`, {
         id: user.id,
-        firstName: fieldValue.name.split(" ").slice(0, -1).join(" "),
+        firstName: fieldValue.name.trim(),
         lastName:
-          fieldValue.name.split(" ")[fieldValue.name.split(" ").length - 1],
+          fieldValue.surname.trim(),
         mobileNumber: fieldValue.phone,
         gender: "MALE",
         //address: fieldValue.address,
@@ -146,18 +153,19 @@ export default function ProfilePage() {
     api
       .get(`${config.urls.user}/${user.id}`)
       .then((response) => {
-        console.log("USERINFOO:", response.data);
         setUserInfo({
-          name: response.data.firstName + " " + response.data.lastName,
+          name: response.data.firstName ,
+          surname:response.data.lastName,
           phone: "+" + response.data.mobileNumber,
           email: response.data.email,
           address: {label:"Sakarya / Serdivan"},
         });
         setFieldValue({
-          name: response.data.firstName + " " + response.data.lastName,
+          name: response.data.firstName ,
+          surname:response.data.lastName,
           phone: response.data.mobileNumber,
           email: response.data.email,
-          address: {label:"Sakarya / Serdivan"}
+          address: {label:"Sakarya / Serdivan"},
         });
         setIsLoading(false);
       })

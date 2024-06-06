@@ -2,6 +2,8 @@
   "profile": {
     "personalinformation": "Kullanıcı Bilgileri",
     "fullname": "Adı Soyadı",
+    "firstname": "Adı",
+    "lastname": "Soyadı",
     "number": "Telefon Numarası",
     "email": "E-Posta",
     "address": "Adres",

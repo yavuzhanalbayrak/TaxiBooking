@@ -2,6 +2,8 @@
   "profile": {
     "personalinformation": "User Information",
     "fullname": "Full Name",
+    "firstname": "First Name",
+    "lastname": "Last Name",
     "number": "Phone Number",
     "email": "Email",
     "address": "Address",
