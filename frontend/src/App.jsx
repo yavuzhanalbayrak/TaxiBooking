@@ -53,7 +53,6 @@ function App() {
         (position) => {
           setLat(position.coords.latitude);
           setLng(position.coords.longitude);
-          getLocationName(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
           console.error("Error getting user location:", error);
@@ -64,22 +63,7 @@ function App() {
     }
   }, []);
 
-  const getLocationName = (lat, lng) => {
-    const geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      if (status === "OK") {
-        if (results[0]) {
-          const locationName = results[0].formatted_address;
-          setLocationName(locationName);
-        } else {
-          console.log("No results found");
-        }
-      } else {
-        console.error("Geocoder failed due to:", status);
-      }
-    });
-  };
+ 
 
   const store = createStore({
     authName: "_auth",

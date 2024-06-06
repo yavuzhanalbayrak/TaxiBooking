@@ -48,8 +48,7 @@ export default function HomePage({
   setTaxiBooking,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setSelectedKeys, isPhone, height } =
-    useContext(GlobalContext);
+  const { setSelectedKeys, isPhone, height } = useContext(GlobalContext);
   const [focus, setFocus] = useState(false);
   const [totalDistance, setTotalDistance] = useState(false);
   const [mes, setMes] = useState(false);
@@ -140,7 +139,6 @@ export default function HomePage({
     }
   }, [isLocationClicked]);
 
-
   const startSearchForDriver = () => {
     if (destination && (source || (lat && lng))) {
       setIsModalOpen(true);
@@ -174,6 +172,27 @@ export default function HomePage({
     googleMapsApiKey: config.env.mapApi,
     libraries: ["places"],
   });
+
+  const getLocationName = (lat, lng) => {
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          const locationName = results[0].formatted_address;
+          setLocationName(locationName);
+        } else {
+          console.log("No results found");
+        }
+      } else {
+        console.error("Geocoder failed due to:", status);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isLoaded) getLocationName(lat, lng);
+  }, [isLoaded]);
 
   const handleSearchPerson = async () => {
     const driver = await api.get(
@@ -651,8 +670,7 @@ export default function HomePage({
                                   },
                                   rating: 3,
                                   destination,
-                                  distance:
-                                    `${totalDistance} km` || distance,
+                                  distance: `${totalDistance} km` || distance,
                                   source,
                                   price:
                                     parseInt(distance.match(/\d+/)[0]) * 10,
