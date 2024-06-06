@@ -747,6 +747,10 @@ export default function TravelPage({
           await api
             .get(`${config.urls.taxiBookingGetById}/${taxibooking.id}`)
             .then(async (response) => {
+              await api.post(`${config.urls.setTaxiBookingStatus}`, {
+                id: taxibooking.id,
+                status: "CANCELED",
+              });
               if (user.role === "USER") {
                 const driver = await api.get(
                   `${config.urls.driver}/${response.data.taxiDriverId}`
