@@ -103,16 +103,6 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    if (distance && travel) {
-      setTravel((prevstate) => ({
-        ...prevstate,
-        distance: distance,
-        price: parseInt(distance) * 10,
-      }));
-    }
-  }, [distance, travel]);
-
   return (
     <>
       <ToastContainer style={{ zIndex: 9999 }} />

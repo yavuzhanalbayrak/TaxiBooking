@@ -20,7 +20,8 @@ const config = {
     driverDeliver: `/api/v1/TaxiBooking/driver/deliver`,
     taxiBookingGetById: `/api/v1/TaxiBooking/get`,
     taxiBookingPayment: `/api/v1/TaxiBooking/payment`,
-    taxiBookingRideStatus: `/api/v1/TaxiBooking/ridestatus`
+    taxiBookingRideStatus: `/api/v1/TaxiBooking/ridestatus`,
+    setTaxiBookingStatus: `/api/v1/TaxiBooking/settaxibookingstatus`,
   },
 };
 

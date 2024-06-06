@@ -50,11 +50,11 @@ export default function CustomLayout({
         destination:{
           label:taxiBooking.data.route[0].address
         },
-        distance: "-",
+        distance: 10,
         source:{
           label:taxiBooking.data.route[1].address
         },
-        price: "-",
+        price: 10,
         currency: "TRY",
       });
   };

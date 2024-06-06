@@ -156,6 +156,11 @@ export default function TravelPage({
         token: "tok_visa",
       })
       .then(async (response) => {
+        await api.post(`${config.urls.setTaxiBookingStatus}`, {
+          id: taxibooking.id,
+          status: "COMPLETED",
+        });
+
         await api
           .get(`${config.urls.taxiBookingGetById}/${taxibooking.id}`)
           .then(async (response) => {
@@ -176,7 +181,7 @@ export default function TravelPage({
               amount: travel.price,
             });
 
-            setTravel(false);
+            setTravel("");
             setPerson(null);
             navigate("/");
             setSource("");
@@ -185,7 +190,7 @@ export default function TravelPage({
             setIsPaymentLoading(false);
 
             toast.success("Ödeme Başarılı!");
-          })
+          });
       })
       .catch((error) => {
         console.log(error);
