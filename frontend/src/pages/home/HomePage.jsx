@@ -228,6 +228,7 @@ export default function HomePage({
                         setSource={setSource}
                         setLocationName={setLocationName}
                         person={person}
+                        travel={travel}
                       ></Map>
                     </div>
                     {user.role == "USER" ? (
@@ -741,6 +742,7 @@ export default function HomePage({
                       setSource={setSource}
                       setLocationName={setLocationName}
                       person={person}
+                      travel={travel}
                     ></Map>
                   </Card>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import GlobalProvider from "./context/GlobalProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,8 +18,9 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import TravelPage from "./pages/travel/TravelPage";
 import io from "socket.io-client";
 import config from "./config";
+import CustomLayout from "./Layout/CustomLayout";
 
-const socket =  io.connect(`${config.env.socketUrl}`);
+const socket = io.connect(`${config.env.socketUrl}`);
 
 function App() {
   const [locationName, setLocationName] = useState(false);
@@ -42,7 +43,7 @@ function App() {
     if (userId) {
       socket.emit("register", userId);
 
-    return
+      return;
     }
   }, [userId]);
 
@@ -94,14 +95,23 @@ function App() {
       setSource("");
       setDestination("");
       setIsPersonApproved(false);
-      if(message.status==="success"){
+      if (message.status === "success") {
         toast.success("Yolculuk tamamlandı!");
-      }
-      else{
+      } else {
         toast.error("Yolculuk iptal edildi!");
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (distance && travel) {
+      setTravel((prevstate) => ({
+        ...prevstate,
+        distance: distance,
+        price: parseInt(distance) * 10,
+      }));
+    }
+  }, [distance, travel]);
 
   return (
     <>
@@ -109,99 +119,109 @@ function App() {
       <AuthProvider store={store}>
         <GlobalProvider>
           <BrowserRouter>
-            <Routes>
-              <Route element={<AuthOutlet fallbackPath="/login" />}>
+            <CustomLayout
+              setTravel={setTravel}
+              setDistance={setDestination}
+              setSource={setSource}
+              setDestination={setDestination}
+              source={source}
+              destination={destination}
+              setTaxiBooking={setTaxiBooking}
+            >
+              <Routes>
+                <Route element={<AuthOutlet fallbackPath="/login" />}>
+                  <Route
+                    path="/"
+                    element={
+                      <Layout link="Home">
+                        <HomePage
+                          setLocationName={setLocationName}
+                          locationName={locationName}
+                          lat={lat}
+                          lng={lng}
+                          setLat={setLat}
+                          setLng={setLng}
+                          source={source}
+                          setSource={setSource}
+                          destination={destination}
+                          setDestination={setDestination}
+                          person={person}
+                          setPerson={setPerson}
+                          isPersonSearching={isPersonSearching}
+                          setIsPersonSearching={setIsPersonSearching}
+                          setIsPersonApproved={setIsPersonApproved}
+                          isPersonApproved={isPersonApproved}
+                          display={display}
+                          setDisplay={setDisplay}
+                          isLocationClicked={isLocationClicked}
+                          setIsLocationClicked={setIsLocationClicked}
+                          distance={distance}
+                          setDistance={setDistance}
+                          distanceToPerson={distanceToPerson}
+                          setDistanceToPerson={setDistanceToPerson}
+                          socket={socket}
+                          setUserId={setUserId}
+                          travel={travel}
+                          setTravel={setTravel}
+                          taxiBooking={taxiBooking}
+                          setTaxiBooking={setTaxiBooking}
+                        />
+                      </Layout>
+                    }
+                  />
+                  <Route
+                    path="/profile"
+                    element={
+                      <Layout link="Home">
+                        <ProfilePage />
+                      </Layout>
+                    }
+                  />
+                  <Route
+                    path="/travel"
+                    element={
+                      <Layout link="travel">
+                        <TravelPage
+                          locationName={locationName}
+                          setPerson={setPerson}
+                          setSource={setSource}
+                          setDestination={setDestination}
+                          setIsPersonApproved={setIsPersonApproved}
+                          socket={socket}
+                          travel={travel}
+                          setTravel={setTravel}
+                          taxibooking={taxiBooking}
+                        />
+                      </Layout>
+                    }
+                  />
+                </Route>
                 <Route
-                  path="/"
+                  path="/login"
                   element={
-                    <Layout link="Home">
-                      <HomePage
-                        setLocationName={setLocationName}
-                        locationName={locationName}
-                        lat={lat}
-                        lng={lng}
-                        setLat={setLat}
-                        setLng={setLng}
-                        source={source}
-                        setSource={setSource}
-                        destination={destination}
-                        setDestination={setDestination}
-                        person={person}
-                        setPerson={setPerson}
-                        isPersonSearching={isPersonSearching}
-                        setIsPersonSearching={setIsPersonSearching}
-                        setIsPersonApproved={setIsPersonApproved}
-                        isPersonApproved={isPersonApproved}
-                        display={display}
-                        setDisplay={setDisplay}
-                        isLocationClicked={isLocationClicked}
-                        setIsLocationClicked={setIsLocationClicked}
-                        distance={distance}
-                        setDistance={setDistance}
-                        distanceToPerson={distanceToPerson}
-                        setDistanceToPerson={setDistanceToPerson}
-                        socket={socket}
-                        setUserId={setUserId}
-                        travel={travel}
-                        setTravel={setTravel}
-                        taxiBooking={taxiBooking}
-                        setTaxiBooking={setTaxiBooking}
-                      />
-                    </Layout>
+                    <AuthLayout>
+                      <LoginPage setUserId={setUserId} />
+                    </AuthLayout>
                   }
                 />
                 <Route
-                  path="/profile"
+                  path="/register"
                   element={
-                    <Layout link="Home">
-                      <ProfilePage />
-                    </Layout>
+                    <AuthLayout>
+                      <RegisterPage />
+                    </AuthLayout>
                   }
                 />
                 <Route
-                  path="/travel"
+                  path="/forgotPassword"
                   element={
-                    <Layout link="travel">
-                      <TravelPage
-                        locationName={locationName}
-                        setPerson={setPerson}
-                        setSource={setSource}
-                        setDestination={setDestination}
-                        setIsPersonApproved={setIsPersonApproved}
-                        socket={socket}
-                        travel={travel}
-                        setTravel={setTravel}
-                        taxibooking={taxiBooking}
-                      />
-                    </Layout>
+                    <AuthLayout>
+                      <ForgotPasswordPage />
+                    </AuthLayout>
                   }
                 />
-              </Route>
-              <Route
-                path="/login"
-                element={
-                  <AuthLayout>
-                    <LoginPage setUserId={setUserId} />
-                  </AuthLayout>
-                }
-              />
-              <Route
-                path="/register"
-                element={
-                  <AuthLayout>
-                    <RegisterPage />
-                  </AuthLayout>
-                }
-              />
-              <Route
-                path="/forgotPassword"
-                element={
-                  <AuthLayout>
-                    <ForgotPasswordPage />
-                  </AuthLayout>
-                }
-              />
-            </Routes>
+              </Routes>
+            </CustomLayout>
           </BrowserRouter>
         </GlobalProvider>
       </AuthProvider>

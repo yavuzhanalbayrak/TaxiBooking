@@ -33,13 +33,14 @@ function Map({
   distanceToPerson,
   setLocationName,
   person,
+  travel
 }) {
   const [map, setMap] = React.useState(null);
   const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
   const [personDirectionRoutePoints, setPersonDirectionRoutePoints] = useState([]);
   const [distanceMatrix, setDistanceMatrix] = useState([]);
   const [distanceMatrixToPerson, setDistanceMatrixToPerson] = useState([]);
-  const { height, travel } = React.useContext(GlobalContext);
+  const { height } = React.useContext(GlobalContext);
   const user = useAuthUser();
   //DRIVER EXAMPLE
   const driver = {
@@ -238,6 +239,12 @@ function Map({
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
+
+  
+  useEffect(()=>{
+    
+    console.log("travelman",travel)
+  },[travel])
 
   return (
     <div>
