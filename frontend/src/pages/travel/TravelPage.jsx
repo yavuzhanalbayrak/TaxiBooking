@@ -161,6 +161,12 @@ export default function TravelPage({
           status: "COMPLETED",
         });
 
+        await api.post(`${config.urls.endBooking}`, {
+          id: taxibooking.id,
+          endTime: new Date(),
+          rating: driverRate || null,
+        });
+
         await api
           .get(`${config.urls.taxiBookingGetById}/${taxibooking.id}`)
           .then(async (response) => {

@@ -22,6 +22,7 @@ const config = {
     taxiBookingPayment: `/api/v1/TaxiBooking/payment`,
     taxiBookingRideStatus: `/api/v1/TaxiBooking/ridestatus`,
     setTaxiBookingStatus: `/api/v1/TaxiBooking/settaxibookingstatus`,
+    endBooking: `/api/v1/TaxiBooking/endbooking`,
   },
 };
 
