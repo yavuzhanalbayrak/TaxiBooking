@@ -43,7 +43,9 @@ export default function HomePage({
   setUserId,
   locationName,
   setTravel,
-  travel
+  travel,
+  taxiBooking,
+  setTaxiBooking,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setSelectedKeys, isPhone, height } =
@@ -138,7 +140,6 @@ export default function HomePage({
     }
   }, [isLocationClicked]);
 
-  const [taxiBooking, setTaxiBooking] = useState("");
 
   const startSearchForDriver = () => {
     if (destination && (source || (lat && lng))) {

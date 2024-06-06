@@ -36,10 +36,10 @@ export default function TravelPage({
   setIsPersonApproved,
   socket,
   travel,
-  setTravel
+  setTravel,
+  taxibooking,
 }) {
-  const { setSelectedKeys, isPhone, height } =
-    React.useContext(GlobalContext);
+  const { setSelectedKeys, isPhone, height } = React.useContext(GlobalContext);
   const totalStars = 5;
   const filledStars = Math.max(0, Math.min(travel?.rating || 0, totalStars));
   const emptyStars = totalStars - filledStars;
@@ -146,7 +146,7 @@ export default function TravelPage({
 
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
-  const handleSubmitMimic = () => {
+  const handleSubmitMimic = async () => {
     setIsPaymentLoading(true);
     api
       .post(`${config.urls.paymentCharge}`, {
@@ -155,8 +155,25 @@ export default function TravelPage({
         description: "Taxi booking",
         token: "tok_visa",
       })
-      .then((response) => {
-        console.log("RESPAYMENT:", response.data);
+      .then(async (response) => {
+        await api
+          .get(`${config.urls.taxiBookingGetById}/${taxibooking.id}`)
+          .then(async (response) => {
+            const driver = await api.get(
+              `${config.urls.driver}/${response.data.taxiDriverId}`
+            );
+            const toUserId = driver.data.user.id;
+
+            socket.emit("completeTravel", {
+              message: {
+                status: "success",
+              },
+              toUserId,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         setTravel(false);
         setPerson(null);
         navigate("/");
@@ -164,12 +181,6 @@ export default function TravelPage({
         setDestination("");
         setIsPersonApproved(false);
         setIsPaymentLoading(false);
-        socket.emit("completeTravel", {
-          message: {
-            status: "success",
-          },
-          toUserId: 2,
-        });
 
         toast.success("Ödeme Başarılı!");
       })
@@ -723,7 +734,29 @@ export default function TravelPage({
         title={t("travelpage.areusure")}
         t={t}
         description={""}
-        onOkModal={() => {
+        onOkModal={async () => {
+          let toUserId;
+          await api
+            .get(`${config.urls.taxiBookingGetById}/${taxibooking.id}`)
+            .then(async (response) => {
+              if (user.role === "USER") {
+                const driver = await api.get(
+                  `${config.urls.driver}/${response.data.taxiDriverId}`
+                );
+                toUserId = driver.data.user.id;
+              } else {
+                toUserId = response.data.taxiCustomerId;
+              }
+              socket.emit("completeTravel", { 
+                message: {
+                  status: "canceled",
+                },
+                toUserId,
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           setTravel(false);
           setPerson(null);
           navigate("/");
@@ -731,12 +764,6 @@ export default function TravelPage({
           setDestination("");
           setIsPersonApproved(false);
           toast.error("Yolculuk iptal edildi!");
-          socket.emit("completeTravel", {
-            message: {
-              status: "canceled",
-            },
-            toUserId: 2,
-          });
         }}
         isModalOpen={open}
         setIsModalOpen={setOpen}

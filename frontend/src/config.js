@@ -9,6 +9,7 @@ const config = {
         register:`/api/v1/auth/sign/signup`,
         changeDriverStatus:`/api/v1/Driver/user`,
         setDriverAvailable:`/api/v1/Driver/avilable`,
+        driver:`/api/v1/Driver`,
         setDriverUnAvailable:`/api/v1/Driver/notavilable`,
         taxiBooking:`/api/v1/TaxiBooking`,
         getImage:`/api/v1/User/downloadImage`,
@@ -16,7 +17,8 @@ const config = {
         findDriver:`/api/v1/TaxiBooking/driver/find`,
         user:`/api/v1/User`,
         paymentCharge:`/api/payment/charge`,
-        driverDeliver:`/api/v1/TaxiBooking/driver/deliver`
+        driverDeliver:`/api/v1/TaxiBooking/driver/deliver`,
+        taxiBookingGetById:`/api/v1/TaxiBooking/get`,
         
     }
 };

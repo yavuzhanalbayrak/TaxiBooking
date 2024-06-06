@@ -36,6 +36,8 @@ function App() {
   const [distanceToPerson, setDistanceToPerson] = useState("");
   const [userId, setUserId] = useState("");
   const [travel, setTravel] = useState("");
+  const [taxiBooking, setTaxiBooking] = useState("");
+
   React.useEffect(() => {
     if (userId) {
       socket.emit("register", userId);
@@ -142,6 +144,8 @@ function App() {
                         setUserId={setUserId}
                         travel={travel}
                         setTravel={setTravel}
+                        taxiBooking={taxiBooking}
+                        setTaxiBooking={setTaxiBooking}
                       />
                     </Layout>
                   }
@@ -167,6 +171,7 @@ function App() {
                         socket={socket}
                         travel={travel}
                         setTravel={setTravel}
+                        taxibooking={taxiBooking}
                       />
                     </Layout>
                   }
