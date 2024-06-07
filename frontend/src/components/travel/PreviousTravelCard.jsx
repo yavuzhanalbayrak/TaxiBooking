@@ -1,6 +1,10 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
-import { CheckOutlined, RightOutlined,CloseCircleOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  RightOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import "./travelStyle.scss";
 
@@ -45,12 +49,28 @@ export default function PreviousTravelCard(props) {
         <Row style={{ borderBottom: "1px solid #00000015", width: "100%" }}>
           <div style={{ padding: "24px", width: "100%" }}>
             <Col className="prev-travel-title" span={24}>
-              {props.travelHistory.route[0].address} ({parseFloat(props.travelHistory.totalDistanceMeters).toFixed(1)+" km"})
+              {props.travelHistory.route[0].address.length > 60
+                ? props.travelHistory.route[0].address.substring(0, 60) + "..."
+                : props.travelHistory.route[0].address}{" "}
+              (
+              {parseFloat(props.travelHistory.totalDistanceMeters).toFixed(1) +
+                " km"}
+              )
             </Col>
             <Col className="prev-travel-date" span={24}>
-              <span>{new Date(props.travelHistory.startTime).toLocaleString().split(" ")[0]}</span>{" "}
-              <span>{new Date(props.travelHistory.startTime).toLocaleString().split(" ")[1].substring(0,5)}</span>{" "}
-
+              <span>
+                {
+                  new Date(props.travelHistory.startTime)
+                    .toLocaleString()
+                    .split(" ")[0]
+                }
+              </span>{" "}
+              <span className="time">
+                {new Date(props.travelHistory.startTime)
+                  .toLocaleString()
+                  .split(" ")[1]
+                  .substring(0, 5)}
+              </span>{" "}
             </Col>
             <Row style={{ width: "100%" }}>
               <Col className="prev-travel-price" span={12}>
@@ -59,18 +79,18 @@ export default function PreviousTravelCard(props) {
                   <Col style={{ color: "#f17624" }}>{formattedPaymentRate}</Col>
                 </Row>
               </Col>
-              <Col
-                onClick={() => {
-                  props.setShowDetails(true);
-                  props.setDetailInfos({
-                    historyDetails,
-                  });
-                }}
-                className="prev-travel-details"
-                span={12}
-                style={{ textAlign: "end" }}
-              >
-                {t("travelpage.details")} <RightOutlined />
+              <Col span={12} style={{ textAlign: "end" }}>
+                <span
+                  className="prev-travel-details"
+                  onClick={() => {
+                    props.setShowDetails(true);
+                    props.setDetailInfos({
+                      historyDetails,
+                    });
+                  }}
+                >
+                  {t("travelpage.details")} <RightOutlined />
+                </span>
               </Col>
             </Row>
           </div>
@@ -82,17 +102,13 @@ export default function PreviousTravelCard(props) {
                 {props.travelHistory.taxibookingStatus == "COMPLETED" ? (
                   <p className="completed">
                     {" "}
-                    <CheckOutlined
-                      style={{ fontSize: "16px"}}
-                    />{" "}
+                    <CheckOutlined style={{ fontSize: "16px" }} />{" "}
                     {t("travelpage.completed")}{" "}
                   </p>
                 ) : (
                   <p className="canceled">
                     {" "}
-                    <CloseCircleOutlined 
-                      style={{ fontSize: "16px" }}
-                    />{" "}
+                    <CloseCircleOutlined style={{ fontSize: "16px" }} />{" "}
                     {t("travelpage.canceled")}{" "}
                   </p>
                 )}
