@@ -159,7 +159,7 @@ export default function HomePage({
           city: "sakarya",
           customerId: user.id,
           vehicleType: "string",
-          amount: parseInt(distance) * 10
+          amount: parseInt(distance) * 10,
         })
         .then((taxiBooking) => {
           console.log(taxiBooking);
@@ -433,7 +433,7 @@ export default function HomePage({
                                 >
                                   <strong>{t("homepage.price")}:</strong>{" "}
                                   <span style={{ color: "#f17624" }}>
-                                    {parseInt(distance)*10+" TRY"}
+                                    {parseInt(distance) * 10 + " TRY"}
                                   </span>
                                 </p>
                               </Col>
@@ -545,24 +545,35 @@ export default function HomePage({
               <Col span={24} xs={24} sm={24} md={10} lg={10} xl={8} xxl={7}>
                 <Col>
                   {user.role == "USER" ? (
-                    <Card title="Varış Noktası Seçiniz">
-                      <LocationInputs
-                        setSource={setSource}
-                        setDestination={setDestination}
-                        destination={destination}
-                        source={source}
-                        distance={distance}
-                        setDistanceToPerson={setDistanceToPerson}
-                        distanceToPerson={distanceToPerson}
-                        startSearchForDriver={startSearchForDriver}
-                        isPhone={false}
-                        focus={focus}
-                        setFocus={setFocus}
-                        lat={lat}
-                        lng={lng}
-                        t={t}
-                      ></LocationInputs>
-                    </Card>
+                    <>
+                      {travel ? (
+                        <Card
+                          bodyStyle={{ padding: "0px" }}
+                          title={`${t("homepage.haveagjourney")}, ${
+                            user.name
+                          }!`}
+                        ></Card>
+                      ) : (
+                        <Card title={`${t("homepage.select")}`}>
+                          <LocationInputs
+                            setSource={setSource}
+                            setDestination={setDestination}
+                            destination={destination}
+                            source={source}
+                            distance={distance}
+                            setDistanceToPerson={setDistanceToPerson}
+                            distanceToPerson={distanceToPerson}
+                            startSearchForDriver={startSearchForDriver}
+                            isPhone={false}
+                            focus={focus}
+                            setFocus={setFocus}
+                            lat={lat}
+                            lng={lng}
+                            t={t}
+                          ></LocationInputs>
+                        </Card>
+                      )}
+                    </>
                   ) : (
                     <Card
                       bodyStyle={{
@@ -572,6 +583,7 @@ export default function HomePage({
                         boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
                         border: "none",
                         backgroundColor: "#efefff",
+                        borderRadius: "10px",
                       }}
                       className={"location-inputs-card-phone "}
                       title={
@@ -579,6 +591,8 @@ export default function HomePage({
                           style={{
                             backgroundColor: "#00305f",
                             color: "#efefff",
+                            borderRadius: "10px",
+
                           }}
                         >
                           {person ? (
@@ -644,7 +658,9 @@ export default function HomePage({
                               }}
                             >
                               <strong>{t("homepage.price")}:</strong>{" "}
-                              <span style={{ color: "#f17624" }}>{parseInt(distance)*10+" TRY"} </span>
+                              <span style={{ color: "#f17624" }}>
+                                {parseInt(distance) * 10 + " TRY"}{" "}
+                              </span>
                             </p>
                           </Col>
                         </Row>
