@@ -29,6 +29,10 @@ export default function ProfilePage() {
   const [userInfo, setUserInfo] = React.useState(user);
   const fileInputRef = useRef(null);
 
+  const [date, setDate] = React.useState(
+    new Date("2025-03-27 19:12:32.745000").toLocaleString()
+  );
+
   const [fieldValue, setFieldValue] = React.useState({
     name: userInfo.name,
     surname: userInfo.surname,
@@ -133,8 +137,7 @@ export default function ProfilePage() {
       const res = await api.put(`${config.urls.user}`, {
         id: user.id,
         firstName: fieldValue.name.trim(),
-        lastName:
-          fieldValue.surname.trim(),
+        lastName: fieldValue.surname.trim(),
         mobileNumber: fieldValue.phone,
         gender: "MALE",
         //address: fieldValue.address,
@@ -154,18 +157,18 @@ export default function ProfilePage() {
       .get(`${config.urls.user}/${user.id}`)
       .then((response) => {
         setUserInfo({
-          name: response.data.firstName ,
-          surname:response.data.lastName,
+          name: response.data.firstName,
+          surname: response.data.lastName,
           phone: "+" + response.data.mobileNumber,
           email: response.data.email,
-          address: {label:"Sakarya / Serdivan"},
+          address: { label: "Sakarya / Serdivan" },
         });
         setFieldValue({
-          name: response.data.firstName ,
-          surname:response.data.lastName,
+          name: response.data.firstName,
+          surname: response.data.lastName,
           phone: response.data.mobileNumber,
           email: response.data.email,
-          address: {label:"Sakarya / Serdivan"},
+          address: { label: "Sakarya / Serdivan" },
         });
         setIsLoading(false);
       })

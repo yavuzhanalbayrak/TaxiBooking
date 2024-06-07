@@ -155,10 +155,11 @@ export default function HomePage({
             latitude: destination.lat,
             longitude: destination.lng,
           },
-          totalDistanceMeters: 0,
+          totalDistanceMeters: parseFloat(distance),
           city: "sakarya",
           customerId: user.id,
           vehicleType: "string",
+          amount: parseInt(distance) * 10
         })
         .then((taxiBooking) => {
           console.log(taxiBooking);
