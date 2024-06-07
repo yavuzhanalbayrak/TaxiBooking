@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
-import { Button, Card, Col, Row, Tooltip } from "antd";
+import { Button, Card, Col, Row, Tooltip, Pagination } from "antd";
 import { useTranslation } from "react-i18next";
 import Stripe from "../../api/Stripe";
 import {
@@ -196,6 +196,21 @@ export default function TravelPage({
   React.useEffect(() => {
     getRecentTravels();
   }, []);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5; // Number of items per page
+
+  // Calculate the indices for slicing the data
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  // Slice the data for the current page
+  const currentData = prevTravels?.slice(startIndex, endIndex);
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <Row
@@ -722,7 +737,7 @@ export default function TravelPage({
                           style={{ width: "100%", border: "none" }}
                         >
                           {prevTravels ? (
-                            prevTravels?.map((travelHistory, index) => {
+                            currentData?.map((travelHistory, index) => {
                               return (
                                 <div
                                   key={index}
@@ -741,6 +756,13 @@ export default function TravelPage({
                           ) : (
                             <div style={{ width: "100%" }}></div>
                           )}
+                          <Pagination
+                            current={currentPage}
+                            pageSize={pageSize}
+                            total={prevTravels?.length}
+                            onChange={handlePageChange}
+                            style={{ textAlign: "center", marginTop: "16px" }}
+                          />
                         </Card>
                       )}
                     </Row>
