@@ -63,8 +63,6 @@ function App() {
     }
   }, []);
 
- 
-
   const store = createStore({
     authName: "_auth",
     authType: "cookie",
@@ -101,6 +99,11 @@ function App() {
               source={source}
               destination={destination}
               setTaxiBooking={setTaxiBooking}
+              setIsLocationClicked={setIsLocationClicked}
+              setIsPersonSearching={setIsPersonSearching}
+              setPerson={setPerson}
+              setIsPersonApproved={setIsPersonApproved}
+              person={person}
             >
               <Routes>
                 <Route element={<AuthOutlet fallbackPath="/login" />}>
