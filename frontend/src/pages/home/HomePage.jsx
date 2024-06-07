@@ -433,7 +433,7 @@ export default function HomePage({
                                 >
                                   <strong>{t("homepage.price")}:</strong>{" "}
                                   <span style={{ color: "#f17624" }}>
-                                    210 TL
+                                    {parseInt(distance)*10+" TRY"}
                                   </span>
                                 </p>
                               </Col>
@@ -644,7 +644,7 @@ export default function HomePage({
                               }}
                             >
                               <strong>{t("homepage.price")}:</strong>{" "}
-                              <span style={{ color: "#f17624" }}>210 TL</span>
+                              <span style={{ color: "#f17624" }}>{parseInt(distance)*10+" TRY"} </span>
                             </p>
                           </Col>
                         </Row>
