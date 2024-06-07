@@ -212,6 +212,8 @@ export default function TravelPage({
     setCurrentPage(page);
   };
 
+  console.log("detailInfos:::", detailInfos);
+
   return (
     <Row
       style={
@@ -250,7 +252,7 @@ export default function TravelPage({
                     <Field
                       title={t("travelpage.status")}
                       field={
-                        detailInfos.historyDetails.status == "completed" ? (
+                        detailInfos.taxibookingStatus == "COMPLETED" ? (
                           <p className="completed">
                             {" "}
                             <CheckOutlined style={{ fontSize: "16px" }} />{" "}
@@ -267,33 +269,33 @@ export default function TravelPage({
                         )
                       }
                       type={
-                        detailInfos.historyDetails.status == "completed"
+                        detailInfos.taxibookingStatus == "COMPLETED"
                           ? "success"
                           : "danger"
                       }
                     />
                     <Field
                       title={t("travelpage.source")}
-                      field={travel?.source?.label || "Konumunuz"}
+                      field={detailInfos.route[1].address}
                       titleSpan={8}
                       fieldSpan={16}
                     />
 
                     <Field
                       title={t("travelpage.dest")}
-                      field={detailInfos.historyDetails.title}
+                      field={detailInfos.route[0].address}
                       titleSpan={8}
                       fieldSpan={16}
                     />
                     <Field
                       title={t("travelpage.distance")}
-                      field={detailInfos.historyDetails.distance}
+                      field={parseFloat(detailInfos.totalDistanceMeters).toFixed(1) + " km"}
                       titleSpan={8}
                       fieldSpan={16}
                     />
                     <Field
                       title={t("travelpage.date")}
-                      field={`${detailInfos.historyDetails.date} / ${detailInfos.historyDetails.time}`}
+                      field={new Date(detailInfos.startTime).toLocaleString()}
                       titleSpan={8}
                       fieldSpan={16}
                     />
@@ -302,17 +304,14 @@ export default function TravelPage({
                       field={() => {
                         const currency = currencyList.find(
                           (item) =>
-                            item.value === detailInfos.historyDetails.currency
+                            item.value === "TRY"
                         );
                         const formattedPaymentRate = `${
                           currency.prefix
-                        } ${detailInfos.historyDetails.price.toLocaleString(
-                          undefined,
-                          {
-                            minimumFractionDigits: currency.decimalDigits,
-                            maximumFractionDigits: currency.decimalDigits,
-                          }
-                        )}`;
+                        } ${detailInfos.amount.toLocaleString(undefined, {
+                          minimumFractionDigits: currency.decimalDigits,
+                          maximumFractionDigits: currency.decimalDigits,
+                        })}`;
                         return <p>{formattedPaymentRate}</p>;
                       }}
                     />
@@ -325,13 +324,17 @@ export default function TravelPage({
                         </Col>
                         <Field
                           title={t("profile.fullname")}
-                          field={detailInfos.historyDetails.name}
+                          field={
+                            detailInfos.driver.user.firstName +
+                            " " +
+                            detailInfos.driver.user.lastName
+                          }
                           titleSpan={8}
                           fieldSpan={16}
                         />
                         <Field
                           title={t("profile.number")}
-                          field={detailInfos.historyDetails.phone}
+                          field={"+"+detailInfos.driver.user.mobileNumber}
                           titleSpan={12}
                           fieldSpan={12}
                         />
@@ -340,7 +343,7 @@ export default function TravelPage({
                           field={
                             <>
                               {[
-                                ...Array(detailInfos.historyDetails.rating),
+                                ...Array(3),
                               ].map((_, index) => (
                                 <StarFilled
                                   style={{ color: "#ffc800" }}
@@ -348,7 +351,7 @@ export default function TravelPage({
                                 />
                               ))}
                               {[
-                                ...Array(5 - detailInfos.historyDetails.rating),
+                                ...Array(5 - 3),
                               ].map((_, index) => (
                                 <StarOutlined key={index} />
                               ))}
@@ -360,15 +363,15 @@ export default function TravelPage({
                         </Col>
                         <Field
                           title={t("travelpage.brand")}
-                          field={detailInfos.historyDetails.car?.brand}
+                          field={"Honda"}
                         />
                         <Field
                           title={t("travelpage.model")}
-                          field={detailInfos.historyDetails.car?.model}
+                          field={"pcx"}
                         />
                         <Field
                           title={t("travelpage.year")}
-                          field={detailInfos.historyDetails.car?.year}
+                          field={"2021"}
                         />
                       </>
                     ) : (
@@ -377,11 +380,11 @@ export default function TravelPage({
                           <h2>{t("travelpage.passinfo")}</h2>
                           <Field
                             title={t("profile.fullname")}
-                            field={"Yavuzhan Albayrak"}
+                            field={detailInfos.customer.user.firstName + " " + detailInfos.customer.user.lastName}
                           ></Field>
                           <Field
                             title={t("profile.number")}
-                            field={"+90 234 213 41 23"}
+                            field={"+"+detailInfos.customer.user.mobileNumber}
                           ></Field>
                         </Col>
                       </>

@@ -84,9 +84,9 @@ export default function PreviousTravelCard(props) {
                   className="prev-travel-details"
                   onClick={() => {
                     props.setShowDetails(true);
-                    props.setDetailInfos({
-                      historyDetails,
-                    });
+                    props.setDetailInfos(
+                      props.travelHistory,
+                    );
                   }}
                 >
                   {t("travelpage.details")} <RightOutlined />
