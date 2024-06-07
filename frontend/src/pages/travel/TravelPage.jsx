@@ -764,7 +764,7 @@ export default function TravelPage({
                             pageSize={pageSize}
                             total={prevTravels?.length}
                             onChange={handlePageChange}
-                            style={{ textAlign: "center", marginTop: "16px" }}
+                            style={{ textAlign: "center", marginTop: "16px", marginBottom: "16px" }}
                           />
                         </Card>
                       )}
