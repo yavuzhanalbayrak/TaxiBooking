@@ -275,7 +275,7 @@ function Map({
           position={{ lat, lng }}
         ></MarkerF>
 
-        {user.role == "USER" && driver && (
+        {/* {user.role == "USER" && driver && (
           <MarkerF
             icon={{
               url: motor,
@@ -286,7 +286,7 @@ function Map({
             }}
             position={{ lat: driver?.lat, lng: driver?.lng }}
           ></MarkerF>
-        )}
+        )} */}
 
         {source.length != [] ? (
           <MarkerF
