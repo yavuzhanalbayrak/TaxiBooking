@@ -108,42 +108,6 @@ export default function TravelPage({
     },
   ];
 
-  //EXAMPLE PREV
-  const prevTravels = [
-    {
-      title: "Samsun - Atakum",
-      distance: "12.3 Km",
-      date: "21.08.2002",
-      time: "17.02",
-      price: "120",
-      status: "completed",
-    },
-    {
-      title: "Sakarya - Mavi Durak",
-      distance: "7.3 Km",
-      date: "13.08.2023",
-      time: "19.15",
-      price: "569",
-      status: "canceled",
-    },
-    {
-      title: "Samsun - Atakum",
-      distance: "12.3 Km",
-      date: "21.08.2002",
-      time: "17.02",
-      price: "200",
-      status: "completed",
-    },
-    {
-      title: "Samsun - Atakum",
-      distance: "12.3 Km",
-      date: "21.08.2002",
-      time: "17.02",
-      price: "200",
-      status: "canceled",
-    },
-  ];
-
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
   const handleSubmitMimic = async () => {
@@ -205,6 +169,33 @@ export default function TravelPage({
         toast.error(t("alert.paymentError"));
       });
   };
+
+  const [prevTravels, setPrevTravels] = React.useState(null);
+  const [prevTravelsLoading, setPrevTravelsLoading] = React.useState(false);
+
+  const getRecentTravels = async () => {
+    setPrevTravelsLoading(true);
+    let travels;
+    if (user.role === "USER") {
+      travels = await api.get(
+        `${config.urls.getUserTravelHistory}/${user.id})`
+      );
+    } else if (user.role === "DRIVER") {
+      const driver = await api.get(
+        `${config.urls.changeDriverStatus}/${user.id}`
+      );
+      const driverId = driver.data.id;
+      travels = await api.get(
+        `${config.urls.getDriverTravelHistory}/${driverId})`
+      );
+    }
+    setPrevTravels(travels.data.reverse());
+    setPrevTravelsLoading(false);
+  };
+
+  React.useEffect(() => {
+    getRecentTravels();
+  }, []);
 
   return (
     <Row
@@ -532,7 +523,10 @@ export default function TravelPage({
                                     />
                                     <Field
                                       title={t("travelpage.distance")}
-                                      field={parseFloat(travel.distance).toFixed(1)+" km"}
+                                      field={
+                                        parseFloat(travel.distance).toFixed(1) +
+                                        " km"
+                                      }
                                     />
                                     <Field
                                       title={t("travelpage.price")}
@@ -690,7 +684,8 @@ export default function TravelPage({
                                         <Link to="/">
                                           <Button>
                                             {" "}
-                                            <LeftCircleOutlined /> {t("travelpage.findDriver")}
+                                            <LeftCircleOutlined />{" "}
+                                            {t("travelpage.findDriver")}
                                           </Button>
                                         </Link>
                                       </Col>
@@ -708,7 +703,8 @@ export default function TravelPage({
                                         <Link to="/">
                                           <Button>
                                             {" "}
-                                            <LeftCircleOutlined /> {t("travelpage.findPassenger")}
+                                            <LeftCircleOutlined />{" "}
+                                            {t("travelpage.findPassenger")}
                                           </Button>
                                         </Link>
                                       </Col>
@@ -720,21 +716,32 @@ export default function TravelPage({
                           )}
                         </>
                       ) : (
-                        <div style={{ width: "100%" }}>
-                          {prevTravels.map((travelHistory, index) => {
-                            return (
-                              <div key={index} style={{ marginBottom: "16px" }}>
-                                <PreviousTravelCard
-                                  setDetailInfos={setDetailInfos}
-                                  setShowDetails={setShowDetails}
-                                  travelHistory={travelHistory}
-                                  driverHistory={travel}
-                                  currencyList={currencyList}
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
+                        <Card
+                          loading={prevTravelsLoading}
+                          bodyStyle={{ padding: "0px" }}
+                          style={{ width: "100%", border: "none" }}
+                        >
+                          {prevTravels ? (
+                            prevTravels?.map((travelHistory, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  style={{ marginBottom: "16px" }}
+                                >
+                                  <PreviousTravelCard
+                                    setDetailInfos={setDetailInfos}
+                                    setShowDetails={setShowDetails}
+                                    travelHistory={travelHistory}
+                                    driverHistory={travel}
+                                    currencyList={currencyList}
+                                  />
+                                </div>
+                              );
+                            })
+                          ) : (
+                            <div style={{ width: "100%" }}></div>
+                          )}
+                        </Card>
                       )}
                     </Row>
                   </div>

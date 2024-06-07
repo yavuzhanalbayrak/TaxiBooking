@@ -32,7 +32,7 @@ export default function PreviousTravelCard(props) {
     );
     const formattedPaymentRate = `${
       currency.prefix
-    } ${historyDetails.price.toLocaleString(undefined, {
+    } ${props.travelHistory.amount?.toLocaleString(undefined, {
       minimumFractionDigits: currency.decimalDigits,
       maximumFractionDigits: currency.decimalDigits,
     })}`;
@@ -45,11 +45,12 @@ export default function PreviousTravelCard(props) {
         <Row style={{ borderBottom: "1px solid #00000015", width: "100%" }}>
           <div style={{ padding: "24px", width: "100%" }}>
             <Col className="prev-travel-title" span={24}>
-              {props.travelHistory.title} ({props.travelHistory.distance})
+              {props.travelHistory.route[0].address} ({parseFloat(props.travelHistory.totalDistanceMeters).toFixed(1)+" km"})
             </Col>
             <Col className="prev-travel-date" span={24}>
-              <span>{props.travelHistory.date}</span>{" "}
-              <span className="time">{props.travelHistory.time}</span>
+              <span>{new Date(props.travelHistory.startTime).toLocaleString().split(" ")[0]}</span>{" "}
+              <span>{new Date(props.travelHistory.startTime).toLocaleString().split(" ")[1].substring(0,5)}</span>{" "}
+
             </Col>
             <Row style={{ width: "100%" }}>
               <Col className="prev-travel-price" span={12}>
@@ -78,7 +79,7 @@ export default function PreviousTravelCard(props) {
           <Col span={24}>
             <Row>
               <Col className="prev-travel-status">
-                {props.travelHistory.status == "completed" ? (
+                {props.travelHistory.taxibookingStatus == "COMPLETED" ? (
                   <p className="completed">
                     {" "}
                     <CheckOutlined

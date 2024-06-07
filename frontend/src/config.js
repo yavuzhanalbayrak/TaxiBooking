@@ -23,6 +23,8 @@ const config = {
     taxiBookingRideStatus: `/api/v1/TaxiBooking/ridestatus`,
     setTaxiBookingStatus: `/api/v1/TaxiBooking/settaxibookingstatus`,
     endBooking: `/api/v1/TaxiBooking/endbooking`,
+    getUserTravelHistory: `/api/v1/TaxiBooking/rideComplotedCancelledCustomer`,
+    getDriverTravelHistory: `/api/v1/TaxiBooking/rideComplotedCancelledDriver`
   },
 };
 
