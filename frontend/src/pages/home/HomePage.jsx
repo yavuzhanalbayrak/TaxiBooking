@@ -579,20 +579,10 @@ export default function HomePage({
                       bodyStyle={{
                         padding: "0px",
                       }}
-                      style={{
-                        boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.2)",
-                        border: "none",
-                        backgroundColor: "#efefff",
-                        borderRadius: "10px",
-                      }}
-                      className={"location-inputs-card-phone "}
                       title={
                         <div
                           style={{
-                            backgroundColor: "#00305f",
-                            color: "#efefff",
-                            borderRadius: "10px",
-
+                            textAlign: "center",
                           }}
                         >
                           {person ? (
@@ -609,7 +599,11 @@ export default function HomePage({
                               }}
                               type="primary"
                               size="large"
-                              style={{ width: "40%", borderRadius: "25px" }}
+                              style={{
+                                width: "40%",
+                                borderRadius: "25px",
+                                minWidth: "170px",
+                              }}
                             >
                               {t("homepage.search")}
                             </Button>
@@ -622,7 +616,11 @@ export default function HomePage({
                               danger
                               type="primary"
                               size="large"
-                              style={{ width: "40%", borderRadius: "25px" }}
+                              style={{
+                                width: "40%",
+                                borderRadius: "25px",
+                                minWidth: "170px",
+                              }}
                             >
                               {" "}
                               <LoadingOutlined></LoadingOutlined>{" "}
