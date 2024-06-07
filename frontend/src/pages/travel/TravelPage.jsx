@@ -195,14 +195,14 @@ export default function TravelPage({
             setIsPersonApproved(false);
             setIsPaymentLoading(false);
 
-            toast.success("Ödeme Başarılı!");
+            toast.success(t("alert.paymentSuccess"));
           });
       })
       .catch((error) => {
         console.log(error);
         setIsPaymentLoading(false);
 
-        toast.error("Ödeme Başarısız!");
+        toast.error(t("alert.paymentError"));
       });
   };
 
@@ -532,7 +532,7 @@ export default function TravelPage({
                                     />
                                     <Field
                                       title={t("travelpage.distance")}
-                                      field={travel.distance}
+                                      field={parseFloat(travel.distance).toFixed(1)+" km"}
                                     />
                                     <Field
                                       title={t("travelpage.price")}
@@ -690,7 +690,7 @@ export default function TravelPage({
                                         <Link to="/">
                                           <Button>
                                             {" "}
-                                            <LeftCircleOutlined /> Araç Bul{" "}
+                                            <LeftCircleOutlined /> {t("travelpage.findDriver")}
                                           </Button>
                                         </Link>
                                       </Col>
@@ -708,7 +708,7 @@ export default function TravelPage({
                                         <Link to="/">
                                           <Button>
                                             {" "}
-                                            <LeftCircleOutlined /> Yolcu Bul{" "}
+                                            <LeftCircleOutlined /> {t("travelpage.findPassenger")}
                                           </Button>
                                         </Link>
                                       </Col>
@@ -781,7 +781,7 @@ export default function TravelPage({
           setSource("");
           setDestination("");
           setIsPersonApproved(false);
-          toast.error("Yolculuk iptal edildi!");
+          toast.error(t("alert.cancelTravel"));
         }}
         isModalOpen={open}
         setIsModalOpen={setOpen}

@@ -70,7 +70,9 @@
     "no": "Hayır",
     "paymentinfo":"Ödeme Bilgileri",
     "ratedriver":"Sürücüyü Puanla",
-    "pay":"Ödeme Yap"
+    "pay":"Ödeme Yap",
+    "findDriver":"Araç Bul",
+    "findPassenger":"Yolcu Bul"
   },
   "loadingmodal": {
     "searching": "Sürücü aranıyor",
@@ -79,5 +81,11 @@
     "countdown": "Sürücü bulundu. Yolculuk başlıyor...",
     "wait": "Lütfen bekleyiniz..."
 
+  },
+  "alert":{
+    "paymentSuccess": "Ödeme Başarılı!",
+    "paymentError": "Ödeme Başarısız!",
+    "cancelTravel": "Yolculuk iptal edildi!",
+    "completeTravel": "Yolculuk tamamlandı!"
   }
 }

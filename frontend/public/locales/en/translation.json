@@ -70,7 +70,9 @@
     "no":"No",
     "paymentinfo":"Payment Informations",
     "ratedriver":"Rate Driver",
-    "pay":"Pay"
+    "pay":"Pay",
+    "findDriver":"Find Driver",
+    "findPassenger":"Find Passenger"
 
   },
   "loadingmodal": {
@@ -80,5 +82,11 @@
     "countdown": "Sürücü bulundu. Yolculuk başlıyor...",
     "wait": "Please wait..."
 
+  },
+  "alert":{
+    "paymentSuccess": "Payment success!",
+    "cancelTravel": "Travel cancelled!",
+    "completeTravel": "Travel completed!",
+    "paymentError": "Payment is not success!"
   }
 }

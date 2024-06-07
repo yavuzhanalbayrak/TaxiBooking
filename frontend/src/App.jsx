@@ -19,7 +19,7 @@ import TravelPage from "./pages/travel/TravelPage";
 import io from "socket.io-client";
 import config from "./config";
 import CustomLayout from "./Layout/CustomLayout";
-
+import { useTranslation } from "react-i18next";
 const socket = io.connect(`${config.env.socketUrl}`);
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
   const [userId, setUserId] = useState("");
   const [travel, setTravel] = useState("");
   const [taxiBooking, setTaxiBooking] = useState("");
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     if (userId) {
@@ -78,9 +79,9 @@ function App() {
       setDestination("");
       setIsPersonApproved(false);
       if (message.status === "success") {
-        toast.success("Yolculuk tamamlandı!");
+        toast.success(t("alert.completeTravel"));
       } else {
-        toast.error("Yolculuk iptal edildi!");
+        toast.error(t("alert.cancelTravel"));
       }
     });
   }, []);
