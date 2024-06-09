@@ -21,6 +21,7 @@ const config = {
     taxiBookingGetById: `/api/v1/TaxiBooking/get`,
     taxiBookingPayment: `/api/v1/TaxiBooking/payment`,
     taxiBookingRideStatus: `/api/v1/TaxiBooking/ridestatus`,
+    taxiBookingRideDriverStatus: `/api/v1/TaxiBooking/rideDriverstatus`,
     setTaxiBookingStatus: `/api/v1/TaxiBooking/settaxibookingstatus`,
     endBooking: `/api/v1/TaxiBooking/endbooking`,
     getUserTravelHistory: `/api/v1/TaxiBooking/rideComplotedCancelledCustomer`,

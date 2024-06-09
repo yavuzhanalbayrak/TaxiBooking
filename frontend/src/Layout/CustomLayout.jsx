@@ -77,10 +77,10 @@ export default function CustomLayout({
     const driverId = driver.data.id;
 
     const taxiBooking = await api.get(
-      `${config.urls.taxiBookingRideStatus}/${driverId}`
+      `${config.urls.taxiBookingRideDriverStatus}/${driverId}`
     );
     setTaxiBooking(taxiBooking.data);
-
+    console.log("HANSI",taxiBooking);
     setPerson({
         lat: taxiBooking.data.route[1].latitude,
         lng: taxiBooking.data.route[1].longitude,
